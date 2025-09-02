@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model weights
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+
+# Results and outputs
+results/
+outputs/
+*.log
+
+# Environment
+.env
+.env.local
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.out
+*.pdf
+*.synctex.gz
+
+# Data (if downloaded)
+data/test_images/
+data/full_dataset/
+
+# Temporary files
+*.tmp
+*.bak
+*~
