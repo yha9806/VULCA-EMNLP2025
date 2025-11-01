@@ -186,3 +186,120 @@ This project uses OpenSpec for specification-driven development. When planning s
 - Check `/openspec/AGENTS.md` for proposal format
 - Review existing change proposals in `/openspec/changes/`
 - Follow the structured change proposal process for major features
+
+### Recent Changes
+
+**Phase 1 Completion: Interactive Exhibition Platform Rebuild** (archived)
+- Built complete vulcaart.art website with artwork-critique interaction
+- Implemented 6 cultural critic personas with RPAIT analysis dimensions
+- Deployed to GitHub Pages with custom domain
+- Status: `rebuild-interactive-exhibition-platform` (archived via OpenSpec)
+
+**Phase 2 Active: Exhibition Platform Content Simplification** (in-progress)
+- **Change ID**: `simplify-exhibition-focus`
+- **Status**: Implementation complete, deployed to production
+- **Strategic Direction**: Transform from hybrid proposal-document to pure art exhibition platform
+- **Key Changes**:
+  - ✅ Removed all project planning documentation (budget tables, 4-week timeline, upgrade paths, risk control matrix)
+  - ✅ Condensed "创作过程" (Creative Process) section by 60% (500 → 200 words)
+  - ✅ Simplified "关于这个项目" (About) section from 4 paragraphs to 2 focused paragraphs
+  - ✅ Embodied Sougwen Chung's "负形" (negative space) aesthetic through intentional content deletion
+  - ✅ Maintained 5-section user journey: Hero → Exhibition → Personas → Process → About
+  - ✅ Deployed and verified via Playwright MCP at https://vulcaart.art
+
+**Implementation Details**
+- **Files Modified**:
+  - `vulca-exhibition/index.html` (main content deletions, ~2000+ chars removed)
+  - `vulca-exhibition/styles/components.css` (cleanup of orphaned styles)
+  - `vulca-exhibition/styles/layout.css` (cleanup of deleted section layouts)
+
+- **Content Reduction**:
+  - Overall page word count: -30% to -40%
+  - HTML size: ~45 KB → ~28 KB (-38%)
+  - Sections: 8 → 5 (major planning sections removed)
+
+- **Aesthetic Philosophy**:
+  - Deletion IS design: absence communicates intent
+  - Negative space principle: what's *not* shown defines what *is* important
+  - User experience: linear, undistracted, meditative flow
+
+## Development Workflow for Future Changes
+
+When implementing new features or changes:
+
+1. **Proposal Phase**: Create `/openspec/changes/[change-id]/proposal.md`
+   - Strategic rationale
+   - Problem statement
+   - What changes (detailed list)
+   - Success criteria
+   - Risk mitigation
+
+2. **Specification Phase**: Create `/openspec/changes/[change-id]/specs/`
+   - Technical requirements with MUST/SHALL keywords
+   - Scenarios with Given/When/Then structure
+   - Acceptance criteria
+
+3. **Design Phase**: Create `/openspec/changes/[change-id]/design.md`
+   - Design philosophy alignment
+   - Visual/interaction changes
+   - Accessibility considerations
+   - Performance impact
+
+4. **Task Breakdown**: Create `/openspec/changes/[change-id]/tasks.md`
+   - Phased task structure
+   - Numbered checkpoints
+   - Validation methods per task
+   - Git commit strategy
+
+5. **Implementation**: Execute tasks.md in order
+   - Mark tasks complete as work progresses
+   - Create atomic git commits per phase
+   - Push to GitHub for deployment
+
+6. **Verification**: Use Playwright MCP for live site testing
+   - Navigate to https://vulcaart.art?nocache=1 (cache-busting parameter)
+   - Verify DOM structure via JavaScript evaluation
+   - Screenshot key sections
+   - Test responsive design (375px, 768px, 1024px, 1440px+)
+
+## Known Constraints & Solutions
+
+### GitHub Pages CDN Caching
+- **Issue**: Changes may take 10-30 minutes to appear on live site
+- **Solution**: Use `?nocache=1` query parameter when testing: `https://vulcaart.art?nocache=1`
+- **Verification**: Playwright MCP can confirm changes deployed even before cache updates
+
+### Data Loading Architecture
+- **Current Approach**: All exhibition data embedded in `js/data.js` as `ExhibitionData` object
+- **Reason**: GitHub Pages CDN caching made separate JSON files unreliable (24+ hour delays)
+- **To Update**: Edit `ExhibitionData` object in `js/data.js`, never separate JSON files
+
+### Bilingual Content Strategy
+- **Method**: All content provided in both English and Chinese
+- **HTML Structure**: Chinese text uses appropriate `lang="zh-CN"` attributes
+- **CSS Typography**: Language-specific font stacks ensure proper character rendering
+
+## Performance Optimization Patterns Implemented
+
+The codebase includes several performance optimizations:
+
+- **O(1) Data Lookups**: Map-indexed artworks, personas, critiques (dataIndexes.js)
+- **Event Delegation**: Single listeners for button and card interactions
+- **Template System**: Centralized HTML generation to avoid DOM manipulation duplication
+- **Memory Optimization**: Consolidated state management in AppState object
+- **Test Framework**: Built-in unit testing for core modules (testFramework.js)
+
+## Deployment Checklist
+
+Before pushing changes to production:
+
+- [ ] All tasks in proposal completed and validated
+- [ ] HTML validates without errors
+- [ ] CSS cleanup complete (no orphaned classes)
+- [ ] Responsive design tested on multiple viewports
+- [ ] Playwright MCP verification passed
+- [ ] Git commits create atomic, meaningful history
+- [ ] Commit messages reference OpenSpec change ID
+- [ ] GitHub push successful (`git log` shows new commit on remote)
+
+For larger changes, create corresponding OpenSpec proposal first to document rationale and ensure alignment with project vision.
