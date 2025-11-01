@@ -207,9 +207,28 @@ class VulcaExhibition {
       // ========== Layer 3: Update auto-play ==========
       this.autoPlayManager.update(1);
 
-      // ========== Layer 1 + 3: Update all particle systems ==========
+      // ========== Layer 1 + 2 + 3: Update all particle systems ==========
       Object.values(this.particleSystems).forEach(system => {
-        // Update particle physics
+        // ===== Layer 2: Apply physics forces =====
+        // Physics engine updates all particles with:
+        // - Cursor attraction force
+        // - Wind field forces
+        // - Velocity damping
+        // - Trail tracking
+        const regionBounds = {
+          x: system.regionBounds.x,
+          y: system.regionBounds.y,
+          w: system.regionBounds.w,
+          h: system.regionBounds.h,
+        };
+
+        this.interactionManager.physicsEngine.updateParticles(
+          system.particles,
+          0.016,  // ~60fps delta time
+          regionBounds
+        );
+
+        // Update particle physics (Layer 1 + 3)
         system.update(1);
 
         // Layer 1: Handle fade-in/fade-out based on regionFocused
@@ -240,7 +259,7 @@ class VulcaExhibition {
     };
 
     animate();
-    console.log('✅ Animation loop started (Layer 1 + Layer 3 active)');
+    console.log('✅ Animation loop started (Layer 1 + Layer 2 + Layer 3 active)');
   }
 
   /**

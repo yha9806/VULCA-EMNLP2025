@@ -23,6 +23,17 @@ class InteractionManager {
     this.lastInteractionTime = Date.now();
     this.resumeAutoPlayTimer = null;
 
+    // Layer 2: Physics Engine initialization
+    this.physicsEngine = new PhysicsEngine({
+      attractionStrength: 5000,
+      attractionRange: 300,
+      windScale: 100,
+      windStrength: 0.5,
+      damping: 0.98,
+      trailsEnabled: true,
+      trailLength: 15,
+    });
+
     // Enable interaction on stage
     this.app.stage.interactive = true;
     this.app.stage.hitArea = new PIXI.Rectangle(0, 0, this.app.renderer.width, this.app.renderer.height);
@@ -31,6 +42,7 @@ class InteractionManager {
     this.setupEventHandlers();
 
     console.log('✅ InteractionManager initialized');
+    console.log('✅ PhysicsEngine (Layer 2) ready');
   }
 
   /**
@@ -69,11 +81,38 @@ class InteractionManager {
   }
 
   /**
+   * Get cursor position (for Layer 2 Physics)
+   */
+  getCursorPosition() {
+    return this.physicsEngine.getCursorPosition();
+  }
+
+  /**
+   * Callback for cursor move events
+   */
+  onCursorMove(callback) {
+    this.cursorMoveCallback = callback;
+  }
+
+  /**
    * Handle pointer move (hover)
    */
   handlePointerMove(event) {
     const { x, y } = event.global;
     const regionKey = this.layout.getRegionAtPoint(x, y);
+
+    // Layer 2: Update physics engine with cursor position
+    // All particles will be attracted to cursor position
+    const region = this.layout.regions[regionKey];
+    if (region) {
+      // Convert global coordinates to region-local coordinates
+      const regionLocalX = x - region.x;
+      const regionLocalY = y - region.y;
+      this.physicsEngine.setCursorPosition(regionLocalX, regionLocalY, true);
+    } else {
+      // Cursor outside any region
+      this.physicsEngine.setCursorPosition(x, y, false);
+    }
 
     // Handle hover state change
     if (regionKey !== this.hoveredRegion) {
