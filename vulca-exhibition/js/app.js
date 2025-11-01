@@ -288,13 +288,30 @@ class VulcaExhibition {
   handleParticleInteraction(event) {
     const { type, region, rpait } = event.detail;
 
-    // Update top panel
-    const artwork = RPAITManager.getArtworkData(region);
-    if (artwork) {
-      this.updateTopPanel(region, rpait, artwork);
+    // Parse region key (format: "artwork_1_苏轼")
+    // region = regionKey from InteractionManager, which includes artwork and persona
+    const parts = region.split('_');
+    let artworkId = null;
+    let personaId = null;
+
+    if (parts.length >= 3) {
+      // Format: artwork_[id]_[persona...]
+      artworkId = `${parts[0]}_${parts[1]}`;  // "artwork_1"
+      personaId = parts.slice(2).join('_');   // Handle persona names with underscores
     }
 
-    console.log(`🎨 Interaction: ${type} on ${region}`);
+    // Update top panel
+    const artwork = RPAITManager.getArtworkData(artworkId);
+    if (artwork) {
+      this.updateTopPanel(artworkId, rpait, artwork);
+    }
+
+    // Phase 4: Display RPAIT radar chart
+    if (this.rpaitVisualization && artworkId && personaId) {
+      this.rpaitVisualization.displayPersonaChart(artworkId, personaId, 'rpait-chart-container');
+    }
+
+    console.log(`🎨 Interaction: ${type} on ${region} | Chart: ${artworkId} × ${personaId}`);
   }
 
   /**
