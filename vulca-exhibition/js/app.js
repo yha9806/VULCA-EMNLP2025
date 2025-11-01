@@ -25,6 +25,7 @@ class VulcaExhibition {
     this.filterSystem = null;
     this.filterUI = null;
     this.bookmarkSystem = null;
+    this.comparisonView = null;
 
     this.isInitialized = false;
     this.animationFrameId = null;
@@ -225,9 +226,18 @@ class VulcaExhibition {
       storageKey: 'vulca-bookmarks',
     });
 
+    // Create ComparisonView (Phase 5 Task 5.4)
+    this.comparisonView = new ComparisonView({
+      rpaitData: RPAITData,
+      chartManager: this.rpaitVisualization?.chartManager,
+      maxComparisons: 4,
+      onClose: () => console.log('Comparison view closed'),
+    });
+
     console.log('✅ Search system initialized with ' + critiques.length + ' critiques');
     console.log('✅ Filter system initialized');
     console.log('✅ Bookmark system initialized');
+    console.log('✅ Comparison view initialized');
   }
 
   /**
@@ -476,8 +486,47 @@ class VulcaExhibition {
    * Show comparison modal
    */
   showComparison() {
-    console.log('📊 Show Comparison');
-    // TODO: Implement comparison UI
+    if (!this.comparisonView) {
+      console.warn('⚠️  ComparisonView not initialized');
+      return;
+    }
+
+    // Clear previous comparisons
+    this.comparisonView.clearAll();
+
+    // Add 2-3 sample critiques for comparison
+    // Using artwork_1 with different personas
+    const sampleCritiques = [
+      {
+        artworkId: 'artwork_1',
+        personaId: '苏轼',
+        title: '书法中的光影',
+        content: CritiqueData.artwork_1.critiques['苏轼'].content,
+      },
+      {
+        artworkId: 'artwork_1',
+        personaId: '约翰罗斯金',
+        title: '书法中的光影',
+        content: CritiqueData.artwork_1.critiques['约翰罗斯金'].content,
+      },
+      {
+        artworkId: 'artwork_1',
+        personaId: '埃琳娜佩特洛娃',
+        title: '书法中的光影',
+        content: CritiqueData.artwork_1.critiques['埃琳娜佩特洛娃'].content,
+      },
+    ];
+
+    // Add critiques to comparison
+    sampleCritiques.forEach(critique => {
+      this.comparisonView.addCritique(critique);
+    });
+
+    // Open comparison modal
+    const opened = this.comparisonView.open();
+    if (opened) {
+      console.log('📊 Comparison view opened with ' + sampleCritiques.length + ' critiques');
+    }
   }
 
   /**
@@ -578,6 +627,9 @@ class VulcaExhibition {
     }
     if (this.filterSystem) {
       this.filterSystem.resetFilters();
+    }
+    if (this.comparisonView) {
+      this.comparisonView.clearAll();
     }
 
     this.particleSystems = {};
