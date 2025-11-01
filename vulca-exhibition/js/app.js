@@ -19,6 +19,10 @@ class VulcaExhibition {
     // Phase 4: RPAIT Visualization
     this.rpaitVisualization = null;
 
+    // Phase 5: Content Interaction System
+    this.searchIndex = null;
+    this.searchUI = null;
+
     this.isInitialized = false;
     this.animationFrameId = null;
     this.time = 0;
@@ -94,6 +98,9 @@ class VulcaExhibition {
         canvasContainer: document.getElementById('rpait-chart-container'),
       });
 
+      // Phase 5: Initialize Full-Text Search System
+      this.initializeSearchSystem();
+
       // Register particle systems with interaction manager and layout
       Object.entries(this.particleSystems).forEach(([key, system]) => {
         this.interactionManager.registerParticleSystem(key, system);
@@ -118,6 +125,7 @@ class VulcaExhibition {
       console.log(`   - Particle Systems: ${Object.keys(this.particleSystems).length}`);
       console.log(`   - Regions: ${Object.keys(this.layout.getAllRegions()).length}`);
       console.log(`   - Phase 4 RPAIT Visualization: Ready`);
+      console.log(`   - Phase 5 Full-Text Search: Ready (Press Ctrl+K to search)`);
 
       // Log info to console
       this.printDebugInfo();
@@ -164,6 +172,62 @@ class VulcaExhibition {
     });
 
     console.log(`✅ Created ${Object.keys(this.particleSystems).length} particle systems`);
+  }
+
+  /**
+   * Initialize search system (Phase 5)
+   */
+  initializeSearchSystem() {
+    // Create SearchIndex
+    this.searchIndex = new SearchIndex({
+      minTokenLength: 2,
+      maxResults: 50,
+    });
+
+    // Build critique data from CritiqueData
+    const critiques = [];
+    Object.entries(CritiqueData).forEach(([artworkId, artworkData]) => {
+      Object.entries(artworkData.critiques).forEach(([personaId, critiqueData]) => {
+        critiques.push({
+          artworkId,
+          personaId,
+          title: critiqueData.title,
+          content: critiqueData.content,
+        });
+      });
+    });
+
+    // Build search index
+    this.searchIndex.buildIndex(critiques);
+
+    // Create SearchUI
+    this.searchUI = new SearchUI({
+      searchIndex: this.searchIndex,
+      onResultSelect: (critique) => this.handleSearchResultSelect(critique),
+    });
+
+    console.log('✅ Search system initialized with ' + critiques.length + ' critiques');
+  }
+
+  /**
+   * Handle search result selection
+   */
+  handleSearchResultSelect(critique) {
+    // Get RPAIT data for this critique
+    const rpait = RPAITManager.getRPAIT(critique.artworkId, critique.personaId);
+    const artwork = RPAITManager.getArtworkData(critique.artworkId);
+
+    // Update top panel with critique info
+    if (artwork) {
+      this.updateTopPanel(critique.artworkId, rpait, artwork);
+    }
+
+    // Display RPAIT radar chart
+    if (this.rpaitVisualization) {
+      this.rpaitVisualization.displayPersonaChart(critique.artworkId, critique.personaId);
+    }
+
+    console.log(`✅ Selected critique: ${critique.personaId} - ${critique.artworkId}`);
   }
 
   /**
@@ -469,6 +533,14 @@ class VulcaExhibition {
     this.interactionManager?.destroy();
     this.layout?.destroy();
     this.renderer?.destroy();
+
+    // Phase 5: Cleanup search system
+    if (this.searchUI) {
+      this.searchUI.close();
+    }
+    if (this.searchIndex) {
+      this.searchIndex.clear();
+    }
 
     this.particleSystems = {};
     this.isInitialized = false;
