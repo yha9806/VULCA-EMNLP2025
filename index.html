@@ -75,19 +75,27 @@
   <!-- ==================== FLOATING MENU ==================== -->
   <nav class="floating-menu" id="floating-menu" aria-label="Navigation menu" hidden>
     <div class="menu-content">
-      <a href="#" class="menu-item menu-home" data-action="home" aria-label="Return to home">
+      <a href="/" class="menu-item menu-home" aria-label="Return to main gallery">
         <span>🏠</span>
-        <span class="menu-label">首页</span>
+        <span class="menu-label">主画廊</span>
       </a>
-      <button class="menu-item" id="menu-lang" data-action="language" aria-label="Switch language">
+      <a href="/pages/critics.html" class="menu-item menu-critics" aria-label="View critics">
+        <span>👥</span>
+        <span class="menu-label">评论家</span>
+      </a>
+      <a href="/pages/about.html" class="menu-item menu-about" aria-label="Learn about">
+        <span>ℹ️</span>
+        <span class="menu-label">关于</span>
+      </a>
+      <a href="/pages/process.html" class="menu-item menu-process" aria-label="See process">
+        <span>🎨</span>
+        <span class="menu-label">过程</span>
+      </a>
+      <button class="menu-item" id="menu-lang" aria-label="Switch language">
         <span>🔤</span>
         <span class="menu-label">语言</span>
       </button>
-      <button class="menu-item" id="menu-settings" data-action="settings" aria-label="Settings">
-        <span>⚙️</span>
-        <span class="menu-label">设置</span>
-      </button>
-      <button class="menu-item" id="menu-close" data-action="close" aria-label="Close menu">
+      <button class="menu-item" id="menu-close" aria-label="Close menu">
         <span>✕</span>
         <span class="menu-label">关闭</span>
       </button>

@@ -295,6 +295,62 @@ window.VULCA_DATA = {
 };
 
 /**
+ * Compute average RPAIT scores for each persona from their critiques
+ * This allows the critics page to display overall RPAIT dimensions
+ */
+(function() {
+  // Create a map to store RPAIT scores for each persona
+  const personaRpaitMap = {};
+
+  // Initialize the map with empty arrays
+  window.VULCA_DATA.personas.forEach(persona => {
+    personaRpaitMap[persona.id] = [];
+  });
+
+  // Collect all RPAIT scores for each persona
+  window.VULCA_DATA.critiques.forEach(critique => {
+    if (critique.personaId && critique.rpait) {
+      personaRpaitMap[critique.personaId].push(critique.rpait);
+    }
+  });
+
+  // Compute average RPAIT for each persona and add to persona object
+  window.VULCA_DATA.personas.forEach(persona => {
+    const rpaitScores = personaRpaitMap[persona.id];
+
+    if (rpaitScores && rpaitScores.length > 0) {
+      // Calculate average for each dimension
+      const avgRpait = {
+        R: 0,
+        P: 0,
+        A: 0,
+        I: 0,
+        T: 0
+      };
+
+      rpaitScores.forEach(score => {
+        avgRpait.R += score.R || 0;
+        avgRpait.P += score.P || 0;
+        avgRpait.A += score.A || 0;
+        avgRpait.I += score.I || 0;
+        avgRpait.T += score.T || 0;
+      });
+
+      // Divide by number of critiques to get average
+      const count = rpaitScores.length;
+      avgRpait.R = Math.round(avgRpait.R / count);
+      avgRpait.P = Math.round(avgRpait.P / count);
+      avgRpait.A = Math.round(avgRpait.A / count);
+      avgRpait.I = Math.round(avgRpait.I / count);
+      avgRpait.T = Math.round(avgRpait.T / count);
+
+      // Add to persona object
+      persona.rpait = avgRpait;
+    }
+  });
+})();
+
+/**
  * Export for Node.js environments
  * (Not used in browser, but included for compatibility)
  */
