@@ -6,9 +6,10 @@
  */
 
 class InteractionManager {
-  constructor(pixiApp, layout) {
+  constructor(pixiApp, layout, appInstance) {
     this.app = pixiApp;
     this.layout = layout;
+    this.appInstance = appInstance;  // Reference to VulcaExhibition for pause/resume
     this.particleSystems = {};  // Map of region -> ParticleSystem
 
     // Interaction state
@@ -17,6 +18,10 @@ class InteractionManager {
     this.isDragging = false;
     this.dragStart = { x: 0, y: 0 };
     this.dragCurrent = { x: 0, y: 0 };
+
+    // Layer 3: Auto-play pause/resume timing
+    this.lastInteractionTime = Date.now();
+    this.resumeAutoPlayTimer = null;
 
     // Enable interaction on stage
     this.app.stage.interactive = true;
@@ -214,6 +219,22 @@ class InteractionManager {
   }
 
   /**
+   * Check if should resume auto-play (Layer 3)
+   * Called every frame - resumes after 3 seconds of no interaction
+   */
+  checkResumeAutoPlay() {
+    if (!this.appInstance?.autoPlayManager) return;
+
+    const now = Date.now();
+    const timeSinceInteraction = now - this.lastInteractionTime;
+
+    // Resume auto-play if 3+ seconds have passed since last interaction
+    if (timeSinceInteraction >= 3000 && !this.appInstance.autoPlayManager.isEnabled) {
+      this.appInstance.autoPlayManager.resume();
+    }
+  }
+
+  /**
    * Get interaction stats for debugging
    */
   getStats() {
@@ -231,6 +252,9 @@ class InteractionManager {
   destroy() {
     this.app.stage.removeAllListeners();
     this.particleSystems = {};
+    if (this.resumeAutoPlayTimer) {
+      clearTimeout(this.resumeAutoPlayTimer);
+    }
     console.log('🗑️  InteractionManager destroyed');
   }
 }

@@ -26,6 +26,15 @@ class ExhibitionLayout {
     // Region metadata
     this.regionData = {};
 
+    // Layer 1 + 3: Region tracking and particle system mapping
+    this.hoveredRegion = null;  // Currently hovered region key or null
+    this.regionSystems = {      // Map each region to its 6 particle systems
+      'artwork_1': [],
+      'artwork_2': [],
+      'artwork_3': [],
+      'artwork_4': []
+    };
+
     this.createRegions();
   }
 
@@ -134,6 +143,30 @@ class ExhibitionLayout {
     if (container && particleSystem.displayContainer) {
       container.addChild(particleSystem.displayContainer);
       console.log(`✅ Added particle system to ${regionKey}`);
+    }
+  }
+
+  /**
+   * Add system to region mapping (Layer 1 + 3)
+   */
+  addSystemToRegion(regionKey, system) {
+    if (this.regionSystems[regionKey]) {
+      this.regionSystems[regionKey].push(system);
+    }
+  }
+
+  /**
+   * Handle region hover event (Layer 1 + 3)
+   */
+  handleRegionHover(regionKey, isHovering) {
+    this.hoveredRegion = isHovering ? regionKey : null;
+
+    // Update regionFocused flag for all systems in this region
+    const systems = this.regionSystems[regionKey];
+    if (systems) {
+      systems.forEach(system => {
+        system.regionFocused = isHovering;
+      });
     }
   }
 

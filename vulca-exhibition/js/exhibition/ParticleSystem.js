@@ -21,6 +21,18 @@ class ParticleSystem {
     this.isActive = false;  // Whether this system is currently active
     this.fadeOutAlpha = 1.0;  // For fade-out effect
 
+    // Layer 1: Gallery Walk (spatial focus)
+    this.fadeAlpha = 0;              // 0-1, temporal fade-in/fade-out animation
+    this.sequenceIndex = 0;          // 0-5, order of appearance
+    this.regionFocused = false;      // Is this region currently hovered?
+
+    // Layer 3: Auto-Play (prominence weighting)
+    this.prominenceLevel = 0.05;     // 0-1, dynamic weighting (0.05=min, 1.0=max)
+    this.baseProminence = 0.05;      // Static baseline for negative space visibility
+
+    // Computed final alpha
+    this.finalAlpha = 0;             // = fadeAlpha × (baseProminence + prominenceLevel × 0.95)
+
     // RPAIT weights
     this.rpait = options.rpait || { R: 5, P: 5, A: 5, I: 5, T: 5 };
     this.currentVisuals = null;  // Cached visual parameters
@@ -195,8 +207,12 @@ class ParticleSystem {
       return;
     }
 
-    // Only render if this system is active
-    if (!this.isActive) {
+    // Calculate final alpha from fadeAlpha and prominenceLevel (Layer 1 + Layer 3)
+    this.finalAlpha = this.fadeAlpha *
+      (this.baseProminence + this.prominenceLevel * 0.95);
+
+    // Skip rendering if alpha too low (negative space principle)
+    if (this.finalAlpha < 0.01) {
       this.displayContainer.removeChildren();
       return;
     }
@@ -212,7 +228,7 @@ class ParticleSystem {
 
     // Draw all particles in one batch
     this.particles.forEach(particle => {
-      const alpha = particle.alpha * particle.lifespan * this.fadeOutAlpha;
+      const alpha = particle.alpha * particle.lifespan * this.finalAlpha;
 
       // Skip if alpha is too low
       if (alpha < 0.01) return;
@@ -237,15 +253,22 @@ class ParticleSystem {
   renderWithGlow() {
     if (!this.enabled) return;
 
-    const shouldRender = this.isActive || Math.random() > 0.9;
-    if (!shouldRender && !this.isActive) return;
+    // Calculate final alpha from fadeAlpha and prominenceLevel (Layer 1 + Layer 3)
+    this.finalAlpha = this.fadeAlpha *
+      (this.baseProminence + this.prominenceLevel * 0.95);
+
+    // Skip rendering if alpha too low
+    if (this.finalAlpha < 0.01) {
+      this.displayContainer.removeChildren();
+      return;
+    }
 
     this.displayContainer.removeChildren();
 
     const glowIntensity = this.currentVisuals?.glowIntensity || 0.1;
 
     this.particles.forEach(particle => {
-      const alpha = particle.alpha * particle.lifespan;
+      const alpha = particle.alpha * particle.lifespan * this.finalAlpha;
 
       // Draw glow
       if (glowIntensity > 0.05) {

@@ -76,15 +76,22 @@ class VulcaExhibition {
       // Initialize particle systems for each artwork × critic combination
       this.initializeParticleSystems();
 
+      // Initialize auto-play manager (Layer 3)
+      this.autoPlayManager = new AutoPlayManager(this.layout);
+
       // Initialize interaction manager
       this.interactionManager = new InteractionManager(
         this.renderer.app,
-        this.layout
+        this.layout,
+        this  // Pass app reference for pause/resume control
       );
 
-      // Register particle systems with interaction manager
+      // Register particle systems with interaction manager and layout
       Object.entries(this.particleSystems).forEach(([key, system]) => {
         this.interactionManager.registerParticleSystem(key, system);
+
+        // Add to region systems mapping (Layer 1 + 3)
+        this.layout.addSystemToRegion(system.artworkId, system);
       });
 
       // Setup event listeners
@@ -93,8 +100,8 @@ class VulcaExhibition {
       // Start animation loop
       this.startAnimationLoop();
 
-      // Enable demo mode - show particles from all systems on startup
-      this.enableDemoMode();
+      // Auto-play will start automatically when page loads
+      // (disable enableDemoMode - auto-play handles it now)
 
       this.isInitialized = true;
       console.log('✅ VULCA Exhibition initialized successfully');
@@ -197,11 +204,28 @@ class VulcaExhibition {
     const animate = () => {
       this.time += 1;
 
-      // Update all particle systems
+      // ========== Layer 3: Update auto-play ==========
+      this.autoPlayManager.update(1);
+
+      // ========== Layer 1 + 3: Update all particle systems ==========
       Object.values(this.particleSystems).forEach(system => {
+        // Update particle physics
         system.update(1);
 
-        // Render based on aesthetics level
+        // Layer 1: Handle fade-in/fade-out based on regionFocused
+        if (system.regionFocused && !system.isActive) {
+          // Region is hovered - start fading in
+          system.fadeAlpha = Math.min(1, system.fadeAlpha + 0.02);  // ~1000ms fade
+          system.isActive = true;
+        } else if (!system.regionFocused && system.fadeAlpha > 0) {
+          // Region is not hovered - fade out
+          system.fadeAlpha = Math.max(0, system.fadeAlpha - 0.01);  // ~1500ms fade
+          if (system.fadeAlpha === 0) {
+            system.isActive = false;
+          }
+        }
+
+        // Render if this system has visible alpha
         if (system.isActive) {
           if (system.rpait?.A >= 7) {
             system.renderWithGlow();
@@ -216,7 +240,7 @@ class VulcaExhibition {
     };
 
     animate();
-    console.log('✅ Animation loop started');
+    console.log('✅ Animation loop started (Layer 1 + Layer 3 active)');
   }
 
   /**

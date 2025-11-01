@@ -1,18 +1,44 @@
 /* PixiJS Exhibition Styles */
 
-/* Region Styling */
+/* Region Styling - Layer 1 + Layer 3 Interactive Regions */
 .exhibition-region {
   position: absolute;
   border: 1px solid var(--color-border);
   transition: all var(--transition-normal);
+  cursor: pointer;
 }
 
+/* Layer 1 + Layer 3: Region hover state */
 .exhibition-region:hover {
   border-color: var(--color-text-secondary);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    inset 0 0 15px rgba(212, 210, 206, 0.15),
+    0 0 8px rgba(212, 210, 206, 0.08);
 }
 
-/* Interactive Feedback */
+/* Layer 3: Auto-play highlighting the current region */
+.exhibition-region.auto-play-active {
+  box-shadow:
+    inset 0 0 20px rgba(212, 210, 206, 0.25),
+    0 0 12px rgba(212, 210, 206, 0.12);
+  border-color: var(--color-text-secondary);
+}
+
+/* Layer 1: Region focused (hovered) with prominence weighting */
+.exhibition-region.region-focused {
+  border-color: var(--color-text-secondary);
+}
+
+/* Smooth cursor change for pointer interactions */
+.pixi-main-container {
+  cursor: default;
+}
+
+.pixi-main-container:hover {
+  cursor: pointer;
+}
+
+/* Interactive Feedback - Burst Effect on Click */
 .region-active {
   box-shadow: inset 0 0 20px rgba(212, 210, 206, 0.3);
 }
@@ -23,10 +49,35 @@
 
 @keyframes burstEffect {
   0% {
-    box-shadow: inset 0 0 10px rgba(212, 210, 206, 0.5);
+    box-shadow:
+      inset 0 0 10px rgba(212, 210, 206, 0.5),
+      0 0 10px rgba(212, 210, 206, 0.3);
   }
   100% {
-    box-shadow: inset 0 0 0px rgba(212, 210, 206, 0);
+    box-shadow:
+      inset 0 0 0px rgba(212, 210, 206, 0),
+      0 0 0px rgba(212, 210, 206, 0);
+  }
+}
+
+/* Active drag interaction feedback */
+.region-dragging {
+  box-shadow:
+    inset 0 0 25px rgba(212, 210, 206, 0.3),
+    0 0 15px rgba(212, 210, 206, 0.15);
+}
+
+/* Touch device feedback */
+@media (hover: none) {
+  .exhibition-region {
+    /* Reduce hover effects on touch devices */
+    box-shadow: inset 0 0 10px rgba(212, 210, 206, 0.08);
+  }
+
+  .exhibition-region:active {
+    box-shadow:
+      inset 0 0 20px rgba(212, 210, 206, 0.2),
+      0 0 10px rgba(212, 210, 206, 0.1);
   }
 }
 
@@ -118,12 +169,67 @@
   }
 }
 
-/* Accessibility */
+/* Responsive Design for Different Screen Sizes */
+
+/* Desktop - Large screens (1440px+) */
+@media (min-width: 1440px) {
+  .exhibition-region:hover {
+    box-shadow:
+      inset 0 0 20px rgba(212, 210, 206, 0.2),
+      0 0 12px rgba(212, 210, 206, 0.1);
+  }
+}
+
+/* Tablet - Medium screens (768px - 1023px) */
+@media (max-width: 1023px) {
+  .exhibition-region {
+    transition: all var(--transition-fast);
+  }
+
+  .exhibition-region:hover {
+    box-shadow:
+      inset 0 0 12px rgba(212, 210, 206, 0.12),
+      0 0 6px rgba(212, 210, 206, 0.06);
+  }
+
+  .exhibition-region.auto-play-active {
+    box-shadow:
+      inset 0 0 15px rgba(212, 210, 206, 0.2),
+      0 0 8px rgba(212, 210, 206, 0.1);
+  }
+}
+
+/* Mobile - Small screens (375px - 767px) */
+@media (max-width: 767px) {
+  .exhibition-region {
+    transition: all var(--transition-fast);
+  }
+
+  .exhibition-region:hover {
+    box-shadow: inset 0 0 10px rgba(212, 210, 206, 0.1);
+  }
+
+  .exhibition-region.auto-play-active {
+    box-shadow: inset 0 0 12px rgba(212, 210, 206, 0.15);
+  }
+
+  /* Simplify feedback on small screens */
+  .region-dragging {
+    box-shadow: inset 0 0 15px rgba(212, 210, 206, 0.2);
+  }
+}
+
+/* Accessibility - Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* Still provide visual feedback, just without motion */
+  .exhibition-region:hover {
+    border-color: var(--color-text-secondary);
   }
 }
 
