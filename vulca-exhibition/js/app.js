@@ -24,6 +24,7 @@ class VulcaExhibition {
     this.searchUI = null;
     this.filterSystem = null;
     this.filterUI = null;
+    this.bookmarkSystem = null;
 
     this.isInitialized = false;
     this.animationFrameId = null;
@@ -218,8 +219,15 @@ class VulcaExhibition {
       onFilterChange: (results) => this.handleFilterChange(results),
     });
 
+    // Create BookmarkSystem
+    this.bookmarkSystem = new BookmarkSystem({
+      maxBookmarks: 100,
+      storageKey: 'vulca-bookmarks',
+    });
+
     console.log('✅ Search system initialized with ' + critiques.length + ' critiques');
     console.log('✅ Filter system initialized');
+    console.log('✅ Bookmark system initialized');
   }
 
   /**
