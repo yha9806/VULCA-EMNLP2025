@@ -56,9 +56,25 @@ class RPAITMapper {
     };
 
     const baseHue = baseHues[criticId] || 0;
-    const variation = (weight - 5) * 10;  // ±50度范围
+    const variation = (weight - 5) * 8;  // ±40度范围
 
     return (baseHue + variation + 360) % 360;
+  }
+
+  /**
+   * Generate saturation based on weight
+   */
+  static generateSaturation(weight) {
+    // Lower weight = less saturated, higher weight = more saturated
+    return 40 + weight * 6;  // 40% - 100%
+  }
+
+  /**
+   * Generate lightness based on weight
+   */
+  static generateLightness(weight) {
+    // Lower weight = darker, higher weight = lighter
+    return 35 + weight * 4;  // 35% - 75%
   }
 
   /**

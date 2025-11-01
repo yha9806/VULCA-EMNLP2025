@@ -92,26 +92,28 @@ class ColorUtils {
    * h: 0-360, s: 0-100, l: 0-100
    */
   static hslToRgb(h, s, l) {
+    h = (h % 360 + 360) % 360;  // Normalize to 0-360
     s /= 100;
     l /= 100;
 
     const c = (1 - Math.abs(2 * l - 1)) * s;
-    const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+    const hPrime = h / 60;
+    const x = c * (1 - Math.abs((hPrime % 2) - 1));
     const m = l - c / 2;
 
     let r = 0, g = 0, b = 0;
 
-    if (h >= 0 && h < 60) {
+    if (hPrime >= 0 && hPrime < 1) {
       r = c; g = x; b = 0;
-    } else if (h >= 60 && h < 120) {
+    } else if (hPrime >= 1 && hPrime < 2) {
       r = x; g = c; b = 0;
-    } else if (h >= 120 && h < 180) {
+    } else if (hPrime >= 2 && hPrime < 3) {
       r = 0; g = c; b = x;
-    } else if (h >= 180 && h < 240) {
+    } else if (hPrime >= 3 && hPrime < 4) {
       r = 0; g = x; b = c;
-    } else if (h >= 240 && h < 300) {
+    } else if (hPrime >= 4 && hPrime < 5) {
       r = x; g = 0; b = c;
-    } else if (h >= 300 && h < 360) {
+    } else if (hPrime >= 5 && hPrime < 6) {
       r = c; g = 0; b = x;
     }
 
@@ -119,7 +121,11 @@ class ColorUtils {
     g = Math.round((g + m) * 255);
     b = Math.round((b + m) * 255);
 
-    return { r, g, b };
+    return {
+      r: Math.max(0, Math.min(255, r)),
+      g: Math.max(0, Math.min(255, g)),
+      b: Math.max(0, Math.min(255, b)),
+    };
   }
 
   /**

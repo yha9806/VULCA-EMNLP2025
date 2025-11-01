@@ -93,6 +93,9 @@ class VulcaExhibition {
       // Start animation loop
       this.startAnimationLoop();
 
+      // Enable demo mode - show particles from all systems on startup
+      this.enableDemoMode();
+
       this.isInitialized = true;
       console.log('✅ VULCA Exhibition initialized successfully');
       const rendererInfo = this.renderer.getInfo();
@@ -134,6 +137,9 @@ class VulcaExhibition {
           rpait,
         });
 
+        // Apply RPAIT weights to make particles responsive
+        system.updateRPAIT(rpait);
+
         this.particleSystems[systemKey] = system;
 
         // Add to layout
@@ -170,6 +176,21 @@ class VulcaExhibition {
   }
 
   /**
+   * Enable demo mode - activate all particle systems to showcase RPAIT-driven particles
+   */
+  enableDemoMode() {
+    // Activate all particle systems to show the RPAIT-driven particle visualization
+    Object.values(this.particleSystems).forEach((system, index) => {
+      // Stagger activation for visual effect (200ms apart)
+      setTimeout(() => {
+        system.isActive = true;
+      }, index * 50);
+    });
+
+    console.log('🎬 Demo mode enabled - all 24 particle systems activated');
+  }
+
+  /**
    * Start animation loop
    */
   startAnimationLoop() {
@@ -179,7 +200,15 @@ class VulcaExhibition {
       // Update all particle systems
       Object.values(this.particleSystems).forEach(system => {
         system.update(1);
-        system.render();
+
+        // Render based on aesthetics level
+        if (system.isActive) {
+          if (system.rpait?.A >= 7) {
+            system.renderWithGlow();
+          } else {
+            system.render();
+          }
+        }
       });
 
       // Continue loop

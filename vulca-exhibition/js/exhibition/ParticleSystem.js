@@ -19,9 +19,11 @@ class ParticleSystem {
     // State
     this.enabled = true;
     this.isActive = false;  // Whether this system is currently active
+    this.fadeOutAlpha = 1.0;  // For fade-out effect
 
     // RPAIT weights
     this.rpait = options.rpait || { R: 5, P: 5, A: 5, I: 5, T: 5 };
+    this.currentVisuals = null;  // Cached visual parameters
 
     // Color and motion identity
     this.colorIdentity = ColorUtils.getPersonaColorIdentity(this.criticId);
@@ -70,10 +72,13 @@ class ParticleSystem {
    * Update RPAIT weights and respond visually
    */
   updateRPAIT(rpait) {
-    this.rpait = rpait;
+    this.rpait = RPAITMapper.normalizeRPAIT(rpait);
+
+    // Map RPAIT to visual properties
+    const visuals = RPAITMapper.mapToVisuals(this.rpait, this.criticId);
 
     // Update particle count based on R (Representation)
-    const targetCount = Math.round(80 + (rpait.R * 20));
+    const targetCount = Math.round(visuals.particleCount);
     this.particleCount = Math.min(targetCount, this.maxParticles);
 
     // Adjust particle count
@@ -84,9 +89,21 @@ class ParticleSystem {
       this.particles.pop();
     }
 
+    // Store visual properties for this update cycle
+    this.currentVisuals = visuals;
+
     // Update other parameters
     this.updateMotionParameters();
     this.updateColorParameters();
+
+    console.log(`🎨 Updated RPAIT for ${this.criticId} (${this.artworkId}):`, {
+      R: this.rpait.R,
+      P: this.rpait.P,
+      A: this.rpait.A,
+      I: this.rpait.I,
+      T: this.rpait.T,
+      particleCount: this.particleCount,
+    });
   }
 
   /**
@@ -109,26 +126,34 @@ class ParticleSystem {
   }
 
   /**
-   * Update color parameters based on A (Aesthetics)
+   * Update color parameters based on A (Aesthetics) and I (Interpretation)
    */
   updateColorParameters() {
-    const a = this.rpait.A / 10;  // 0-1
-    const i = this.rpait.I / 10;  // 0-1
+    if (!this.currentVisuals) {
+      this.currentVisuals = RPAITMapper.mapToVisuals(this.rpait, this.criticId);
+    }
 
-    // Color brightness based on Aesthetics
-    const colorVariant = ColorUtils.generateVariant(
-      this.colorIdentity.primaryColor,
-      this.rpait.A
-    );
+    const visuals = this.currentVisuals;
+
+    // Generate dynamic color from RPAIT weights
+    const hue = RPAITMapper.generateHue(this.rpait.A, this.criticId);
+    const saturation = RPAITMapper.generateSaturation(this.rpait.A);
+    const lightness = RPAITMapper.generateLightness(this.rpait.A);
+
+    const rgbColor = ColorUtils.hslToRgb(hue, saturation, lightness);
+    const hexColor = ColorUtils.rgbToHex(rgbColor.r, rgbColor.g, rgbColor.b);
 
     // Alpha based on Interpretation
-    const alphaMin = 0.05 + i * 0.05;
-    const alphaMax = 0.3 + i * 0.2;
+    const alphaMin = visuals.alphaMin;
+    const alphaMax = visuals.alphaMax;
 
     this.particles.forEach(particle => {
-      particle.color = colorVariant;
+      particle.color = hexColor;
       particle.alpha = alphaMin + Math.random() * (alphaMax - alphaMin);
+      particle.size = visuals.particleSize;
     });
+
+    console.log(`   🎨 Color updated: HSL(${hue.toFixed(0)}, ${saturation.toFixed(0)}%, ${lightness.toFixed(0)}%)`);
   }
 
   /**
@@ -162,23 +187,86 @@ class ParticleSystem {
   }
 
   /**
-   * Render particles to display container
+   * Render particles to display container (with performance optimization)
    */
   render() {
-    if (!this.enabled || !this.isActive) return;
+    if (!this.enabled) {
+      this.displayContainer.removeChildren();
+      return;
+    }
+
+    // Only render if this system is active
+    if (!this.isActive) {
+      this.displayContainer.removeChildren();
+      return;
+    }
 
     // Clear previous frame
     this.displayContainer.removeChildren();
 
-    // Draw particles
-    this.particles.forEach(particle => {
-      const sprite = new PIXI.Graphics();
-      sprite.beginFill(particle.color);
-      sprite.drawCircle(particle.x, particle.y, particle.size / 2);
-      sprite.endFill();
-      sprite.alpha = particle.alpha * particle.lifespan;
+    // Don't render if no particles
+    if (this.particles.length === 0) return;
 
-      this.displayContainer.addChild(sprite);
+    // Create a single graphics object for batch rendering (more efficient)
+    const graphics = new PIXI.Graphics();
+
+    // Draw all particles in one batch
+    this.particles.forEach(particle => {
+      const alpha = particle.alpha * particle.lifespan * this.fadeOutAlpha;
+
+      // Skip if alpha is too low
+      if (alpha < 0.01) return;
+
+      // Set fill style
+      const color = particle.color;
+      graphics.beginFill(color, alpha);
+
+      // Draw circle
+      const radius = particle.size / 2;
+      graphics.drawCircle(particle.x, particle.y, radius);
+
+      graphics.endFill();
+    });
+
+    this.displayContainer.addChild(graphics);
+  }
+
+  /**
+   * Render particles with glow effect (for high Aesthetics values)
+   */
+  renderWithGlow() {
+    if (!this.enabled) return;
+
+    const shouldRender = this.isActive || Math.random() > 0.9;
+    if (!shouldRender && !this.isActive) return;
+
+    this.displayContainer.removeChildren();
+
+    const glowIntensity = this.currentVisuals?.glowIntensity || 0.1;
+
+    this.particles.forEach(particle => {
+      const alpha = particle.alpha * particle.lifespan;
+
+      // Draw glow
+      if (glowIntensity > 0.05) {
+        const glow = new PIXI.Graphics();
+        const color = particle.color;
+        const glowColor = ColorUtils.blendColors(color, 0xFFFFFF, 0.3);
+
+        glow.beginFill(glowColor, alpha * glowIntensity * 0.5);
+        glow.drawCircle(particle.x, particle.y, particle.size);
+        glow.endFill();
+
+        this.displayContainer.addChild(glow);
+      }
+
+      // Draw particle
+      const graphics = new PIXI.Graphics();
+      graphics.beginFill(particle.color, alpha);
+      graphics.drawCircle(particle.x, particle.y, particle.size / 2);
+      graphics.endFill();
+
+      this.displayContainer.addChild(graphics);
     });
   }
 
