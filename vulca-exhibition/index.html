@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VULCA - Sougwen Chung 艺术展览</title>
+
+  <!-- CSS Foundation -->
+  <link rel="stylesheet" href="./styles/reset.css">
+  <link rel="stylesheet" href="./styles/variables.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/pixi-exhibition.css">
+
+</head>
+<body>
+  <!-- Main Canvas Container -->
+  <div id="pixi-container" class="pixi-main-container"></div>
+
+  <!-- Top Info Panel (20%) -->
+  <div id="top-info-panel" class="panel top-panel">
+    <div class="info-section artwork-metadata">
+      <div class="artwork-title">选择一个作品开始</div>
+      <div class="artwork-meta">悬停在任何区域探索</div>
+    </div>
+
+    <div class="info-section rpait-radar">
+      <svg id="rpait-chart" class="rpait-chart" width="200" height="200" viewBox="0 0 200 200"></svg>
+    </div>
+
+    <div class="info-section interaction-hints">
+      <div class="hint">🖱️ 悬停：放大粒子</div>
+      <div class="hint">👆 点击：爆裂效果</div>
+      <div class="hint">✋ 拖动：风场轨迹</div>
+    </div>
+  </div>
+
+  <!-- Bottom Interactive Panel (10%) -->
+  <div id="bottom-panel" class="panel bottom-panel">
+    <button class="panel-button" data-action="compare">评论家比较</button>
+    <button class="panel-button" data-action="rpait">RPAIT详解</button>
+    <button class="panel-button" data-action="critique">评论全文</button>
+    <button class="panel-button" data-action="settings">设置</button>
+    <button class="panel-button" data-action="about">关于</button>
+  </div>
+
+  <!-- PixiJS v8.6.0 - Load first -->
+  <script src="https://cdn.jsdelivr.net/npm/pixi.js@8.6.0/dist/pixi.min.js"></script>
+
+  <!-- Data and Core Modules -->
+  <script src="./js/data/RPAIT.js"></script>
+  <script src="./js/utils/ColorUtils.js"></script>
+  <script src="./js/exhibition/PixiRenderer.js"></script>
+  <script src="./js/exhibition/ExhibitionLayout.js"></script>
+  <script src="./js/exhibition/ParticleSystem.js"></script>
+  <script src="./js/exhibition/MotionLanguage.js"></script>
+  <script src="./js/exhibition/RPAITMapper.js"></script>
+  <script src="./js/exhibition/InteractionManager.js"></script>
+  <script src="./js/app.js" defer></script>
+</body>
+</html>
