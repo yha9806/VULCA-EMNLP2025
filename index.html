@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- ==================== META TAGS ==================== -->
+  <!-- Version: 2.1.0 - Build: 2025-11-01T12:30:00Z Embedded Data Solution -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="潮汐的负形 - VULCA艺术装置交互展览平台。探索4件精选艺术作品与6位文化评论家的视角碰撞。">
+  <meta name="keywords" content="艺术展览, AI评论生成, 文化批评, 互动平台">
+  <meta name="author" content="VULCA">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vulcaart.art">
+  <meta property="og:title" content="潮汐的负形 | vulcaart.art">
+  <meta property="og:description" content="交互式艺术展览平台 - 体验AI驱动的多角度艺术评论">
+  <meta property="og:image" content="https://vulcaart.art/assets/og-image.jpg">
+  <meta property="og:locale" content="zh_CN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="潮汐的负形 | vulcaart.art">
+  <meta name="twitter:description" content="交互式艺术展览平台">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="alternate icon" href="/assets/favicon.ico">
+
+  <!-- ==================== STYLESHEETS ==================== -->
+  <link rel="stylesheet" href="/styles/main.css">
+
+  <!-- ==================== CHART LIBRARY ==================== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- ==================== PARTICLE EFFECTS LIBRARY ==================== -->
+  <script src="https://cdn.jsdelivr.net/npm/sparticles/dist/sparticles.min.js"></script>
+
+  <!-- ==================== PRECONNECT ==================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- ==================== GOOGLE FONTS ==================== -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap">
+
+  <!-- ==================== TITLE ==================== -->
+  <title>潮汐的负形 | vulcaart.art</title>
+</head>
+
+<body>
+  <!-- ==================== SKIP LINK ==================== -->
+  <a href="#main-content" class="skip-to-main">跳转到主要内容</a>
+
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header>
+    <nav class="container flex flex-between">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <a href="/" class="brand-logo" title="回到首页">
+          <span class="brand-text">vulcaart</span>
+          <span class="brand-subtitle">潮汐的负形</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <ul class="nav-desktop flex flex-gap-lg">
+        <li><a href="#exhibition">展览</a></li>
+        <li><a href="#personas">评论家</a></li>
+        <li><a href="#process">创作过程</a></li>
+        <li><a href="#about">关于</a></li>
+      </ul>
+
+      <!-- Mobile Menu Button -->
+      <button class="hamburger" aria-label="打开菜单" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <nav class="nav-mobile" id="mobile-menu" style="display: none;">
+      <ul class="flex flex-column flex-gap-md p-lg">
+        <li><a href="#exhibition" class="nav-link">展览</a></li>
+        <li><a href="#personas" class="nav-link">评论家</a></li>
+        <li><a href="#process" class="nav-link">创作过程</a></li>
+        <li><a href="#about" class="nav-link">关于</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main id="main-content">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <h1>潮汐的负形</h1>
+      <p>
+        一场关于艺术评论的视角之旅。<br>
+        通过不同文化评论家的眼睛，探索同一件作品的多维解读。
+      </p>
+      <a href="#exhibition" class="btn btn-primary btn-lg">进入展览</a>
+    </section>
+
+    <!-- EXHIBITION SECTION -->
+    <section id="exhibition" class="section">
+      <div class="container">
+        <h2>核心体验</h2>
+        <div class="grid grid-2 gap-xl mb-xl">
+          <div class="feature-card">
+            <h3>4件精选作品</h3>
+            <p>精心挑选的艺术作品，每件都承载着独特的文化意蕴和视觉语言。 高分辨率呈现，邀请您细致地观看和思考。</p>
+            <div class="tag">视觉探索</div>
+          </div>
+          <div class="feature-card">
+            <h3>6位文化评论家</h3>
+            <p>来自不同文化背景和历史时期的评论家视角。 每位评论家都有独特的分析维度和审美标准。</p>
+            <div class="tag">多元视角</div>
+          </div>
+        </div>
+
+        <div class="interactive-panel">
+          <h3>交互式评论体验</h3>
+          <p>选择一件作品与一位评论家，阅读多维度的艺术评论。 体验不同视角如何赋予同一件作品全新的意义。</p>
+
+          <div class="controls-grid">
+            <div>
+              <h4>选择艺术作品</h4>
+              <div id="artworks-selector" class="cards-grid"></div>
+            </div>
+            <div>
+              <h4>选择评论家视角</h4>
+              <div id="personas-selector" class="cards-grid"></div>
+            </div>
+          </div>
+
+          <div class="results-panel">
+            <div class="button-group">
+              <button id="get-critique-btn" class="btn btn-primary" data-action="get-critique">获取评论</button>
+              <button id="compare-btn" class="btn btn-secondary" data-action="compare">对比视图</button>
+            </div>
+            <div id="critique-output" class="critique-output">
+              <p>请选择一件作品和一位评论家</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONAS SECTION -->
+    <section id="personas" class="section section-alt">
+      <div class="container">
+        <h2>6位文化评论家</h2>
+        <p>从北宋文人到当代AI伦理学者，这些评论家代表了不同文化传统和时代的审美标准。</p>
+        <div id="personas-container" class="personas-grid">
+          <h3>评论家加载中...</h3>
+          <p>等待数据加载</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section id="process" class="section">
+      <div class="container">
+        <h2>创作过程 · 负形关注</h2>
+        <p>
+          "\"负形\"不仅是艺术的主题，也是我们呈现方式的原则。 通过展示创作过程、设计决策和概念演进，我们邀请您看见通常隐藏的部分。"
+        </p>
+        <div class="grid grid-4 gap-lg">
+          <div class="process-card">
+            <h3>概念发展</h3>
+            <p>从想法到框架的演变与转化。</p>
+          </div>
+          <div class="process-card">
+            <h3>设计迭代</h3>
+            <p>界面设计的迭代和决策思考。</p>
+          </div>
+          <div class="process-card">
+            <h3>研究阶段</h3>
+            <p>评论家选择与艺术策展研究。</p>
+          </div>
+          <div class="process-card">
+            <h3>技术实现</h3>
+            <p>从架构设计到功能开发的技术选择。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section section-alt">
+      <div class="container">
+        <h2>关于这个项目</h2>
+        <div>
+          <p>vulcaart.art 是 VULCA（视觉理解与语言的文化自适应）项目的数字展览平台。 这个项目探索AI系统如何理解和评价艺术作品，特别是从多元文化视角出发。</p>
+          <p>
+            <strong>"\"潮汐的负形\""</strong>作为主题，强调：
+          </p>
+          <ul>
+            <li>
+              <strong>潮汐性</strong>
+              — 艺术评论随着不同视角的切换而变化，如同潮汐的涨落
+            </li>
+            <li>
+              <strong>负形</strong>
+              — 关注过程、草稿和迭代，而不仅是最终成果
+            </li>
+            <li>
+              <strong>多维性</strong>
+              — 同一件作品在不同评论家眼中有完全不同的意义
+            </li>
+          </ul>
+
+          <br>
+
+          <p>
+            <em>通过AI、艺术和文化的交集，探索我们如何看待和理解彼此的创意表达。</em>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="grid grid-auto gap-lg mb-lg">
+        <!-- About -->
+        <div>
+          <h4 class="mb-md">关于</h4>
+          <p class="text-secondary">
+            VULCA 艺术展览平台<br>
+            潮汐的负形
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="mb-md">链接</h4>
+          <ul class="flex flex-column flex-gap-sm">
+            <li><a href="#exhibition">展览</a></li>
+            <li><a href="#personas">评论家</a></li>
+            <li><a href="#process">创作过程</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="mb-md">联系</h4>
+          <p class="text-secondary">
+            <a href="mailto:info@vulcaart.art">info@vulcaart.art</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="divider-poetic"></div>
+      <div class="flex flex-between text-secondary py-md">
+        <p>© 2025 VULCA. 保留所有权利。</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script src="/js/data.js?v=1"></script>
+  <script src="/js/plan.js?v=2"></script>
+  <script src="/js/dataIndexes.js?v=1"></script>
+  <script src="/js/performanceMonitor.js?v=1"></script>
+  <script src="/js/testFramework.js?v=1"></script>
+  <script src="/js/templates.js?v=1"></script>
+  <script src="/js/eventDelegation.js?v=1"></script>
+  <script src="/js/particles-config.js?v=1"></script>
+  <script src="/js/app.js?v=6" defer></script>
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = isOpen ? 'none' : 'block';
+      });
+    }
+  </script>
+</body>
+
+</html>
