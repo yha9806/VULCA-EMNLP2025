@@ -54,3 +54,21 @@ data/full_dataset/
 *.tmp
 *.bak
 *~
+
+# Node.js
+node_modules/
+package-lock.json
+package.json
+
+# Development tools
+.playwright-mcp/
+.claude/
+.env.example
+
+# Build outputs
+CNAME
+
+# Setup scripts
+setup-*.js
+full-setup-*.js
+namecheap-setup.js
