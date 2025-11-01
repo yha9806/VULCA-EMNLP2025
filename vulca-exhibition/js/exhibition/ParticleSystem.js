@@ -223,28 +223,46 @@ class ParticleSystem {
     // Don't render if no particles
     if (this.particles.length === 0) return;
 
-    // Create a single graphics object for batch rendering (more efficient)
-    const graphics = new PIXI.Graphics();
+    // Create graphics objects for trails and particles
+    const trailGraphics = new PIXI.Graphics();
+    const particleGraphics = new PIXI.Graphics();
 
-    // Draw all particles in one batch
+    // Draw all particles and trails
     this.particles.forEach(particle => {
       const alpha = particle.alpha * particle.lifespan * this.finalAlpha;
 
       // Skip if alpha is too low
       if (alpha < 0.01) return;
 
-      // Set fill style
       const color = particle.color;
-      graphics.beginFill(color, alpha);
 
-      // Draw circle
+      // ===== Layer 2: Draw particle trails =====
+      if (particle.trailPositions && particle.trailPositions.length > 1) {
+        const trailLength = particle.trailPositions.length;
+
+        // Draw trail lines with fading alpha
+        for (let i = 0; i < trailLength - 1; i++) {
+          const pos1 = particle.trailPositions[i];
+          const pos2 = particle.trailPositions[i + 1];
+
+          // Calculate trail alpha: fade from old (dim) to new (bright)
+          const trailAlpha = (i / trailLength) * alpha * 0.5;
+
+          trailGraphics.lineStyle(particle.size * 0.5, color, trailAlpha);
+          trailGraphics.moveTo(pos1.x, pos1.y);
+          trailGraphics.lineTo(pos2.x, pos2.y);
+        }
+      }
+
+      // Draw particle circle
+      particleGraphics.beginFill(color, alpha);
       const radius = particle.size / 2;
-      graphics.drawCircle(particle.x, particle.y, radius);
-
-      graphics.endFill();
+      particleGraphics.drawCircle(particle.x, particle.y, radius);
+      particleGraphics.endFill();
     });
 
-    this.displayContainer.addChild(graphics);
+    this.displayContainer.addChild(trailGraphics);
+    this.displayContainer.addChild(particleGraphics);
   }
 
   /**
@@ -267,30 +285,50 @@ class ParticleSystem {
 
     const glowIntensity = this.currentVisuals?.glowIntensity || 0.1;
 
+    // Create graphics object for batch rendering
+    const glowGraphics = new PIXI.Graphics();
+    const trailGraphics = new PIXI.Graphics();
+    const particleGraphics = new PIXI.Graphics();
+
     this.particles.forEach(particle => {
       const alpha = particle.alpha * particle.lifespan * this.finalAlpha;
+      const color = particle.color;
+
+      // ===== Layer 2: Draw particle trails =====
+      if (particle.trailPositions && particle.trailPositions.length > 1) {
+        const trailLength = particle.trailPositions.length;
+
+        // Draw trail lines with fading alpha
+        for (let i = 0; i < trailLength - 1; i++) {
+          const pos1 = particle.trailPositions[i];
+          const pos2 = particle.trailPositions[i + 1];
+
+          // Calculate trail alpha: fade from old (dim) to new (bright)
+          const trailAlpha = (i / trailLength) * alpha * 0.5;
+
+          trailGraphics.lineStyle(particle.size * 0.5, color, trailAlpha);
+          trailGraphics.moveTo(pos1.x, pos1.y);
+          trailGraphics.lineTo(pos2.x, pos2.y);
+        }
+      }
 
       // Draw glow
       if (glowIntensity > 0.05) {
-        const glow = new PIXI.Graphics();
-        const color = particle.color;
         const glowColor = ColorUtils.blendColors(color, 0xFFFFFF, 0.3);
-
-        glow.beginFill(glowColor, alpha * glowIntensity * 0.5);
-        glow.drawCircle(particle.x, particle.y, particle.size);
-        glow.endFill();
-
-        this.displayContainer.addChild(glow);
+        glowGraphics.beginFill(glowColor, alpha * glowIntensity * 0.5);
+        glowGraphics.drawCircle(particle.x, particle.y, particle.size);
+        glowGraphics.endFill();
       }
 
       // Draw particle
-      const graphics = new PIXI.Graphics();
-      graphics.beginFill(particle.color, alpha);
-      graphics.drawCircle(particle.x, particle.y, particle.size / 2);
-      graphics.endFill();
-
-      this.displayContainer.addChild(graphics);
+      particleGraphics.beginFill(color, alpha);
+      particleGraphics.drawCircle(particle.x, particle.y, particle.size / 2);
+      particleGraphics.endFill();
     });
+
+    this.displayContainer.addChild(trailGraphics);
+    this.displayContainer.addChild(glowGraphics);
+    this.displayContainer.addChild(particleGraphics);
   }
 
   /**
