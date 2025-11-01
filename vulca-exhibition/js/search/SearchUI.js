@@ -210,19 +210,29 @@ class SearchUI {
       return;
     }
 
-    // Show suggestions
-    if (query.length < 3) {
+    // Check if query is a Chinese character (CJK)
+    const isChinese = /[\u4E00-\u9FFF]/.test(query);
+
+    // Show suggestions for short queries (except Chinese single characters)
+    if (query.length < 3 && !isChinese) {
       this.showSuggestions(query);
       return;
     }
 
-    // Perform search
+    // For single Chinese characters or longer queries, perform search
     this.currentResults = this.searchIndex.search(query, {
       matchMode: 'any',
       useFuzzy: true,
     });
 
     this.displayResults();
+
+    // Also show suggestions if we have them
+    if (query.length < 3) {
+      this.showSuggestions(query);
+    } else {
+      this.suggestionsContainer.style.display = 'none';
+    }
   }
 
   /**
