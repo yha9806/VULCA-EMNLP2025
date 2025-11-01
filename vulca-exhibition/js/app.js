@@ -22,6 +22,8 @@ class VulcaExhibition {
     // Phase 5: Content Interaction System
     this.searchIndex = null;
     this.searchUI = null;
+    this.filterSystem = null;
+    this.filterUI = null;
 
     this.isInitialized = false;
     this.animationFrameId = null;
@@ -206,7 +208,18 @@ class VulcaExhibition {
       onResultSelect: (critique) => this.handleSearchResultSelect(critique),
     });
 
+    // Create FilterSystem
+    this.filterSystem = new FilterSystem();
+    this.filterSystem.setCritiques(critiques);
+
+    // Create FilterUI
+    this.filterUI = new FilterUI({
+      filterSystem: this.filterSystem,
+      onFilterChange: (results) => this.handleFilterChange(results),
+    });
+
     console.log('✅ Search system initialized with ' + critiques.length + ' critiques');
+    console.log('✅ Filter system initialized');
   }
 
   /**
@@ -228,6 +241,17 @@ class VulcaExhibition {
     }
 
     console.log(`✅ Selected critique: ${critique.personaId} - ${critique.artworkId}`);
+  }
+
+  /**
+   * Handle filter change
+   */
+  handleFilterChange(results) {
+    const stats = this.filterSystem.getStats();
+    const summary = this.filterSystem.getFilterSummary();
+
+    console.log(`📊 Filters applied: ${stats.filteredCritiques} / ${stats.totalCritiques} results`);
+    console.log(`   ${summary}`);
   }
 
   /**
@@ -534,12 +558,18 @@ class VulcaExhibition {
     this.layout?.destroy();
     this.renderer?.destroy();
 
-    // Phase 5: Cleanup search system
+    // Phase 5: Cleanup search and filter systems
     if (this.searchUI) {
       this.searchUI.close();
     }
     if (this.searchIndex) {
       this.searchIndex.clear();
+    }
+    if (this.filterUI) {
+      this.filterUI.close();
+    }
+    if (this.filterSystem) {
+      this.filterSystem.resetFilters();
     }
 
     this.particleSystems = {};
