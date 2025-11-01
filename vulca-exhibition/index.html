@@ -24,7 +24,10 @@
     </div>
 
     <div class="info-section rpait-radar">
-      <svg id="rpait-chart" class="rpait-chart" width="200" height="200" viewBox="0 0 200 200"></svg>
+      <!-- Chart.js Radar Chart Container -->
+      <div id="rpait-chart-container" style="width: 300px; height: 300px; margin: auto;">
+        <!-- Charts will be rendered here -->
+      </div>
     </div>
 
     <div class="info-section interaction-hints">
@@ -46,6 +49,9 @@
   <!-- PixiJS v8.6.0 - Load first -->
   <script src="https://cdn.jsdelivr.net/npm/pixi.js@8.6.0/dist/pixi.min.js"></script>
 
+  <!-- Chart.js v4.4.0 - Data visualization library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
   <!-- Data and Core Modules -->
   <script src="./js/data/RPAIT.js"></script>
   <script src="./js/utils/ColorUtils.js"></script>
@@ -57,6 +63,10 @@
 
   <!-- Layer 2 Physics Engine (Phase 3) -->
   <script src="./js/exhibition/PhysicsEngine.js"></script>
+
+  <!-- Phase 4: RPAIT Visualization System -->
+  <script src="./js/exhibition/ChartManager.js"></script>
+  <script src="./js/exhibition/RPAITVisualization.js"></script>
 
   <script src="./js/exhibition/InteractionManager.js"></script>
   <script src="./js/exhibition/AutoPlayManager.js"></script>

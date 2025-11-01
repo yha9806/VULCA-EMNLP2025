@@ -16,6 +16,9 @@ class VulcaExhibition {
     this.interactionManager = null;
     this.particleSystems = {};
 
+    // Phase 4: RPAIT Visualization
+    this.rpaitVisualization = null;
+
     this.isInitialized = false;
     this.animationFrameId = null;
     this.time = 0;
@@ -86,6 +89,11 @@ class VulcaExhibition {
         this  // Pass app reference for pause/resume control
       );
 
+      // Phase 4: Initialize RPAIT Visualization
+      this.rpaitVisualization = new RPAITVisualization({
+        canvasContainer: document.getElementById('rpait-chart-container'),
+      });
+
       // Register particle systems with interaction manager and layout
       Object.entries(this.particleSystems).forEach(([key, system]) => {
         this.interactionManager.registerParticleSystem(key, system);
@@ -109,6 +117,7 @@ class VulcaExhibition {
       console.log(`   - Renderer: ${rendererInfo.width}x${rendererInfo.height}`);
       console.log(`   - Particle Systems: ${Object.keys(this.particleSystems).length}`);
       console.log(`   - Regions: ${Object.keys(this.layout.getAllRegions()).length}`);
+      console.log(`   - Phase 4 RPAIT Visualization: Ready`);
 
       // Log info to console
       this.printDebugInfo();
