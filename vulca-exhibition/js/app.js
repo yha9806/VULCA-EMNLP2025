@@ -27,6 +27,7 @@ class VulcaExhibition {
     this.bookmarkSystem = null;
     this.comparisonView = null;
     this.shareSystem = null;
+    this.navigationUI = null;
 
     this.isInitialized = false;
     this.animationFrameId = null;
@@ -242,11 +243,18 @@ class VulcaExhibition {
       onStateRestore: (state) => this.handleStateRestore(state),
     });
 
+    // Create NavigationUI (Phase 5 Task 5.6)
+    this.navigationUI = new NavigationUI({
+      maxHistoryItems: 20,
+      storageKey: 'vulca-navigation-history',
+    });
+
     console.log('✅ Search system initialized with ' + critiques.length + ' critiques');
     console.log('✅ Filter system initialized');
     console.log('✅ Bookmark system initialized');
     console.log('✅ Comparison view initialized');
     console.log('✅ Share system initialized');
+    console.log('✅ Navigation UI initialized');
   }
 
   /**
@@ -265,6 +273,15 @@ class VulcaExhibition {
     // Display RPAIT radar chart
     if (this.rpaitVisualization) {
       this.rpaitVisualization.displayPersonaChart(critique.artworkId, critique.personaId);
+    }
+
+    // Add to browse history
+    if (this.navigationUI && artwork) {
+      this.navigationUI.addBrowseHistory(
+        critique.artworkId,
+        critique.personaId,
+        artwork.title
+      );
     }
 
     console.log(`✅ Selected critique: ${critique.personaId} - ${critique.artworkId}`);
@@ -680,6 +697,9 @@ class VulcaExhibition {
     }
     if (this.shareSystem) {
       this.shareSystem.clearState();
+    }
+    if (this.navigationUI) {
+      this.navigationUI.clearAllHistory();
     }
 
     this.particleSystems = {};
