@@ -26,6 +26,7 @@ class VulcaExhibition {
     this.filterUI = null;
     this.bookmarkSystem = null;
     this.comparisonView = null;
+    this.shareSystem = null;
 
     this.isInitialized = false;
     this.animationFrameId = null;
@@ -234,10 +235,18 @@ class VulcaExhibition {
       onClose: () => console.log('Comparison view closed'),
     });
 
+    // Create ShareSystem (Phase 5 Task 5.5)
+    this.shareSystem = new ShareSystem({
+      baseUrl: window.location.origin + window.location.pathname,
+      maxUrlLength: 2048,
+      onStateRestore: (state) => this.handleStateRestore(state),
+    });
+
     console.log('✅ Search system initialized with ' + critiques.length + ' critiques');
     console.log('✅ Filter system initialized');
     console.log('✅ Bookmark system initialized');
     console.log('✅ Comparison view initialized');
+    console.log('✅ Share system initialized');
   }
 
   /**
@@ -270,6 +279,44 @@ class VulcaExhibition {
 
     console.log(`📊 Filters applied: ${stats.filteredCritiques} / ${stats.totalCritiques} results`);
     console.log(`   ${summary}`);
+  }
+
+  /**
+   * Handle state restore from URL
+   */
+  handleStateRestore(state) {
+    if (!state) return;
+
+    // Restore search query if present
+    if (state.searchQuery && this.searchUI) {
+      console.log(`🔗 Restoring search query: "${state.searchQuery}"`);
+      // Execute search with restored query
+      const results = this.searchIndex.search(state.searchQuery, { matchMode: 'any', useFuzzy: true });
+      console.log(`   Found ${results.length} results`);
+    }
+
+    // Restore filters if present
+    if ((state.filterPersonas?.length > 0 || state.filterArtworks?.length > 0) && this.filterSystem) {
+      console.log('🔗 Restoring filters...');
+      state.filterPersonas?.forEach(persona => {
+        this.filterSystem.addPersonaFilter(persona);
+      });
+      state.filterArtworks?.forEach(artwork => {
+        this.filterSystem.addArtworkFilter(artwork);
+      });
+      if (state.filterRPAIT) {
+        this.filterSystem.setRPAITDimension(state.filterRPAIT);
+      }
+      if (state.filterScoreRange) {
+        this.filterSystem.setRPAITScoreRange(state.filterScoreRange[0], state.filterScoreRange[1]);
+      }
+      if (state.filterLogic) {
+        this.filterSystem.setCombinationLogic(state.filterLogic);
+      }
+      console.log(`   Applied ${state.filterPersonas?.length || 0} persona and ${state.filterArtworks?.length || 0} artwork filters`);
+    }
+
+    console.log('✅ Application state restored from shared URL');
   }
 
   /**
@@ -630,6 +677,9 @@ class VulcaExhibition {
     }
     if (this.comparisonView) {
       this.comparisonView.clearAll();
+    }
+    if (this.shareSystem) {
+      this.shareSystem.clearState();
     }
 
     this.particleSystems = {};
