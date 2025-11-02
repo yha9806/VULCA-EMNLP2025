@@ -136,6 +136,65 @@
       </div>
     </section>
 
+    <!-- DATA VISUALIZATION SECTION -->
+    <section class="visualization-section" id="visualization-section">
+      <div class="container">
+        <header class="viz-header">
+          <h2>数据洞察 / Data Insights</h2>
+          <p>探索评论家视角与作品之间的多维关系</p>
+        </header>
+
+        <div class="viz-grid">
+          <!-- Panel 1: RPAIT Radar -->
+          <div class="viz-panel" id="rpait-radar-panel">
+            <h3>评论家维度分布</h3>
+            <canvas id="rpait-radar-chart" role="img" aria-label="RPAIT radar chart" tabindex="0"></canvas>
+            <div class="viz-controls">
+              <button class="viz-btn active" data-mode="single" aria-label="Single persona mode">单一模式</button>
+              <button class="viz-btn" data-mode="compare" aria-label="Compare multiple personas">对比模式</button>
+            </div>
+          </div>
+
+          <!-- Panel 2: Persona Comparison -->
+          <div class="viz-panel" id="persona-matrix-panel">
+            <h3>评论家对比矩阵</h3>
+            <canvas id="persona-matrix-chart" role="img" aria-label="Persona comparison matrix" tabindex="0"></canvas>
+            <div class="viz-controls">
+              <select id="dimension-selector" aria-label="Select RPAIT dimension">
+                <option value="all">全部维度</option>
+                <option value="R">Representation</option>
+                <option value="P">Philosophy</option>
+                <option value="A">Aesthetic</option>
+                <option value="I">Identity</option>
+                <option value="T">Tradition</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Panel 3: Similarity Heatmap -->
+          <div class="viz-panel" id="similarity-heatmap-panel">
+            <h3>语义相似度热力图</h3>
+            <div id="similarity-heatmap"></div>
+            <div class="viz-legend">
+              <span>低相似度</span>
+              <div class="legend-gradient"></div>
+              <span>高相似度</span>
+            </div>
+          </div>
+
+          <!-- Panel 4: Network Graph -->
+          <div class="viz-panel viz-panel-large" id="network-graph-panel">
+            <h3>作品-评论家关系网络</h3>
+            <svg id="network-graph" role="img" aria-label="Artwork-persona network graph" tabindex="0"></svg>
+            <div class="viz-controls">
+              <button class="viz-btn" data-action="reset" aria-label="Reset graph layout">重置布局</button>
+              <button class="viz-btn" data-action="export" aria-label="Export as PNG">导出PNG</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FULL GALLERY (hidden, for detail pages) -->
     <!-- CRITICAL: display: none !important prevents CSS or JS from overriding on homepage -->
     <section class="gallery" id="gallery" style="display: none !important;">
@@ -269,7 +328,19 @@
   <!-- <script src="/js/gallery.js?v=1"></script> -->
   <!-- <script src="/js/critique.js?v=1"></script> -->
   <!-- <script src="/js/language.js?v=1"></script> -->
-  <!-- <script src="/js/visualization.js?v=1"></script> -->
+
+  <!-- Data Analysis Module -->
+  <script src="/js/analysis.js?v=1"></script>
+
+  <!-- D3.js for Network Graph (minimal modules) -->
+  <script src="https://cdn.jsdelivr.net/npm/d3-force@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-selection@3"></script>
+
+  <!-- Visualization Components -->
+  <script src="/js/visualizations/rpait-radar.js?v=1"></script>
+  <script src="/js/visualizations/persona-matrix.js?v=1"></script>
+  <script src="/js/visualizations/similarity-heatmap.js?v=1"></script>
+  <script src="/js/visualizations/network-graph.js?v=1"></script>
 
   <!-- Main App (deferred for async loading) -->
   <script src="/js/app.js?v=6" defer></script>

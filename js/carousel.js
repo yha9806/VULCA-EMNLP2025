@@ -130,6 +130,17 @@ window.ArtworkCarousel = (function() {
           critics: critics
         });
       });
+
+      // Emit custom event for visualizations to consume
+      if (eventName === 'navigate' && currentArtwork) {
+        window.dispatchEvent(new CustomEvent('visualization:update', {
+          detail: {
+            artworkId: currentArtwork.id,
+            artworkIndex: this.currentIndex,
+            artwork: currentArtwork
+          }
+        }));
+      }
     }
   }
 

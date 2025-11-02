@@ -2409,4 +2409,359 @@ a:focus-visible {
   }
 }
 
+/* ==================== DATA VISUALIZATION SECTION ==================== */
+
+:root {
+  /* RPAIT Dimension Colors */
+  --rpait-r: #E8998D;
+  --rpait-p: #A3A8C5;
+  --rpait-a: #B8D8BE;
+  --rpait-i: #F4C2C2;
+  --rpait-t: #D4A574;
+
+  /* Heatmap Gradient */
+  --heatmap-low: hsl(0, 70%, 75%);
+  --heatmap-mid: hsl(40, 70%, 75%);
+  --heatmap-high: hsl(120, 70%, 75%);
+}
+
+.visualization-section {
+  padding: var(--spacing-2xl) 0;
+  background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);
+}
+
+.viz-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.viz-header h2 {
+  font-size: 2rem;
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.viz-header p {
+  font-size: 1.125rem;
+  color: var(--color-text-light);
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.viz-panel {
+  background: white;
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.viz-panel:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.viz-panel h3 {
+  font-size: 1.25rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.viz-panel-large {
+  grid-column: 1 / -1;  /* Full width */
+}
+
+/* Canvas sizing */
+.viz-panel canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 400px;
+}
+
+/* SVG sizing */
+.viz-panel svg {
+  width: 100%;
+  height: 500px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+/* Visualization Controls */
+.viz-controls {
+  margin-top: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.viz-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: white;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: var(--weight-medium);
+}
+
+.viz-btn:hover {
+  background: var(--color-bg-alt);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.viz-btn:active {
+  transform: translateY(0);
+}
+
+.viz-btn.active {
+  background: var(--color-text);
+  color: white;
+  border-color: var(--color-text);
+}
+
+.viz-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#dimension-selector {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: white;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+#dimension-selector:hover {
+  border-color: var(--color-text-light);
+}
+
+#dimension-selector:focus {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* Similarity Heatmap */
+#similarity-heatmap {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  margin: var(--spacing-md) 0;
+}
+
+.heatmap-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.viz-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+
+.legend-gradient {
+  width: 200px;
+  height: 20px;
+  background: linear-gradient(
+    to right,
+    var(--heatmap-low) 0%,
+    var(--heatmap-mid) 50%,
+    var(--heatmap-high) 100%
+  );
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+/* Network Graph Styles */
+#network-graph .node {
+  cursor: pointer;
+  stroke: white;
+  stroke-width: 2px;
+}
+
+#network-graph .node:hover {
+  stroke-width: 3px;
+  filter: brightness(1.1);
+}
+
+#network-graph .link {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+#network-graph .link:hover {
+  stroke-opacity: 1;
+  stroke-width: 3px;
+}
+
+#network-graph .label {
+  font-size: 11px;
+  fill: var(--color-text);
+  pointer-events: none;
+  text-anchor: middle;
+  font-weight: var(--weight-medium);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .viz-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .viz-panel canvas {
+    max-height: 350px;
+  }
+
+  .viz-panel svg {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .visualization-section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .viz-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .viz-header p {
+    font-size: 1rem;
+  }
+
+  .viz-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .viz-panel {
+    padding: var(--spacing-md);
+  }
+
+  .viz-panel canvas {
+    max-height: 280px;
+  }
+
+  .viz-panel svg {
+    height: 300px;
+  }
+
+  .viz-controls {
+    flex-direction: column;
+  }
+
+  .viz-btn {
+    width: 100%;
+  }
+
+  #similarity-heatmap {
+    gap: 1px;
+  }
+
+  .heatmap-cell {
+    font-size: 10px;
+  }
+
+  .legend-gradient {
+    width: 150px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .viz-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .viz-header p {
+    font-size: 0.875rem;
+  }
+
+  .viz-panel h3 {
+    font-size: 1.125rem;
+  }
+
+  .heatmap-cell {
+    font-size: 9px;
+  }
+}
+
+/* Accessibility: Focus States */
+.viz-btn:focus-visible,
+#dimension-selector:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+canvas:focus-visible,
+svg:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .viz-panel,
+  .viz-btn,
+  .heatmap-cell {
+    transition: none;
+  }
+
+  .heatmap-cell:hover {
+    transform: none;
+  }
+}
+
+/* Loading State */
+.viz-panel.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.viz-panel.loading::after {
+  content: 'Loading...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  color: var(--color-text-light);
+}
+
 /* ========== END OF STYLESHEET ========== */
