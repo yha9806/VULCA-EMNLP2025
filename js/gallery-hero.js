@@ -10,7 +10,7 @@ window.GalleryHeroRenderer = (function() {
   'use strict';
 
   const CONFIG = {
-    MAX_CRITICS_VISIBLE: 3,  // Show up to 3 critics at a time
+    MAX_CRITICS_VISIBLE: 6,  // Show all 6 critics
     CRITIC_TEXT_PREVIEW: 250, // Characters to show in preview
   };
 
@@ -41,10 +41,195 @@ window.GalleryHeroRenderer = (function() {
    * Render current artwork and critics
    */
   function render(carousel) {
+    renderHeroTitle(carousel);
+    renderArtworkHeader(carousel);
     renderArtworkImage(carousel);
     renderCritiques(carousel);
+    renderRPAITVisualization(carousel);
     updateIndicator(carousel);
     renderDots(carousel);
+  }
+
+  /**
+   * Render hero section title and description
+   */
+  function renderHeroTitle(carousel) {
+    const galleryHero = document.getElementById('gallery-hero');
+    if (!galleryHero) return;
+
+    // Check if hero title already exists
+    let heroTitle = galleryHero.querySelector('.hero-title-section');
+    if (!heroTitle) {
+      heroTitle = document.createElement('div');
+      heroTitle.className = 'hero-title-section';
+      galleryHero.insertBefore(heroTitle, galleryHero.firstChild);
+    }
+
+    heroTitle.innerHTML = '';
+
+    const title = document.createElement('h1');
+    title.className = 'hero-title';
+    title.lang = 'zh';
+    title.textContent = '潮汐的负形';
+
+    const subtitle = document.createElement('p');
+    subtitle.className = 'hero-subtitle';
+    subtitle.lang = 'zh';
+    subtitle.textContent = '一场关于艺术评论的视角之旅';
+
+    heroTitle.appendChild(title);
+    heroTitle.appendChild(subtitle);
+
+    console.log('✓ Rendered hero title section');
+  }
+
+  /**
+   * Render artwork header with title, year, and metadata
+   */
+  function renderArtworkHeader(carousel) {
+    const galleryHero = document.getElementById('gallery-hero');
+    if (!galleryHero) return;
+
+    const artwork = carousel.getCurrentArtwork();
+    if (!artwork) return;
+
+    // Check if artwork header already exists
+    let artworkHeader = galleryHero.querySelector('.artwork-header-section');
+    if (!artworkHeader) {
+      artworkHeader = document.createElement('div');
+      artworkHeader.className = 'artwork-header-section';
+      const artworkDisplay = galleryHero.querySelector('.artwork-display');
+      if (artworkDisplay) {
+        artworkDisplay.insertBefore(artworkHeader, artworkDisplay.firstChild);
+      } else {
+        galleryHero.appendChild(artworkHeader);
+      }
+    }
+
+    artworkHeader.innerHTML = '';
+
+    // Title
+    const title = document.createElement('h2');
+    title.className = 'artwork-title';
+
+    const titleZh = document.createElement('span');
+    titleZh.lang = 'zh';
+    titleZh.textContent = artwork.titleZh;
+
+    const titleEn = document.createElement('span');
+    titleEn.lang = 'en';
+    titleEn.textContent = artwork.titleEn;
+
+    title.appendChild(titleZh);
+    title.appendChild(document.createElement('br'));
+    title.appendChild(titleEn);
+
+    artworkHeader.appendChild(title);
+
+    // Year and artist info
+    const metadata = document.createElement('div');
+    metadata.className = 'artwork-meta';
+
+    const year = document.createElement('time');
+    year.className = 'artwork-year';
+    year.dateTime = artwork.year;
+    year.textContent = `${artwork.year}`;
+
+    const artist = document.createElement('span');
+    artist.className = 'artwork-artist';
+    artist.textContent = artwork.artist || 'Sougwen Chung';
+
+    metadata.appendChild(year);
+    metadata.appendChild(document.createTextNode(' • '));
+    metadata.appendChild(artist);
+
+    artworkHeader.appendChild(metadata);
+
+    console.log(`✓ Rendered artwork header: ${artwork.titleZh}`);
+  }
+
+  /**
+   * Render RPAIT visualization for current artwork
+   */
+  function renderRPAITVisualization(carousel) {
+    const galleryHero = document.getElementById('gallery-hero');
+    if (!galleryHero) return;
+
+    const artwork = carousel.getCurrentArtwork();
+    if (!artwork) return;
+
+    // Check if viz container already exists
+    let vizContainer = galleryHero.querySelector('.artwork-rpait-visualization');
+    if (!vizContainer) {
+      vizContainer = document.createElement('div');
+      vizContainer.className = 'artwork-rpait-visualization';
+      galleryHero.appendChild(vizContainer);
+    }
+
+    vizContainer.innerHTML = '';
+
+    // Get average RPAIT scores for all critics of this artwork
+    const critiques = carousel.getArtworkCritiques();
+    if (!critiques || critiques.length === 0) {
+      console.warn('⚠ No critiques for RPAIT visualization');
+      return;
+    }
+
+    // Calculate average RPAIT scores
+    const avgRpait = { R: 0, P: 0, A: 0, I: 0, T: 0 };
+    critiques.forEach(critique => {
+      if (critique.rpait) {
+        avgRpait.R += critique.rpait.R || 0;
+        avgRpait.P += critique.rpait.P || 0;
+        avgRpait.A += critique.rpait.A || 0;
+        avgRpait.I += critique.rpait.I || 0;
+        avgRpait.T += critique.rpait.T || 0;
+      }
+    });
+
+    // Calculate averages
+    const count = critiques.length;
+    Object.keys(avgRpait).forEach(key => {
+      avgRpait[key] = Math.round(avgRpait[key] / count);
+    });
+
+    // Create visualization
+    const title = document.createElement('h3');
+    title.className = 'rpait-title';
+    title.textContent = 'RPAIT 评论维度分析';
+    vizContainer.appendChild(title);
+
+    const gridContainer = document.createElement('div');
+    gridContainer.className = 'rpait-grid';
+
+    ['R', 'P', 'A', 'I', 'T'].forEach(dimension => {
+      const score = avgRpait[dimension];
+      const barContainer = document.createElement('div');
+      barContainer.className = 'rpait-bar-container';
+
+      const label = document.createElement('span');
+      label.className = 'rpait-label';
+      label.textContent = dimension;
+
+      const bar = document.createElement('div');
+      bar.className = `rpait-bar rpait-${dimension}`;
+      const width = (score / 10) * 100;
+      bar.style.width = width + '%';
+
+      const scoreDisplay = document.createElement('span');
+      scoreDisplay.className = 'rpait-score';
+      scoreDisplay.textContent = score;
+
+      barContainer.appendChild(label);
+      barContainer.appendChild(bar);
+      barContainer.appendChild(scoreDisplay);
+
+      gridContainer.appendChild(barContainer);
+    });
+
+    vizContainer.appendChild(gridContainer);
+
+    console.log('✓ Rendered RPAIT visualization');
   }
 
   /**
