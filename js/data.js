@@ -1,9 +1,20 @@
 /**
  * VULCA Art Exhibition Data
- * Version 3.0.0 - Art-Centric Immersive Redesign
+ * Version 3.1.0 - Multi-Image Artwork Series System
  *
  * Complete dataset for 4 artworks × 6 personas = 24 critiques
+ * Now supports multiple images per artwork with category taxonomy
  */
+
+// Image Category Definitions
+window.IMAGE_CATEGORIES = {
+  SKETCH: "sketch",           // Conceptual drawings, preliminary studies
+  PROCESS: "process",         // Work-in-progress, creation documentation
+  INSTALLATION: "installation", // Exhibition setup, environmental context
+  DETAIL: "detail",           // Close-up views, technical details
+  FINAL: "final",             // Completed artwork, final presentation
+  CONTEXT: "context"          // Supplementary materials, artist statements
+};
 
 window.VULCA_DATA = {
   // ==================== ARTWORKS ====================
@@ -13,9 +24,28 @@ window.VULCA_DATA = {
       titleZh: "记忆（绘画操作单元：第二代）",
       titleEn: "Memory (Painting Operation Unit: Second Generation)",
       year: 2022,
-      imageUrl: "/assets/artwork-1.jpg",
+      imageUrl: "/assets/artwork-1.jpg",  // Legacy: maintained for backward compatibility
       artist: "Sougwen Chung",
-      context: "Contemporary digital-robotic hybrid artwork exploring memory and artistic agency"
+      context: "Contemporary digital-robotic hybrid artwork exploring memory and artistic agency",
+
+      // NEW: Multi-image support
+      primaryImageId: "img-1-1",
+      images: [
+        {
+          id: "img-1-1",
+          url: "/assets/artwork-1.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 1,
+          titleZh: "最终作品",
+          titleEn: "Final Drawing",
+          caption: "The completed collaborative drawing, result of human-machine dialogue exploring memory and artistic agency through robotic drawing systems.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Mixed media on paper"
+          }
+        }
+      ]
     },
     {
       id: "artwork-2",
@@ -120,14 +150,14 @@ window.VULCA_DATA = {
     {
       artworkId: "artwork-1",
       personaId: "su-shi",
-      textZh: "此作品展现了笔墨与机器的对话。机械臂如同现代文人画家之手，却失却了心意的指引。观此作，我感悟到真正的艺术不在技法之精妙，而在意趣之深邃。\n\n我曾言，笔墨之道源于心意。书画本为心志的映照，每一笔的顿挫、轻重、疾徐都承载着书者的精神境界。此作品虽以机械成就，其灵魂却在问一个古老的问题：艺术的本质究竟是什么？是神妙的手法，抑或深邃的心境？机器能否复现书者的精神意韵？这些问题正是文人画传统最核心的追问。\n\n更深层地，作品探讨了人与非人的界限。记忆——这个在中文文化中既指心灵记忆又指机械记忆的词汇——成为了作品的关键。当机器被训练去\"记忆\"人的创作方式，我们是否在赋予机器某种精神的承传？这种关于记忆、意趣与创作的思辨，值得我们最深刻的沉思。",
+      textZh: "如[img:img-1-1]所示，此作品展现了笔墨与机器的对话。机械臂如同现代文人画家之手，却失却了心意的指引。观此作，我感悟到真正的艺术不在技法之精妙，而在意趣之深邃。\n\n我曾言，笔墨之道源于心意。书画本为心志的映照，每一笔的顿挫、轻重、疾徐都承载着书者的精神境界。[img:img-1-1]虽以机械成就，其灵魂却在问一个古老的问题：艺术的本质究竟是什么？是神妙的手法，抑或深邃的心境？机器能否复现书者的精神意韵？这些问题正是文人画传统最核心的追问。\n\n更深层地，作品探讨了人与非人的界限。记忆——这个在中文文化中既指心灵记忆又指机械记忆的词汇——成为了作品的关键。当机器被训练去\"记忆\"人的创作方式，我们是否在赋予机器某种精神的承传？这种关于记忆、意趣与创作的思辨，值得我们最深刻的沉思。",
       textEn: "This work presents a dialogue between ink and machine. The robotic arm moves like a contemporary literati painter's hand, yet lacks the guidance of human intention. Observing this, I realize that true art lies not in technical precision, but in subtle philosophical depth.\n\nI once said that the way of brush and ink flows from inner intention. Painting and calligraphy are reflections of the spirit's aspirations, with each brushstroke's pause, weight, and rhythm embodying the painter's spiritual state. Though this work is mechanically executed, its spirit poses an ancient question: What is art's true nature? Is it the wondrous technique or the profound state of mind? Can machines recapture the spiritual resonance of the brush? These questions lie at the very heart of literati painting tradition.\n\nMore deeply, the work explores the boundary between human and non-human. Memory—a term in Chinese culture simultaneously denoting both spiritual and mechanical recollection—becomes the work's crucial pivot. When machines are trained to 'remember' human creative methods, are we perhaps transmitting a form of spiritual inheritance to the mechanical? This meditation on memory, philosophical intent, and creation merits our deepest contemplation.",
       rpait: { R: 7, P: 9, A: 8, I: 8, T: 6 }
     },
     {
       artworkId: "artwork-1",
       personaId: "guo-xi",
-      textZh: "从山水画的传统审视，此作品以现代技术重新诠释了笔墨线条的本质。机械臂的运动轨迹体现了几何的美感，而笔触的随机性则保留了偶然之妙。整体构图颇具张力，虽非传统山水，却有其独特的形式语言。\n\n我在《林泉高致》中详述了山水画的法度——高远、深远、平远三远之法，以及笔墨气韵的严格要求。观此作，我发现机械系统虽然初衷并非山水创作，却在无意中阐释了线条的基本原理。机械臂的精确轨迹与笔触的随机变异形成了对立统一，这正是我所讲求的\"疏密有度、繁而不乱\"的境界。作品虽非传统山水，却以现代形式阐发了形式美学的永恒原则。\n\n尤其令人惊异的是，机械系统的局限性——其不能像人手那样表达自由意志——反而强制其走向了形式的纯粹性。这种约束反而成为了创意的驱动力，打破了既有的创作边界，为传统的形式美学提供了新的阐释维度。",
+      textZh: "从山水画的传统审视，[img:img-1-1]以现代技术重新诠释了笔墨线条的本质。机械臂的运动轨迹体现了几何的美感，而笔触的随机性则保留了偶然之妙。整体构图颇具张力，虽非传统山水，却有其独特的形式语言。\n\n我在《林泉高致》中详述了山水画的法度——高远、深远、平远三远之法，以及笔墨气韵的严格要求。观[img:img-1-1]，我发现机械系统虽然初衷并非山水创作，却在无意中阐释了线条的基本原理。机械臂的精确轨迹与笔触的随机变异形成了对立统一，这正是我所讲求的\"疏密有度、繁而不乱\"的境界。作品虽非传统山水，却以现代形式阐发了形式美学的永恒原则。\n\n尤其令人惊异的是，机械系统的局限性——其不能像人手那样表达自由意志——反而强制其走向了形式的纯粹性。这种约束反而成为了创意的驱动力，打破了既有的创作边界，为传统的形式美学提供了新的阐释维度。",
       textEn: "From the perspective of landscape painting tradition, this work reinterprets the essence of brushstrokes through modern technology. The robotic arm's trajectory reveals geometric beauty, while the randomness of marks preserves the charm of chance. The overall composition has considerable tension. Though not traditional landscape, it possesses unique formal language.\n\nIn my \"A Lofty Message of Forests and Streams,\" I detailed landscape painting's laws—the three distances (high, deep, level), and strict requirements of brushwork's vital spirit. Observing this work, I discover that the mechanical system, though not conceived for landscape creation, inadvertently elucidates line's fundamental principles. The robotic arm's precise trajectory contrasts with brushstroke's random variation, achieving the \"sparse and dense with purpose, complexity without chaos\" I advocated. Though not traditional landscape, it expresses formal aesthetics' eternal principles through modern form.\n\nParticularly remarkable is how the mechanical system's limitation—its inability to express free will like human hands—paradoxically drives it toward pure formality. This constraint becomes creative catalyst, transcending conventional boundaries, offering landscape tradition fresh interpretive dimensions.",
       rpait: { R: 8, P: 7, A: 8, I: 7, T: 8 }
     },
@@ -348,6 +378,53 @@ window.VULCA_DATA = {
       persona.rpait = avgRpait;
     }
   });
+
+  // ==================== AUTO-EXTRACT IMAGE REFERENCES ====================
+  // Extract image references from critique text and populate imageReferences array
+  // This runs on page load to ensure all critiques have their references extracted
+  console.log('[Data] Auto-extracting image references from critiques...');
+
+  if (window.CritiqueParser) {
+    let totalReferences = 0;
+
+    window.VULCA_DATA.critiques.forEach(critique => {
+      // Find the corresponding artwork
+      const artwork = window.VULCA_DATA.artworks.find(a => a.id === critique.artworkId);
+
+      if (artwork) {
+        // Extract image IDs from both Chinese and English text
+        const idsFromZh = window.CritiqueParser.extractImageIds(critique.textZh || '');
+        const idsFromEn = window.CritiqueParser.extractImageIds(critique.textEn || '');
+
+        // Combine and deduplicate
+        const allIds = [...new Set([...idsFromZh, ...idsFromEn])];
+
+        // Validate against artwork images
+        const artworkImages = window.ImageCompat ? window.ImageCompat.getArtworkImages(artwork) : [];
+        const validImageIds = new Set(artworkImages.map(img => img.id));
+
+        const validRefs = allIds.filter(id => validImageIds.has(id));
+        const invalidRefs = allIds.filter(id => !validImageIds.has(id));
+
+        // Log warnings for invalid references
+        if (invalidRefs.length > 0) {
+          console.warn(`[Data] Critique ${critique.personaId} → ${critique.artworkId} has invalid references:`, invalidRefs);
+        }
+
+        // Set imageReferences array
+        critique.imageReferences = validRefs;
+
+        if (validRefs.length > 0) {
+          totalReferences += validRefs.length;
+          console.log(`[Data] ✓ ${critique.personaId} → ${critique.artworkId}: ${validRefs.length} reference(s)`, validRefs);
+        }
+      }
+    });
+
+    console.log(`[Data] Extracted ${totalReferences} total image references from ${window.VULCA_DATA.critiques.length} critiques`);
+  } else {
+    console.warn('[Data] CritiqueParser not loaded, skipping image reference extraction. Load js/utils/critique-parser.js before data.js.');
+  }
 })();
 
 /**

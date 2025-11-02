@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Enrichment Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #f5f5f5;
+    }
+    .test-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .result {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .critique-item {
+      background: #f9f9f9;
+      border-left: 4px solid #4CAF50;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    .has-refs {
+      border-left-color: #2196F3;
+    }
+    .no-refs {
+      border-left-color: #ccc;
+    }
+    .refs-list {
+      color: #2196F3;
+      font-weight: 600;
+      font-family: monospace;
+    }
+    code {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-header">
+    <h1>📊 Data Enrichment Test</h1>
+    <p>Task 3.4: Automatic imageReferences Extraction</p>
+  </div>
+
+  <div class="result">
+    <h2>Test Results</h2>
+    <div id="output"></div>
+  </div>
+
+  <!-- Load dependencies IN ORDER -->
+  <script src="/js/utils/image-compat.js?v=1.0"></script>
+  <script src="/js/utils/critique-parser.js?v=1.0"></script>
+  <script src="/js/data.js?v=3.2"></script>
+
+  <script>
+    // Wait for all scripts to load
+    window.addEventListener('DOMContentLoaded', () => {
+      const output = document.getElementById('output');
+
+      // Check if CritiqueParser and VULCA_DATA loaded
+      if (!window.VULCA_DATA) {
+        output.innerHTML = '<p style="color: red;">❌ VULCA_DATA not loaded!</p>';
+        return;
+      }
+
+      if (!window.CritiqueParser) {
+        output.innerHTML = '<p style="color: red;">❌ CritiqueParser not loaded!</p>';
+        return;
+      }
+
+      // Display results
+      let html = '<h3>Critiques with Image References:</h3>';
+
+      const critiquesWithRefs = window.VULCA_DATA.critiques.filter(c => c.imageReferences && c.imageReferences.length > 0);
+      const critiquesWithoutRefs = window.VULCA_DATA.critiques.filter(c => !c.imageReferences || c.imageReferences.length === 0);
+
+      html += `<p><strong>Total critiques:</strong> ${window.VULCA_DATA.critiques.length}</p>`;
+      html += `<p><strong>With references:</strong> ${critiquesWithRefs.length} ✅</p>`;
+      html += `<p><strong>Without references:</strong> ${critiquesWithoutRefs.length}</p>`;
+
+      html += '<hr>';
+
+      // Show critiques with references
+      if (critiquesWithRefs.length > 0) {
+        html += '<h3>Critiques with References:</h3>';
+        critiquesWithRefs.forEach(critique => {
+          html += `
+            <div class="critique-item has-refs">
+              <strong>${critique.personaId}</strong> → <strong>${critique.artworkId}</strong><br>
+              <span class="refs-list">imageReferences: [${critique.imageReferences.map(id => `"${id}"`).join(', ')}]</span><br>
+              <small>${critique.textZh.substring(0, 100)}...</small>
+            </div>
+          `;
+        });
+      }
+
+      // Show first few without references
+      if (critiquesWithoutRefs.length > 0) {
+        html += '<h3>Critiques without References (sample):</h3>';
+        critiquesWithoutRefs.slice(0, 3).forEach(critique => {
+          html += `
+            <div class="critique-item no-refs">
+              <strong>${critique.personaId}</strong> → <strong>${critique.artworkId}</strong><br>
+              <span style="color: #999;">imageReferences: []</span><br>
+              <small>${critique.textZh.substring(0, 100)}...</small>
+            </div>
+          `;
+        });
+      }
+
+      // Test data integrity
+      html += '<hr><h3>Data Integrity Check:</h3>';
+
+      let allValid = true;
+      critiquesWithRefs.forEach(critique => {
+        const artwork = window.VULCA_DATA.artworks.find(a => a.id === critique.artworkId);
+        const artworkImages = window.ImageCompat.getArtworkImages(artwork);
+        const validImageIds = new Set(artworkImages.map(img => img.id));
+
+        critique.imageReferences.forEach(refId => {
+          if (!validImageIds.has(refId)) {
+            html += `<p style="color: red;">❌ Invalid reference: ${refId} in ${critique.personaId} → ${critique.artworkId}</p>`;
+            allValid = false;
+          }
+        });
+      });
+
+      if (allValid) {
+        html += '<p style="color: green;">✅ All image references are valid!</p>';
+      }
+
+      output.innerHTML = html;
+    });
+  </script>
+</body>
+</html>
