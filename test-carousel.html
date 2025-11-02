@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artwork Carousel Test</title>
+
+  <!-- Load styles -->
+  <link rel="stylesheet" href="/styles/main.css?v=4">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #f5f5f5;
+    }
+
+    .test-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .test-header h1 {
+      color: #2d2d2d;
+      margin: 0 0 10px 0;
+    }
+
+    .test-header p {
+      color: #666;
+      margin: 0;
+    }
+
+    .test-section {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .test-section h2 {
+      margin-top: 0;
+      color: #2d2d2d;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    .test-controls {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .test-btn {
+      padding: 10px 20px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 200ms;
+    }
+
+    .test-btn:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .test-btn:active {
+      transform: translateY(0);
+    }
+
+    .test-btn.secondary {
+      background: #2196F3;
+    }
+
+    .test-btn.secondary:hover {
+      background: #0b7dda;
+    }
+
+    .test-btn.danger {
+      background: #f44336;
+    }
+
+    .test-btn.danger:hover {
+      background: #da190b;
+    }
+
+    .console-output {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 13px;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+
+    .console-output .log {
+      margin: 4px 0;
+    }
+
+    .console-output .log-info {
+      color: #4EC9B0;
+    }
+
+    .console-output .log-warn {
+      color: #DCDCAA;
+    }
+
+    .console-output .log-error {
+      color: #F48771;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .status-badge.success {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .status-badge.pending {
+      background: #FF9800;
+      color: white;
+    }
+
+    #carousel-container {
+      margin: 30px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-header">
+    <h1>🎠 Artwork Image Carousel Test</h1>
+    <p>Testing Task 2.1: Carousel Module - Core Functionality</p>
+  </div>
+
+  <!-- Test 1: Basic Instantiation -->
+  <div class="test-section">
+    <h2>Test 1: Carousel Instantiation <span class="status-badge pending" id="test1-status">PENDING</span></h2>
+    <p>Verify that the ArtworkImageCarousel class instantiates without errors.</p>
+    <div id="test1-output" class="console-output"></div>
+  </div>
+
+  <!-- Test 2: Render Method -->
+  <div class="test-section">
+    <h2>Test 2: Render Method <span class="status-badge pending" id="test2-status">PENDING</span></h2>
+    <p>Verify that render() displays the current image with all UI components.</p>
+    <div id="carousel-container"></div>
+    <div class="test-controls">
+      <button class="test-btn" onclick="testRender()">Run render() Test</button>
+    </div>
+    <div id="test2-output" class="console-output"></div>
+  </div>
+
+  <!-- Test 3: Navigation Methods -->
+  <div class="test-section">
+    <h2>Test 3: Navigation Methods <span class="status-badge pending" id="test3-status">PENDING</span></h2>
+    <p>Test next(), prev(), and goTo() methods.</p>
+    <div class="test-controls">
+      <button class="test-btn" onclick="testNavigation('next')">Next →</button>
+      <button class="test-btn" onclick="testNavigation('prev')">← Prev</button>
+      <button class="test-btn secondary" onclick="testNavigation('goTo', 0)">Go to First</button>
+      <button class="test-btn secondary" onclick="testNavigation('goTo', 2)">Go to Index 2</button>
+      <button class="test-btn secondary" onclick="testNavigation('goTo', -1)">Invalid Index (test error handling)</button>
+    </div>
+    <div id="test3-output" class="console-output"></div>
+  </div>
+
+  <!-- Test 4: State Management -->
+  <div class="test-section">
+    <h2>Test 4: State Management <span class="status-badge pending" id="test4-status">PENDING</span></h2>
+    <p>Verify that currentIndex updates correctly during navigation.</p>
+    <div class="test-controls">
+      <button class="test-btn" onclick="testState()">Check Current State</button>
+    </div>
+    <div id="test4-output" class="console-output"></div>
+  </div>
+
+  <!-- Test 5: Highlight Feature -->
+  <div class="test-section">
+    <h2>Test 5: Highlight Feature <span class="status-badge pending" id="test5-status">PENDING</span></h2>
+    <p>Test the highlightImages() and clearHighlights() methods (used by critique system).</p>
+    <div class="test-controls">
+      <button class="test-btn" onclick="testHighlight('set')">Highlight Image 1 & 3</button>
+      <button class="test-btn danger" onclick="testHighlight('clear')">Clear Highlights</button>
+    </div>
+    <div id="test5-output" class="console-output"></div>
+  </div>
+
+  <!-- Test 6: Destroy Method -->
+  <div class="test-section">
+    <h2>Test 6: Destroy Method <span class="status-badge pending" id="test6-status">PENDING</span></h2>
+    <p>Verify that destroy() properly cleans up the carousel.</p>
+    <div class="test-controls">
+      <button class="test-btn danger" onclick="testDestroy()">Destroy Carousel</button>
+      <button class="test-btn" onclick="testRender()">Re-render Carousel</button>
+    </div>
+    <div id="test6-output" class="console-output"></div>
+  </div>
+
+  <!-- Load dependencies in correct order -->
+  <script src="/js/data.js?v=3.1"></script>
+  <script src="/js/utils/image-compat.js?v=1.0"></script>
+  <script src="/js/components/artwork-carousel.js?v=1.0"></script>
+
+  <script>
+    // Global carousel instance
+    let carousel = null;
+
+    // Console logging utilities
+    function log(message, type = 'info', outputId = null) {
+      const className = `log log-${type}`;
+      const logLine = `<div class="${className}">[${new Date().toLocaleTimeString()}] ${message}</div>`;
+
+      console.log(message);
+
+      if (outputId) {
+        const output = document.getElementById(outputId);
+        output.innerHTML += logLine;
+        output.scrollTop = output.scrollHeight;
+      }
+    }
+
+    function setStatus(testId, status) {
+      const badge = document.getElementById(`${testId}-status`);
+      badge.textContent = status === 'success' ? 'PASS ✓' : status === 'error' ? 'FAIL ✗' : 'PENDING';
+      badge.className = `status-badge ${status}`;
+    }
+
+    // Test 1: Instantiation
+    function testInstantiation() {
+      try {
+        log('Starting instantiation test...', 'info', 'test1-output');
+
+        const artwork = window.VULCA_DATA.artworks.find(a => a.id === 'artwork-1');
+        log(`Retrieved artwork: ${artwork.titleEn}`, 'info', 'test1-output');
+
+        const container = document.getElementById('carousel-container');
+        log('Container element found', 'info', 'test1-output');
+
+        carousel = new window.ArtworkImageCarousel(artwork, container, {
+          loop: true,
+          preloadAdjacent: true,
+          enableKeyboard: true,
+          enableTouch: true
+        });
+
+        log('✅ Carousel instantiated successfully!', 'info', 'test1-output');
+        log(`Images loaded: ${carousel.images.length}`, 'info', 'test1-output');
+        log(`Current index: ${carousel.currentIndex}`, 'info', 'test1-output');
+
+        setStatus('test1', 'success');
+      } catch (error) {
+        log(`❌ Instantiation failed: ${error.message}`, 'error', 'test1-output');
+        setStatus('test1', 'error');
+      }
+    }
+
+    // Test 2: Render
+    function testRender() {
+      try {
+        log('Starting render test...', 'info', 'test2-output');
+
+        if (!carousel) {
+          const artwork = window.VULCA_DATA.artworks.find(a => a.id === 'artwork-1');
+          const container = document.getElementById('carousel-container');
+          carousel = new window.ArtworkImageCarousel(artwork, container);
+        }
+
+        carousel.render();
+        log('✅ Carousel rendered successfully!', 'info', 'test2-output');
+
+        // Verify DOM elements exist
+        const viewport = carousel.elements.viewport;
+        const prevBtn = carousel.elements.prevButton;
+        const nextBtn = carousel.elements.nextButton;
+        const indicators = carousel.elements.indicators;
+
+        log(`Viewport exists: ${!!viewport}`, 'info', 'test2-output');
+        log(`Prev button exists: ${!!prevBtn}`, 'info', 'test2-output');
+        log(`Next button exists: ${!!nextBtn}`, 'info', 'test2-output');
+        log(`Indicators exist: ${!!indicators}`, 'info', 'test2-output');
+
+        if (viewport && prevBtn && nextBtn && indicators) {
+          setStatus('test2', 'success');
+        } else {
+          throw new Error('Missing DOM elements');
+        }
+      } catch (error) {
+        log(`❌ Render failed: ${error.message}`, 'error', 'test2-output');
+        setStatus('test2', 'error');
+      }
+    }
+
+    // Test 3: Navigation
+    function testNavigation(method, arg = null) {
+      try {
+        if (!carousel) {
+          log('❌ Carousel not initialized. Run render test first.', 'error', 'test3-output');
+          return;
+        }
+
+        const beforeIndex = carousel.currentIndex;
+        log(`Before: currentIndex = ${beforeIndex}`, 'info', 'test3-output');
+
+        let result;
+        if (method === 'next') {
+          result = carousel.next();
+        } else if (method === 'prev') {
+          result = carousel.prev();
+        } else if (method === 'goTo') {
+          result = carousel.goTo(arg);
+        }
+
+        const afterIndex = carousel.currentIndex;
+        log(`After ${method}(${arg !== null ? arg : ''}): currentIndex = ${afterIndex}`, 'info', 'test3-output');
+        log(`Navigation result: ${result}`, 'info', 'test3-output');
+
+        if (method === 'goTo' && arg >= 0 && arg < carousel.images.length) {
+          if (afterIndex === arg) {
+            log(`✅ goTo(${arg}) successful`, 'info', 'test3-output');
+            setStatus('test3', 'success');
+          } else {
+            log(`❌ goTo(${arg}) failed: expected ${arg}, got ${afterIndex}`, 'error', 'test3-output');
+          }
+        } else if (method === 'next' || method === 'prev') {
+          if (beforeIndex !== afterIndex) {
+            log(`✅ ${method}() successful`, 'info', 'test3-output');
+            setStatus('test3', 'success');
+          }
+        }
+      } catch (error) {
+        log(`❌ Navigation error: ${error.message}`, 'error', 'test3-output');
+        setStatus('test3', 'error');
+      }
+    }
+
+    // Test 4: State
+    function testState() {
+      try {
+        if (!carousel) {
+          log('❌ Carousel not initialized.', 'error', 'test4-output');
+          return;
+        }
+
+        log('Current carousel state:', 'info', 'test4-output');
+        log(`  currentIndex: ${carousel.currentIndex}`, 'info', 'test4-output');
+        log(`  total images: ${carousel.images.length}`, 'info', 'test4-output');
+        log(`  loaded images: ${carousel.loadedImages.size}`, 'info', 'test4-output');
+        log(`  highlighted images: ${carousel.highlightedImages.size}`, 'info', 'test4-output');
+
+        const currentImage = carousel.images[carousel.currentIndex];
+        log(`  current image: ${currentImage.id} - ${currentImage.titleEn}`, 'info', 'test4-output');
+
+        setStatus('test4', 'success');
+      } catch (error) {
+        log(`❌ State check error: ${error.message}`, 'error', 'test4-output');
+        setStatus('test4', 'error');
+      }
+    }
+
+    // Test 5: Highlight
+    function testHighlight(action) {
+      try {
+        if (!carousel) {
+          log('❌ Carousel not initialized.', 'error', 'test5-output');
+          return;
+        }
+
+        if (action === 'set') {
+          const imageIds = ['img-1-1']; // Only one image in artwork-1 currently
+          carousel.highlightImages(imageIds);
+          log(`✅ Highlighted images: ${imageIds.join(', ')}`, 'info', 'test5-output');
+          log('Check the carousel indicators - they should be gold colored', 'info', 'test5-output');
+        } else if (action === 'clear') {
+          carousel.clearHighlights();
+          log('✅ Cleared all highlights', 'info', 'test5-output');
+        }
+
+        setStatus('test5', 'success');
+      } catch (error) {
+        log(`❌ Highlight error: ${error.message}`, 'error', 'test5-output');
+        setStatus('test5', 'error');
+      }
+    }
+
+    // Test 6: Destroy
+    function testDestroy() {
+      try {
+        if (!carousel) {
+          log('❌ Carousel not initialized.', 'error', 'test6-output');
+          return;
+        }
+
+        carousel.destroy();
+        log('✅ Carousel destroyed', 'info', 'test6-output');
+
+        const container = document.getElementById('carousel-container');
+        if (container.innerHTML === '') {
+          log('✅ Container cleared successfully', 'info', 'test6-output');
+          setStatus('test6', 'success');
+        } else {
+          log('❌ Container not properly cleared', 'error', 'test6-output');
+        }
+
+        carousel = null;
+      } catch (error) {
+        log(`❌ Destroy error: ${error.message}`, 'error', 'test6-output');
+        setStatus('test6', 'error');
+      }
+    }
+
+    // Run initial tests on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('=== Carousel Test Suite Started ===');
+      testInstantiation();
+      testRender();
+    });
+  </script>
+</body>
+</html>
