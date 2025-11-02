@@ -490,6 +490,15 @@
         this.elements.viewport.addEventListener('touchmove', this._boundTouchMove, { passive: false });
         this.elements.viewport.addEventListener('touchend', this._boundTouchEnd, { passive: true });
       }
+
+      // Custom navigation event (from image reference links)
+      this._boundNavigateToHandler = (e) => {
+        const { imageIndex } = e.detail;
+        if (typeof imageIndex === 'number' && imageIndex >= 0 && imageIndex < this.images.length) {
+          this.goTo(imageIndex);
+        }
+      };
+      this.elements.container.addEventListener('carousel:navigateTo', this._boundNavigateToHandler);
     }
 
     /**
@@ -503,6 +512,10 @@
         this.elements.viewport.removeEventListener('touchstart', this._boundTouchStart);
         this.elements.viewport.removeEventListener('touchmove', this._boundTouchMove);
         this.elements.viewport.removeEventListener('touchend', this._boundTouchEnd);
+      }
+
+      if (this.elements.container && this._boundNavigateToHandler) {
+        this.elements.container.removeEventListener('carousel:navigateTo', this._boundNavigateToHandler);
       }
     }
 

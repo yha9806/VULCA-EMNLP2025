@@ -666,6 +666,29 @@ ul, ol {
   margin-bottom: 0;
 }
 
+/* Image reference links (Phase 3: implement-multi-image-artwork-series) */
+.critique-text .image-reference-link {
+  color: #2196F3;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.critique-text .image-reference-link:hover {
+  color: #0b7dda;
+  text-decoration-style: solid;
+  background: rgba(33, 150, 243, 0.1);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+.critique-text .image-reference-link:active {
+  transform: translateY(1px);
+}
+
 /* Language-specific visibility */
 [data-lang="zh"] .critique-text[lang="en"],
 [data-lang="en"] .critique-text[lang="zh"] {

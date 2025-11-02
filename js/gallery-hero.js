@@ -252,7 +252,7 @@ window.GalleryHeroRenderer = (function() {
   }
 
   /**
-   * Render artwork image
+   * Render artwork image (with multi-image carousel support)
    */
   function renderArtworkImage(carousel) {
     const container = document.getElementById('artwork-image-container');
@@ -264,7 +264,46 @@ window.GalleryHeroRenderer = (function() {
     // Clear previous content
     container.innerHTML = '';
 
-    // Create figure element
+    // Check if artwork uses new multi-image format
+    if (window.ImageCompat && window.ArtworkImageCarousel) {
+      const images = window.ImageCompat.getArtworkImages(artwork);
+
+      // If artwork has multiple images, use carousel
+      if (images.length > 1) {
+        console.log(`✓ Rendering multi-image carousel for: ${artwork.titleZh} (${images.length} images)`);
+
+        // Create carousel
+        const artworkCarousel = new window.ArtworkImageCarousel(artwork, container, {
+          loop: true,
+          preloadAdjacent: true,
+          enableKeyboard: true,
+          enableTouch: true,
+          showMetadata: true,
+          showIndicators: true,
+          showNavigation: true,
+          categoryBadges: true
+        });
+
+        artworkCarousel.render();
+
+        // Highlight images referenced in current critiques (if any)
+        const currentCritiques = window.VULCA_DATA?.critiques?.filter(c => c.artworkId === artwork.id) || [];
+        const referencedImageIds = new Set();
+        currentCritiques.forEach(critique => {
+          if (critique.imageReferences) {
+            critique.imageReferences.forEach(id => referencedImageIds.add(id));
+          }
+        });
+
+        if (referencedImageIds.size > 0) {
+          artworkCarousel.highlightImages(Array.from(referencedImageIds));
+        }
+
+        return;
+      }
+    }
+
+    // Fallback: single image display (legacy format or single-image artwork)
     const figure = document.createElement('figure');
     figure.className = 'artwork-image';
 
@@ -286,7 +325,7 @@ window.GalleryHeroRenderer = (function() {
     figure.appendChild(img);
     container.appendChild(figure);
 
-    console.log(`✓ Rendering artwork: ${artwork.titleZh}`);
+    console.log(`✓ Rendering single artwork image: ${artwork.titleZh}`);
   }
 
   /**
@@ -367,13 +406,45 @@ window.GalleryHeroRenderer = (function() {
     header.appendChild(periodEl);
     panel.appendChild(header);
 
-    // Text content
+    // Text content (with image reference support)
     const textEl = document.createElement('p');
     textEl.className = 'critique-text';
+
     // Use English or Chinese based on current language
     const lang = document.documentElement.getAttribute('data-lang') || 'zh';
     const text = lang === 'en' ? critique.textEn : critique.textZh;
-    textEl.textContent = text || '';
+
+    // Render with CritiqueParser if available
+    if (window.CritiqueParser && critique.artworkId) {
+      const artwork = window.VULCA_DATA?.artworks?.find(a => a.id === critique.artworkId);
+
+      if (artwork) {
+        // Render image references as clickable links
+        const renderedText = window.CritiqueParser.renderImageReferences(text, artwork, {
+          linkClass: 'image-reference-link',
+          showImageTitle: false, // Keep critique text clean
+          format: 'chinese' // Use "图片X" format
+        });
+
+        textEl.innerHTML = renderedText;
+
+        // Add click handlers for image reference links
+        setTimeout(() => {
+          textEl.querySelectorAll('.image-reference-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+              e.preventDefault();
+              const imageId = link.dataset.imageId;
+              handleImageReferenceClick(imageId, artwork);
+            });
+          });
+        }, 0);
+      } else {
+        textEl.textContent = text || '';
+      }
+    } else {
+      textEl.textContent = text || '';
+    }
+
     panel.appendChild(textEl);
 
     // RPAIT scores
@@ -462,6 +533,62 @@ window.GalleryHeroRenderer = (function() {
     });
 
     console.log(`✓ Rendered ${artworks.length} dot indicators`);
+  }
+
+  /**
+   * Handle click on image reference link in critique text
+   * Navigates to the referenced image in the artwork carousel (if multi-image)
+   */
+  function handleImageReferenceClick(imageId, artwork) {
+    console.log(`[Gallery Hero] Image reference clicked: ${imageId}`);
+
+    // Find the carousel instance in the artwork-image-container
+    const container = document.getElementById('artwork-image-container');
+    if (!container) {
+      console.warn('[Gallery Hero] No artwork container found');
+      return;
+    }
+
+    // Check if this artwork has a multi-image carousel
+    if (!window.ImageCompat) {
+      console.warn('[Gallery Hero] ImageCompat not available');
+      return;
+    }
+
+    const images = window.ImageCompat.getArtworkImages(artwork);
+
+    if (images.length <= 1) {
+      // Single image artwork - no carousel navigation needed
+      console.log('[Gallery Hero] Single image artwork, no carousel to navigate');
+      return;
+    }
+
+    // Find the carousel instance
+    // The carousel is stored in the container's data attribute or we can search for it
+    const carouselElement = container.querySelector('.carousel-container');
+    if (!carouselElement) {
+      console.warn('[Gallery Hero] Multi-image artwork but carousel not found in DOM');
+      return;
+    }
+
+    // Find the image index
+    const imageIndex = images.findIndex(img => img.id === imageId);
+    if (imageIndex === -1) {
+      console.warn(`[Gallery Hero] Image ${imageId} not found in artwork images`);
+      return;
+    }
+
+    // Trigger carousel navigation
+    // We need to access the carousel instance - let's dispatch a custom event
+    const event = new CustomEvent('carousel:navigateTo', {
+      detail: { imageIndex, imageId }
+    });
+    carouselElement.dispatchEvent(event);
+
+    console.log(`[Gallery Hero] Navigating carousel to image ${imageIndex + 1}: ${imageId}`);
+
+    // Scroll to carousel (smooth scroll)
+    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   // Initialize when DOM is ready
