@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # CLAUDE.md - Claude Code 工作指南
 
-**最后更新**: 2025-11-01
+**最后更新**: 2025-11-02
 **项目**: VULCA - 艺术评论展览平台（沉浸式艺术评论展览）
 **网址**: https://vulcaart.art
 **GitHub**: https://github.com/yha9806/VULCA-EMNLP2025
@@ -238,6 +238,54 @@ persona.rpait = avgRpait;
 // 5. 附加传记文本
 ```
 
+#### 5. 艺术作品图片 Placeholder 系统 (gallery-hero.js)
+```javascript
+// 🖼️ 图片占位符系统 (Phase 1: fix-artwork-image-display-system)
+// 当艺术作品图片文件不存在时，自动显示彩色渐变占位符
+//
+// 工作原理:
+// 1. 尝试加载 artwork.imageUrl (例如: /assets/artwork-1.jpg)
+// 2. 如果图片加载失败 (404), img.onerror 触发
+// 3. 生成 placeholder div，显示作品元数据:
+//    - 中文标题 (titleZh)
+//    - 英文标题 (titleEn)
+//    - 艺术家姓名 (artist)
+//    - 创作年份 (year)
+//    - "🖼️ Image Pending Acquisition" 状态消息
+// 4. 每个作品有独特的渐变背景色:
+//    - artwork-1: 蓝紫渐变 (#667eea → #764ba2)
+//    - artwork-2: 绿青渐变 (#11998e → #38ef7d)
+//    - artwork-3: 橙红渐变 (#eb3349 → #f45c43)
+//    - artwork-4: 粉紫渐变 (#d66d75 → #e29587)
+// 5. 控制台记录警告: "⚠ Image not found: /assets/artwork-X.jpg"
+
+// 关键函数:
+function createPlaceholder(artwork) {
+  // 创建带有 ARIA 属性的占位符 DOM
+  // 支持屏幕阅读器，维持 3:2 宽高比
+}
+
+// 错误处理器 (在 renderArtworkImage 函数中):
+img.onerror = () => {
+  console.warn(`⚠ Image not found: ${artwork.imageUrl} (${artwork.id})`);
+  container.innerHTML = '';
+  const placeholder = createPlaceholder(artwork);
+  container.appendChild(placeholder);
+  console.log(`✓ Displaying placeholder for: ${artwork.titleZh}`);
+};
+```
+
+**重要说明**:
+- ✅ **无需真实图片即可开发**: 现在可以添加新作品到 `js/data.js`，即使没有图片文件，系统也会显示美观的占位符
+- ✅ **响应式设计**: Placeholder 保持 3:2 宽高比，在所有断点 (375/768/1024/1440/1920px) 正常显示
+- ✅ **可访问性**: 包含 `role="img"` 和完整的 `aria-label`，支持屏幕阅读器
+- ⚠️ **未来计划**: Phase 2 将联系艺术家获取真实图片，Phase 3 将添加 lazy loading 和 srcset
+
+**相关文件**:
+- `js/gallery-hero.js` (lines 277-314): Error handler + createPlaceholder 函数
+- `styles/main.css` (lines 1638-1760): Placeholder CSS 样式
+- `openspec/changes/fix-artwork-image-display-system/`: 完整的 OpenSpec 提案
+
 ---
 
 ## 🎨 样式约定
@@ -290,10 +338,27 @@ persona.rpait = avgRpait;
 
 ### 任务1: 添加新作品
 
-1. 在 `js/data.js` 的 `artworks` 数组中添加对象
-2. 提供图片文件到 `assets/`
-3. 在 `index.html` 中添加对应的卡片 HTML（如果需要）
-4. 测试本地显示
+**重要提示**: 现在系统支持 Placeholder，无需真实图片即可添加作品！
+
+1. 在 `js/data.js` 的 `artworks` 数组中添加对象:
+   ```javascript
+   {
+     id: "artwork-5",  // 使用唯一ID
+     titleZh: "作品中文标题",
+     titleEn: "Artwork English Title",
+     year: 2024,
+     imageUrl: "/assets/artwork-5.jpg",  // 即使文件不存在也可以
+     artist: "艺术家姓名",
+     context: "作品背景描述..."
+   }
+   ```
+2. **可选**: 提供图片文件到 `/assets/` (如果暂时没有图片，系统会显示彩色渐变 placeholder)
+3. 添加对应的评论数据 (6位评论家 × 1件作品 = 6条 critiques)
+4. 测试本地显示 (`http://localhost:9999`)
+5. 验证:
+   - 如果有图片: 图片正常显示
+   - 如果无图片: 显示带有作品元数据的彩色 placeholder
+   - 控制台会记录: `⚠ Image not found: /assets/artwork-5.jpg`
 
 ### 任务2: 修改评论家信息
 
@@ -315,6 +380,76 @@ persona.rpait = avgRpait;
 2. 或创建新的 JavaScript 文件
 3. 在 `index.html` 中加载脚本
 4. 测试功能
+
+---
+
+## 🔄 OpenSpec 工作流 (功能变更管理)
+
+本项目使用 **OpenSpec** 规范管理所有功能变更。这是一个严格的提案-设计-实施-归档流程。
+
+### OpenSpec 命令
+
+```bash
+# 1. 创建新功能提案
+/openspec:proposal
+# 描述问题和解决方案，系统会生成 proposal.md, design.md, specs/, tasks.md
+
+# 2. 验证提案
+openspec validate <change-name> --strict
+# 检查 SHALL/MUST 关键词、场景完整性、依赖关系
+
+# 3. 实施变更
+/openspec:apply
+# 根据 tasks.md 逐步实施，更新进度
+
+# 4. 归档已完成的变更
+/openspec:archive <change-name>
+# 标记为已部署，移动到归档目录
+```
+
+### OpenSpec 文件结构
+
+```
+openspec/changes/<change-name>/
+├── proposal.md              # 提案概述 (问题、解决方案、影响范围)
+├── design.md                # 设计决策 (架构选择、技术选型、权衡分析)
+├── specs/                   # 需求规范
+│   └── <feature>/
+│       └── spec.md         # ADDED/MODIFIED/REMOVED 需求 + BDD 场景
+└── tasks.md                # 可执行任务清单 (带时间估计和验证标准)
+```
+
+### OpenSpec 最佳实践
+
+1. **提案阶段**: 完整描述问题和解决方案，包括 3 个关键部分:
+   - **What Changes**: 具体变更内容
+   - **Why**: 问题分析和动机
+   - **How**: 实施步骤和验证方法
+
+2. **设计阶段**: 记录所有架构决策和技术选型:
+   - 列出所有考虑的方案 (A/B/C)
+   - 说明每个方案的优缺点
+   - 明确选择理由
+
+3. **规范阶段**: 使用严格的 BDD 格式:
+   - 每个需求必须包含 SHALL 或 MUST
+   - 每个场景包含 Given/When/Then
+   - 提供验证代码示例
+
+4. **任务阶段**: 分解为可执行的小任务:
+   - 每个任务 15-45 分钟
+   - 包含成功标准 ([ ] checklist)
+   - 明确依赖关系
+
+### 示例: fix-artwork-image-display-system
+
+这是本项目第一个完整的 OpenSpec 变更，包含:
+- **Proposal**: 3阶段解决方案 (Placeholder → Asset Acquisition → Enhancements)
+- **Design**: 5个架构决策 (CSS vs SVG, 错误处理策略, 图片获取策略等)
+- **Specs**: 5个需求，11个验证场景
+- **Tasks**: 77个任务，分为 Phase 1/2/3 + 验证
+
+参考此示例创建新的功能变更提案。
 
 ---
 
@@ -426,19 +561,75 @@ https://vulcaart.art?nocache=1
 ### Q6: 部署后显示旧版本？
 **A**: 这是 CDN 缓存。等待 10-30 分钟，或在 URL 加 `?nocache=1`。
 
-### Q7: 图片不显示？
-**A**: 确保图片文件在 `/assets/` 目录中，HTML 中的路径是 `/assets/image.jpg`（绝对路径）。
+### Q7: 图片显示为彩色渐变块 (Placeholder)？
+**A**: 这是**正常行为**！系统实施了 Placeholder 系统 (Phase 1: fix-artwork-image-display-system)。
+
+**原因**: 图片文件暂未获取或路径错误
+
+**Placeholder 功能**:
+- 显示作品完整元数据（中英文标题、艺术家、年份）
+- 每个作品有独特的渐变背景色用于区分
+- 保持 3:2 宽高比，响应式设计
+- 支持屏幕阅读器 (ARIA 属性)
+- 控制台记录警告消息
+
+**如何添加真实图片**:
+1. 将图片文件放入 `/assets/` 目录
+2. 确保文件名与 `js/data.js` 中的 `imageUrl` 匹配
+3. 图片规格: 1200×800px (3:2), <500KB, JPG 85% 质量
+4. 刷新浏览器，图片会自动替换 placeholder
+
+**如何自定义 Placeholder 颜色**:
+编辑 `styles/main.css` 中的渐变定义:
+```css
+.artwork-placeholder.artwork-5 {
+  background: linear-gradient(135deg, #颜色1 0%, #颜色2 100%);
+}
+```
 
 ### Q8: 汉字显示乱码？
 **A**: 确保 HTML 头部有 `<meta charset="UTF-8">`，文件编码为 UTF-8。
+
+### Q9: 如何验证 Placeholder 系统是否正常工作？
+**A**: 按以下步骤检查:
+
+1. **打开浏览器开发者工具** (F12)
+2. **访问** `http://localhost:9999`
+3. **检查控制台**，应该看到:
+   ```
+   ⚠ Image not found: /assets/artwork-1.jpg (artwork-1)
+   ✓ Displaying placeholder for: 记忆（绘画操作单元：第二代）
+   ⚠ Image not found: /assets/artwork-2.jpg (artwork-2)
+   ✓ Displaying placeholder for: 绘画操作单元（第一代）
+   ...
+   ```
+4. **检查 DOM 结构**，应该看到:
+   ```html
+   <div class="artwork-placeholder artwork-1" role="img" aria-label="...">
+     <div class="placeholder-content">
+       <h3 class="placeholder-title" lang="zh">记忆（绘画操作单元：第二代）</h3>
+       <p class="placeholder-title-en" lang="en">Memory (Painting Operation Unit: Second Generation)</p>
+       <p class="placeholder-meta">Sougwen Chung • 2022</p>
+       <p class="placeholder-status">🖼️ Image Pending Acquisition</p>
+     </div>
+   </div>
+   ```
+5. **视觉验证**: 每个作品应显示不同颜色的渐变背景
+6. **响应式测试**: 在不同设备宽度下 (375/768/1024px)，placeholder 应保持 3:2 宽高比
 
 ---
 
 ## 📖 相关文档
 
 - **SPEC.md** - 项目规范和结构（必读）
+- **README.md** - 项目概览与快速开始
 - **PHASE_5_FINAL_SUMMARY.md** - Phase 5 功能总结
 - **PHASE_5_PROGRESS.md** - 详细开发进度
+- **openspec/changes/fix-artwork-image-display-system/** - 图片占位符系统完整规范
+  - `proposal.md` - 问题分析与3阶段解决方案
+  - `design.md` - 架构决策与技术选型
+  - `specs/placeholder-system/spec.md` - 5个需求规范 + 11个验证场景
+  - `tasks.md` - 77个可执行任务清单
 
 ---
 
@@ -491,7 +682,41 @@ Closes #42
 - 每当项目结构或规则变更时，同时更新两个文档
 - 定期审查过时内容
 
-**最后同步**: 2025-11-01
+**最后同步**: 2025-11-02
+
+---
+
+## 🎉 最新更新 (2025-11-02)
+
+### ✅ Phase 1: 艺术作品图片 Placeholder 系统已实施
+
+**解决的问题**:
+- ❌ 之前: 画廊显示破损图片图标 (broken image icons)，控制台显示 404 错误
+- ✅ 现在: 显示美观的彩色渐变占位符，包含完整的作品元数据
+
+**实施内容**:
+1. **CSS 渐变背景** (`styles/main.css` +123行)
+   - 4个独特的渐变色，每个作品一个
+   - 响应式设计，支持 3 个断点 (768/480px)
+   - 保持 3:2 宽高比
+
+2. **JavaScript 错误处理** (`js/gallery-hero.js` +33行)
+   - `createPlaceholder()` 函数生成占位符 DOM
+   - `img.onerror` 处理器捕获图片加载失败
+   - 控制台警告日志
+
+3. **可访问性支持**
+   - ARIA 属性 (`role="img"`, `aria-label`)
+   - 多语言支持 (`lang="zh"`, `lang="en"`)
+   - 屏幕阅读器兼容
+
+**开发者体验提升**:
+- 🚀 **无需真实图片即可开发**: 添加新作品到 `js/data.js`，立即看到效果
+- 🎨 **视觉区分度高**: 每个作品有独特的渐变背景色
+- 📱 **响应式验证**: 可以在没有图片的情况下验证布局
+- ♿ **完全可访问**: 符合 WCAG 2.1 AA 标准
+
+**相关文档**: 参见 `openspec/changes/fix-artwork-image-display-system/`
 
 ---
 
