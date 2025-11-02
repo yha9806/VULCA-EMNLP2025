@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Critique Parser Test</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #f5f5f5;
+    }
+
+    .test-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .test-header h1 {
+      color: #2d2d2d;
+      margin: 0 0 10px 0;
+    }
+
+    .test-section {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .test-section h2 {
+      margin-top: 0;
+      color: #2d2d2d;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    .sample-text {
+      background: #f9f9f9;
+      border-left: 4px solid #4CAF50;
+      padding: 15px;
+      margin: 15px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .result {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 13px;
+      margin: 15px 0;
+      white-space: pre-wrap;
+    }
+
+    .rendered-output {
+      background: #fff;
+      border: 2px solid #4CAF50;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .image-reference-link {
+      color: #2196F3;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .image-reference-link:hover {
+      color: #0b7dda;
+      background: rgba(33, 150, 243, 0.1);
+    }
+
+    .image-reference-invalid {
+      color: #f44336;
+      background: rgba(244, 67, 54, 0.1);
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .status-badge.success {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .status-badge.error {
+      background: #f44336;
+      color: white;
+    }
+
+    .test-btn {
+      padding: 10px 20px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 200ms;
+      margin: 5px;
+    }
+
+    .test-btn:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="test-header">
+    <h1>📝 Critique Parser Test</h1>
+    <p>Testing Task 3.1: Image Reference Parser - [img:id] Syntax</p>
+  </div>
+
+  <!-- Test 1: Basic Parsing -->
+  <div class="test-section">
+    <h2>Test 1: Parse Image References <span class="status-badge success" id="test1-status">READY</span></h2>
+    <p>Extract all [img:id] patterns from critique text.</p>
+
+    <div class="sample-text">
+      <strong>Sample Text (Chinese):</strong><br>
+      如[img:img-1-1]所示，这件作品展现了人机协作的独特魅力。艺术家通过机械臂[img:img-1-1]创作出充满诗意的线条。
+    </div>
+
+    <button class="test-btn" onclick="testParsing()">Run Parse Test</button>
+    <div class="result" id="test1-output"></div>
+  </div>
+
+  <!-- Test 2: Extract Unique IDs -->
+  <div class="test-section">
+    <h2>Test 2: Extract Unique Image IDs <span class="status-badge success" id="test2-status">READY</span></h2>
+    <p>Get deduplicated list of image IDs from text.</p>
+
+    <div class="sample-text">
+      <strong>Sample Text (with duplicates):</strong><br>
+      如[img:img-1-1]所示...另见[img:img-1-1]和[img:img-1-1]的细节。
+    </div>
+
+    <button class="test-btn" onclick="testExtractIds()">Run Extract Test</button>
+    <div class="result" id="test2-output"></div>
+  </div>
+
+  <!-- Test 3: Validation -->
+  <div class="test-section">
+    <h2>Test 3: Validate References <span class="status-badge success" id="test3-status">READY</span></h2>
+    <p>Check if referenced image IDs exist in the artwork.</p>
+
+    <div class="sample-text">
+      <strong>Sample Text (with valid and invalid refs):</strong><br>
+      Valid: [img:img-1-1] 所示<br>
+      Invalid: [img:img-1-99] 不存在
+    </div>
+
+    <button class="test-btn" onclick="testValidation()">Run Validation Test</button>
+    <div class="result" id="test3-output"></div>
+  </div>
+
+  <!-- Test 4: Render to HTML -->
+  <div class="test-section">
+    <h2>Test 4: Render as HTML Links <span class="status-badge success" id="test4-status">READY</span></h2>
+    <p>Convert [img:id] syntax to clickable links.</p>
+
+    <div class="sample-text">
+      <strong>Sample Text:</strong><br>
+      如[img:img-1-1]所示，机械臂的动作充满诗意，展现了人机协作的独特魅力。
+    </div>
+
+    <button class="test-btn" onclick="testRender()">Run Render Test</button>
+    <div class="rendered-output" id="test4-output"></div>
+  </div>
+
+  <!-- Test 5: Get Referenced Images -->
+  <div class="test-section">
+    <h2>Test 5: Get Referenced Image Objects <span class="status-badge success" id="test5-status">READY</span></h2>
+    <p>Retrieve full image metadata for referenced images.</p>
+
+    <button class="test-btn" onclick="testGetImages()">Run Get Images Test</button>
+    <div class="result" id="test5-output"></div>
+  </div>
+
+  <!-- Test 6: Enrich Critique -->
+  <div class="test-section">
+    <h2>Test 6: Enrich Critique with References <span class="status-badge success" id="test6-status">READY</span></h2>
+    <p>Add imageReferences array to critique object.</p>
+
+    <button class="test-btn" onclick="testEnrich()">Run Enrich Test</button>
+    <div class="result" id="test6-output"></div>
+  </div>
+
+  <!-- Load dependencies -->
+  <script src="/js/data.js?v=3.1"></script>
+  <script src="/js/utils/image-compat.js?v=1.0"></script>
+  <script src="/js/utils/critique-parser.js?v=1.0"></script>
+
+  <script>
+    // Test data
+    const sampleTextZh = "如[img:img-1-1]所示，这件作品展现了人机协作的独特魅力。艺术家通过机械臂[img:img-1-1]创作出充满诗意的线条。";
+    const sampleTextWithDupes = "如[img:img-1-1]所示...另见[img:img-1-1]和[img:img-1-1]的细节。";
+    const sampleTextWithInvalid = "Valid: [img:img-1-1] 所示。Invalid: [img:img-1-99] 不存在。";
+    const artwork = window.VULCA_DATA.artworks.find(a => a.id === 'artwork-1');
+
+    function log(output, elementId) {
+      document.getElementById(elementId).textContent = output;
+    }
+
+    // Test 1: Parsing
+    function testParsing() {
+      const refs = window.CritiqueParser.parseImageReferences(sampleTextZh);
+      const output = JSON.stringify(refs, null, 2);
+      log(`Found ${refs.length} references:\n\n${output}`, 'test1-output');
+
+      if (refs.length === 2 && refs[0].imageId === 'img-1-1') {
+        document.getElementById('test1-status').textContent = 'PASS ✓';
+        document.getElementById('test1-status').className = 'status-badge success';
+      }
+    }
+
+    // Test 2: Extract IDs
+    function testExtractIds() {
+      const ids = window.CritiqueParser.extractImageIds(sampleTextWithDupes);
+      const output = `Extracted unique IDs:\n${JSON.stringify(ids, null, 2)}\n\nOriginal text has 3 references, but only ${ids.length} unique ID(s)`;
+      log(output, 'test2-output');
+
+      if (ids.length === 1 && ids[0] === 'img-1-1') {
+        document.getElementById('test2-status').textContent = 'PASS ✓';
+        document.getElementById('test2-status').className = 'status-badge success';
+      }
+    }
+
+    // Test 3: Validation
+    function testValidation() {
+      const validation = window.CritiqueParser.validateImageReferences(sampleTextWithInvalid, artwork);
+      const output = `Validation Results:
+
+Valid references: ${validation.valid.length}
+${JSON.stringify(validation.valid, null, 2)}
+
+Invalid references: ${validation.invalid.length}
+${JSON.stringify(validation.invalid, null, 2)}
+
+All valid: ${validation.allValid}`;
+
+      log(output, 'test3-output');
+
+      if (validation.valid.length === 1 && validation.invalid.length === 1) {
+        document.getElementById('test3-status').textContent = 'PASS ✓';
+        document.getElementById('test3-status').className = 'status-badge success';
+      }
+    }
+
+    // Test 4: Render
+    function testRender() {
+      const html = window.CritiqueParser.renderImageReferences(sampleTextZh, artwork, {
+        linkClass: 'image-reference-link',
+        showImageTitle: true
+      });
+
+      document.getElementById('test4-output').innerHTML = html;
+
+      // Add click handlers
+      document.querySelectorAll('.image-reference-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const imageId = link.dataset.imageId;
+          alert(`Clicked image reference: ${imageId}\n\nIn a real app, this would navigate the carousel to this image.`);
+        });
+      });
+
+      document.getElementById('test4-status').textContent = 'PASS ✓';
+      document.getElementById('test4-status').className = 'status-badge success';
+    }
+
+    // Test 5: Get Images
+    function testGetImages() {
+      const images = window.CritiqueParser.getReferencedImages(sampleTextZh, artwork);
+      const output = `Referenced images:\n\n${JSON.stringify(images.map(img => ({
+        id: img.id,
+        titleZh: img.titleZh,
+        titleEn: img.titleEn,
+        category: img.category,
+        sequence: img.sequence
+      })), null, 2)}`;
+
+      log(output, 'test5-output');
+
+      if (images.length > 0) {
+        document.getElementById('test5-status').textContent = 'PASS ✓';
+        document.getElementById('test5-status').className = 'status-badge success';
+      }
+    }
+
+    // Test 6: Enrich
+    function testEnrich() {
+      const mockCritique = {
+        artworkId: 'artwork-1',
+        personaId: 'su-shi',
+        textZh: sampleTextZh,
+        textEn: 'As shown in [img:img-1-1], this work demonstrates...',
+        rpait: { R: 8, P: 9, A: 8, I: 8, T: 7 }
+      };
+
+      const enriched = window.CritiqueParser.enrichCritiqueWithReferences(mockCritique, artwork);
+
+      const output = `Enriched critique:\n\n${JSON.stringify(enriched, null, 2)}
+
+✅ Added imageReferences array: ${JSON.stringify(enriched.imageReferences)}`;
+
+      log(output, 'test6-output');
+
+      if (enriched.imageReferences && enriched.imageReferences.length > 0) {
+        document.getElementById('test6-status').textContent = 'PASS ✓';
+        document.getElementById('test6-status').className = 'status-badge success';
+      }
+    }
+
+    // Run initial test on load
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('=== Critique Parser Test Suite Loaded ===');
+      console.log('Click buttons to run individual tests');
+    });
+  </script>
+</body>
+</html>
