@@ -2122,6 +2122,13 @@ a:focus-visible {
     transform: scale(1.1);
     box-shadow: 0 4px 12px var(--color-shadow);
   }
+
+  /* Show metadata elements on hover */
+  .artwork-carousel:hover .category-badge,
+  .artwork-carousel:hover .image-counter,
+  .artwork-carousel:hover .carousel-metadata {
+    opacity: 1;
+  }
 }
 
 /* Mobile/Touch: Always semi-visible */
@@ -2133,6 +2140,13 @@ a:focus-visible {
   .carousel-btn:active:not(:disabled) {
     opacity: 1;
     background: white;
+  }
+
+  /* Metadata elements semi-visible on mobile */
+  .category-badge,
+  .image-counter,
+  .carousel-metadata {
+    opacity: 0.7;
   }
 }
 
@@ -2209,6 +2223,8 @@ a:focus-visible {
   left: 0;
   right: 0;
   z-index: 5;
+  opacity: 0; /* Default: hidden */
+  transition: opacity 200ms ease;
 }
 
 .carousel-metadata-content {
@@ -2226,6 +2242,8 @@ a:focus-visible {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: var(--spacing-sm);
+  opacity: 0; /* Default: hidden */
+  transition: opacity 200ms ease;
 }
 
 .category-badge.category-sketch {
@@ -2267,6 +2285,8 @@ a:focus-visible {
   padding: 4px 12px;
   border-radius: 12px;
   margin-bottom: var(--spacing-sm);
+  opacity: 0; /* Default: hidden */
+  transition: opacity 200ms ease;
 }
 
 /* Titles */
