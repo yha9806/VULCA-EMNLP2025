@@ -164,6 +164,7 @@ window.GalleryHeroRenderer = (function() {
     if (!vizContainer) {
       vizContainer = document.createElement('div');
       vizContainer.className = 'artwork-rpait-visualization';
+      vizContainer.setAttribute('data-reveal', ''); // Enable scroll-reveal animation
       galleryHero.appendChild(vizContainer);
     }
 
@@ -312,6 +313,7 @@ window.GalleryHeroRenderer = (function() {
   function createCriticPanel(critique, personas) {
     const panel = document.createElement('article');
     panel.className = 'critique-panel';
+    panel.setAttribute('data-reveal', ''); // Enable scroll-reveal animation
 
     // Find persona info
     const persona = personas.find(p => p.id === critique.personaId) || {};

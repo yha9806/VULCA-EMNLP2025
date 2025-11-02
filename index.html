@@ -188,9 +188,9 @@
   </footer>
 
   <!-- ==================== SCRIPTS ==================== -->
-  <!-- Enable Immersive Mode on Main Page -->
+  <!-- Disable Immersive Mode to Enable Scrolling -->
   <script>
-    window.IMMERSIVE_MODE = true;
+    window.IMMERSIVE_MODE = false;
     // CRITICAL: Ensure gallery is hidden on homepage (immersive mode)
     // Use MutationObserver to continuously enforce display:none
     function enforceGalleryHidden() {
@@ -234,6 +234,9 @@
 
   <!-- Scroll Prevention (Immersive Anti-Scroll Feature) -->
   <script src="/js/scroll-prevention.js?v=1"></script>
+
+  <!-- Scroll Reveal Animations (Progressive Content Display) -->
+  <script src="/js/scroll-reveal.js?v=1"></script>
 
   <!-- Gallery Initialization (Phase 1) -->
   <script src="/js/gallery-init.js?v=1"></script>
