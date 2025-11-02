@@ -274,10 +274,43 @@ window.GalleryHeroRenderer = (function() {
     img.alt = `${artwork.titleZh} ${artwork.titleEn}`;
     img.loading = 'eager';
 
+    // Add error handler for missing images (Phase 1: fix-artwork-image-display-system)
+    img.onerror = () => {
+      console.warn(`⚠ Image not found: ${artwork.imageUrl} (${artwork.id})`);
+      container.innerHTML = '';
+      const placeholder = createPlaceholder(artwork);
+      container.appendChild(placeholder);
+      console.log(`✓ Displaying placeholder for: ${artwork.titleZh}`);
+    };
+
     figure.appendChild(img);
     container.appendChild(figure);
 
-    console.log(`✓ Rendered artwork: ${artwork.titleZh}`);
+    console.log(`✓ Rendering artwork: ${artwork.titleZh}`);
+  }
+
+  /**
+   * Create placeholder for missing artwork image
+   * Phase 1 implementation of fix-artwork-image-display-system
+   */
+  function createPlaceholder(artwork) {
+    const div = document.createElement('div');
+    div.className = `artwork-placeholder ${artwork.id}`;
+    div.setAttribute('role', 'img');
+    div.setAttribute('aria-label',
+      `${artwork.titleZh} ${artwork.titleEn}, ${artwork.artist}, ${artwork.year}, Image Pending Acquisition`
+    );
+
+    div.innerHTML = `
+      <div class="placeholder-content">
+        <h3 class="placeholder-title" lang="zh">${artwork.titleZh}</h3>
+        <p class="placeholder-title-en" lang="en">${artwork.titleEn}</p>
+        <p class="placeholder-meta">${artwork.artist} • ${artwork.year}</p>
+        <p class="placeholder-status">🖼️ Image Pending Acquisition</p>
+      </div>
+    `;
+
+    return div;
   }
 
   /**

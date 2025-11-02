@@ -1758,4 +1758,126 @@ a:focus-visible {
   }
 }
 
+/* ==================== ARTWORK IMAGE PLACEHOLDERS ==================== */
+
+/**
+ * Placeholder System for Missing Artwork Images
+ * Displays artwork metadata when image files are not available
+ * Phase 1 implementation of fix-artwork-image-display-system
+ */
+
+/* Base placeholder styles */
+.artwork-placeholder {
+  aspect-ratio: 3/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Unique gradients per artwork */
+.artwork-placeholder.artwork-1 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.artwork-placeholder.artwork-2 {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.artwork-placeholder.artwork-3 {
+  background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+}
+
+.artwork-placeholder.artwork-4 {
+  background: linear-gradient(135deg, #d66d75 0%, #e29587 100%);
+}
+
+/* Content container */
+.placeholder-content {
+  max-width: 500px;
+  z-index: 1;
+}
+
+/* Artwork title (Chinese) */
+.placeholder-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+/* Artwork title (English) */
+.placeholder-title-en {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+/* Artist and year metadata */
+.placeholder-meta {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+/* Pending acquisition status */
+.placeholder-status {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* Responsive adjustments for placeholders */
+@media (max-width: 768px) {
+  .artwork-placeholder {
+    padding: 1.5rem;
+  }
+
+  .placeholder-title {
+    font-size: 1.2rem;
+  }
+
+  .placeholder-title-en {
+    font-size: 1rem;
+  }
+
+  .placeholder-meta {
+    font-size: 0.875rem;
+  }
+
+  .placeholder-status {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .artwork-placeholder {
+    padding: 1rem;
+  }
+
+  .placeholder-title {
+    font-size: 1rem;
+  }
+
+  .placeholder-title-en {
+    font-size: 0.875rem;
+  }
+
+  .placeholder-meta {
+    font-size: 0.75rem;
+  }
+
+  .placeholder-status {
+    font-size: 0.7rem;
+  }
+}
+
 /* ========== END OF STYLESHEET ========== */
