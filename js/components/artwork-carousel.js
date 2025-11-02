@@ -498,7 +498,7 @@
           this.goTo(imageIndex);
         }
       };
-      this.elements.container.addEventListener('carousel:navigateTo', this._boundNavigateToHandler);
+      this.container.addEventListener('carousel:navigateTo', this._boundNavigateToHandler);
     }
 
     /**
@@ -514,8 +514,8 @@
         this.elements.viewport.removeEventListener('touchend', this._boundTouchEnd);
       }
 
-      if (this.elements.container && this._boundNavigateToHandler) {
-        this.elements.container.removeEventListener('carousel:navigateTo', this._boundNavigateToHandler);
+      if (this.container && this._boundNavigateToHandler) {
+        this.container.removeEventListener('carousel:navigateTo', this._boundNavigateToHandler);
       }
     }
 

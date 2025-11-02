@@ -423,6 +423,8 @@ window.GalleryHeroRenderer = (function() {
       const artwork = window.VULCA_DATA?.artworks?.find(a => a.id === critique.artworkId);
 
       if (artwork) {
+        console.log(`[Gallery Hero] Rendering critique with CritiqueParser for ${critique.personaId} → ${critique.artworkId}`);
+
         // Render image references as clickable links
         const renderedText = window.CritiqueParser.renderImageReferences(text, artwork, {
           linkClass: 'image-reference-link',
@@ -431,6 +433,7 @@ window.GalleryHeroRenderer = (function() {
         });
 
         textEl.innerHTML = renderedText;
+        console.log(`[Gallery Hero] Rendered HTML contains ${textEl.querySelectorAll('.image-reference-link').length} links`);
 
         // Add click handlers for image reference links
         setTimeout(() => {
@@ -567,14 +570,6 @@ window.GalleryHeroRenderer = (function() {
       return;
     }
 
-    // Find the carousel instance
-    // The carousel is stored in the container's data attribute or we can search for it
-    const carouselElement = container.querySelector('.carousel-container');
-    if (!carouselElement) {
-      console.warn('[Gallery Hero] Multi-image artwork but carousel not found in DOM');
-      return;
-    }
-
     // Find the image index
     const imageIndex = images.findIndex(img => img.id === imageId);
     if (imageIndex === -1) {
@@ -582,14 +577,14 @@ window.GalleryHeroRenderer = (function() {
       return;
     }
 
-    // Trigger carousel navigation
-    // We need to access the carousel instance - let's dispatch a custom event
+    // Trigger carousel navigation by dispatching custom event to container
     const event = new CustomEvent('carousel:navigateTo', {
-      detail: { imageIndex, imageId }
+      detail: { imageIndex, imageId },
+      bubbles: true
     });
-    carouselElement.dispatchEvent(event);
+    container.dispatchEvent(event);
 
-    console.log(`[Gallery Hero] Navigating carousel to image ${imageIndex + 1}: ${imageId}`);
+    console.log(`[Gallery Hero] Dispatched navigation event to index ${imageIndex} (${imageId})`);
 
     // Scroll to carousel (smooth scroll)
     container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

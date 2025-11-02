@@ -152,6 +152,44 @@ window.GalleryInit = (function() {
   }
 
   /**
+   * Handle click on image reference link
+   * @param {String} imageId - Image ID to navigate to
+   * @param {Object} artwork - Artwork object
+   */
+  function handleImageReferenceClick(imageId, artwork) {
+    if (!imageId || !artwork) {
+      console.warn('[Gallery Init] Invalid image reference click:', imageId, artwork);
+      return;
+    }
+
+    console.log(`[Gallery Init] Image reference clicked: ${imageId} for artwork ${artwork.id}`);
+
+    // Find the image index
+    const images = window.ImageCompat ? window.ImageCompat.getArtworkImages(artwork) : [];
+    const imageIndex = images.findIndex(img => img.id === imageId);
+
+    if (imageIndex === -1) {
+      console.warn(`[Gallery Init] Image not found: ${imageId}`);
+      return;
+    }
+
+    // Find the carousel container (main page uses #artwork-image-container)
+    const artworkContainer = document.getElementById('artwork-image-container');
+
+    if (artworkContainer) {
+      // Dispatch custom event to navigate carousel
+      const event = new CustomEvent('carousel:navigateTo', {
+        detail: { imageIndex },
+        bubbles: true
+      });
+      artworkContainer.dispatchEvent(event);
+      console.log(`[Gallery Init] Dispatched navigation event to index ${imageIndex}`);
+    } else {
+      console.warn(`[Gallery Init] Carousel container not found for artwork ${artwork.id}`);
+    }
+  }
+
+  /**
    * Create a single critique panel
    * @param {Object} persona - Persona data
    * @param {Object} critique - Critique data
@@ -190,13 +228,57 @@ window.GalleryInit = (function() {
     const textZh = document.createElement('p');
     textZh.className = 'critique-text';
     textZh.lang = 'zh';
-    textZh.textContent = critique.textZh;
-    body.appendChild(textZh);
 
     const textEn = document.createElement('p');
     textEn.className = 'critique-text';
     textEn.lang = 'en';
-    textEn.textContent = critique.textEn;
+
+    // Render with CritiqueParser if available (for image reference links)
+    if (window.CritiqueParser && critique.artworkId) {
+      const artwork = window.VULCA_DATA?.artworks?.find(a => a.id === critique.artworkId);
+
+      if (artwork) {
+        // Render image references as clickable links
+        textZh.innerHTML = window.CritiqueParser.renderImageReferences(critique.textZh, artwork, {
+          linkClass: 'image-reference-link',
+          showImageTitle: false,
+          format: 'chinese'
+        });
+
+        textEn.innerHTML = window.CritiqueParser.renderImageReferences(critique.textEn, artwork, {
+          linkClass: 'image-reference-link',
+          showImageTitle: false,
+          format: 'english'
+        });
+
+        // Add click handlers for image reference links (after DOM insertion)
+        setTimeout(() => {
+          textZh.querySelectorAll('.image-reference-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+              e.preventDefault();
+              handleImageReferenceClick(link.dataset.imageId, artwork);
+            });
+          });
+
+          textEn.querySelectorAll('.image-reference-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+              e.preventDefault();
+              handleImageReferenceClick(link.dataset.imageId, artwork);
+            });
+          });
+        }, 0);
+      } else {
+        // Fallback: plain text
+        textZh.textContent = critique.textZh;
+        textEn.textContent = critique.textEn;
+      }
+    } else {
+      // Fallback: plain text
+      textZh.textContent = critique.textZh;
+      textEn.textContent = critique.textEn;
+    }
+
+    body.appendChild(textZh);
     body.appendChild(textEn);
 
     panel.appendChild(body);

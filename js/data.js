@@ -29,13 +29,69 @@ window.VULCA_DATA = {
       context: "Contemporary digital-robotic hybrid artwork exploring memory and artistic agency",
 
       // NEW: Multi-image support
-      primaryImageId: "img-1-1",
+      primaryImageId: "img-1-5",  // Updated to point to final drawing
       images: [
         {
           id: "img-1-1",
-          url: "/assets/artworks/artwork-1/01-final-drawing.jpg",
-          category: IMAGE_CATEGORIES.FINAL,
+          url: "/assets/artworks/artwork-1/01-concept-sketch.jpg",
+          category: IMAGE_CATEGORIES.SKETCH,
           sequence: 1,
+          titleZh: "初步概念草图",
+          titleEn: "Initial Concept Sketch",
+          caption: "Early conceptual sketches exploring the visual language of machine-generated brushstrokes and the aesthetic possibilities of robotic drawing systems.",
+          metadata: {
+            year: 2021,
+            dimensions: "1200x800",
+            medium: "Pencil and ink on paper"
+          }
+        },
+        {
+          id: "img-1-2",
+          url: "/assets/artworks/artwork-1/02-training-process.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "机器学习训练过程",
+          titleEn: "Machine Learning Training Process",
+          caption: "Documentation of the machine learning training phase, where the robotic arm learns to replicate and reinterpret human brushstroke patterns through iterative feedback loops.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Digital documentation"
+          }
+        },
+        {
+          id: "img-1-3",
+          url: "/assets/artworks/artwork-1/03-human-machine-collaboration.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 3,
+          titleZh: "人机协作绘画现场",
+          titleEn: "Human-Machine Collaborative Drawing",
+          caption: "The artist and robotic arm drawing simultaneously, showcasing the real-time dialogue between human intention and machine interpretation in the creative process.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Performance documentation"
+          }
+        },
+        {
+          id: "img-1-4",
+          url: "/assets/artworks/artwork-1/04-brushstroke-detail.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 4,
+          titleZh: "笔触细节特写",
+          titleEn: "Brushstroke Detail Close-up",
+          caption: "Close-up view revealing the intricate interplay between fluid organic lines and precise mechanical movements, highlighting the unique aesthetic qualities of machine-generated brushwork.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Photography"
+          }
+        },
+        {
+          id: "img-1-5",
+          url: "/assets/artworks/artwork-1/05-final-drawing.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
           titleZh: "最终作品",
           titleEn: "Final Drawing",
           caption: "The completed collaborative drawing, result of human-machine dialogue exploring memory and artistic agency through robotic drawing systems.",
@@ -43,6 +99,20 @@ window.VULCA_DATA = {
             year: 2022,
             dimensions: "1200x800",
             medium: "Mixed media on paper"
+          }
+        },
+        {
+          id: "img-1-6",
+          url: "/assets/artworks/artwork-1/06-installation-view.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 6,
+          titleZh: "展览现场",
+          titleEn: "Installation View",
+          caption: "Exhibition installation view showing the artwork displayed alongside the robotic drawing apparatus, contextualizing the work within its technological and conceptual framework.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Installation photography"
           }
         }
       ]
@@ -164,29 +234,29 @@ window.VULCA_DATA = {
     {
       artworkId: "artwork-1",
       personaId: "john-ruskin",
-      textZh: "当机器取代人手时，艺术是否失去了灵魂？此作引发深刻的伦理思考。虽然技术令人惊叹，但我担忧：它是否破坏了创作过程中的道德承诺？\n\n在我看来，艺术必须植根于诚实——对自然的诚实观察，对自我的诚实表达，以及对社会责任的诚实承诺。真正的艺术家通过亲手创作来建立与世界的道德联系。当机器参与创作时，我们是否仍能声称这种道德承诺依然存在？然而，这件作品却以一种意外的方式回答了这个问题。它没有隐瞒其机械本质，反而坦诚地展示了人与机器的关系。这种透明性本身就是一种诚实的道德表态。\n\n更深层地，作品问出了一个更根本的问题：记忆可以被机械化吗？如果艺术的本质在于人对过往的诚实回忆和深刻思考，那么当机器被训练去模仿这种记忆过程时，我们目睹的就是对人性本身的一次深刻的哲学质疑。这种对人性的根本性反思，正是艺术最可贵之处，也是伦理思考的核心。",
-      textEn: "When machines replace human hands, does art lose its soul? This work provokes profound ethical reflection. While technology is astounding, I worry whether it severs the moral covenant inherent in creation.\n\nI believe art must be rooted in honesty—honest observation of nature, honest self-expression, and honest commitment to social responsibility. True artists establish moral connection with the world through their own hands. When machines participate in creation, can we still claim this moral covenant persists? Yet this work answers unexpectedly. It hides nothing of its mechanical nature but frankly displays the human-machine relationship. This transparency itself becomes an honest moral statement.\n\nMore profoundly, the work poses a more fundamental question: Can memory be mechanized? If art's essence lies in honest recollection of the past and profound reflection, then when machines are trained to mimic this memory process, we witness a deep philosophical interrogation of humanity itself. This fundamental reflection on human nature is art's greatest value, and the very core of ethical inquiry.",
+      textZh: "当机器取代人手时，艺术是否失去了灵魂？此作引发深刻的伦理思考。虽然技术令人惊叹，但我担忧：它是否破坏了创作过程中的道德承诺？\n\n在我看来，艺术必须植根于诚实——对自然的诚实观察，对自我的诚实表达，以及对社会责任的诚实承诺。真正的艺术家通过亲手创作来建立与世界的道德联系。当机器参与创作时，我们是否仍能声称这种道德承诺依然存在？然而，[img:img-1-3]所展现的人机协作场景以一种意外的方式回答了这个问题。它没有隐瞒其机械本质，反而坦诚地展示了人与机器的关系。这种透明性本身就是一种诚实的道德表态。\n\n更深层地，作品问出了一个更根本的问题：记忆可以被机械化吗？[img:img-1-2]记录的训练过程揭示了机器如何\"学习\"人的创作方式。如果艺术的本质在于人对过往的诚实回忆和深刻思考，那么当机器被训练去模仿这种记忆过程时，我们目睹的就是对人性本身的一次深刻的哲学质疑。这种对人性的根本性反思，正是艺术最可贵之处，也是伦理思考的核心。",
+      textEn: "When machines replace human hands, does art lose its soul? This work provokes profound ethical reflection. While technology is astounding, I worry whether it severs the moral covenant inherent in creation.\n\nI believe art must be rooted in honesty—honest observation of nature, honest self-expression, and honest commitment to social responsibility. True artists establish moral connection with the world through their own hands. When machines participate in creation, can we still claim this moral covenant persists? Yet [img:img-1-3] the human-machine collaborative scene answers unexpectedly. It hides nothing of its mechanical nature but frankly displays the human-machine relationship. This transparency itself becomes an honest moral statement.\n\nMore profoundly, the work poses a more fundamental question: Can memory be mechanized? [img:img-1-2] The documented training process reveals how machines 'learn' human creative methods. If art's essence lies in honest recollection of the past and profound reflection, then when machines are trained to mimic this memory process, we witness a deep philosophical interrogation of humanity itself. This fundamental reflection on human nature is art's greatest value, and the very core of ethical inquiry.",
       rpait: { R: 6, P: 8, A: 7, I: 9, T: 5 }
     },
     {
       artworkId: "artwork-1",
       personaId: "mama-zola",
-      textZh: "机器与艺术的相遇，让我想起我们祖先用手绘制的故事。每一笔都承载着传统与信念。看这部作品，我看到了一种新的叙事方式，虽然是机器驱动，但它在问一些我们社区最关切的问题。\n\n在我们的传统中，故事总是口口相传。长者向年轻一代讲述他们的经历和智慧，这个过程本身就是文化的传承。当我看到这部作品时，我看到了一种新的对话形式。机器被训练去\"记忆\"人的创作方式——这何尝不是一种文化传承的新形式？虽然介质从声音变成了线条，从人与人变成了人与机器，但核心的问题依然是：我们如何将最珍贵的东西传递给下一代？\n\n特别地，这部作品让我思考，记忆在我们社区中的意义。记忆不仅是个人的，更是集体的。当机器学习如何创作，它某种程度上正在\"学习\"人类的集体记忆。对于我们的社区来说，看到这样的对话，不是失去，而是发现了新的、更广阔的传承可能性。",
-      textEn: "The encounter between machine and art reminds me of how our ancestors drew stories by hand. Each stroke carried tradition and belief. Witnessing this work, I see a new form of narrative, though machine-driven, posing questions most vital to our community.\n\nIn our traditions, stories have always been passed mouth to ear. Elders share their experiences and wisdom with the young; this process itself is cultural transmission. When I see this work, I perceive a new form of dialogue. The machine is trained to 'remember' how humans create—isn't this a new form of cultural inheritance? Though the medium shifts from voice to lines, from person to person to person to machine, the core question remains: How do we pass our most precious heritage to the next generation?\n\nParticularly, this work makes me reflect on memory's meaning in our community. Memory is not only personal but collective. When machines learn to create, they are in a sense learning human collective memory. For our community, witnessing such dialogue is not loss but discovery of new, broader possibilities for transmission of culture.",
+      textZh: "机器与艺术的相遇，让我想起我们祖先用手绘制的故事。每一笔都承载着传统与信念。看[img:img-1-5]这部作品，我看到了一种新的叙事方式，虽然是机器驱动，但它在问一些我们社区最关切的问题。\n\n在我们的传统中，故事总是口口相传。长者向年轻一代讲述他们的经历和智慧，这个过程本身就是文化的传承。当我看到[img:img-1-3]中艺术家与机器共同创作的场景时，我看到了一种新的对话形式。机器被训练去\"记忆\"人的创作方式——这何尝不是一种文化传承的新形式？虽然介质从声音变成了线条，从人与人变成了人与机器，但核心的问题依然是：我们如何将最珍贵的东西传递给下一代？\n\n特别地，这部作品让我思考，记忆在我们社区中的意义。记忆不仅是个人的，更是集体的。当机器学习如何创作，它某种程度上正在\"学习\"人类的集体记忆。对于我们的社区来说，看到[img:img-1-6]展览现场中观众的参与，不是失去，而是发现了新的、更广阔的传承可能性。",
+      textEn: "The encounter between machine and art reminds me of how our ancestors drew stories by hand. Each stroke carried tradition and belief. Witnessing [img:img-1-5] this work, I see a new form of narrative, though machine-driven, posing questions most vital to our community.\n\nIn our traditions, stories have always been passed mouth to ear. Elders share their experiences and wisdom with the young; this process itself is cultural transmission. When I see [img:img-1-3] the artist and machine creating together, I perceive a new form of dialogue. The machine is trained to 'remember' how humans create—isn't this a new form of cultural inheritance? Though the medium shifts from voice to lines, from person to person to person to machine, the core question remains: How do we pass our most precious heritage to the next generation?\n\nParticularly, this work makes me reflect on memory's meaning in our community. Memory is not only personal but collective. When machines learn to create, they are in a sense learning human collective memory. For our community, witnessing [img:img-1-6] the audience engagement in the exhibition space is not loss but discovery of new, broader possibilities for transmission of culture.",
       rpait: { R: 7, P: 6, A: 8, I: 8, T: 6 }
     },
     {
       artworkId: "artwork-1",
       personaId: "professor-petrova",
-      textZh: "从形式主义的角度，此作在视觉层面达成了卓越的平衡。线条的变异性与重复性形成对立统一，创造出动态的视觉节奏。色彩的运用虽然克制，却恰好突显了线条本身的力量。结构上，作品展现了机械系统与艺术表现之间的深层对话。\n\n在俄罗斯形式主义传统中，我们强调\"陌生化\"（defamiliarization）——通过打破寻常的感知方式来揭示艺术语言的本质。此作通过机械系统的介入实现了这种陌生化。观众观看笔墨线条时，通常期待看到人的意念与情感的直接表达。但当了解到这些线条来自机械臂的精确控制和机器学习的记忆时，我们对线条本身的认知被重新激活了。线条不再是意图的透明载体，而成为了形式本身的主角。\n\n这正是我所欣赏的：作品通过约束（机械系统的局限性）来实现形式的纯粹性。每条线都在视觉逻辑中占据确定的位置，形成了严密的结构关系。作品中不存在无谓的装饰或偶然的笔触——一切都服从于形式的严格法则。这种对立与统一的关系，这种设备（device）与结构的完美结合，正是形式美学的最高境界。",
-      textEn: "From a formalist perspective, this work achieves excellent visual balance. The variation and repetition of lines create dynamic visual rhythm through dialectical opposition. Color use, though restrained, precisely emphasizes line's power. Structurally, the work manifests deep dialogue between mechanical systems and artistic expression.\n\nIn Russian formalist tradition, we emphasize \"defamiliarization\"—revealing artistic language's essence by disrupting ordinary perception. This work achieves such estrangement through mechanical intervention. When viewing brushline, viewers typically expect direct expression of human intention and emotion. Yet learning these lines stem from robotic arm's precision and machine learning's memory reactivates our awareness of line itself. Lines cease being transparent carriers of intent; they become form's protagonist.\n\nThis is what I appreciate: the work achieves formal purity through constraint—mechanical system's limitations. Each line occupies determined visual position, forming rigorous structural relations. The work contains no superfluous decoration or accidental strokes—all obeys strict formal law. This opposition and unity, this device-structure fusion, achieves formal aesthetics' highest realization.",
+      textZh: "从形式主义的角度，[img:img-1-5]在视觉层面达成了卓越的平衡。线条的变异性与重复性形成对立统一，创造出动态的视觉节奏。色彩的运用虽然克制，却恰好突显了线条本身的力量。结构上，作品展现了机械系统与艺术表现之间的深层对话。\n\n在俄罗斯形式主义传统中，我们强调\"陌生化\"（defamiliarization）——通过打破寻常的感知方式来揭示艺术语言的本质。此作通过机械系统的介入实现了这种陌生化。观众观看笔墨线条时，通常期待看到人的意念与情感的直接表达。但当了解到这些线条来自机械臂的精确控制和机器学习的记忆时，我们对线条本身的认知被重新激活了。[img:img-1-4]的细节特写尤其清晰地展现了这一点——线条不再是意图的透明载体，而成为了形式本身的主角。\n\n这正是我所欣赏的：作品通过约束（机械系统的局限性）来实现形式的纯粹性。每条线都在视觉逻辑中占据确定的位置，形成了严密的结构关系。作品中不存在无谓的装饰或偶然的笔触——一切都服从于形式的严格法则。这种对立与统一的关系，这种设备（device）与结构的完美结合，正是形式美学的最高境界。",
+      textEn: "From a formalist perspective, [img:img-1-5] achieves excellent visual balance at the visual level. The variation and repetition of lines create dynamic visual rhythm through dialectical opposition. Color use, though restrained, precisely emphasizes line's power. Structurally, the work manifests deep dialogue between mechanical systems and artistic expression.\n\nIn Russian formalist tradition, we emphasize \"defamiliarization\"—revealing artistic language's essence by disrupting ordinary perception. This work achieves such estrangement through mechanical intervention. When viewing brushline, viewers typically expect direct expression of human intention and emotion. Yet learning these lines stem from robotic arm's precision and machine learning's memory reactivates our awareness of line itself. [img:img-1-4] The close-up detail particularly reveals this clearly—lines cease being transparent carriers of intent; they become form's protagonist.\n\nThis is what I appreciate: the work achieves formal purity through constraint—mechanical system's limitations. Each line occupies determined visual position, forming rigorous structural relations. The work contains no superfluous decoration or accidental strokes—all obeys strict formal law. This opposition and unity, this device-structure fusion, achieves formal aesthetics' highest realization.",
       rpait: { R: 8, P: 7, A: 9, I: 6, T: 8 }
     },
     {
       artworkId: "artwork-1",
       personaId: "ai-ethics",
-      textZh: "这是人工创意的一个引人注目的案例。机器学习系统被训练来模仿艺术创作，这引发了关键问题：创意的本质是什么？这件作品通过展示机器也能参与创意过程，挑战了我们关于人类独特性的最基本的假设。\n\n从技术伦理的角度，这件作品提出了关于算法与美学交点的核心问题。当我们用机器学习系统来生成艺术时，我们实际上在量化和编码创意过程。这导致了深刻的哲学问题：如果一个算法能够生成美的线条，这些线条的审美价值来自于哪里？是算法本身的优雅，还是人类赋予它的意义？\n\n更重要的是，这件作品强制我们重新定义艺术真实性（authenticity）。传统上，真实性与创作者的意图、情感和个人风格紧密相关。但当机器参与创作时，这些定义变得模糊。这不是说机器创作的艺术不真实，而是说我们需要发展新的框架来理解和评估人工创意的真实性。这项工作展示了这一新时代的可能性，同时也警示我们：在拥抱人工创意时，必须保持对其局限性、伦理含义和社会影响的清醒认识。",
-      textEn: "This is a notable case of artificial creativity. Machine learning systems trained to mimic artistic creation raise key questions: What is creativity's essence? By demonstrating machines can participate in creative processes, it challenges fundamental assumptions about human uniqueness.\n\nFrom technology ethics perspective, this work poses core questions about algorithms and aesthetics intersection. When we employ machine learning to generate art, we effectively quantify and encode creative process. This raises profound philosophical issues: When algorithm generates beautiful lines, where does their aesthetic value originate? From algorithm's elegance or meaning humans project?\n\nMore critically, this work forces us to redefine artistic authenticity. Traditionally, authenticity connects intimately with creator's intention, emotion, personal style. Yet when machines participate, these definitions blur. This doesn't mean machine-created art lacks authenticity, but we must develop new frameworks understanding and evaluating artificial creativity's authenticity. This work exemplifies this new era's possibilities while warning us: embracing artificial creativity demands clear-eyed recognition of its limitations, ethical implications, and societal impact.",
+      textZh: "这是人工创意的一个引人注目的案例。[img:img-1-2]展示的机器学习训练过程揭示了系统如何被训练来模仿艺术创作，这引发了关键问题：创意的本质是什么？这件作品通过展示机器也能参与创意过程，挑战了我们关于人类独特性的最基本的假设。\n\n从技术伦理的角度，这件作品提出了关于算法与美学交点的核心问题。当我们用机器学习系统来生成艺术时，我们实际上在量化和编码创意过程。[img:img-1-3]中人机协作的场景尤其引人深思：如果一个算法能够生成美的线条，这些线条的审美价值来自于哪里？是算法本身的优雅，还是人类赋予它的意义？\n\n更重要的是，[img:img-1-5]最终作品强制我们重新定义艺术真实性（authenticity）。传统上，真实性与创作者的意图、情感和个人风格紧密相关。但当机器参与创作时，这些定义变得模糊。这不是说机器创作的艺术不真实，而是说我们需要发展新的框架来理解和评估人工创意的真实性。这项工作展示了这一新时代的可能性，同时也警示我们：在拥抱人工创意时，必须保持对其局限性、伦理含义和社会影响的清醒认识。",
+      textEn: "This is a notable case of artificial creativity. [img:img-1-2] The machine learning training process reveals how systems are trained to mimic artistic creation, raising key questions: What is creativity's essence? By demonstrating machines can participate in creative processes, it challenges fundamental assumptions about human uniqueness.\n\nFrom technology ethics perspective, this work poses core questions about algorithms and aesthetics intersection. When we employ machine learning to generate art, we effectively quantify and encode creative process. [img:img-1-3] The human-machine collaboration scene is particularly thought-provoking: When algorithm generates beautiful lines, where does their aesthetic value originate? From algorithm's elegance or meaning humans project?\n\nMore critically, [img:img-1-5] the final work forces us to redefine artistic authenticity. Traditionally, authenticity connects intimately with creator's intention, emotion, personal style. Yet when machines participate, these definitions blur. This doesn't mean machine-created art lacks authenticity, but we must develop new frameworks understanding and evaluating artificial creativity's authenticity. This work exemplifies this new era's possibilities while warning us: embracing artificial creativity demands clear-eyed recognition of its limitations, ethical implications, and societal impact.",
       rpait: { R: 8, P: 8, A: 7, I: 9, T: 7 }
     },
 
