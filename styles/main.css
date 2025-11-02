@@ -1917,6 +1917,37 @@ a:focus-visible {
   margin: 0 auto;
 }
 
+/* Edge gradient hints (show interactive areas on hover) */
+.artwork-carousel::before,
+.artwork-carousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.artwork-carousel::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+}
+
+.artwork-carousel::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .artwork-carousel:hover::before,
+  .artwork-carousel:hover::after {
+    opacity: 1;
+  }
+}
+
 .carousel-wrapper {
   position: relative;
   background: var(--color-bg);
@@ -2074,23 +2105,52 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 200ms ease;
+  transition: opacity 200ms ease, transform 200ms ease, background 200ms ease, box-shadow 200ms ease;
   box-shadow: 0 2px 8px var(--color-shadow);
+  opacity: 0; /* Default: hidden */
 }
 
-.carousel-btn:hover:not(:disabled) {
-  background: white;
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px var(--color-shadow);
+/* Desktop: Show on carousel hover */
+@media (hover: hover) and (pointer: fine) {
+  .artwork-carousel:hover .carousel-btn {
+    opacity: 1;
+  }
+
+  .carousel-btn:hover:not(:disabled) {
+    opacity: 1;
+    background: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px var(--color-shadow);
+  }
 }
 
+/* Mobile/Touch: Always semi-visible */
+@media (hover: none) {
+  .carousel-btn {
+    opacity: 0.5;
+  }
+
+  .carousel-btn:active:not(:disabled) {
+    opacity: 1;
+    background: white;
+  }
+}
+
+/* Common states */
 .carousel-btn:active:not(:disabled) {
   transform: scale(0.95);
 }
 
 .carousel-btn:disabled {
-  opacity: 0.3;
+  opacity: 0.2 !important;
   cursor: not-allowed;
+}
+
+/* Keyboard focus (accessibility) */
+.carousel-btn:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
 }
 
 .carousel-btn svg {
