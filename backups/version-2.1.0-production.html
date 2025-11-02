@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- ==================== META TAGS ==================== -->
+  <!-- Version: 2.1.0 - Build: 2025-11-01T12:30:00Z Embedded Data Solution -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="潮汐的负形 - VULCA艺术装置交互展览平台。探索4件精选艺术作品与6位文化评论家的视角碰撞。">
+  <meta name="keywords" content="艺术展览, AI评论生成, 文化批评, 互动平台">
+  <meta name="author" content="VULCA">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vulcaart.art">
+  <meta property="og:title" content="潮汐的负形 | vulcaart.art">
+  <meta property="og:description" content="交互式艺术展览平台 - 体验AI驱动的多角度艺术评论">
+  <meta property="og:image" content="https://vulcaart.art/assets/og-image.jpg">
+  <meta property="og:locale" content="zh_CN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="潮汐的负形 | vulcaart.art">
+  <meta name="twitter:description" content="交互式艺术展览平台">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="alternate icon" href="/assets/favicon.ico">
+
+  <!-- ==================== STYLESHEETS ==================== -->
+  <link rel="stylesheet" href="/styles/main.css">
+
+  <!-- ==================== CHART LIBRARY ==================== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- ==================== PARTICLE EFFECTS LIBRARY ==================== -->
+  <script src="https://cdn.jsdelivr.net/npm/sparticles/dist/sparticles.min.js"></script>
+
+  <!-- ==================== PRECONNECT ==================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- ==================== GOOGLE FONTS ==================== -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap">
+
+  <!-- ==================== TITLE ==================== -->
+  <title>潮汐的负形 | vulcaart.art</title>
+</head>
+
+<body>
+  <!-- ==================== SKIP LINK ==================== -->
+  <a href="#main-content" class="skip-to-main">跳转到主要内容</a>
+
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header>
+    <nav class="container flex flex-between">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <a href="/" class="brand-logo" title="回到首页">
+          <span class="brand-text">vulcaart</span>
+          <span class="brand-subtitle">潮汐的负形</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <ul class="nav-desktop flex flex-gap-lg">
+        <li><a href="#exhibition">展览</a></li>
+        <li><a href="#personas">评论家</a></li>
+        <li><a href="#process">创作过程</a></li>
+        <li><a href="#about">关于</a></li>
+      </ul>
+
+      <!-- Mobile Menu Button -->
+      <button class="hamburger" aria-label="打开菜单" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <nav class="nav-mobile" id="mobile-menu" style="display: none;">
+      <ul class="flex flex-column flex-gap-md p-lg">
+        <li><a href="#exhibition" class="nav-link">展览</a></li>
+        <li><a href="#personas" class="nav-link">评论家</a></li>
+        <li><a href="#process" class="nav-link">创作过程</a></li>
+        <li><a href="#about" class="nav-link">关于</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main id="main-content">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <h1>潮汐的负形</h1>
+      <p>
+        一场关于艺术评论的视角之旅。<br>
+        通过不同文化评论家的眼睛，探索同一件作品的多维解读。
+      </p>
+      <a href="#exhibition" class="btn btn-primary btn-lg">进入展览</a>
+    </section>
+
+    <!-- WHITESPACE -->
+    <div class="section-spacer"></div>
+
+    <!-- EXHIBITION SECTION -->
+    <section id="exhibition" class="container breathing-room">
+      <h2 class="heading-line">核心体验</h2>
+
+      <div class="grid grid-2 gap-lg mt-lg">
+        <!-- Artwork Gallery Preview -->
+        <div class="card card-lg">
+          <h3>4件精选作品</h3>
+          <p class="mt-md">
+            精心挑选的艺术作品，每件都承载着独特的文化意蕴和视觉语言。
+            高分辨率呈现，邀请您细致地观看和思考。
+          </p>
+          <div class="mt-lg">
+            <span class="badge badge-primary">视觉探索</span>
+          </div>
+        </div>
+
+        <!-- Critic Personas Preview -->
+        <div class="card card-lg">
+          <h3>6位文化评论家</h3>
+          <p class="mt-md">
+            来自不同文化背景和历史时期的评论家视角。
+            每位评论家都有独特的分析维度和审美标准。
+          </p>
+          <div class="mt-lg">
+            <span class="badge badge-primary">多元视角</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Critique Experience -->
+      <div class="card card-lg mt-lg">
+        <h3>交互式评论体验</h3>
+        <p class="mt-md">
+          选择一件作品与一位评论家，阅读多维度的艺术评论。
+          体验不同视角如何赋予同一件作品全新的意义。
+        </p>
+
+        <!-- Artwork Selection -->
+        <div class="mt-lg">
+          <h4 style="font-size: var(--size-body); margin-bottom: var(--space-md); color: var(--color-text-primary);">选择艺术作品</h4>
+          <div class="artwork-grid" id="artworkSelector" style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+          ">
+            <!-- Artwork cards will be inserted here by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Persona Selection -->
+        <div class="mt-lg">
+          <h4 style="font-size: var(--size-body); margin-bottom: var(--space-md); color: var(--color-text-primary);">选择评论家视角</h4>
+          <div class="persona-selector" id="personaSelector" style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--space-md);
+          ">
+            <!-- Persona cards will be inserted here by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Get Critique Button -->
+        <div class="mt-lg text-center">
+          <div class="btn-wrapper" style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+            <button id="getCritiqueBtn" class="btn btn-primary btn-lg" style="cursor: pointer;">
+              获取评论
+            </button>
+            <button id="getComparisonBtn" class="btn btn-secondary btn-lg" style="cursor: pointer; background-color: #666; color: white;">
+              对比视图
+            </button>
+          </div>
+          <p id="selectionStatus" style="margin-top: var(--space-sm); font-size: var(--size-caption); color: var(--color-text-secondary); min-height: 20px;">
+            请选择一件作品和一位评论家
+          </p>
+        </div>
+
+        <!-- Critique Display -->
+        <div id="critiqueDisplay" style="margin-top: var(--space-lg); display: none;">
+          <div style="
+            background-color: #F9F7F3;
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-lg);
+            border-left: 4px solid var(--color-accent);
+          ">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--space-md);">
+              <div>
+                <h4 id="critiquePersonaName" style="font-size: var(--size-body); color: var(--color-text-primary); margin: 0;">评论家</h4>
+                <p id="critiqueArtworkTitle" style="font-size: var(--size-caption); color: var(--color-text-secondary); margin: var(--space-xs) 0 0 0;">作品</p>
+              </div>
+              <button id="closeCritiqueBtn" style="
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: var(--color-text-secondary);
+                padding: 0;
+                width: 32px;
+                height: 32px;
+              ">×</button>
+            </div>
+
+            <!-- Critique Content with RPAIT Chart -->
+            <div class="critique-grid" style="display: grid; grid-template-columns: 1fr 300px; gap: var(--space-lg); align-items: start;">
+              <!-- Bilingual Critique -->
+              <div id="critiqueContent" style="line-height: 1.8;">
+                <p id="critiqueEnglish" style="margin-bottom: var(--space-md); color: var(--color-text-primary);"></p>
+                <p id="critiqueChinese" style="margin-bottom: 0; color: var(--color-text-primary);"></p>
+              </div>
+
+              <!-- RPAIT Visualization -->
+              <div class="rpait-container" style="display: flex; flex-direction: column; align-items: center;">
+                <canvas id="rpaitChart" style="max-width: 280px; max-height: 280px; width: 100%;"></canvas>
+                <p style="font-size: var(--size-caption); color: var(--color-text-secondary); margin-top: var(--space-sm); text-align: center;">
+                  评论维度<br><span style="font-size: 10px;">R P A I T</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparison View Display -->
+        <div id="comparisonDisplay" style="margin-top: var(--space-lg); display: none;">
+          <div style="
+            background-color: #F9F7F3;
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-lg);
+            border-left: 4px solid var(--color-accent);
+          ">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md);">
+              <div>
+                <h4 id="comparisonArtworkTitle" style="font-size: var(--size-body); color: var(--color-text-primary); margin: 0;">作品对比</h4>
+                <p style="font-size: var(--size-caption); color: var(--color-text-secondary); margin: var(--space-xs) 0 0 0;">多位评论家的不同视角</p>
+              </div>
+              <button id="closeComparisonBtn" style="
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: var(--color-text-secondary);
+                padding: 0;
+                width: 32px;
+                height: 32px;
+              ">×</button>
+            </div>
+
+            <!-- Comparison Grid -->
+            <div id="comparisonGrid" class="comparison-grid" style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: var(--space-lg);
+            ">
+              <!-- Individual critique cards will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHITESPACE -->
+    <div class="section-spacer"></div>
+
+    <!-- PERSONAS SECTION -->
+    <section id="personas" class="container breathing-room">
+      <h2 class="heading-line">6位文化评论家</h2>
+      <p class="max-w-prose mx-auto text-center mt-md mb-lg">
+        从北宋文人到当代AI伦理学者，这些评论家代表了不同文化传统和时代的审美标准。
+      </p>
+
+      <div class="grid grid-auto gap-lg mt-lg">
+        <!-- Personas will be rendered here by JavaScript -->
+        <div class="card card-lg text-center">
+          <div class="p-lg">
+            <div style="width: 120px; height: 120px; background-color: #F0EEE8; margin: 0 auto var(--space-md); border-radius: var(--border-radius-lg);"></div>
+            <h3>评论家加载中...</h3>
+            <p class="mt-md text-secondary">等待数据加载</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHITESPACE -->
+    <div class="section-spacer"></div>
+
+    <!-- PROCESS DOCUMENTATION SECTION -->
+    <section id="process" class="container breathing-room">
+      <h2 class="heading-line">创作过程 · 负形关注</h2>
+      <p class="max-w-prose mx-auto text-center mt-md mb-lg">
+        "负形"不仅是艺术的主题，也是我们呈现方式的原则。
+        通过展示创作过程、设计决策和概念演进，我们邀请您看见通常隐藏的部分。
+      </p>
+
+      <div class="grid grid-2 gap-lg mt-lg">
+        <!-- Concept Development -->
+        <div class="card card-lg">
+          <h3>概念发展</h3>
+          <p class="mt-md text-secondary">
+            从想法到框架的演变与转化。
+          </p>
+        </div>
+
+        <!-- Design Iterations -->
+        <div class="card card-lg">
+          <h3>设计迭代</h3>
+          <p class="mt-md text-secondary">
+            界面设计的迭代和决策思考。
+          </p>
+        </div>
+
+        <!-- Research -->
+        <div class="card card-lg">
+          <h3>研究阶段</h3>
+          <p class="mt-md text-secondary">
+            评论家选择与艺术策展研究。
+          </p>
+        </div>
+
+        <!-- Technical Implementation -->
+        <div class="card card-lg">
+          <h3>技术实现</h3>
+          <p class="mt-md text-secondary">
+            从架构设计到功能开发的技术选择。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHITESPACE -->
+    <div class="section-spacer"></div>
+
+    <!-- EXHIBITION PLAN SECTION -->
+    <!-- WHITESPACE -->
+    <div class="section-spacer"></div>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="container breathing-room">
+      <h2 class="heading-line">关于这个项目</h2>
+
+      <div class="max-w-prose mx-auto mt-lg">
+        <p class="mb-md">
+          vulcaart.art 是 VULCA（视觉理解与语言的文化自适应）项目的数字展览平台。
+          这个项目探索AI系统如何理解和评价艺术作品，特别是从多元文化视角出发。
+        </p>
+
+        <p class="mb-md">
+          <strong>"潮汐的负形"</strong> 作为主题，强调：
+        </p>
+
+        <ul class="mb-md">
+          <li class="mb-sm">• <strong>潮汐性</strong> — 艺术评论随着不同视角的切换而变化，如同潮汐的涨落</li>
+          <li class="mb-sm">• <strong>负形</strong> — 关注过程、草稿和迭代，而不仅是最终成果</li>
+          <li class="mb-sm">• <strong>多维性</strong> — 同一件作品在不同评论家眼中有完全不同的意义</li>
+        </ul>
+
+        <p class="mb-md">
+          <p>
+          <em>
+            通过AI、艺术和文化的交集，探索我们如何看待和理解彼此的创意表达。
+          </em>
+        </p>
+      </div>
+    </section>
+
+    <!-- WHITESPACE -->
+    <div class="section-spacer"></div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="grid grid-auto gap-lg mb-lg">
+        <!-- About -->
+        <div>
+          <h4 class="mb-md">关于</h4>
+          <p class="text-secondary">
+            VULCA 艺术展览平台<br>
+            潮汐的负形
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="mb-md">链接</h4>
+          <ul class="flex flex-column flex-gap-sm">
+            <li><a href="#exhibition">展览</a></li>
+            <li><a href="#personas">评论家</a></li>
+            <li><a href="#process">创作过程</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="mb-md">联系</h4>
+          <p class="text-secondary">
+            <a href="mailto:info@vulcaart.art">info@vulcaart.art</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="divider-poetic"></div>
+      <div class="flex flex-between text-secondary py-md">
+        <p>&copy; 2025 VULCA. 保留所有权利。</p>
+        <p>设计灵感：Sougwen Chung | 开发：Claude Code</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script src="/js/data.js?v=1"></script>
+  <script src="/js/plan.js?v=2"></script>
+  <script src="/js/dataIndexes.js?v=1"></script>
+  <script src="/js/performanceMonitor.js?v=1"></script>
+  <script src="/js/testFramework.js?v=1"></script>
+  <script src="/js/templates.js?v=1"></script>
+  <script src="/js/eventDelegation.js?v=1"></script>
+  <script src="/js/particles-config.js?v=1"></script>
+  <script src="/js/app.js?v=6" defer></script>
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.style.display === 'flex';
+        mobileMenu.style.display = isOpen ? 'none' : 'flex';
+        menuBtn.classList.toggle('active');
+      });
+    }
+
+    // Close menu when clicking on a link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.style.display = 'none';
+        if (menuBtn) menuBtn.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
