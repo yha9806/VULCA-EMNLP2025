@@ -104,24 +104,40 @@
 
   <!-- ==================== MAIN CONTENT ==================== -->
   <main id="main-content">
-    <!-- MINIMAL HERO SECTION -->
-    <section class="hero-minimal">
-      <div class="hero-content">
-        <h1 class="hero-title">潮汐的负形</h1>
-        <p class="hero-subtitle">一场关于艺术评论的视角之旅</p>
-      </div>
-
-      <!-- Scroll prompt -->
-      <div class="scroll-prompt">
-        <span>向下滚动探索</span>
-        <svg class="scroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M12 5v14M19 12l-7 7-7-7"/>
-        </svg>
+    <!-- GALLERY HERO SECTION - Active Artwork Display -->
+    <section class="gallery-hero" id="gallery-hero">
+      <!-- Artwork display container -->
+      <div class="artwork-display">
+        <div class="artwork-image-container" id="artwork-image-container">
+          <!-- Image will be rendered here by gallery-hero.js -->
+        </div>
+        <div class="critiques-panel" id="critiques-panel">
+          <!-- Critic reviews will be rendered here by gallery-hero.js -->
+        </div>
       </div>
     </section>
 
-    <!-- IMMERSIVE GALLERY -->
-    <section class="gallery" id="gallery">
+    <!-- GALLERY NAVIGATION BAR -->
+    <section class="gallery-nav" id="gallery-nav">
+      <button id="nav-prev" class="nav-button nav-prev" aria-label="Previous artwork">
+        <span>◄</span>
+      </button>
+
+      <div class="artwork-indicator">
+        <span id="artwork-current">1</span> of <span id="artwork-total">4</span>
+      </div>
+
+      <button id="nav-next" class="nav-button nav-next" aria-label="Next artwork">
+        <span>►</span>
+      </button>
+
+      <div class="artwork-dots" id="artwork-dots">
+        <!-- Dots will be rendered here by gallery-hero.js -->
+      </div>
+    </section>
+
+    <!-- FULL GALLERY (hidden, for detail pages) -->
+    <section class="gallery" id="gallery" style="display: none;">
       <!-- Artwork sections will be dynamically loaded here -->
       <!-- Structure:
            <article class="artwork-section" data-artwork-id="artwork-1">
@@ -185,8 +201,14 @@
   <!-- Gallery Initialization (Phase 1) -->
   <script src="/js/gallery-init.js?v=1"></script>
 
-  <!-- Auto-Play Immersive Experience (Phase 1 Redesign) -->
-  <script src="/js/autoplay.js?v=1"></script>
+  <!-- Carousel Controller (NEW - Click-based Navigation) -->
+  <script src="/js/carousel.js?v=1"></script>
+
+  <!-- Gallery Hero Renderer (NEW - Homepage Display) -->
+  <script src="/js/gallery-hero.js?v=1"></script>
+
+  <!-- Auto-Play Immersive Experience (DISABLED - Replaced by click-based carousel) -->
+  <!-- <script src="/js/autoplay.js?v=1"></script> -->
 
   <!-- Utilities -->
   <script src="/js/performanceMonitor.js?v=1"></script>
@@ -208,6 +230,27 @@
 
   <!-- Inline Scripts for Immediate Interactivity -->
   <script>
+    // Gallery navigation button handlers
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = window.carousel;
+      const navPrev = document.getElementById('nav-prev');
+      const navNext = document.getElementById('nav-next');
+
+      if (carousel && navPrev && navNext) {
+        navPrev.addEventListener('click', (e) => {
+          e.preventDefault();
+          carousel.prev();
+        });
+
+        navNext.addEventListener('click', (e) => {
+          e.preventDefault();
+          carousel.next();
+        });
+
+        console.log('✓ Gallery navigation handlers initialized');
+      }
+    });
+
     // Menu toggle
     const menuToggle = document.getElementById('menu-toggle');
     const floatingMenu = document.getElementById('floating-menu');
