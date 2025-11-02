@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Compat Utility Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .test-section {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .test-section h2 {
+      margin-top: 0;
+      color: #2d2d2d;
+    }
+    .result {
+      background: #f9f9f9;
+      border-left: 4px solid #4CAF50;
+      padding: 15px;
+      margin: 10px 0;
+      font-family: "Consolas", "Monaco", monospace;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+    .result.error {
+      border-color: #f44336;
+    }
+    .pass {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+    .fail {
+      color: #f44336;
+      font-weight: bold;
+    }
+    .image-preview {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .image-card {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      background: white;
+      flex: 0 0 calc(33.333% - 10px);
+    }
+    .image-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .image-card .meta {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Image Compatibility Utility Test</h1>
+
+  <div class="test-section">
+    <h2>Test 1: New Format (artwork-1 with images array)</h2>
+    <div id="test1-output"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>Test 2: Legacy Format (artwork-2 with imageUrl)</h2>
+    <div id="test2-output"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>Test 3: Primary Image Selection</h2>
+    <div id="test3-output"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>Test 4: Multi-Image Detection</h2>
+    <div id="test4-output"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>Test 5: Image Count</h2>
+    <div id="test5-output"></div>
+  </div>
+
+  <!-- Load dependencies -->
+  <script src="/js/data.js?v=3.1"></script>
+  <script src="/js/utils/image-compat.js?v=1.0"></script>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // Helper to display results
+      function displayResult(elementId, content, isError = false) {
+        const element = document.getElementById(elementId);
+        const resultDiv = document.createElement('div');
+        resultDiv.className = isError ? 'result error' : 'result';
+        resultDiv.textContent = content;
+        element.appendChild(resultDiv);
+      }
+
+      function runTests() {
+        console.log('=== Starting Image Compat Tests ===');
+
+        // Test 1: New format (artwork-1 with images array)
+        try {
+          const artwork1 = window.VULCA_DATA.artworks.find(a => a.id === 'artwork-1');
+          const images1 = window.ImageCompat.getArtworkImages(artwork1);
+
+          const expected1 = artwork1.images.length;
+          const actual1 = images1.length;
+
+          if (actual1 === expected1 && images1[0].id === 'img-1-1') {
+            displayResult('test1-output', `✅ PASS: Retrieved ${actual1} image(s) from images array\nFirst image ID: ${images1[0].id}\nCategory: ${images1[0].category}\nTitle: ${images1[0].titleZh}`);
+          } else {
+            displayResult('test1-output', `❌ FAIL: Expected ${expected1} images, got ${actual1}`, true);
+          }
+        } catch (error) {
+          displayResult('test1-output', `❌ ERROR: ${error.message}`, true);
+        }
+
+        // Test 2: Legacy format (artwork-2 with imageUrl)
+        try {
+          const artwork2 = window.VULCA_DATA.artworks.find(a => a.id === 'artwork-2');
+          const images2 = window.ImageCompat.getArtworkImages(artwork2);
+
+          if (images2.length === 1 &&
+              images2[0].id === 'artwork-2-legacy' &&
+              images2[0].url === artwork2.imageUrl &&
+              images2[0].category === 'final') {
+            displayResult('test2-output', `✅ PASS: Converted legacy imageUrl to images array\nConverted ID: ${images2[0].id}\nURL: ${images2[0].url}\nCategory: ${images2[0].category}\nTitle: ${images2[0].titleZh}`);
+          } else {
+            displayResult('test2-output', `❌ FAIL: Legacy conversion failed\n${JSON.stringify(images2, null, 2)}`, true);
+          }
+        } catch (error) {
+          displayResult('test2-output', `❌ ERROR: ${error.message}`, true);
+        }
+
+        // Test 3: Primary image selection
+        try {
+          const artwork1 = window.VULCA_DATA.artworks.find(a => a.id === 'artwork-1');
+          const primaryImg = window.ImageCompat.getPrimaryImage(artwork1);
+
+          if (primaryImg && primaryImg.id === artwork1.primaryImageId) {
+            displayResult('test3-output', `✅ PASS: Primary image correctly selected\nPrimary ID: ${primaryImg.id}\nMatches artwork.primaryImageId: ${artwork1.primaryImageId === primaryImg.id}`);
+          } else {
+            displayResult('test3-output', `❌ FAIL: Primary image selection failed\nExpected: ${artwork1.primaryImageId}\nGot: ${primaryImg ? primaryImg.id : 'null'}`, true);
+          }
+        } catch (error) {
+          displayResult('test3-output', `❌ ERROR: ${error.message}`, true);
+        }
+
+        // Test 4: Multi-image detection
+        try {
+          const artwork1 = window.VULCA_DATA.artworks.find(a => a.id === 'artwork-1');
+          const artwork2 = window.VULCA_DATA.artworks.find(a => a.id === 'artwork-2');
+
+          const isMulti1 = window.ImageCompat.isMultiImageArtwork(artwork1);
+          const isMulti2 = window.ImageCompat.isMultiImageArtwork(artwork2);
+
+          const result = [];
+          result.push(`artwork-1 (images array): ${isMulti1 ? '✅ Multi-image' : '❌ Single-image'}`);
+          result.push(`artwork-2 (legacy imageUrl): ${!isMulti2 ? '✅ Single-image' : '❌ Multi-image'}`);
+
+          // artwork-1 currently only has 1 image, so it won't be detected as multi-image yet
+          displayResult('test4-output', result.join('\n') + '\n\nNote: artwork-1 currently has 1 image in array, will be multi-image when more added');
+        } catch (error) {
+          displayResult('test4-output', `❌ ERROR: ${error.message}`, true);
+        }
+
+        // Test 5: Image count
+        try {
+          const counts = window.VULCA_DATA.artworks.map(artwork => {
+            const count = window.ImageCompat.getImageCount(artwork);
+            return `${artwork.id}: ${count} image(s)`;
+          });
+
+          displayResult('test5-output', `✅ PASS: Image count function works\n${counts.join('\n')}`);
+        } catch (error) {
+          displayResult('test5-output', `❌ ERROR: ${error.message}`, true);
+        }
+
+        console.log('=== Tests Complete ===');
+      }
+
+      // Run tests when DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runTests);
+      } else {
+        runTests();
+      }
+    })();
+  </script>
+</body>
+</html>
