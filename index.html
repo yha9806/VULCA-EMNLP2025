@@ -137,7 +137,8 @@
     </section>
 
     <!-- FULL GALLERY (hidden, for detail pages) -->
-    <section class="gallery" id="gallery" style="display: none;">
+    <!-- CRITICAL: display: none !important prevents CSS or JS from overriding on homepage -->
+    <section class="gallery" id="gallery" style="display: none !important;">
       <!-- Artwork sections will be dynamically loaded here -->
       <!-- Structure:
            <article class="artwork-section" data-artwork-id="artwork-1">
@@ -188,7 +189,43 @@
 
   <!-- ==================== SCRIPTS ==================== -->
   <!-- Enable Immersive Mode on Main Page -->
-  <script>window.IMMERSIVE_MODE = true;</script>
+  <script>
+    window.IMMERSIVE_MODE = true;
+    // CRITICAL: Ensure gallery is hidden on homepage (immersive mode)
+    // Use MutationObserver to continuously enforce display:none
+    function enforceGalleryHidden() {
+      const gallery = document.getElementById('gallery');
+      if (gallery && window.getComputedStyle(gallery).display !== 'none') {
+        gallery.style.display = 'none !important';
+        gallery.setAttribute('aria-hidden', 'true');
+        console.log('✓ Gallery force-hidden (display enforced)');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      enforceGalleryHidden();
+
+      // Watch for style changes to gallery and re-enforce display:none
+      const gallery = document.getElementById('gallery');
+      if (gallery) {
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+              enforceGalleryHidden();
+            }
+          });
+        });
+
+        observer.observe(gallery, {
+          attributes: true,
+          attributeFilter: ['style'],
+          attributeOldValue: true
+        });
+
+        console.log('✓ MutationObserver attached to enforce gallery display:none');
+      }
+    });
+  </script>
 
   <!-- Core Data & Configuration -->
   <script src="/js/data.js?v=3"></script>

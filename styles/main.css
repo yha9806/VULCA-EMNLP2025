@@ -398,6 +398,11 @@ ul, ol {
   gap: var(--spacing-2xl);
 }
 
+/* CRITICAL FIX: Respect inline display:none on gallery element (for homepage immersive mode) */
+#gallery[style*="display: none"] {
+  display: none !important;
+}
+
 /* Artwork Section */
 .artwork-section {
   display: grid;

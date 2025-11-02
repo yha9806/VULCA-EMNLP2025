@@ -97,11 +97,32 @@ Fix critical homepage display issues where main gallery content is not visible, 
 
 ---
 
+## What Changes
+
+### Files Created
+- `js/carousel.js` - Carousel state management module with event system (171 lines)
+- `js/gallery-hero.js` - Hero section renderer that responds to navigation events (241 lines)
+
+### Files Modified
+- `index.html` - Restructured hero section, added navigation bar with buttons and dots
+- `styles/main.css` - Added ~310 lines for gallery display, responsive layout, and navigation styling
+
+### Data Changes
+- No changes to `js/data.js` - Existing artwork and critic data reused
+
+### Behavioral Changes
+- **On page load**: First artwork image + 3 critic reviews display immediately (previously: blank hero + "scroll to explore" message)
+- **Navigation**: Click/touch based (Previous/Next buttons, dot indicators) replaces auto-play timing
+- **Layout**: All content fits in viewport without scrolling (mobile: stacked, tablet/desktop: 2-column with image 40%, reviews 60%)
+- **Scroll behavior**: Remains disabled on main page (scroll prevention maintained)
+
+---
+
 ## Success Criteria
 
 - ✅ Hero section displays actual artwork content on page load
 - ✅ User can navigate between 4 artworks via Next/Previous buttons
-- ✅ Touch swipe gestures work on mobile/tablet
+- ✅ Dot indicators enable direct jump to any artwork
 - ✅ All content for current artwork visible within viewport (no scroll needed)
 - ✅ Scroll still disabled on main page
 - ✅ Clear visual affordance showing which artwork is current ("Artwork X of 4")
