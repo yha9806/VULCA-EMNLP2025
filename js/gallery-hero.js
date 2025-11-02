@@ -100,7 +100,8 @@ window.GalleryHeroRenderer = (function() {
       artworkHeader.className = 'artwork-header-section';
       const artworkDisplay = galleryHero.querySelector('.artwork-display');
       if (artworkDisplay) {
-        artworkDisplay.insertBefore(artworkHeader, artworkDisplay.firstChild);
+        // Insert BEFORE artwork-display (as sibling, not child)
+        galleryHero.insertBefore(artworkHeader, artworkDisplay);
       } else {
         galleryHero.appendChild(artworkHeader);
       }
@@ -202,29 +203,46 @@ window.GalleryHeroRenderer = (function() {
     const gridContainer = document.createElement('div');
     gridContainer.className = 'rpait-grid';
 
-    ['R', 'P', 'A', 'I', 'T'].forEach(dimension => {
-      const score = avgRpait[dimension];
-      const barContainer = document.createElement('div');
-      barContainer.className = 'rpait-bar-container';
+    // Dimension labels (English names for tooltip)
+    const dimensions = [
+      { key: 'R', label: 'Representation' },
+      { key: 'P', label: 'Philosophy' },
+      { key: 'A', label: 'Aesthetics' },
+      { key: 'I', label: 'Interpretation' },
+      { key: 'T', label: 'Technique' }
+    ];
 
-      const label = document.createElement('span');
-      label.className = 'rpait-label';
-      label.textContent = dimension;
+    dimensions.forEach(dim => {
+      const score = avgRpait[dim.key];
 
+      // Validate score
+      const validScore = Math.max(1, Math.min(10, parseInt(score) || 0));
+
+      // Create bar container (use .rpait-bar, not .rpait-bar-container)
       const bar = document.createElement('div');
-      bar.className = `rpait-bar rpait-${dimension}`;
-      const width = (score / 10) * 100;
-      bar.style.width = width + '%';
+      bar.className = 'rpait-bar';
+      bar.setAttribute('data-dimension', dim.key);
 
-      const scoreDisplay = document.createElement('span');
-      scoreDisplay.className = 'rpait-score';
-      scoreDisplay.textContent = score;
+      // Label with abbr and score
+      const label = document.createElement('div');  // div, not span
+      label.className = 'rpait-label';
+      label.innerHTML = `<abbr title="${dim.label}">${dim.key}</abbr><span class="score">${validScore}/10</span>`;
 
-      barContainer.appendChild(label);
-      barContainer.appendChild(bar);
-      barContainer.appendChild(scoreDisplay);
+      // Bar background container
+      const barBg = document.createElement('div');
+      barBg.className = 'rpait-bar-bg';
 
-      gridContainer.appendChild(barContainer);
+      // Bar fill (the colored part)
+      const fill = document.createElement('div');
+      fill.className = 'rpait-bar-fill';
+      fill.style.width = `${(validScore / 10) * 100}%`;
+      fill.style.backgroundColor = '#4a90a4';  // Default color
+
+      barBg.appendChild(fill);
+
+      bar.appendChild(label);
+      bar.appendChild(barBg);
+      gridContainer.appendChild(bar);
     });
 
     vizContainer.appendChild(gridContainer);
