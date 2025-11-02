@@ -33,7 +33,7 @@ window.VULCA_DATA = {
       images: [
         {
           id: "img-1-1",
-          url: "/assets/artwork-1.jpg",
+          url: "/assets/artworks/artwork-1/01-final-drawing.jpg",
           category: IMAGE_CATEGORIES.FINAL,
           sequence: 1,
           titleZh: "最终作品",

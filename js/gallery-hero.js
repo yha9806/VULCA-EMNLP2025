@@ -307,15 +307,19 @@ window.GalleryHeroRenderer = (function() {
     const figure = document.createElement('figure');
     figure.className = 'artwork-image';
 
+    // Get image URL from images array (supports both new and legacy formats)
+    const images = window.ImageCompat ? window.ImageCompat.getArtworkImages(artwork) : [];
+    const imageUrl = images.length > 0 ? images[0].url : artwork.imageUrl;
+
     // Create image
     const img = document.createElement('img');
-    img.src = artwork.imageUrl;
+    img.src = imageUrl;
     img.alt = `${artwork.titleZh} ${artwork.titleEn}`;
     img.loading = 'eager';
 
     // Add error handler for missing images (Phase 1: fix-artwork-image-display-system)
     img.onerror = () => {
-      console.warn(`⚠ Image not found: ${artwork.imageUrl} (${artwork.id})`);
+      console.warn(`⚠ Image not found: ${imageUrl} (${artwork.id})`);
       container.innerHTML = '';
       const placeholder = createPlaceholder(artwork);
       container.appendChild(placeholder);
