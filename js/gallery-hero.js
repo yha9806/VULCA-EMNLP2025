@@ -36,6 +36,26 @@ window.GalleryHeroRenderer = (function() {
   }
 
   /**
+   * Get button text based on current language
+   * @param {string} state - 'expand' or 'collapse'
+   * @returns {object} - { text, ariaLabel }
+   */
+  function getButtonText(state) {
+    const lang = document.documentElement.getAttribute('data-lang') || 'zh';
+    const texts = {
+      expand: {
+        zh: { text: '展开 ▼', ariaLabel: '展开评论全文' },
+        en: { text: 'Expand ▼', ariaLabel: 'Expand full critique' }
+      },
+      collapse: {
+        zh: { text: '收起 ▲', ariaLabel: '收起评论' },
+        en: { text: 'Collapse ▲', ariaLabel: 'Collapse critique' }
+      }
+    };
+    return texts[state][lang] || texts[state].zh;
+  }
+
+  /**
    * Toggle critique expansion state
    * Now supports HTML content with image reference links
    * @param {HTMLElement} card - Critique card element
@@ -59,9 +79,10 @@ window.GalleryHeroRenderer = (function() {
         textElement.textContent = truncateText(card.dataset.fullTextPlain, 150);
       }
 
-      button.textContent = '展开 ▼';
+      const expandText = getButtonText('expand');
+      button.textContent = expandText.text;
       button.setAttribute('aria-expanded', 'false');
-      button.setAttribute('aria-label', '展开评论全文');
+      button.setAttribute('aria-label', expandText.ariaLabel);
     } else {
       // Expand
       card.classList.add('expanded');
@@ -72,9 +93,10 @@ window.GalleryHeroRenderer = (function() {
         textElement.textContent = card.dataset.fullTextPlain;
       }
 
-      button.textContent = '收起 ▲';
+      const collapseText = getButtonText('collapse');
+      button.textContent = collapseText.text;
       button.setAttribute('aria-expanded', 'true');
-      button.setAttribute('aria-label', '收起评论');
+      button.setAttribute('aria-label', collapseText.ariaLabel);
     }
 
     // Re-attach click handlers after content change
@@ -200,6 +222,12 @@ window.GalleryHeroRenderer = (function() {
 
     // Listen to carousel navigation events
     carousel.on('navigate', (event) => {
+      render(carousel);
+    });
+
+    // Listen to language change events
+    document.addEventListener('langchange', () => {
+      console.log('[Gallery Hero] Language changed, re-rendering...');
       render(carousel);
     });
 
@@ -556,9 +584,11 @@ window.GalleryHeroRenderer = (function() {
     // Toggle button for expand/collapse
     const toggleBtn = document.createElement('button');
     toggleBtn.className = 'critique-toggle-btn';
-    toggleBtn.textContent = '展开 ▼';
+
+    const expandText = getButtonText('expand');
+    toggleBtn.textContent = expandText.text;
     toggleBtn.setAttribute('aria-expanded', 'false');
-    toggleBtn.setAttribute('aria-label', '展开评论全文');
+    toggleBtn.setAttribute('aria-label', expandText.ariaLabel);
     toggleBtn.setAttribute('aria-controls', textId);
 
     toggleBtn.addEventListener('click', () => {
