@@ -48,7 +48,12 @@
           },
           y: {
             ticks: {
-              font: { size: 12 }
+              font: { size: 12 },
+              color: (context) => {
+                const personaId = selectedPersonas[context.index];
+                const persona = window.VULCA_DATA.personas.find(p => p.id === personaId);
+                return persona ? persona.color : '#2d2d2d'; // Fallback to default text color
+              }
             },
             grid: {
               display: false
@@ -94,27 +99,27 @@
       // Show all 5 dimensions
       const datasets = [
         {
-          label: 'Representation (R)',
+          label: '代表性',
           data: personas.map(p => getRPAITScore(p.id, 'R')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-r').trim()
         },
         {
-          label: 'Philosophy (P)',
+          label: '哲学性',
           data: personas.map(p => getRPAITScore(p.id, 'P')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-p').trim()
         },
         {
-          label: 'Aesthetic (A)',
+          label: '美学性',
           data: personas.map(p => getRPAITScore(p.id, 'A')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-a').trim()
         },
         {
-          label: 'Identity (I)',
+          label: '身份性',
           data: personas.map(p => getRPAITScore(p.id, 'I')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-i').trim()
         },
         {
-          label: 'Tradition (T)',
+          label: '传统性',
           data: personas.map(p => getRPAITScore(p.id, 'T')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-t').trim()
         }
@@ -123,11 +128,11 @@
     } else {
       // Show single dimension
       const dimensionNames = {
-        R: 'Representation',
-        P: 'Philosophy',
-        A: 'Aesthetic',
-        I: 'Identity',
-        T: 'Tradition'
+        R: '代表性',
+        P: '哲学性',
+        A: '美学性',
+        I: '身份性',
+        T: '传统性'
       };
 
       const datasets = [{
@@ -170,8 +175,16 @@
     const canvas = document.getElementById('persona-matrix-chart');
     if (!canvas) return;
 
-    const dimensionText = currentDimension === 'all' ? 'all RPAIT dimensions' : currentDimension;
-    const label = `Persona comparison matrix showing ${dimensionText} for all personas`;
+    const dimensionNames = {
+      all: '所有RPAIT维度',
+      R: '代表性',
+      P: '哲学性',
+      A: '美学性',
+      I: '身份性',
+      T: '传统性'
+    };
+    const dimensionText = dimensionNames[currentDimension] || currentDimension;
+    const label = `评论家对比矩阵显示所有评论家的${dimensionText}`;
     canvas.setAttribute('aria-label', label);
   }
 

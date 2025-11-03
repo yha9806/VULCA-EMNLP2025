@@ -91,14 +91,14 @@
    */
   function getChartData() {
     const labels = [
-      '代表性 Representation',
-      '哲学性 Philosophy',
-      '美学性 Aesthetic',
-      '身份性 Identity',
-      '传统性 Tradition'
+      '代表性',
+      '哲学性',
+      '美学性',
+      '身份性',
+      '传统性'
     ];
 
-    const datasets = selectedPersonas.slice(0, 3).map(personaId => {
+    const datasets = selectedPersonas.map(personaId => {
       const persona = window.VULCA_DATA.personas.find(p => p.id === personaId);
       if (!persona) return null;
 
@@ -109,7 +109,7 @@
       if (!rpait) return null;
 
       return {
-        label: `${persona.nameZh} (${persona.nameEn})`,
+        label: persona.nameZh,
         data: [rpait.R, rpait.P, rpait.A, rpait.I, rpait.T],
         backgroundColor: hexToRgba(persona.color, 0.2),
         borderColor: persona.color,
@@ -154,7 +154,7 @@
                   window.VULCA_ANALYSIS.getPersonaAverageRPAIT(selectedPersonas[0]);
 
     if (rpait) {
-      const label = `RPAIT radar chart showing ${persona.nameEn}'s scores: Representation ${rpait.R}, Philosophy ${rpait.P}, Aesthetic ${rpait.A}, Identity ${rpait.I}, Tradition ${rpait.T}`;
+      const label = `RPAIT雷达图显示${persona.nameZh}的分数：代表性 ${rpait.R}，哲学性 ${rpait.P}，美学性 ${rpait.A}，身份性 ${rpait.I}，传统性 ${rpait.T}`;
       canvas.setAttribute('aria-label', label);
     }
   }
@@ -227,11 +227,11 @@
 
     const personaNames = selectedPersonas.map(id => {
       const persona = window.VULCA_DATA.personas.find(p => p.id === id);
-      return persona ? persona.nameEn : id;
-    }).join(', ');
+      return persona ? persona.nameZh : id;
+    }).join('、');
 
     canvas.setAttribute('aria-label',
-      `RPAIT radar chart showing ${selectedPersonas.length} persona${selectedPersonas.length > 1 ? 's' : ''}: ${personaNames}`
+      `RPAIT雷达图显示 ${selectedPersonas.length} 位评论家：${personaNames}`
     );
   }
 

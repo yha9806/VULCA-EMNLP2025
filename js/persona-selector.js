@@ -104,7 +104,7 @@ window.PersonaSelection = (function() {
         const parsed = JSON.parse(stored);
 
         // Validate
-        if (Array.isArray(parsed) && parsed.length > 0 && parsed.length <= 3) {
+        if (Array.isArray(parsed) && parsed.length > 0) {
           // Verify all IDs are valid
           if (window.VULCA_DATA && window.VULCA_DATA.personas) {
             const validIds = window.VULCA_DATA.personas.map(p => p.id);
