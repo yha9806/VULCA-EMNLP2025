@@ -32,8 +32,6 @@
       <a href="/pages/critics.html" class="menu-item menu-critics" aria-label="View critics"><span>👥</span><span class="menu-label">评论家</span></a>
       <a href="/pages/about.html" class="menu-item menu-about active" aria-label="Learn about"><span>ℹ️</span><span class="menu-label">关于</span></a>
       <a href="/pages/process.html" class="menu-item menu-process" aria-label="See process"><span>🎨</span><span class="menu-label">过程</span></a>
-      <button class="menu-item" id="menu-lang" aria-label="Switch language"><span>🔤</span><span class="menu-label">语言</span></button>
-      <button class="menu-item" id="menu-close" aria-label="Close menu"><span>✕</span><span class="menu-label">关闭</span></button>
     </div>
   </nav>
 
@@ -135,8 +133,6 @@
         langToggle.querySelector('.lang-text').textContent = newLang === 'zh' ? 'EN/中' : 'ZH/英';
       });
     }
-    const menuLangBtn = document.getElementById('menu-lang');
-    if (menuLangBtn) menuLangBtn.addEventListener('click', () => langToggle.click());
     const preferred = localStorage.getItem('preferred-lang') || 'zh';
     document.documentElement.setAttribute('data-lang', preferred);
     if (langToggle) langToggle.querySelector('.lang-text').textContent = preferred === 'zh' ? 'EN/中' : 'ZH/英';

@@ -84,14 +84,6 @@
         <span>🎨</span>
         <span class="menu-label">过程</span>
       </a>
-      <button class="menu-item" id="menu-lang" aria-label="Switch language">
-        <span>🔤</span>
-        <span class="menu-label">语言</span>
-      </button>
-      <button class="menu-item" id="menu-close" aria-label="Close menu">
-        <span>✕</span>
-        <span class="menu-label">关闭</span>
-      </button>
     </div>
   </nav>
 
@@ -191,14 +183,6 @@
 
         // Update button text
         langToggle.querySelector('.lang-text').textContent = newLang === 'zh' ? 'EN/中' : 'ZH/英';
-      });
-    }
-
-    // Menu language toggle
-    const menuLangBtn = document.getElementById('menu-lang');
-    if (menuLangBtn) {
-      menuLangBtn.addEventListener('click', () => {
-        langToggle.click();
       });
     }
 
