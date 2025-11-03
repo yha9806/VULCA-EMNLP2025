@@ -178,27 +178,6 @@
               </select>
             </div>
           </div>
-
-          <!-- Panel 3: Similarity Heatmap -->
-          <div class="viz-panel" id="similarity-heatmap-panel">
-            <h3>语义相似度热力图</h3>
-            <div id="similarity-heatmap"></div>
-            <div class="viz-legend">
-              <span>低相似度</span>
-              <div class="legend-gradient"></div>
-              <span>高相似度</span>
-            </div>
-          </div>
-
-          <!-- Panel 4: Network Graph -->
-          <div class="viz-panel viz-panel-large" id="network-graph-panel">
-            <h3>作品-评论家关系网络</h3>
-            <svg id="network-graph" role="img" aria-label="Artwork-persona network graph" tabindex="0"></svg>
-            <div class="viz-controls">
-              <button class="viz-btn" data-action="reset" aria-label="Reset graph layout">重置布局</button>
-              <button class="viz-btn" data-action="export" aria-label="Export as PNG">导出PNG</button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -350,8 +329,6 @@
   <!-- Visualization Components -->
   <script src="/js/visualizations/rpait-radar.js?v=1"></script>
   <script src="/js/visualizations/persona-matrix.js?v=1"></script>
-  <script src="/js/visualizations/similarity-heatmap.js?v=1"></script>
-  <script src="/js/visualizations/network-graph.js?v=1"></script>
 
   <!-- Navigation Auto-Hide Module -->
   <script src="/js/navigation-autohide.js?v=1"></script>
