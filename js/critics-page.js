@@ -16,9 +16,21 @@
   function initCriticsPage() {
     // Wait for DOM to be ready
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', renderCritics);
+      document.addEventListener('DOMContentLoaded', () => {
+        renderCritics();
+        // Listen to language change events
+        document.addEventListener('langchange', () => {
+          console.log('[Critics Page] Language changed, re-rendering...');
+          renderCritics();
+        });
+      });
     } else {
       renderCritics();
+      // Listen to language change events
+      document.addEventListener('langchange', () => {
+        console.log('[Critics Page] Language changed, re-rendering...');
+        renderCritics();
+      });
     }
   }
 
@@ -116,31 +128,38 @@
     header.className = 'critic-card-header';
     header.style.borderLeftColor = color;
 
-    // Chinese name
-    const nameZh = document.createElement('h2');
-    nameZh.className = 'critic-name-zh';
+    // Name (bilingual)
+    const name = document.createElement('h2');
+    name.className = 'critic-name';
+
+    const nameZh = document.createElement('span');
+    nameZh.lang = 'zh';
     nameZh.textContent = persona.nameZh;
 
-    // English name (de-emphasized)
-    const nameEn = document.createElement('p');
-    nameEn.className = 'critic-name-en';
+    const nameEn = document.createElement('span');
+    nameEn.lang = 'en';
     nameEn.textContent = persona.nameEn || '';
 
-    // Period / description
-    let periodText = '';
-    if (persona.period) {
-      periodText = persona.period;
-    } else if (persona.era) {
-      periodText = persona.era;
-    }
+    name.appendChild(nameZh);
+    name.appendChild(nameEn);
 
+    // Period / description (bilingual)
     const period = document.createElement('p');
     period.className = 'critic-period';
-    period.textContent = periodText;
 
-    header.appendChild(nameZh);
-    header.appendChild(nameEn);
-    if (periodText) {
+    const periodZh = document.createElement('span');
+    periodZh.lang = 'zh';
+    periodZh.textContent = persona.period || persona.periodZh || persona.era || '';
+
+    const periodEn = document.createElement('span');
+    periodEn.lang = 'en';
+    periodEn.textContent = persona.periodEn || persona.period || persona.era || '';
+
+    period.appendChild(periodZh);
+    period.appendChild(periodEn);
+
+    header.appendChild(name);
+    if (periodZh.textContent || periodEn.textContent) {
       header.appendChild(period);
     }
 
@@ -156,12 +175,25 @@
     const body = document.createElement('div');
     body.className = 'critic-card-body';
 
-    // Biography - prefer Chinese, fallback to English
-    const bioText = persona.bioZh || persona.bio;
-    if (bioText) {
+    // Biography (bilingual)
+    const bioZh = persona.bioZh || persona.bio;
+    const bioEn = persona.bioEn || persona.bio;
+
+    if (bioZh || bioEn) {
       const bio = document.createElement('p');
       bio.className = 'critic-bio';
-      bio.textContent = bioText;
+
+      const bioSpanZh = document.createElement('span');
+      bioSpanZh.lang = 'zh';
+      bioSpanZh.textContent = bioZh || '';
+
+      const bioSpanEn = document.createElement('span');
+      bioSpanEn.lang = 'en';
+      bioSpanEn.textContent = bioEn || '';
+
+      bio.appendChild(bioSpanZh);
+      bio.appendChild(bioSpanEn);
+
       body.appendChild(bio);
     }
 
@@ -184,10 +216,10 @@
 
     const dimensions = [
       { key: 'R', label: 'Representation', labelZh: '代表性' },
-      { key: 'P', label: 'Philosophy', labelZh: '哲学性' },
+      { key: 'P', label: 'Philosophicality', labelZh: '哲学性' },
       { key: 'A', label: 'Aesthetics', labelZh: '美学性' },
-      { key: 'I', label: 'Interpretation', labelZh: '诠释性' },
-      { key: 'T', label: 'Technique', labelZh: '技巧性' }
+      { key: 'I', label: 'Interpretability', labelZh: '诠释性' },
+      { key: 'T', label: 'Technicality', labelZh: '技巧性' }
     ];
 
     dimensions.forEach(dim => {
@@ -200,10 +232,20 @@
       bar.className = 'rpait-bar';
       bar.setAttribute('data-dimension', dim.key);
 
-      // Label
+      // Label (bilingual tooltip)
       const label = document.createElement('div');
       label.className = 'rpait-label';
-      label.innerHTML = `<abbr title="${dim.label}">${dim.key}</abbr><span class="score">${validScore}/10</span>`;
+
+      const abbr = document.createElement('abbr');
+      abbr.setAttribute('title', `${dim.labelZh} / ${dim.label}`);
+      abbr.textContent = dim.key;
+
+      const scoreSpan = document.createElement('span');
+      scoreSpan.className = 'score';
+      scoreSpan.textContent = `${validScore}/10`;
+
+      label.appendChild(abbr);
+      label.appendChild(scoreSpan);
 
       // Bar background
       const barBg = document.createElement('div');
