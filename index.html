@@ -147,15 +147,20 @@
           <p>探索评论家视角与作品之间的多维关系</p>
         </header>
 
+        <!-- Persona Selector -->
+        <div class="persona-selector-wrapper">
+          <div class="persona-badges" id="persona-badges-container" role="group" aria-label="选择评论家进行对比分析">
+            <!-- Badges generated dynamically by persona-selector.js -->
+          </div>
+          <p class="help-text">单击选择评论家，双击取消选择 · 可选择任意数量</p>
+          <div id="persona-count" class="sr-only" aria-live="polite" aria-atomic="true">已选择 3 位评论家</div>
+        </div>
+
         <div class="viz-grid">
           <!-- Panel 1: RPAIT Radar -->
           <div class="viz-panel" id="rpait-radar-panel">
             <h3>评论家维度分布</h3>
             <canvas id="rpait-radar-chart" role="img" aria-label="RPAIT radar chart" tabindex="0"></canvas>
-            <div class="viz-controls">
-              <button class="viz-btn active" data-mode="single" aria-label="Single persona mode">单一模式</button>
-              <button class="viz-btn" data-mode="compare" aria-label="Compare multiple personas">对比模式</button>
-            </div>
           </div>
 
           <!-- Panel 2: Persona Comparison -->
@@ -313,7 +318,7 @@
   <script src="/js/carousel.js?v=1"></script>
 
   <!-- Gallery Hero Renderer (NEW - Homepage Display) -->
-  <script src="/js/gallery-hero.js?v=4"></script>
+  <script src="/js/gallery-hero.js?v=5"></script>
 
   <!-- Auto-Play Immersive Experience (DISABLED - Replaced by click-based carousel) -->
   <!-- <script src="/js/autoplay.js?v=1"></script> -->
@@ -338,6 +343,9 @@
   <!-- D3.js for Network Graph (minimal modules) -->
   <script src="https://cdn.jsdelivr.net/npm/d3-force@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-selection@3"></script>
+
+  <!-- Global Persona Selection State Manager (must load before visualizations) -->
+  <script src="/js/persona-selector.js?v=1"></script>
 
   <!-- Visualization Components -->
   <script src="/js/visualizations/rpait-radar.js?v=1"></script>

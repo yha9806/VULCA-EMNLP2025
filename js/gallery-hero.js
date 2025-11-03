@@ -11,8 +11,56 @@ window.GalleryHeroRenderer = (function() {
 
   const CONFIG = {
     MAX_CRITICS_VISIBLE: 6,  // Show all 6 critics
-    CRITIC_TEXT_PREVIEW: 250, // Characters to show in preview
+    CRITIC_TEXT_PREVIEW: 150, // Characters to show in preview (reduced for expand/collapse)
   };
+
+  /**
+   * Smart text truncation at sentence boundaries
+   * @param {string} text - Full text
+   * @param {number} maxLength - Maximum characters (default 150)
+   * @returns {string} - Truncated text with "..."
+   */
+  function truncateText(text, maxLength = 150) {
+    if (!text || text.length <= maxLength) return text;
+
+    const truncated = text.substring(0, maxLength);
+    const lastPeriod = truncated.lastIndexOf('。');
+    const lastComma = truncated.lastIndexOf('，');
+
+    const breakPoint = Math.max(lastPeriod, lastComma);
+
+    // Use sentence boundary if found after 50 chars
+    return breakPoint > 50
+      ? text.substring(0, breakPoint + 1) + '...'
+      : truncated + '...';
+  }
+
+  /**
+   * Toggle critique expansion state
+   * @param {HTMLElement} card - Critique card element
+   * @param {HTMLElement} textElement - Text paragraph element
+   * @param {HTMLElement} button - Toggle button element
+   * @param {string} fullText - Full critique text
+   */
+  function toggleCritiqueExpansion(card, textElement, button, fullText) {
+    const isExpanded = card.classList.contains('expanded');
+
+    if (isExpanded) {
+      // Collapse
+      card.classList.remove('expanded');
+      textElement.textContent = truncateText(fullText, 150);
+      button.textContent = '展开 ▼';
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-label', '展开评论全文');
+    } else {
+      // Expand
+      card.classList.add('expanded');
+      textElement.textContent = fullText;
+      button.textContent = '收起 ▲';
+      button.setAttribute('aria-expanded', 'true');
+      button.setAttribute('aria-label', '收起评论');
+    }
+  }
 
   /**
    * Initialize the gallery hero renderer
@@ -45,7 +93,6 @@ window.GalleryHeroRenderer = (function() {
     renderArtworkHeader(carousel);
     renderArtworkImage(carousel);
     renderCritiques(carousel);
-    renderRPAITVisualization(carousel);
     updateIndicator(carousel);
     renderDots(carousel);
   }
@@ -147,108 +194,6 @@ window.GalleryHeroRenderer = (function() {
     artworkHeader.appendChild(metadata);
 
     console.log(`✓ Rendered artwork header: ${artwork.titleZh}`);
-  }
-
-  /**
-   * Render RPAIT visualization for current artwork
-   */
-  function renderRPAITVisualization(carousel) {
-    const galleryHero = document.getElementById('gallery-hero');
-    if (!galleryHero) return;
-
-    const artwork = carousel.getCurrentArtwork();
-    if (!artwork) return;
-
-    // Check if viz container already exists
-    let vizContainer = galleryHero.querySelector('.artwork-rpait-visualization');
-    if (!vizContainer) {
-      vizContainer = document.createElement('div');
-      vizContainer.className = 'artwork-rpait-visualization';
-      vizContainer.setAttribute('data-reveal', ''); // Enable scroll-reveal animation
-      galleryHero.appendChild(vizContainer);
-    }
-
-    vizContainer.innerHTML = '';
-
-    // Get average RPAIT scores for all critics of this artwork
-    const critiques = carousel.getArtworkCritiques();
-    if (!critiques || critiques.length === 0) {
-      console.warn('⚠ No critiques for RPAIT visualization');
-      return;
-    }
-
-    // Calculate average RPAIT scores
-    const avgRpait = { R: 0, P: 0, A: 0, I: 0, T: 0 };
-    critiques.forEach(critique => {
-      if (critique.rpait) {
-        avgRpait.R += critique.rpait.R || 0;
-        avgRpait.P += critique.rpait.P || 0;
-        avgRpait.A += critique.rpait.A || 0;
-        avgRpait.I += critique.rpait.I || 0;
-        avgRpait.T += critique.rpait.T || 0;
-      }
-    });
-
-    // Calculate averages
-    const count = critiques.length;
-    Object.keys(avgRpait).forEach(key => {
-      avgRpait[key] = Math.round(avgRpait[key] / count);
-    });
-
-    // Create visualization
-    const title = document.createElement('h3');
-    title.className = 'rpait-title';
-    title.textContent = 'RPAIT 评论维度分析';
-    vizContainer.appendChild(title);
-
-    const gridContainer = document.createElement('div');
-    gridContainer.className = 'rpait-grid';
-
-    // Dimension labels (English names for tooltip)
-    const dimensions = [
-      { key: 'R', label: 'Representation' },
-      { key: 'P', label: 'Philosophy' },
-      { key: 'A', label: 'Aesthetics' },
-      { key: 'I', label: 'Interpretation' },
-      { key: 'T', label: 'Technique' }
-    ];
-
-    dimensions.forEach(dim => {
-      const score = avgRpait[dim.key];
-
-      // Validate score
-      const validScore = Math.max(1, Math.min(10, parseInt(score) || 0));
-
-      // Create bar container (use .rpait-bar, not .rpait-bar-container)
-      const bar = document.createElement('div');
-      bar.className = 'rpait-bar';
-      bar.setAttribute('data-dimension', dim.key);
-
-      // Label with abbr and score
-      const label = document.createElement('div');  // div, not span
-      label.className = 'rpait-label';
-      label.innerHTML = `<abbr title="${dim.label}">${dim.key}</abbr><span class="score">${validScore}/10</span>`;
-
-      // Bar background container
-      const barBg = document.createElement('div');
-      barBg.className = 'rpait-bar-bg';
-
-      // Bar fill (the colored part)
-      const fill = document.createElement('div');
-      fill.className = 'rpait-bar-fill';
-      fill.style.width = `${(validScore / 10) * 100}%`;
-      fill.style.backgroundColor = '#4a90a4';  // Default color
-
-      barBg.appendChild(fill);
-
-      bar.appendChild(label);
-      bar.appendChild(barBg);
-      gridContainer.appendChild(bar);
-    });
-
-    vizContainer.appendChild(gridContainer);
-
-    console.log('✓ Rendered RPAIT visualization');
   }
 
   /**
@@ -413,46 +358,35 @@ window.GalleryHeroRenderer = (function() {
     // Text content (with image reference support)
     const textEl = document.createElement('p');
     textEl.className = 'critique-text';
+    const textId = `critique-text-${critique.personaId}-${critique.artworkId}`;
+    textEl.id = textId;
 
     // Use English or Chinese based on current language
     const lang = document.documentElement.getAttribute('data-lang') || 'zh';
     const text = lang === 'en' ? critique.textEn : critique.textZh;
 
-    // Render with CritiqueParser if available
-    if (window.CritiqueParser && critique.artworkId) {
-      const artwork = window.VULCA_DATA?.artworks?.find(a => a.id === critique.artworkId);
+    // Store full text for expand/collapse
+    const fullText = text || '';
+    panel.dataset.fullText = fullText;
 
-      if (artwork) {
-        console.log(`[Gallery Hero] Rendering critique with CritiqueParser for ${critique.personaId} → ${critique.artworkId}`);
-
-        // Render image references as clickable links
-        const renderedText = window.CritiqueParser.renderImageReferences(text, artwork, {
-          linkClass: 'image-reference-link',
-          showImageTitle: false, // Keep critique text clean
-          format: 'chinese' // Use "图片X" format
-        });
-
-        textEl.innerHTML = renderedText;
-        console.log(`[Gallery Hero] Rendered HTML contains ${textEl.querySelectorAll('.image-reference-link').length} links`);
-
-        // Add click handlers for image reference links
-        setTimeout(() => {
-          textEl.querySelectorAll('.image-reference-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-              e.preventDefault();
-              const imageId = link.dataset.imageId;
-              handleImageReferenceClick(imageId, artwork);
-            });
-          });
-        }, 0);
-      } else {
-        textEl.textContent = text || '';
-      }
-    } else {
-      textEl.textContent = text || '';
-    }
+    // Set truncated text by default
+    textEl.textContent = truncateText(fullText, 150);
 
     panel.appendChild(textEl);
+
+    // Toggle button for expand/collapse
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'critique-toggle-btn';
+    toggleBtn.textContent = '展开 ▼';
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    toggleBtn.setAttribute('aria-label', '展开评论全文');
+    toggleBtn.setAttribute('aria-controls', textId);
+
+    toggleBtn.addEventListener('click', () => {
+      toggleCritiqueExpansion(panel, textEl, toggleBtn, fullText);
+    });
+
+    panel.appendChild(toggleBtn);
 
     // RPAIT scores
     if (critique.rpait) {

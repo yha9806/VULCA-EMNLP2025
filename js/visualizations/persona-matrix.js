@@ -11,6 +11,7 @@
   let matrixChart = null;
   let currentDimension = 'all';  // 'all', 'R', 'P', 'A', 'I', 'T'
   let currentArtworkId = 'artwork-1';
+  let selectedPersonas = ['su-shi', 'guo-xi', 'john-ruskin'];  // ADDED: Track selected personas
 
   /**
    * Initialize the comparison matrix chart
@@ -84,7 +85,9 @@
    * Get chart data based on current dimension filter
    */
   function getChartData() {
-    const personas = window.VULCA_DATA.personas;
+    // MODIFIED: Filter personas based on selection
+    const allPersonas = window.VULCA_DATA.personas;
+    const personas = allPersonas.filter(p => selectedPersonas.includes(p.id));
     const labels = personas.map(p => p.nameZh);
 
     if (currentDimension === 'all') {
@@ -203,6 +206,15 @@
     }
 
     window.addEventListener('visualization:update', handleVisualizationUpdate);
+
+    // ADDED: Listen for global persona selection changes
+    window.addEventListener('persona:selectionChanged', (event) => {
+      const { personas } = event.detail;
+      console.log(`[Matrix Chart] Selection changed to ${personas.length} personas`, personas);
+
+      selectedPersonas = personas;
+      updateMatrixChart();
+    });
 
     console.log('✓ Matrix chart event listeners initialized');
   }

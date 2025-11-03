@@ -10,9 +10,9 @@
   'use strict';
 
   let radarChart = null;
-  let currentMode = 'single';  // 'single' or 'compare'
-  let selectedPersonas = ['su-shi'];  // Default to Su Shi
+  let selectedPersonas = ['su-shi', 'guo-xi', 'john-ruskin'];  // CHANGED: Default to 3 personas
   let currentArtworkId = 'artwork-1';  // Default artwork
+  // REMOVED: currentMode - now automatically determined by selection count
 
   /**
    * Initialize the radar chart
@@ -170,34 +170,6 @@
   }
 
   /**
-   * Handle mode toggle (single vs compare)
-   */
-  function handleModeToggle(mode) {
-    currentMode = mode;
-
-    // Update button states
-    document.querySelectorAll('#rpait-radar-panel .viz-btn').forEach(btn => {
-      if (btn.dataset.mode === mode) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-
-    // Adjust selected personas
-    if (mode === 'single') {
-      selectedPersonas = [selectedPersonas[0] || 'su-shi'];
-    } else if (mode === 'compare') {
-      // Add Guo Xi for comparison if only one persona selected
-      if (selectedPersonas.length === 1) {
-        selectedPersonas.push('guo-xi');
-      }
-    }
-
-    updateRadarChart();
-  }
-
-  /**
    * Handle visualization update event (from carousel)
    */
   function handleVisualizationUpdate(e) {
@@ -209,19 +181,15 @@
   }
 
   /**
-   * Handle persona click (for future persona selection UI)
+   * Handle persona click (legacy function, now handled by global selector)
    */
   function selectPersona(personaId) {
-    if (currentMode === 'single') {
-      selectedPersonas = [personaId];
+    // SIMPLIFIED: Just toggle persona without mode restrictions
+    const index = selectedPersonas.indexOf(personaId);
+    if (index > -1) {
+      selectedPersonas.splice(index, 1);
     } else {
-      // Toggle persona in comparison mode
-      const index = selectedPersonas.indexOf(personaId);
-      if (index > -1) {
-        selectedPersonas.splice(index, 1);
-      } else if (selectedPersonas.length < 3) {
-        selectedPersonas.push(personaId);
-      }
+      selectedPersonas.push(personaId);
     }
     updateRadarChart();
   }
@@ -230,17 +198,41 @@
    * Initialize event listeners
    */
   function initEventListeners() {
-    // Mode toggle buttons
-    document.querySelectorAll('#rpait-radar-panel .viz-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        handleModeToggle(btn.dataset.mode);
-      });
-    });
+    // REMOVED: Mode toggle buttons (no longer needed)
 
     // Listen for carousel artwork changes
     window.addEventListener('visualization:update', handleVisualizationUpdate);
 
+    // Listen for global persona selection changes
+    window.addEventListener('persona:selectionChanged', (event) => {
+      const { personas } = event.detail;
+      console.log(`[Radar Chart] Selection changed to ${personas.length} personas`, personas);
+
+      selectedPersonas = personas;
+      updateRadarChart();
+
+      // Update ARIA label for accessibility
+      updateARIALabel();
+    });
+
     console.log('✓ Radar chart event listeners initialized');
+  }
+
+  /**
+   * Update ARIA label to reflect current selection
+   */
+  function updateARIALabel() {
+    const canvas = document.getElementById('rpait-radar-chart');
+    if (!canvas) return;
+
+    const personaNames = selectedPersonas.map(id => {
+      const persona = window.VULCA_DATA.personas.find(p => p.id === id);
+      return persona ? persona.nameEn : id;
+    }).join(', ');
+
+    canvas.setAttribute('aria-label',
+      `RPAIT radar chart showing ${selectedPersonas.length} persona${selectedPersonas.length > 1 ? 's' : ''}: ${personaNames}`
+    );
   }
 
   /**

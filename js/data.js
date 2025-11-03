@@ -147,6 +147,106 @@ window.VULCA_DATA = {
   ],
 
   // ==================== PERSONAS ====================
+  /**
+   * Persona data schema for art critic profiles
+   *
+   * Each persona represents a distinct critical voice with unique cultural,
+   * historical, and philosophical perspectives. Personas are used throughout
+   * the exhibition to generate AI-driven critiques of artworks.
+   *
+   * @typedef {Object} Persona
+   *
+   * @property {string} id
+   *   Unique identifier for the persona. Must be kebab-case (lowercase with hyphens).
+   *   Used as DOM data attribute and internal reference key.
+   *   ⚠ MUST be kebab-case (lowercase, hyphens only, no spaces or capitals)
+   *   ✅ Valid: "su-shi", "john-ruskin", "bell-hooks"
+   *   ❌ Invalid: "Su Shi", "John_Ruskin", "BellHooks"
+   *
+   * @property {string} nameZh
+   *   Chinese display name. Used in UI badges and Chinese-language context.
+   *   Examples: "苏轼", "约翰·罗斯金", "贝尔·胡克斯"
+   *
+   * @property {string} nameEn
+   *   English display name. Used in UI badges and English-language context.
+   *   Examples: "Su Shi", "John Ruskin", "bell hooks"
+   *
+   * @property {string} period
+   *   Time period or role description in Chinese. Provides historical/cultural context.
+   *   Format: "文化背景 (生卒年份)" or "角色描述"
+   *   Examples: "北宋文人 (1037-1101)", "维多利亚时期评论家 (1819-1900)", "当代"
+   *
+   * @property {string} era
+   *   Era classification in English. Used for categorization and filtering.
+   *   Examples: "Northern Song Dynasty", "Victorian England", "Contemporary American"
+   *
+   * @property {string} bio
+   *   Full biography in English (~300-500 words). Describes the persona's critical
+   *   philosophy, historical context, and unique perspective. Should be detailed
+   *   enough to guide AI critique generation.
+   *   💡 Aim for 300-500 words (2-3 paragraphs). Too short lacks depth;
+   *   too long may overwhelm UI display.
+   *
+   * @property {string} color
+   *   Hex color code for visual identity. Used for badge borders, chart colors,
+   *   and UI accents.
+   *   ⚠ MUST be 6-digit hex format with # prefix
+   *   ✅ Valid: "#B85C3C", "#6B4C8A", "#FFFFFF"
+   *   ❌ Invalid: "red", "rgb(184, 92, 60)", "#B8C" (too short)
+   *
+   * @property {string} bias
+   *   Short description of critical perspective/bias (~10-20 words).
+   *   Summarizes the lens through which this persona views art.
+   *   Examples: "Aesthetic idealism, personal expression", "Moral aesthetics, social responsibility"
+   *
+   * === HOW TO ADD A NEW PERSONA ===
+   *
+   * Follow these steps to add a new art critic to the exhibition:
+   *
+   * 1. Open this file (js/data.js) in a text editor
+   *
+   * 2. Scroll to the "personas:" array below
+   *
+   * 3. Add your new persona object at the END of the array (before the closing "]")
+   *    - Copy an existing persona as a template
+   *    - Update all 8 fields (id, nameZh, nameEn, period, era, bio, color, bias)
+   *    - Follow the @typedef Persona schema documented above
+   *
+   * 4. Choose a unique color hex code (e.g., #A73E5C)
+   *    - Check existing personas to avoid duplicate colors
+   *    - Use color picker tool: https://www.google.com/search?q=color+picker
+   *
+   * 5. Save the file (Ctrl+S / Cmd+S)
+   *
+   * 6. Add corresponding critiques for this persona in the "critiques:" array
+   *    - You need one critique per artwork (4 artworks = 4 critique objects)
+   *    - Each critique should have: artworkId, personaId, textZh, textEn, rpait scores
+   *
+   * 7. Clear your browser cache:
+   *    - Chrome: Ctrl+Shift+Delete → Check "Cached images" → Clear data
+   *    - Firefox: Ctrl+Shift+Delete → Check "Cache" → Clear Now
+   *    - Safari: Cmd+Option+E
+   *
+   * 8. Refresh the page (Ctrl+R / Cmd+R) - the new persona badge should appear!
+   *
+   * ⚠ NO HTML editing required - badges generate automatically from this data!
+   * ⚠ NO CSS editing required - colors apply via data-persona attribute!
+   *
+   * If the badge doesn't appear, check browser console (F12) for error messages.
+   *
+   * @example
+   * // Adding a new contemporary feminist critic
+   * {
+   *   id: "bell-hooks",
+   *   nameZh: "贝尔·胡克斯",
+   *   nameEn: "bell hooks",
+   *   period: "美国女性主义评论家 (1952-2021)",
+   *   era: "Contemporary American",
+   *   bio: "Feminist cultural critic and social activist whose intersectional approach to art, race, class, and gender transformed contemporary criticism. bell hooks (lowercase intentional) examined how art reinforces or challenges systems of domination, centering the voices and experiences of marginalized communities. Her writing emphasized accessible language and engaged pedagogy, insisting that critical theory serve liberation rather than academic elitism. In visual art analysis, hooks attended to whose stories are told, whose aesthetics are validated, and how artistic production intersects with structures of power and oppression.",
+   *   color: "#C41E3A",
+   *   bias: "Feminist critique, intersectionality, marginalized voices, power structures"
+   * }
+   */
   personas: [
     {
       id: "su-shi",
