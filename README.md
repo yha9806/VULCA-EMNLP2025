@@ -4,7 +4,7 @@
 
 🌐 **Live Site**: [vulcaart.art](https://vulcaart.art)
 📄 **Repository**: [github.com/yha9806/VULCA-EMNLP2025](https://github.com/yha9806/VULCA-EMNLP2025)
-📧 **Contact**: info@vulcaart.art
+📧 **Contact**: yuhaorui48@gmail.com
 
 ---
 
@@ -281,7 +281,7 @@ This project is part of academic research for EMNLP 2025.
 - **Live Exhibition**: [vulcaart.art](https://vulcaart.art)
 - **GitHub Repository**: [yha9806/VULCA-EMNLP2025](https://github.com/yha9806/VULCA-EMNLP2025)
 - **Old Repository** (archived): [yha9806/vulca-exhibition](https://github.com/yha9806/vulca-exhibition)
-- **Contact**: info@vulcaart.art
+- **Contact**: yuhaorui48@gmail.com
 
 ---
 

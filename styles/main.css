@@ -1013,10 +1013,12 @@ a:focus-visible {
 }
 
 .critic-name-en {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  margin: 0 0 0.5rem 0;
-  color: var(--color-text-light);
+  font-style: italic;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  color: #666;
 }
 
 .critic-period {
@@ -1034,9 +1036,9 @@ a:focus-visible {
 
 .critic-bio {
   font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--color-text);
-  margin: 0;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 1.5rem;
 }
 
 /* RPAIT Grid */
@@ -1044,13 +1046,14 @@ a:focus-visible {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .rpait-bar {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  margin-bottom: 0.75rem;
 }
 
 .rpait-label {
@@ -3027,6 +3030,170 @@ svg:focus-visible {
     color: #74c0fc;
     background-color: rgba(77, 171, 247, 0.1);
   }
+}
+
+/* ==================== PAPER CITATION STYLING ==================== */
+
+/* Paper citation container */
+.paper-citation {
+  background: #f9f9f9;
+  border-left: 4px solid #B85C3C;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+
+/* Paper title */
+.paper-title {
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.paper-title a {
+  color: #B85C3C;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.paper-title a:hover {
+  color: #8B4513;
+  text-decoration: underline;
+}
+
+/* Paper authors */
+.paper-authors {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0.25rem 0;
+}
+
+/* Paper venue */
+.paper-venue {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.25rem 0;
+}
+
+/* BibTeX collapsible section */
+.paper-bibtex {
+  margin-top: 1rem;
+}
+
+.paper-bibtex summary {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #B85C3C;
+  font-weight: 500;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.paper-bibtex summary:hover {
+  color: #8B4513;
+  text-decoration: underline;
+}
+
+.paper-bibtex pre {
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  border: 1px solid #e0e0e0;
+}
+
+.paper-bibtex code {
+  font-family: 'Courier New', Monaco, monospace;
+  color: #333;
+}
+
+/* Homepage paper link styling */
+.paper-link {
+  font-size: 0.95rem;
+  margin: 0.5rem 0;
+}
+
+.paper-link a {
+  color: #B85C3C;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.paper-link a:hover {
+  color: #8B4513;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .paper-citation {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .paper-title {
+    font-size: 1rem;
+  }
+
+  .paper-bibtex pre {
+    font-size: 0.75rem;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .paper-citation {
+    padding: 0.75rem;
+    border-left-width: 3px;
+  }
+
+  .paper-title {
+    font-size: 0.95rem;
+  }
+
+  .paper-authors,
+  .paper-venue {
+    font-size: 0.85rem;
+  }
+}
+
+/* ==================== LANGUAGE SWITCHING ==================== */
+
+/* Hide inactive language content */
+[data-lang="zh"] [lang="en"],
+[data-lang="en"] [lang="zh"] {
+  display: none;
+}
+
+/* Show active language content */
+[data-lang="zh"] [lang="zh"],
+[data-lang="en"] [lang="en"] {
+  display: inline;
+}
+
+/* Block-level elements should remain block */
+[data-lang="zh"] h1 [lang="zh"],
+[data-lang="en"] h1 [lang="en"],
+[data-lang="zh"] h2 [lang="zh"],
+[data-lang="en"] h2 [lang="en"],
+[data-lang="zh"] h3 [lang="zh"],
+[data-lang="en"] h3 [lang="en"],
+[data-lang="zh"] p [lang="zh"],
+[data-lang="en"] p [lang="en"],
+[data-lang="zh"] li [lang="zh"],
+[data-lang="en"] li [lang="en"] {
+  display: block;
+}
+
+/* Inline elements */
+[data-lang="zh"] span[lang="zh"],
+[data-lang="en"] span[lang="en"] {
+  display: inline;
 }
 
 /* ========== END OF STYLESHEET ========== */

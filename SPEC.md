@@ -181,7 +181,7 @@
 
 ## 联系与反馈
 
-**Email**: info@vulcaart.art
+**Email**: yuhaorui48@gmail.com
 **Repository**: https://github.com/yha9806/VULCA-EMNLP2025
 
 ---

@@ -121,8 +121,8 @@
     nameZh.className = 'critic-name-zh';
     nameZh.textContent = persona.nameZh;
 
-    // English name
-    const nameEn = document.createElement('h3');
+    // English name (de-emphasized)
+    const nameEn = document.createElement('p');
     nameEn.className = 'critic-name-en';
     nameEn.textContent = persona.nameEn || '';
 
@@ -156,11 +156,12 @@
     const body = document.createElement('div');
     body.className = 'critic-card-body';
 
-    // Biography
-    if (persona.bio) {
+    // Biography - prefer Chinese, fallback to English
+    const bioText = persona.bioZh || persona.bio;
+    if (bioText) {
       const bio = document.createElement('p');
       bio.className = 'critic-bio';
-      bio.textContent = persona.bio;
+      bio.textContent = bioText;
       body.appendChild(bio);
     }
 

@@ -44,17 +44,25 @@
 
   <!-- ==================== TITLE ==================== -->
   <title>潮汐的负形 | vulcaart.art</title>
+
+  <!-- ==================== LANGUAGE SUPPORT ==================== -->
+  <script src="/js/navigation-i18n.js"></script>
+  <script src="/js/meta-i18n.js"></script>
+  <script src="/js/lang-manager.js"></script>
 </head>
 
 <body>
   <!-- ==================== SKIP LINK ==================== -->
-  <a href="#main-content" class="skip-to-main">跳转到主要内容</a>
+  <a href="#main-content" class="skip-to-main">
+    <span lang="zh">跳转到主要内容</span>
+    <span lang="en">Skip to main content</span>
+  </a>
 
   <!-- ==================== MINIMAL HEADER ==================== -->
   <header class="header-minimal">
     <div class="header-controls">
       <!-- Hamburger Menu Button -->
-      <button class="hamburger" id="menu-toggle" aria-label="打开菜单" aria-expanded="false">
+      <button class="hamburger" id="menu-toggle" aria-label="打开菜单 Open menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -76,21 +84,21 @@
   <div class="menu-overlay" id="menu-overlay"></div>
 
   <!-- ==================== FLOATING MENU ==================== -->
-  <nav class="floating-menu" id="floating-menu" aria-label="Navigation menu" hidden>
+  <nav class="floating-menu" id="floating-menu" aria-label="导航菜单 Navigation menu" hidden>
     <div class="menu-content">
-      <a href="/" class="menu-item menu-home" aria-label="Return to main gallery">
+      <a href="/" class="menu-item menu-home" aria-label="返回主画廊 Return to main gallery">
         <span>🏠</span>
         <span class="menu-label">主画廊</span>
       </a>
-      <a href="/pages/critics.html" class="menu-item menu-critics" aria-label="View critics">
+      <a href="/pages/critics.html" class="menu-item menu-critics" aria-label="查看评论家 View critics">
         <span>👥</span>
         <span class="menu-label">评论家</span>
       </a>
-      <a href="/pages/about.html" class="menu-item menu-about" aria-label="Learn about">
+      <a href="/pages/about.html" class="menu-item menu-about" aria-label="了解VULCA Learn about VULCA">
         <span>ℹ️</span>
         <span class="menu-label">关于</span>
       </a>
-      <a href="/pages/process.html" class="menu-item menu-process" aria-label="See process">
+      <a href="/pages/process.html" class="menu-item menu-process" aria-label="查看创作过程 See creation process">
         <span>🎨</span>
         <span class="menu-label">过程</span>
       </a>
@@ -114,15 +122,15 @@
 
     <!-- GALLERY NAVIGATION BAR -->
     <section class="gallery-nav" id="gallery-nav">
-      <button id="nav-prev" class="nav-button nav-prev" aria-label="Previous artwork">
+      <button id="nav-prev" class="nav-button nav-prev" aria-label="上一件作品 Previous artwork">
         <span>◄</span>
       </button>
 
       <div class="artwork-indicator">
-        <span id="artwork-current">1</span> of <span id="artwork-total">4</span>
+        <span id="artwork-current">1</span> <span lang="zh">的</span><span lang="en">of</span> <span id="artwork-total">4</span>
       </div>
 
-      <button id="nav-next" class="nav-button nav-next" aria-label="Next artwork">
+      <button id="nav-next" class="nav-button nav-next" aria-label="下一件作品 Next artwork">
         <span>►</span>
       </button>
 
@@ -138,38 +146,56 @@
     <section class="visualization-section" id="visualization-section">
       <div class="container">
         <header class="viz-header">
-          <h2>数据洞察</h2>
-          <p>探索评论家视角与作品之间的多维关系</p>
+          <h2>
+            <span lang="zh">数据洞察</span>
+            <span lang="en">Data Insights</span>
+          </h2>
+          <p>
+            <span lang="zh">探索评论家视角与作品之间的多维关系</span>
+            <span lang="en">Explore multi-dimensional relationships between critics and artworks</span>
+          </p>
         </header>
 
         <!-- Persona Selector -->
         <div class="persona-selector-wrapper">
-          <div class="persona-badges" id="persona-badges-container" role="group" aria-label="选择评论家进行对比分析">
+          <div class="persona-badges" id="persona-badges-container" role="group" aria-label="选择评论家进行对比分析 Select critics for comparative analysis">
             <!-- Badges generated dynamically by persona-selector.js -->
           </div>
-          <p class="help-text">单击选择评论家，双击取消选择 · 可选择任意数量</p>
-          <div id="persona-count" class="sr-only" aria-live="polite" aria-atomic="true">已选择 3 位评论家</div>
+          <p class="help-text">
+            <span lang="zh">单击选择评论家，双击取消选择 · 可选择任意数量</span>
+            <span lang="en">Click to select critics, double-click to deselect · Select any number</span>
+          </p>
+          <div id="persona-count" class="sr-only" aria-live="polite" aria-atomic="true">
+            <span lang="zh">已选择 3 位评论家</span>
+            <span lang="en">3 critics selected</span>
+          </div>
         </div>
 
         <div class="viz-grid">
           <!-- Panel 1: RPAIT Radar -->
           <div class="viz-panel" id="rpait-radar-panel">
-            <h3>评论家维度分布</h3>
-            <canvas id="rpait-radar-chart" role="img" aria-label="RPAIT radar chart" tabindex="0"></canvas>
+            <h3>
+              <span lang="zh">评论家维度分布</span>
+              <span lang="en">Critic Dimension Distribution</span>
+            </h3>
+            <canvas id="rpait-radar-chart" role="img" aria-label="RPAIT 雷达图 RPAIT radar chart" tabindex="0"></canvas>
           </div>
 
           <!-- Panel 2: Persona Comparison -->
           <div class="viz-panel" id="persona-matrix-panel">
-            <h3>评论家对比矩阵</h3>
-            <canvas id="persona-matrix-chart" role="img" aria-label="Persona comparison matrix" tabindex="0"></canvas>
+            <h3>
+              <span lang="zh">评论家对比矩阵</span>
+              <span lang="en">Critic Comparison Matrix</span>
+            </h3>
+            <canvas id="persona-matrix-chart" role="img" aria-label="评论家对比矩阵 Critic comparison matrix" tabindex="0"></canvas>
             <div class="viz-controls">
-              <select id="dimension-selector" aria-label="Select RPAIT dimension">
-                <option value="all">全部维度</option>
-                <option value="R">代表性</option>
-                <option value="P">哲学性</option>
-                <option value="A">美学性</option>
-                <option value="I">身份性</option>
-                <option value="T">传统性</option>
+              <select id="dimension-selector" aria-label="选择RPAIT维度 Select RPAIT dimension">
+                <option value="all" data-zh="全部维度" data-en="All Dimensions">全部维度 / All Dimensions</option>
+                <option value="R" data-zh="代表性" data-en="Representation">代表性 / Representation</option>
+                <option value="P" data-zh="哲学性" data-en="Philosophicality">哲学性 / Philosophicality</option>
+                <option value="A" data-zh="美学性" data-en="Aesthetics">美学性 / Aesthetics</option>
+                <option value="I" data-zh="诠释性" data-en="Interpretability">诠释性 / Interpretability</option>
+                <option value="T" data-zh="技巧性" data-en="Technicality">技巧性 / Technicality</option>
               </select>
             </div>
           </div>
@@ -193,25 +219,54 @@
     <!-- ABOUT SECTION (OPTIONAL, hidden by default) -->
     <section id="about-section" class="about-section" style="display: none;">
       <div class="container">
-        <h2>关于这个项目</h2>
+        <h2>
+          <span lang="zh">关于这个项目</span>
+          <span lang="en">About This Project</span>
+        </h2>
         <div class="about-content">
-          <p>vulcaart.art 是 VULCA（视觉理解与语言的文化自适应）项目的数字展览平台。 这个项目探索AI系统如何理解和评价艺术作品，特别是从多元文化视角出发。</p>
           <p>
-            <strong>"潮汐的负形"</strong>作为主题，强调：
+            <span lang="zh">vulcaart.art 是 VULCA（视觉理解与语言的文化自适应）项目的数字展览平台。这个项目探索AI系统如何理解和评价艺术作品，特别是从多元文化视角出发。</span>
+            <span lang="en">vulcaart.art is the digital exhibition platform for the VULCA (Visual Understanding and Language Cultural Adaptation) project. This project explores how AI systems understand and critique artworks, particularly from multicultural perspectives.</span>
+          </p>
+          <p>
+            <strong>
+              <span lang="zh">"潮汐的负形"</span>
+              <span lang="en">"Negative Space of the Tide"</span>
+            </strong>
+            <span lang="zh">作为主题，强调：</span>
+            <span lang="en"> as the theme emphasizes:</span>
           </p>
           <ul>
             <li>
-              <strong>潮汐性</strong> — 艺术评论随着不同视角的切换而变化，如同潮汐的涨落
+              <strong>
+                <span lang="zh">潮汐性</span>
+                <span lang="en">Tidal Nature</span>
+              </strong>
+              <span lang="zh"> — 艺术评论随着不同视角的切换而变化，如同潮汐的涨落</span>
+              <span lang="en"> — Art critiques shift with different perspectives, like the ebb and flow of tides</span>
             </li>
             <li>
-              <strong>负形</strong> — 关注过程、草稿和迭代，而不仅是最终成果
+              <strong>
+                <span lang="zh">负形</span>
+                <span lang="en">Negative Space</span>
+              </strong>
+              <span lang="zh"> — 关注过程、草稿和迭代，而不仅是最终成果</span>
+              <span lang="en"> — Focus on process, drafts, and iteration, not just final outcomes</span>
             </li>
             <li>
-              <strong>多维性</strong> — 同一件作品在不同评论家眼中有完全不同的意义
+              <strong>
+                <span lang="zh">多维性</span>
+                <span lang="en">Multidimensionality</span>
+              </strong>
+              <span lang="zh"> — 同一件作品在不同评论家眼中有完全不同的意义</span>
+              <span lang="en"> — The same artwork holds entirely different meanings for different critics</span>
             </li>
           </ul>
           <p>
-            <em>通过AI、艺术和文化的交集，探索我们如何看待和理解彼此的创意表达。</em>
+            <em>
+              <span lang="zh">通过AI、艺术和文化的交集，探索我们如何看待和理解彼此的创意表达。</span>
+              <span lang="en">Through the intersection of AI, art, and culture, we explore how we perceive and understand each other's creative expressions.</span>
+            </em>
           </p>
         </div>
       </div>
@@ -221,9 +276,18 @@
   <!-- ==================== MINIMAL FOOTER ==================== -->
   <footer class="footer-minimal">
     <div class="footer-content">
-      <p class="footer-text">© 2025 VULCA. 保留所有权利。</p>
+      <p class="footer-text">
+        <span lang="zh">© 2025 VULCA. 保留所有权利。</span>
+        <span lang="en">© 2025 VULCA. All rights reserved.</span>
+      </p>
+      <p class="paper-link">
+        <span lang="zh">📄 研究论文：</span><span lang="en">📄 Research Paper: </span>
+        <a href="https://aclanthology.org/2025.findings-emnlp.103/" target="_blank" rel="noopener">
+          EMNLP 2025 Findings
+        </a>
+      </p>
       <p class="footer-contact">
-        <a href="mailto:info@vulcaart.art">info@vulcaart.art</a>
+        <a href="mailto:yuhaorui48@gmail.com">yuhaorui48@gmail.com</a>
       </p>
     </div>
   </footer>
@@ -383,15 +447,12 @@
     const langToggle = document.getElementById('lang-toggle');
     if (langToggle) {
       langToggle.addEventListener('click', () => {
-        const html = document.documentElement;
-        const currentLang = html.getAttribute('data-lang') || 'zh';
+        const currentLang = document.documentElement.getAttribute('data-lang');
         const newLang = currentLang === 'zh' ? 'en' : 'zh';
 
-        html.setAttribute('data-lang', newLang);
-        localStorage.setItem('preferred-lang', newLang);
-
-        // Update button text
-        langToggle.querySelector('.lang-text').textContent = newLang === 'zh' ? 'EN/中' : 'ZH/英';
+        if (window.langManager) {
+          window.langManager.setLanguage(newLang, true); // true = update localStorage
+        }
       });
     }
 
@@ -405,15 +466,6 @@
         scrollProgress.style.width = scrollPercent + '%';
       }
     });
-
-    // Restore language preference on load
-    (function() {
-      const preferred = localStorage.getItem('preferred-lang') || 'zh';
-      document.documentElement.setAttribute('data-lang', preferred);
-      if (langToggle) {
-        langToggle.querySelector('.lang-text').textContent = preferred === 'zh' ? 'EN/中' : 'ZH/英';
-      }
-    })();
   </script>
 </body>
 

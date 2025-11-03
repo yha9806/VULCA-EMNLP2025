@@ -471,11 +471,33 @@ window.GalleryHeroRenderer = (function() {
 
     const nameEl = document.createElement('h3');
     nameEl.className = 'critique-author';
-    nameEl.textContent = persona.nameZh || 'Unknown';
+
+    // Bilingual name display
+    const nameZh = document.createElement('span');
+    nameZh.lang = 'zh';
+    nameZh.textContent = persona.nameZh || '未知';
+
+    const nameEn = document.createElement('span');
+    nameEn.lang = 'en';
+    nameEn.textContent = persona.nameEn || 'Unknown';
+
+    nameEl.appendChild(nameZh);
+    nameEl.appendChild(nameEn);
 
     const periodEl = document.createElement('p');
     periodEl.className = 'critique-period';
-    periodEl.textContent = persona.period || '';
+
+    // Bilingual period display
+    const periodZh = document.createElement('span');
+    periodZh.lang = 'zh';
+    periodZh.textContent = persona.period || persona.periodZh || '';
+
+    const periodEn = document.createElement('span');
+    periodEn.lang = 'en';
+    periodEn.textContent = persona.periodEn || persona.period || '';
+
+    periodEl.appendChild(periodZh);
+    periodEl.appendChild(periodEn);
 
     header.appendChild(nameEl);
     header.appendChild(periodEl);

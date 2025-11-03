@@ -386,7 +386,7 @@ When writing critiques, consider referencing images by their category:
 - Check existing critiques in `js/data.js` for examples
 - Use test pages: `test-critique-parser.html`, `test-data-enrichment.html`
 - See `CLAUDE.md` for developer guidance
-- Contact: info@vulcaart.art
+- Contact: yuhaorui48@gmail.com
 
 ---
 

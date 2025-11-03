@@ -639,7 +639,7 @@ https://vulcaart.art?nocache=1
 |------|-----|
 | 线上网站 | https://vulcaart.art |
 | GitHub 仓库 | https://github.com/yha9806/VULCA-EMNLP2025 |
-| 联系邮箱 | info@vulcaart.art |
+| 联系邮箱 | yuhaorui48@gmail.com |
 
 ---
 
@@ -721,3 +721,4 @@ Closes #42
 ---
 
 **开始编辑前，请完整阅读本文档和 SPEC.md！**
+- to memorize 记住这个问题

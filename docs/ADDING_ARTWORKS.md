@@ -499,7 +499,7 @@ id: "img-5-2"  // artwork 5, image 2
 - Check `CLAUDE.md` for developer guidance
 - Review existing artworks in `js/data.js` as examples
 - See `openspec/` for detailed specifications
-- Contact: info@vulcaart.art
+- Contact: yuhaorui48@gmail.com
 
 ---
 
