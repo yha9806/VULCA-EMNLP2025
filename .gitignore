@@ -72,3 +72,5 @@ CNAME
 setup-*.js
 full-setup-*.js
 namecheap-setup.js
+# 备份目录
+migration-backups/
