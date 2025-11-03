@@ -65,6 +65,9 @@
     </div>
   </header>
 
+  <!-- ==================== MENU OVERLAY ==================== -->
+  <div class="menu-overlay" id="menu-overlay"></div>
+
   <!-- ==================== FLOATING MENU ==================== -->
   <nav class="floating-menu" id="floating-menu" aria-label="Navigation menu" hidden>
     <div class="menu-content">
@@ -103,16 +106,42 @@
       </div>
     </section>
 
+    <!-- Critics Classification Info -->
+    <section class="content-section">
+      <h2>评论家构成说明</h2>
+      <p>VULCA系统的6位评论家采用<strong>真实历史人物与虚构AI角色相结合</strong>的研究设计：</p>
+
+      <div style="margin: 1.5rem 0;">
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">✓ 真实历史评论家（4位）</h3>
+        <ul style="margin-left: 1.5rem; line-height: 1.8;">
+          <li><strong>苏轼</strong>（北宋文人，1037-1101）- 代表中国古典文人美学和诗画一律传统</li>
+          <li><strong>郭熙</strong>（北宋山水画家，1020-1100）- 代表山水画理论和形式构图法则</li>
+          <li><strong>约翰·罗斯金</strong>（维多利亚时期评论家，1819-1900）- 代表道德美学和社会责任视角</li>
+          <li><strong>凯特·克劳福德</strong>（当代AI伦理学家）- 代表技术伦理和人机协作批评</li>
+        </ul>
+      </div>
+
+      <div style="margin: 1.5rem 0;">
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">◆ 虚构AI角色（2位）</h3>
+        <ul style="margin-left: 1.5rem; line-height: 1.8;">
+          <li><strong>佐拉妈妈</strong>（西非传统文化）- AI创建的虚构角色，代表西非griot口述传统和集体诠释范式</li>
+          <li><strong>埃琳娜·佩特洛娃教授</strong>（俄罗斯形式主义）- AI创建的虚构角色，代表结构分析和视觉语言研究传统</li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 1rem; font-style: italic; color: #666;">这种混合设计是本研究的核心实验设计：真实历史人物确保批评传统的准确性，虚构AI角色探索AI在构建新型批评视角时的能力与局限。</p>
+    </section>
+
     <!-- RPAIT Framework Info -->
     <section class="rpait-info">
       <h2>RPAIT 评论维度</h2>
       <p>每位评论家使用五个维度来评价艺术作品：</p>
       <ul class="rpait-dimensions">
-        <li><strong>R (Representation)</strong> - 代表性：作品对现实或观念的呈现方式</li>
-        <li><strong>P (Philosophy)</strong> - 哲学性：作品所体现的哲学思想和世界观</li>
-        <li><strong>A (Aesthetics)</strong> - 美学性：作品的视觉形式和美学价值</li>
-        <li><strong>I (Interpretation)</strong> - 诠释性：作品的意义层次和诠释空间</li>
-        <li><strong>T (Technique)</strong> - 技巧性：艺术家的技法和表现手段</li>
+        <li><strong>R - 代表性</strong>：作品对现实或观念的呈现方式</li>
+        <li><strong>P - 哲学性</strong>：作品所体现的哲学思想和世界观</li>
+        <li><strong>A - 美学性</strong>：作品的视觉形式和美学价值</li>
+        <li><strong>I - 诠释性</strong>：作品的意义层次和诠释空间</li>
+        <li><strong>T - 技巧性</strong>：艺术家的技法和表现手段</li>
       </ul>
     </section>
   </main>
@@ -145,31 +174,6 @@
 
   <!-- Inline Scripts for Immediate Interactivity -->
   <script>
-    // Menu toggle
-    const menuToggle = document.getElementById('menu-toggle');
-    const floatingMenu = document.getElementById('floating-menu');
-
-    if (menuToggle && floatingMenu) {
-      menuToggle.addEventListener('click', () => {
-        const isOpen = !floatingMenu.hasAttribute('hidden');
-        if (isOpen) {
-          floatingMenu.setAttribute('hidden', '');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        } else {
-          floatingMenu.removeAttribute('hidden');
-          menuToggle.setAttribute('aria-expanded', 'true');
-        }
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!floatingMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-          floatingMenu.setAttribute('hidden', '');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-
     // Language toggle
     const langToggle = document.getElementById('lang-toggle');
     if (langToggle) {

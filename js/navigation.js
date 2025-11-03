@@ -16,11 +16,12 @@
     constructor() {
       this.menuToggle = document.getElementById('menu-toggle');
       this.menuDrawer = document.getElementById('floating-menu');
+      this.menuOverlay = document.getElementById('menu-overlay');
       this.menuItems = document.querySelectorAll('.menu-item');
     }
 
     init() {
-      if (!this.menuToggle || !this.menuDrawer) {
+      if (!this.menuToggle || !this.menuDrawer || !this.menuOverlay) {
         console.warn('[Navigation] Menu elements not found');
         return;
       }
@@ -39,6 +40,11 @@
             this.closeMenu();
           }
         });
+      });
+
+      // Close menu when clicking overlay
+      this.menuOverlay.addEventListener('click', () => {
+        this.closeMenu();
       });
 
       // Close menu when clicking outside
@@ -72,11 +78,13 @@
 
     openMenu() {
       this.menuDrawer.removeAttribute('hidden');
+      this.menuOverlay.classList.add('active');
       this.menuToggle.setAttribute('aria-expanded', 'true');
     }
 
     closeMenu() {
       this.menuDrawer.setAttribute('hidden', '');
+      this.menuOverlay.classList.remove('active');
       this.menuToggle.setAttribute('aria-expanded', 'false');
     }
 

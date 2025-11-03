@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="关于VULCA - 一个沉浸式艺术展览平台，融合AI生成评论和跨越时代的艺术评论视角">
+  <meta name="description" content="关于VULCA - AI艺术评论实验系统，探索跨时代评论家视角和RPAIT五维评论框架">
   <meta property="og:title" content="关于 | vulcaart.art">
-  <meta property="og:description" content="了解VULCA项目、RPAIT评论框架和展览的愿景">
+  <meta property="og:description" content="了解VULCA系统、研究目标、系统架构和研究意义">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +26,9 @@
     </div>
   </header>
 
+  <!-- Menu Overlay -->
+  <div class="menu-overlay" id="menu-overlay"></div>
+
   <nav class="floating-menu" id="floating-menu" aria-label="Navigation menu" hidden>
     <div class="menu-content">
       <a href="/" class="menu-item menu-home" aria-label="Return to main gallery"><span>🏠</span><span class="menu-label">主画廊</span></a>
@@ -38,14 +41,16 @@
   <main id="main-content" class="page-content">
     <section class="page-header">
       <h1>关于VULCA</h1>
-      <p class="subtitle">沉浸式艺术展览平台</p>
+      <p class="subtitle">AI艺术评论实验系统</p>
     </section>
 
     <section class="content-section">
-      <h2>项目愿景</h2>
-      <p>VULCA是一个创新的艺术展览平台，致力于在沉浸式的视觉体验中呈现多维度的艺术评论视角。通过融合跨越时代的评论家观点和当代艺术实践，我们创造了一个独特的对话空间，邀请观众在视觉沉浸中深刻思考艺术的意义。</p>
+      <h2>VULCA 系统简介</h2>
+      <p>VULCA（跨时代艺术评论视角）是一个基于人工智能的艺术评论实验系统，旨在探索不同历史时期的艺术评论家如何评价当代艺术作品。</p>
 
-      <p>该项目挑战了传统艺术展览的叙述方式，提供了一种非线性的、多声道的、沉浸式的艺术观看体验。</p>
+      <p>系统采用AI角色扮演技术，模拟6位来自不同时代和文化背景的艺术评论家，对4件当代艺术作品进行多维度评论。每位AI评论家基于历史文献和理论文本进行角色建模，在RPAIT五维框架下生成评论，形成6×4×5=120个评论数据点的实验数据集。</p>
+
+      <p>通过这一系统，我们探索以下研究问题：历史上的艺术评论家会如何看待当代艺术？AI能否准确模拟历史人物的评论风格和思想体系？结构化的评论框架能否帮助我们更系统地理解艺术作品？</p>
     </section>
 
     <section class="content-section">
@@ -54,41 +59,82 @@
 
       <div class="framework-cards">
         <div class="framework-card">
-          <h3>R - 代表性 (Representation)</h3>
+          <h3>R - 代表性</h3>
           <p>作品如何呈现现实或观念？它选择了什么，又回避了什么？代表性涉及艺术家对现实的选择性解读和表达方式。</p>
         </div>
 
         <div class="framework-card">
-          <h3>P - 哲学性 (Philosophy)</h3>
+          <h3>P - 哲学性</h3>
           <p>作品所体现的哲学思想和世界观是什么？它涉及什么样的人类根本问题？哲学性关乎作品的理念深度。</p>
         </div>
 
         <div class="framework-card">
-          <h3>A - 美学性 (Aesthetics)</h3>
+          <h3>A - 美学性</h3>
           <p>作品的视觉形式、颜色、构图、材料等如何创造美的体验？美学性是艺术最直接的感官维度。</p>
         </div>
 
         <div class="framework-card">
-          <h3>I - 诠释性 (Interpretation)</h3>
+          <h3>I - 诠释性</h3>
           <p>作品能够被如何诠释？它开放了多少种可能的意义？诠释性反映了作品的意义开放性和观众的参与空间。</p>
         </div>
 
         <div class="framework-card">
-          <h3>T - 技巧性 (Technique)</h3>
+          <h3>T - 技巧性</h3>
           <p>艺术家运用了什么样的技法和表现手段？技巧的娴熟度如何？技巧性体现了艺术执行的专业性。</p>
         </div>
       </div>
     </section>
 
     <section class="content-section">
-      <h2>展览特色</h2>
+      <h2>研究目标</h2>
+      <p>VULCA系统的核心研究目标包括以下三个方面：</p>
+
       <ul class="feature-list">
-        <li><strong>沉浸式设计</strong> - 自动播放的艺术作品展示，防止滚动打断，创造完全沉浸的视觉体验</li>
-        <li><strong>多维评论</strong> - 6位跨越时代的评论家，使用RPAIT五维框架评价每件作品</li>
-        <li><strong>幽灵UI美学</strong> - 高透明度、模糊效果的界面设计，让艺术作品成为绝对主体</li>
-        <li><strong>浮动实验布局</strong> - 图片占主导，评论和数据在周围浮动，营造对话感</li>
-        <li><strong>响应式体验</strong> - 从手机到桌面的无缝适配，随处随时可访问</li>
+        <li><strong>跨时代艺术评论探索</strong> - 通过AI角色扮演，探索不同历史时期的艺术评论家对当代艺术的可能观点，建立跨越时代的艺术对话</li>
+        <li><strong>RPAIT评论框架验证</strong> - 验证结构化的五维评论框架（代表性、哲学性、美学性、诠释性、技巧性）在艺术评论中的有效性和适用性</li>
+        <li><strong>AI角色扮演准确性研究</strong> - 评估大语言模型在模拟历史人物评论风格、思想体系和理论立场方面的能力和局限性</li>
       </ul>
+
+      <p>通过这些研究，我们希望为AI辅助的艺术评论、历史人物角色建模以及跨时代文化对话提供新的视角和方法。</p>
+    </section>
+
+    <section class="content-section">
+      <h2>系统架构</h2>
+      <p>VULCA系统由三个核心组件构成：</p>
+
+      <div class="framework-cards">
+        <div class="framework-card">
+          <h3>AI评论家角色系统</h3>
+          <p>基于历史文献和理论文本，为每位评论家建立角色模型，包括其美学观点、哲学立场、文化背景和评论风格。系统采用<strong>4位真实历史人物</strong>和<strong>2位虚构AI角色</strong>的混合设计：</p>
+
+          <p><strong>真实历史评论家（4位）</strong>：苏轼（北宋文人，1037-1101）、郭熙（北宋山水画家，1020-1100）、约翰·罗斯金（维多利亚时期评论家，1819-1900）、凯特·克劳福德（当代AI伦理学家）。这些评论家的理论立场和著作均有历史文献支撑。</p>
+
+          <p><strong>虚构AI角色（2位）</strong>：佐拉妈妈（代表西非griot口述传统和集体诠释视角）、埃琳娜·佩特洛娃教授（代表俄罗斯形式主义结构分析传统）。这两位虚构角色由AI创建，用于代表特定的批评范式和文化视角，是本研究探索AI角色扮演能力的实验设计。</p>
+
+          <p>这种真实与虚构相结合的设计，既保证了历史评论传统的准确性，又探索了AI在构建新型批评视角时的创造潜力。</p>
+        </div>
+
+        <div class="framework-card">
+          <h3>RPAIT评论框架</h3>
+          <p>五维度结构化评论系统，确保评论的全面性和可比性。每个维度都有明确的评估标准：代表性关注作品对现实的呈现方式，哲学性关注思想深度，美学性关注视觉形式，诠释性关注意义的开放性，技巧性关注艺术执行的专业性。每个维度采用1-10分量化评分。</p>
+        </div>
+
+        <div class="framework-card">
+          <h3>评论生成管道</h3>
+          <p>结合AI生成和人工审核的混合流程。首先通过大语言模型基于角色设定和RPAIT框架生成初稿评论，然后由研究团队进行历史准确性验证、理论一致性检查和文本质量控制，最终形成符合学术标准的评论数据集。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>研究意义</h2>
+      <p>VULCA系统在学术研究和实际应用方面都具有重要意义：</p>
+
+      <p><strong>学术贡献</strong>：本研究为艺术评论的计算方法、历史人物的AI建模以及跨时代文化对话提供了新的研究范式。RPAIT框架为艺术评论的结构化分析提供了可复用的工具，而AI角色扮演技术为人文研究中的"反事实历史"探索开辟了新路径。</p>
+
+      <p><strong>应用场景</strong>：系统的方法和框架可应用于艺术教育（帮助学生从多维度理解艺术）、策展实践（为展览提供多元评论视角）、艺术批评研究（系统分析不同批评传统的特点）以及AI人文应用（探索AI在历史人物建模和文化传承中的可能性）。</p>
+
+      <p>更重要的是，VULCA系统提出了一个关键问题：当我们让AI"代言"历史人物时，我们究竟在创造什么？是对历史的再现，还是一种新的诠释？这一问题对于理解AI在人文领域的作用至关重要。</p>
     </section>
 
     <section class="content-section">
@@ -108,21 +154,6 @@
   <script src="/js/scroll-prevention.js?v=1"></script>
   <script src="/js/navigation.js?v=1"></script>
   <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const floatingMenu = document.getElementById('floating-menu');
-    if (menuToggle && floatingMenu) {
-      menuToggle.addEventListener('click', () => {
-        const isOpen = !floatingMenu.hasAttribute('hidden');
-        floatingMenu[isOpen ? 'setAttribute' : 'removeAttribute']('hidden', '');
-        menuToggle.setAttribute('aria-expanded', !isOpen);
-      });
-      document.addEventListener('click', (e) => {
-        if (!floatingMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-          floatingMenu.setAttribute('hidden', '');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
     const langToggle = document.getElementById('lang-toggle');
     if (langToggle) {
       langToggle.addEventListener('click', () => {
