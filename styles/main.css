@@ -1464,6 +1464,56 @@ a:focus-visible {
   gap: 30px;
   padding: 0 20px;
   z-index: var(--z-sticky);
+  /* Auto-hide on desktop: slide down by default */
+  transform: translateY(100%);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Desktop: Show navigation on hover or keyboard focus */
+@media (min-width: 600px) {
+  .gallery-nav.show,
+  .gallery-nav:focus-within {
+    transform: translateY(0);
+  }
+}
+
+/* Visual hint indicator: subtle bar at bottom */
+.nav-hint {
+  position: fixed;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  transition: opacity 300ms;
+  pointer-events: none;
+  z-index: calc(var(--z-sticky) - 1);
+}
+
+/* Hide hint on mobile */
+@media (max-width: 599px) {
+  .nav-hint {
+    display: none;
+  }
+}
+
+/* Fade out hint when navigation is visible */
+.gallery-nav.show ~ .nav-hint {
+  opacity: 0;
+}
+
+/* Accessibility: Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-nav {
+    transition: none;
+  }
+
+  .nav-hint {
+    transition: none;
+  }
 }
 
 .nav-button {
@@ -1677,6 +1727,9 @@ a:focus-visible {
     height: 70px;
     gap: 15px;
     padding: 0 10px;
+    /* Mobile: Always visible (no auto-hide) */
+    transform: translateY(0) !important;
+    transition: none;
   }
 
   .artwork-indicator {
