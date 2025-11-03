@@ -957,19 +957,6 @@ a:focus-visible {
   color: var(--color-primary);
 }
 
-/* Back Button */
-.back-button {
-  font-size: 1.5rem;
-  color: var(--color-text);
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.5rem 1rem;
-}
-
-.back-button:hover {
-  color: var(--color-primary);
-}
-
 /* ==================== CRITICS PAGE ==================== */
 
 .critics-section {
