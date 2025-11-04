@@ -133,10 +133,12 @@
     name.className = 'critic-name';
 
     const nameZh = document.createElement('span');
+    nameZh.className = 'critic-name-zh';
     nameZh.lang = 'zh';
     nameZh.textContent = persona.nameZh;
 
     const nameEn = document.createElement('span');
+    nameEn.className = 'critic-name-en';
     nameEn.lang = 'en';
     nameEn.textContent = persona.nameEn || '';
 
