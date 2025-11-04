@@ -217,6 +217,33 @@ window.GalleryHeroRenderer = (function() {
       return;
     }
 
+    // Initialize UnifiedNavigation component
+    const unifiedNavContainer = document.getElementById('unified-navigation-container');
+    if (!unifiedNavContainer) {
+      console.error('❌ unified-navigation-container not found');
+      return;
+    }
+
+    if (!window.UnifiedNavigation) {
+      console.error('❌ UnifiedNavigation component not loaded');
+      return;
+    }
+
+    // Create UnifiedNavigation instance
+    const unifiedNav = new window.UnifiedNavigation({
+      container: unifiedNavContainer,
+      artworkCarousel: carousel,
+      showImageNav: true,  // Enable inner image navigation (for multi-image artworks)
+      config: {
+        enableKeyboardShortcuts: true  // Shift+Arrow for artwork navigation
+      }
+    });
+
+    // Store reference for cleanup
+    window.unifiedNav = unifiedNav;
+
+    console.log('✓ UnifiedNavigation component initialized');
+
     // Initial render
     render(carousel);
 
@@ -240,10 +267,10 @@ window.GalleryHeroRenderer = (function() {
   function render(carousel) {
     renderHeroTitle(carousel);
     renderArtworkHeader(carousel);
-    renderArtworkImage(carousel);
+    // renderArtworkImage(carousel);  // Now handled by UnifiedNavigation component
     renderCritiques(carousel);
-    updateIndicator(carousel);
-    renderDots(carousel);
+    // updateIndicator(carousel);     // Now handled by UnifiedNavigation component
+    // renderDots(carousel);           // Removed (old navigation)
   }
 
   /**
@@ -265,13 +292,33 @@ window.GalleryHeroRenderer = (function() {
 
     const title = document.createElement('h1');
     title.className = 'hero-title';
-    title.lang = 'zh';
-    title.textContent = '潮汐的负形';
+
+    // Bilingual title (fix-hero-title-bilingual-support)
+    const titleZh = document.createElement('span');
+    titleZh.lang = 'zh';
+    titleZh.textContent = '潮汐的负形';
+
+    const titleEn = document.createElement('span');
+    titleEn.lang = 'en';
+    titleEn.textContent = 'Negative Space of the Tide';
+
+    title.appendChild(titleZh);
+    title.appendChild(titleEn);
 
     const subtitle = document.createElement('p');
     subtitle.className = 'hero-subtitle';
-    subtitle.lang = 'zh';
-    subtitle.textContent = '一场关于艺术评论的视角之旅';
+
+    // Bilingual subtitle (fix-hero-title-bilingual-support)
+    const subtitleZh = document.createElement('span');
+    subtitleZh.lang = 'zh';
+    subtitleZh.textContent = '一场关于艺术评论的视角之旅';
+
+    const subtitleEn = document.createElement('span');
+    subtitleEn.lang = 'en';
+    subtitleEn.textContent = 'A Perspective Journey Through Art Critiques';
+
+    subtitle.appendChild(subtitleZh);
+    subtitle.appendChild(subtitleEn);
 
     heroTitle.appendChild(title);
     heroTitle.appendChild(subtitle);

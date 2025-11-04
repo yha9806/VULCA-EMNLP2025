@@ -3,6 +3,10 @@
    styles/main.css - v3.0.0
    ======================================== */
 
+/* ==================== COMPONENT IMPORTS ==================== */
+
+@import url('/styles/components/unified-navigation.css');
+
 /* ==================== CSS CUSTOM PROPERTIES ==================== */
 
 :root {
@@ -1312,6 +1316,19 @@ a:focus-visible {
   align-items: flex-start; /* Allow natural height based on content */
 }
 
+/* Unified Navigation Container (replaces artwork-image-container) */
+.unified-navigation-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 500px; /* Ensure minimum height for navigation */
+  overflow: visible; /* Allow component to manage overflow */
+  border-radius: 8px;
+  background: transparent; /* Component manages its own background */
+  position: relative;
+}
+
+/* Legacy artwork-image-container (kept for backwards compatibility) */
 .artwork-image-container {
   flex: 1;
   aspect-ratio: 16 / 9; /* Maintain aspect ratio across viewports */
@@ -1495,6 +1512,12 @@ a:focus-visible {
 
 /* ==================== GALLERY NAVIGATION BAR ==================== */
 
+/* ==================== OLD NAVIGATION BAR (DEPRECATED) ====================
+   Replaced by UnifiedNavigation component
+   Keep commented for reference / rollback
+   ======================================================================== */
+
+/*
 .gallery-nav {
   position: fixed;
   bottom: 0;
@@ -1509,13 +1532,11 @@ a:focus-visible {
   gap: 30px;
   padding: 0 20px;
   z-index: var(--z-sticky);
-  /* Auto-hide on desktop: slide down by default */
   transform: translateY(100%);
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
-/* Desktop: Show navigation on hover or keyboard focus */
 @media (min-width: 600px) {
   .gallery-nav.show,
   .gallery-nav:focus-within {
@@ -1523,7 +1544,6 @@ a:focus-visible {
   }
 }
 
-/* Visual hint indicator: subtle bar at bottom */
 .nav-hint {
   position: fixed;
   bottom: 5px;
@@ -1538,19 +1558,16 @@ a:focus-visible {
   z-index: calc(var(--z-sticky) - 1);
 }
 
-/* Hide hint on mobile */
 @media (max-width: 599px) {
   .nav-hint {
     display: none;
   }
 }
 
-/* Fade out hint when navigation is visible */
 .gallery-nav.show ~ .nav-hint {
   opacity: 0;
 }
 
-/* Accessibility: Disable animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .gallery-nav {
     transition: none;
@@ -1622,6 +1639,7 @@ a:focus-visible {
   color: white;
   border-color: var(--color-text);
 }
+*/
 
 /* ==================== RESPONSIVE HERO LAYOUT ==================== */
 
@@ -1666,6 +1684,7 @@ a:focus-visible {
     gap: 16px;
   }
 
+  /* OLD NAVIGATION (DEPRECATED)
   .gallery-nav {
     height: 100px;
     gap: 40px;
@@ -1680,6 +1699,7 @@ a:focus-visible {
     width: 40px;
     height: 40px;
   }
+  */
 }
 
 /* Large Desktop: 1366px - 1919px - 4 columns */
@@ -1704,6 +1724,7 @@ a:focus-visible {
     gap: 16px;
   }
 
+  /* OLD NAVIGATION (DEPRECATED)
   .gallery-nav {
     height: 100px;
     gap: 40px;
@@ -1718,6 +1739,7 @@ a:focus-visible {
     width: 40px;
     height: 40px;
   }
+  */
 }
 
 /* Ultra-Wide: 1920px+ - 4 columns, max-width constraint */
@@ -1742,6 +1764,7 @@ a:focus-visible {
     gap: 16px;
   }
 
+  /* OLD NAVIGATION (DEPRECATED)
   .gallery-nav {
     height: 100px;
     gap: 40px;
@@ -1756,19 +1779,20 @@ a:focus-visible {
     width: 40px;
     height: 40px;
   }
+  */
 }
 
 /* Mobile: ≤599px - Single column, natural scrolling */
 @media (max-width: 599px) {
+  /* OLD NAVIGATION (DEPRECATED)
   .artwork-dots {
-    display: none; /* Hide dots to save space */
+    display: none;
   }
 
   .gallery-nav {
     height: 70px;
     gap: 15px;
     padding: 0 10px;
-    /* Mobile: Always visible (no auto-hide) */
     transform: translateY(0) !important;
     transition: none;
   }
@@ -1782,6 +1806,7 @@ a:focus-visible {
     padding: 6px 12px;
     font-size: 16px;
   }
+  */
 
   .gallery-hero {
     padding: 60px 15px 90px 15px;

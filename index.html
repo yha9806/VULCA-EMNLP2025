@@ -27,7 +27,8 @@
   <link rel="alternate icon" href="/assets/favicon.ico">
 
   <!-- ==================== STYLESHEETS ==================== -->
-  <link rel="stylesheet" href="/styles/main.css?v=3">
+  <link rel="stylesheet" href="/styles/main.css?v=5">
+  <link rel="stylesheet" href="/styles/components/unified-navigation.css?v=1">
 
   <!-- ==================== CHART LIBRARY ==================== -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -111,31 +112,12 @@
     <section class="gallery-hero" id="gallery-hero">
       <!-- Artwork display container -->
       <div class="artwork-display">
-        <div class="artwork-image-container" id="artwork-image-container">
-          <!-- Image will be rendered here by gallery-hero.js -->
+        <div id="unified-navigation-container" class="unified-navigation-container">
+          <!-- UnifiedNavigation component will be mounted here -->
         </div>
         <div class="critiques-panel" id="critiques-panel">
           <!-- Critic reviews will be rendered here by gallery-hero.js -->
         </div>
-      </div>
-    </section>
-
-    <!-- GALLERY NAVIGATION BAR -->
-    <section class="gallery-nav" id="gallery-nav">
-      <button id="nav-prev" class="nav-button nav-prev" aria-label="上一件作品 Previous artwork">
-        <span>◄</span>
-      </button>
-
-      <div class="artwork-indicator">
-        <span id="artwork-current">1</span> <span lang="zh">的</span><span lang="en">of</span> <span id="artwork-total">4</span>
-      </div>
-
-      <button id="nav-next" class="nav-button nav-next" aria-label="下一件作品 Next artwork">
-        <span>►</span>
-      </button>
-
-      <div class="artwork-dots" id="artwork-dots">
-        <!-- Dots will be rendered here by gallery-hero.js -->
       </div>
     </section>
 
@@ -338,6 +320,9 @@
   <script src="/js/utils/critique-parser.js?v=1.0"></script>
   <script src="/js/components/artwork-carousel.js?v=1.1"></script>
 
+  <!-- Unified Navigation Component (Phase 2: unify-navigation-to-image-area) -->
+  <script src="/js/components/unified-navigation.js?v=1.6"></script>
+
   <!-- Core Data & Configuration -->
   <script src="/js/data.js?v=3" charset="utf-8"></script>
   <script src="/js/plan.js?v=2" charset="utf-8"></script>
@@ -356,7 +341,7 @@
   <script src="/js/carousel.js?v=1"></script>
 
   <!-- Gallery Hero Renderer (NEW - Homepage Display) -->
-  <script src="/js/gallery-hero.js?v=5"></script>
+  <script src="/js/gallery-hero.js?v=8"></script>
 
   <!-- Auto-Play Immersive Experience (DISABLED - Replaced by click-based carousel) -->
   <!-- <script src="/js/autoplay.js?v=1"></script> -->
@@ -386,8 +371,8 @@
   <script src="/js/persona-selector.js?v=1"></script>
 
   <!-- Visualization Components -->
-  <script src="/js/visualizations/rpait-radar.js?v=1"></script>
-  <script src="/js/visualizations/persona-matrix.js?v=1"></script>
+  <script src="/js/visualizations/rpait-radar.js?v=2"></script>
+  <script src="/js/visualizations/persona-matrix.js?v=2"></script>
 
   <!-- Navigation Auto-Hide Module -->
   <script src="/js/navigation-autohide.js?v=1"></script>
