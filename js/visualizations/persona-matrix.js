@@ -13,6 +13,36 @@
   let currentArtworkId = 'artwork-1';
   let selectedPersonas = ['su-shi', 'guo-xi', 'john-ruskin'];  // ADDED: Track selected personas
 
+  // Translation constants for bilingual support (fix-chart-labels-bilingual-support)
+  const CHART_LABELS = {
+    dimensions: {
+      R: { zh: '代表性', en: 'Representation' },
+      P: { zh: '哲学性', en: 'Philosophicality' },
+      A: { zh: '美学性', en: 'Aesthetics' },
+      I: { zh: '身份性', en: 'Identity' },
+      T: { zh: '传统性', en: 'Tradition' },
+      all: { zh: '所有RPAIT维度', en: 'All RPAIT Dimensions' }
+    },
+    ariaPrefix: {
+      zh: '评论家对比矩阵显示所有评论家的',
+      en: 'Critic comparison matrix showing all critics\' '
+    }
+  };
+
+  /**
+   * Get current language from document attribute
+   */
+  function getCurrentLang() {
+    return document.documentElement.getAttribute('data-lang') || 'zh';
+  }
+
+  /**
+   * Get persona name in current language
+   */
+  function getPersonaName(persona, lang) {
+    return lang === 'en' ? (persona.nameEn || persona.nameZh) : persona.nameZh;
+  }
+
   /**
    * Initialize the comparison matrix chart
    */
@@ -90,36 +120,37 @@
    * Get chart data based on current dimension filter
    */
   function getChartData() {
+    const lang = getCurrentLang();
     // MODIFIED: Filter personas based on selection
     const allPersonas = window.VULCA_DATA.personas;
     const personas = allPersonas.filter(p => selectedPersonas.includes(p.id));
-    const labels = personas.map(p => p.nameZh);
+    const labels = personas.map(p => getPersonaName(p, lang));
 
     if (currentDimension === 'all') {
       // Show all 5 dimensions
       const datasets = [
         {
-          label: '代表性',
+          label: CHART_LABELS.dimensions.R[lang],
           data: personas.map(p => getRPAITScore(p.id, 'R')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-r').trim()
         },
         {
-          label: '哲学性',
+          label: CHART_LABELS.dimensions.P[lang],
           data: personas.map(p => getRPAITScore(p.id, 'P')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-p').trim()
         },
         {
-          label: '美学性',
+          label: CHART_LABELS.dimensions.A[lang],
           data: personas.map(p => getRPAITScore(p.id, 'A')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-a').trim()
         },
         {
-          label: '身份性',
+          label: CHART_LABELS.dimensions.I[lang],
           data: personas.map(p => getRPAITScore(p.id, 'I')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-i').trim()
         },
         {
-          label: '传统性',
+          label: CHART_LABELS.dimensions.T[lang],
           data: personas.map(p => getRPAITScore(p.id, 'T')),
           backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--rpait-t').trim()
         }
@@ -127,16 +158,8 @@
       return { labels, datasets };
     } else {
       // Show single dimension
-      const dimensionNames = {
-        R: '代表性',
-        P: '哲学性',
-        A: '美学性',
-        I: '身份性',
-        T: '传统性'
-      };
-
       const datasets = [{
-        label: dimensionNames[currentDimension],
+        label: CHART_LABELS.dimensions[currentDimension][lang],
         data: personas.map(p => getRPAITScore(p.id, currentDimension)),
         backgroundColor: getComputedStyle(document.documentElement).getPropertyValue(`--rpait-${currentDimension.toLowerCase()}`).trim()
       }];
@@ -175,16 +198,10 @@
     const canvas = document.getElementById('persona-matrix-chart');
     if (!canvas) return;
 
-    const dimensionNames = {
-      all: '所有RPAIT维度',
-      R: '代表性',
-      P: '哲学性',
-      A: '美学性',
-      I: '身份性',
-      T: '传统性'
-    };
-    const dimensionText = dimensionNames[currentDimension] || currentDimension;
-    const label = `评论家对比矩阵显示所有评论家的${dimensionText}`;
+    const lang = getCurrentLang();
+    const dimensionText = CHART_LABELS.dimensions[currentDimension][lang];
+    const prefix = CHART_LABELS.ariaPrefix[lang];
+    const label = `${prefix}${dimensionText}`;
     canvas.setAttribute('aria-label', label);
   }
 
@@ -226,6 +243,12 @@
       console.log(`[Matrix Chart] Selection changed to ${personas.length} personas`, personas);
 
       selectedPersonas = personas;
+      updateMatrixChart();
+    });
+
+    // Listen for language changes (fix-chart-labels-bilingual-support)
+    document.addEventListener('langchange', (e) => {
+      console.log('[Matrix Chart] Language changed, updating labels...');
       updateMatrixChart();
     });
 

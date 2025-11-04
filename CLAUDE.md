@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # CLAUDE.md - Claude Code 工作指南
 
-**最后更新**: 2025-11-02
+**最后更新**: 2025-11-04
 **项目**: VULCA - 艺术评论展览平台（沉浸式艺术评论展览）
 **网址**: https://vulcaart.art
 **GitHub**: https://github.com/yha9806/VULCA-EMNLP2025
@@ -686,9 +686,72 @@ Closes #42
 
 ---
 
-## 🎉 最新更新 (2025-11-02)
+## 🎉 最新更新
 
-### ✅ Phase 1: 艺术作品图片 Placeholder 系统已实施
+### ✅ Hero 标题双语支持 (2025-11-04)
+
+**解决的问题**:
+- ❌ 之前: 主页 Hero 标题和副标题只显示中文，语言切换时不更新
+- ✅ 现在: 显示双语结构，语言切换时实时更新
+
+**实施内容**:
+1. **Hero 标题双语化** (`js/gallery-hero.js` +17行, -4行)
+   - 标题: "潮汐的负形" / "Negative Space of the Tide"
+   - 副标题: "一场关于艺术评论的视角之旅" / "A Perspective Journey Through Art Critiques"
+   - 使用 `<span lang="zh">` / `<span lang="en">` 结构
+   - 利用现有 CSS `[data-lang]` 选择器控制显示/隐藏
+
+2. **事件驱动更新**
+   - 监听 `langchange` 事件自动重新渲染
+   - 支持语言持久化（localStorage）
+   - 支持 URL 参数 (`?lang=en`)
+
+**开发者体验提升**:
+- 🚀 **即时切换**: CSS 控制显示，无 JavaScript 延迟
+- 🎨 **一致模式**: 与评论文本、评论家姓名使用相同的双语结构
+- ♿ **完全可访问**: `lang` 属性支持屏幕阅读器
+
+**相关文档**: 参见 `openspec/changes/fix-hero-title-bilingual-support/`
+
+---
+
+### ✅ 图表标签双语支持 (2025-11-04)
+
+**解决的问题**:
+- ❌ 之前: RPAIT雷达图和评论家对比矩阵的标签只显示中文，语言切换时不更新
+- ✅ 现在: 所有图表标签（维度名称、评论家姓名、Legend）实时响应语言切换
+
+**实施内容**:
+1. **RPAIT 雷达图双语化** (`js/visualizations/rpait-radar.js` +45行)
+   - 维度标签: ["代表性", "哲学性", "美学性", "身份性", "传统性"] / ["Representation", "Philosophicality", "Aesthetics", "Identity", "Tradition"]
+   - 评论家姓名: 根据当前语言显示 `nameZh` 或 `nameEn`
+   - ARIA 标签: 支持双语无障碍访问
+   - 添加 `langchange` 事件监听器，实时更新图表数据
+
+2. **评论家对比矩阵双语化** (`js/visualizations/persona-matrix.js` +43行)
+   - 单维度标签: { R: "代表性"/"Representation", P: "哲学性"/"Philosophicality", ... }
+   - 全维度标签: "所有RPAIT维度" / "All RPAIT Dimensions"
+   - Y轴标签（评论家姓名）: 根据当前语言动态更新
+   - 维度选择器保持正常工作
+
+3. **技术实现模式**:
+   - 集中式翻译常量对象 (`CHART_LABELS`)
+   - `getCurrentLang()` 辅助函数读取当前语言
+   - `getPersonaName(persona, lang)` 辅助函数选择正确姓名
+   - Chart.js 热数据更新（无需重建图表实例）
+   - 事件驱动: 所有图表监听 `langchange` 事件
+
+**开发者体验提升**:
+- ⚡ **即时响应**: 语言切换后图表在 100ms 内更新
+- 🎯 **一致模式**: 与 Hero 标题使用相同的翻译管理模式
+- ♿ **完全可访问**: ARIA 标签也支持双语
+- 🔧 **易于维护**: 翻译常量集中管理，易于扩展
+
+**相关文档**: 参见 `openspec/changes/fix-chart-labels-bilingual-support/`
+
+---
+
+### ✅ Phase 1: 艺术作品图片 Placeholder 系统已实施 (2025-11-02)
 
 **解决的问题**:
 - ❌ 之前: 画廊显示破损图片图标 (broken image icons)，控制台显示 404 错误

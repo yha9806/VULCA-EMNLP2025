@@ -14,6 +14,36 @@
   let currentArtworkId = 'artwork-1';  // Default artwork
   // REMOVED: currentMode - now automatically determined by selection count
 
+  // Translation constants for bilingual support (fix-chart-labels-bilingual-support)
+  const CHART_LABELS = {
+    dimensions: {
+      zh: ['代表性', '哲学性', '美学性', '身份性', '传统性'],
+      en: ['Representation', 'Philosophicality', 'Aesthetics', 'Identity', 'Tradition']
+    },
+    ariaPrefix: {
+      zh: 'RPAIT雷达图显示',
+      en: 'RPAIT radar chart showing'
+    },
+    ariaUnit: {
+      zh: '位评论家',
+      en: 'critics'
+    }
+  };
+
+  /**
+   * Get current language from document attribute
+   */
+  function getCurrentLang() {
+    return document.documentElement.getAttribute('data-lang') || 'zh';
+  }
+
+  /**
+   * Get persona name in current language
+   */
+  function getPersonaName(persona, lang) {
+    return lang === 'en' ? (persona.nameEn || persona.nameZh) : persona.nameZh;
+  }
+
   /**
    * Initialize the radar chart
    */
@@ -90,13 +120,8 @@
    * Get chart data based on current mode and selection
    */
   function getChartData() {
-    const labels = [
-      '代表性',
-      '哲学性',
-      '美学性',
-      '身份性',
-      '传统性'
-    ];
+    const lang = getCurrentLang();
+    const labels = CHART_LABELS.dimensions[lang];
 
     const datasets = selectedPersonas.map(personaId => {
       const persona = window.VULCA_DATA.personas.find(p => p.id === personaId);
@@ -109,7 +134,7 @@
       if (!rpait) return null;
 
       return {
-        label: persona.nameZh,
+        label: getPersonaName(persona, lang),
         data: [rpait.R, rpait.P, rpait.A, rpait.I, rpait.T],
         backgroundColor: hexToRgba(persona.color, 0.2),
         borderColor: persona.color,
@@ -215,6 +240,13 @@
       updateARIALabel();
     });
 
+    // Listen for language changes (fix-chart-labels-bilingual-support)
+    document.addEventListener('langchange', (e) => {
+      console.log('[Radar Chart] Language changed, updating labels...');
+      updateRadarChart();
+      updateARIALabel();
+    });
+
     console.log('✓ Radar chart event listeners initialized');
   }
 
@@ -225,13 +257,18 @@
     const canvas = document.getElementById('rpait-radar-chart');
     if (!canvas) return;
 
+    const lang = getCurrentLang();
     const personaNames = selectedPersonas.map(id => {
       const persona = window.VULCA_DATA.personas.find(p => p.id === id);
-      return persona ? persona.nameZh : id;
-    }).join('、');
+      return persona ? getPersonaName(persona, lang) : id;
+    }).join(lang === 'zh' ? '、' : ', ');
+
+    const prefix = CHART_LABELS.ariaPrefix[lang];
+    const count = selectedPersonas.length;
+    const unit = CHART_LABELS.ariaUnit[lang];
 
     canvas.setAttribute('aria-label',
-      `RPAIT雷达图显示 ${selectedPersonas.length} 位评论家：${personaNames}`
+      `${prefix} ${count} ${unit}: ${personaNames}`
     );
   }
 
