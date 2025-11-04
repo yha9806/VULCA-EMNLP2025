@@ -453,6 +453,71 @@ openspec/changes/<change-name>/
 
 ---
 
+### 🐛 OpenSpec Known Issues
+
+**重要**: OpenSpec CLI v0.14.0 存在已知的验证 bug，需要使用临时解决方案。
+
+#### 问题描述
+
+运行 `openspec validate <change-id> --strict` 会报错：
+```
+✗ [ERROR] Delta sections found, but no requirement entries parsed
+✗ [ERROR] Change must have at least one delta. No deltas found
+```
+
+但实际上：
+- Spec 文件格式是正确的
+- `openspec show <change-id> --json --deltas-only` 可以成功解析
+- 这是 **CLI 工具的 bug**，不是我们的规范问题
+
+#### 临时解决方案
+
+**归档已完成的变更时使用**：
+```bash
+openspec archive <change-id> --yes --no-validate --skip-specs
+```
+
+**标志说明**：
+- `--yes`: 自动确认
+- `--no-validate`: 跳过验证（绕过 bug）
+- `--skip-specs`: 跳过 spec 更新（仅用于工具性变更）
+
+**何时使用 `--skip-specs`**：
+- ✅ 工具/文档类变更（无功能需求）
+- ✅ UI 双语支持（不改变功能逻辑）
+- ❌ 新功能开发（需要更新 specs）
+
+#### 验证步骤
+
+归档前验证 spec 正确性：
+```bash
+# 1. 检查文件结构
+ls openspec/changes/<change-id>/specs/
+
+# 2. 测试解析功能（应该成功）
+openspec show <change-id> --json --deltas-only
+
+# 3. 忽略验证错误（已知 bug）
+openspec validate <change-id> --strict  # 会失败，忽略
+
+# 4. 使用临时解决方案归档
+openspec archive <change-id> --yes --no-validate --skip-specs
+```
+
+#### 追踪状态
+
+- **GitHub Issue**: [#164](https://github.com/Fission-AI/OpenSpec/issues/164)（OPEN，未修复）
+- **详细文档**: 参见 `OPENSPEC_KNOWN_ISSUES.md`
+- **版本**: v0.14.0（当前最新版本）
+- **预计修复**: 待官方发布
+
+**当 CLI 修复后**：
+1. 升级版本：`npm install -g openspec@latest`
+2. 移除临时解决方案文档
+3. 恢复标准验证流程
+
+---
+
 ## 📤 部署流程
 
 ### 本地开发
