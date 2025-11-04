@@ -340,7 +340,7 @@
       prevButton.setAttribute('aria-controls', 'artwork-image-container');
 
       if (prevArtwork) {
-        prevButton.setAttribute('aria-label', `Previous artwork: ${prevArtwork.titleZh || prevArtwork.titleEn}`);
+        prevButton.setAttribute('aria-label', `Previous artwork: ${prevArtwork.titleZh} ${prevArtwork.titleEn}`);
       } else {
         prevButton.setAttribute('aria-label', 'Previous artwork');
         prevButton.disabled = !this.config.loop;
@@ -349,10 +349,7 @@
       // Previous button content: Arrow + Text
       prevButton.innerHTML = `
         <span class="button-icon" aria-hidden="true">◄</span>
-        <span class="button-text">
-          <span class="button-text-zh" lang="zh">上一件作品</span>
-          <span class="button-text-en" lang="en">Previous Artwork</span>
-        </span>
+        <span class="button-text">Previous Artwork</span>
       `;
 
       // Create artwork indicator
@@ -363,7 +360,7 @@
 
       indicator.innerHTML = `
         <span class="current-index" aria-current="page">${currentIndex + 1}</span>
-        <span class="separator" lang="zh"> 的 </span>
+        <span class="separator"> of </span>
         <span class="total-count">${artworkCount}</span>
       `;
 
@@ -374,7 +371,7 @@
       nextButton.type = 'button';
 
       if (nextArtwork) {
-        nextButton.setAttribute('aria-label', `Next artwork: ${nextArtwork.titleZh || nextArtwork.titleEn}`);
+        nextButton.setAttribute('aria-label', `Next artwork: ${nextArtwork.titleZh} ${nextArtwork.titleEn}`);
       } else {
         nextButton.setAttribute('aria-label', 'Next artwork');
         nextButton.disabled = !this.config.loop;
@@ -382,10 +379,7 @@
 
       // Next button content: Text + Arrow
       nextButton.innerHTML = `
-        <span class="button-text">
-          <span class="button-text-zh" lang="zh">下一件作品</span>
-          <span class="button-text-en" lang="en">Next Artwork</span>
-        </span>
+        <span class="button-text">Next Artwork</span>
         <span class="button-icon" aria-hidden="true">►</span>
       `;
 
@@ -581,11 +575,11 @@
       // Update indicator content
       this.elements.indicator.innerHTML = `
         <span class="current-index" aria-current="page">${currentIndex + 1}</span>
-        <span class="separator" lang="zh"> 的 </span>
+        <span class="separator"> of </span>
         <span class="total-count">${artworkCount}</span>
       `;
 
-      console.log(`[UnifiedNavigation] Indicator updated: ${currentIndex + 1} 的 ${artworkCount}`);
+      console.log(`[UnifiedNavigation] Indicator updated: ${currentIndex + 1} of ${artworkCount}`);
     }
 
     /**
@@ -611,7 +605,7 @@
       } else {
         this.elements.prevButton.disabled = false;
         const prevArtwork = this.artworkCarousel.artworks[currentIndex - 1];
-        const ariaLabel = `Previous artwork: ${prevArtwork.titleZh}`;
+        const ariaLabel = `Previous artwork: ${prevArtwork.titleZh} ${prevArtwork.titleEn}`;
         this.elements.prevButton.setAttribute('aria-label', ariaLabel);
         console.log('[UnifiedNavigation] Prev button enabled');
       }
@@ -624,7 +618,7 @@
       } else {
         this.elements.nextButton.disabled = false;
         const nextArtwork = this.artworkCarousel.artworks[currentIndex + 1];
-        const ariaLabel = `Next artwork: ${nextArtwork.titleZh}`;
+        const ariaLabel = `Next artwork: ${nextArtwork.titleZh} ${nextArtwork.titleEn}`;
         this.elements.nextButton.setAttribute('aria-label', ariaLabel);
         console.log('[UnifiedNavigation] Next button enabled');
       }
