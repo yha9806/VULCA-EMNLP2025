@@ -122,25 +122,25 @@ class DialoguePlayer {
    * @returns {number} Delay in milliseconds
    */
   _calculateNaturalDelay(message, index) {
-    const THINKING_MIN = 1500;
-    const THINKING_MAX = 3000;
+    const THINKING_MIN = 2000;  // Increased from 1500ms
+    const THINKING_MAX = 4000;  // Increased from 3000ms
 
     // Base random thinking time
     let delay = this._randomDelay(THINKING_MIN, THINKING_MAX);
 
-    // Adjust for message length (500ms per 100 chars)
+    // Adjust for message length (300ms per 100 chars - reduced multiplier for subtlety)
     const lang = document.documentElement.getAttribute('data-lang') || 'zh';
     const text = lang === 'en' ? message.textEn : message.textZh;
-    const lengthAdjustment = Math.floor(text.length / 100) * 500;
+    const lengthAdjustment = Math.floor(text.length / 100) * 300;
     delay += lengthAdjustment;
 
-    // First message appears faster (80% of normal delay)
+    // First message appears slightly faster (90% of normal delay for less aggressive reduction)
     if (index === 0) {
-      delay = Math.floor(delay * 0.8);
+      delay = Math.floor(delay * 0.9);
     }
 
-    // Cap maximum delay at 5 seconds
-    delay = Math.min(delay, 5000);
+    // Cap maximum delay at 8 seconds (increased from 5s to allow "deep thinking")
+    delay = Math.min(delay, 8000);
 
     console.log(`[DialoguePlayer] Message ${index} delay: ${delay}ms (length: ${text.length} chars)`);
     return delay;

@@ -28,6 +28,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  scroll-margin-top: 20px;  /* Ensure header is visible when scrolled into view */
 }
 
 /* ============================================================================
