@@ -35,9 +35,10 @@
    ========================================================================== */
 
 .dialogue-player__header {
-  padding: 24px;
+  padding: 28px 24px;      /* Phase 4: Increased for better proportion */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
+  min-height: 80px;        /* Phase 4: Establish minimum height */
 }
 
 .dialogue-player__topic {
@@ -266,12 +267,13 @@
    ========================================================================== */
 
 .dialogue-player__controls {
-  padding: 20px 24px;
-  background: #ffffff;
+  padding: 16px 24px;      /* Phase 4: Reduced for better proportion */
+  background: #f9fafb;     /* Phase 4: Lighter background */
   border-top: 1px solid #e5e7eb;
+  min-height: 70px;        /* Phase 4: Establish minimum height */
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;               /* Phase 4: Reduced gap */
 }
 
 /* Phase 3: Mode Toggle Container */
