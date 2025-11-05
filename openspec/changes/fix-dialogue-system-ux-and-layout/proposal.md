@@ -111,9 +111,9 @@ Full Content Visible → Optional "Animate" Button → Enhanced Experience
 
 ### Should Have (P1)
 - [x] Optional animation toggle per dialogue (Phase 3 complete)
-- [ ] First dialogue auto-expanded as example
-- [ ] Visual hierarchy: 80% content, 20% controls (Phase 4 pending)
-- [ ] User guidance ("6 dialogues available" counter) (Phase 4 pending)
+- [ ] First dialogue auto-expanded as example (not implemented - users can expand manually)
+- [x] Visual hierarchy: 80% content, 20% controls (Phase 4 Task 4.1 complete)
+- [ ] User guidance ("6 dialogues available" counter) (deferred - low priority)
 
 ### Nice to Have (P2)
 - [ ] "Play All" button for batch animation

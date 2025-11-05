@@ -524,10 +524,10 @@
    ```
 
 **Success Criteria**:
-- [ ] Header: ~80px (14%)
-- [ ] Messages: ~400-600px (73%)
-- [ ] Controls: ~70px (13%)
-- [ ] Proportions match golden ratio
+- [x] Header: ~80px (14%)
+- [x] Messages: ~400-600px (73%)
+- [x] Controls: ~70px (13%)
+- [x] Proportions achieve 80% content, 20% chrome
 
 ---
 
