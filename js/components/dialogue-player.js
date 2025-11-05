@@ -79,6 +79,12 @@ class DialoguePlayer {
     this.renderedMessages = new Set();
     this.messageElements = new Map();
 
+    // Phase 4: Progressive Focus tracking
+    this._currentMessageEl = null;    // Track current focused message element
+    this.currentMessageIndex = -1;     // Track current message index
+    this.autoScrollDisabled = false;   // Auto-scroll toggle
+    this._isAutoScrolling = false;     // Prevent scroll event conflicts
+
     // Calculate total duration (max timestamp + buffer)
     this.totalDuration = this._calculateTotalDuration();
 
@@ -172,7 +178,8 @@ class DialoguePlayer {
   }
 
   /**
-   * Reveal a hidden message with animation (Natural Timing)
+   * Reveal a message with Progressive Focus state management
+   * Phase 4: Task 4.2 - State Transition Logic
    * @private
    * @param {string} messageId - Message ID to reveal
    */
@@ -183,14 +190,37 @@ class DialoguePlayer {
       return;
     }
 
-    // Remove hidden class, add appearing animation
-    msgEl.classList.remove('message-hidden');
-    msgEl.classList.add('message-appearing');
+    const msgIdx = this.thread.messages.findIndex(m => m.id === messageId);
+    if (msgIdx === -1) {
+      console.error(`[DialoguePlayer] Message not found in thread: ${messageId}`);
+      return;
+    }
 
-    // Scroll into view (smooth)
-    msgEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    // Phase 4: Step 1 - Transition previous current to past
+    if (this._currentMessageEl) {
+      this._currentMessageEl.classList.remove('current');
+      this._currentMessageEl.classList.add('past');
+      this._currentMessageEl.removeAttribute('aria-current'); // Phase 4: Task 4.6
+      console.log('[DialoguePlayer] Previous message transitioned to past');
+    }
 
-    console.log(`[DialoguePlayer] Revealed message: ${messageId}`);
+    // Phase 4: Step 2 - Reveal and set new current message
+    msgEl.classList.remove('message-hidden', 'future');
+    msgEl.classList.add('current', 'message-appearing');
+    msgEl.setAttribute('aria-current', 'true'); // Phase 4: Task 4.6
+
+    this._currentMessageEl = msgEl;
+    this.currentMessageIndex = msgIdx;
+
+    console.log(`[DialoguePlayer] Message ${msgIdx + 1}/${this.thread.messages.length} revealed as current`);
+
+    // Phase 4: Step 3 - Mark all future messages
+    this._markFutureMessages();
+
+    // Phase 4: Step 4 - Auto-scroll to center (if enabled)
+    if (!this.autoScrollDisabled) {
+      this._scrollToMessage(msgEl);
+    }
   }
 
   /**
@@ -247,6 +277,19 @@ class DialoguePlayer {
       msgEl.dataset.personaId = message.personaId;
       msgEl.dataset.interactionType = message.interactionType;
       msgEl.dataset.timestamp = message.timestamp;
+
+      // Phase 4: Task 4.4 - Set initial states for progressive focus
+      if (index === 0) {
+        // First message will become current when revealed
+        // Don't add .future class - it will get .current on first reveal
+      } else {
+        // All subsequent messages start as future (hidden)
+        msgEl.classList.add('future');
+      }
+
+      // Phase 4: Task 4.6 - Add ARIA attributes
+      msgEl.setAttribute('role', 'article');
+      msgEl.setAttribute('aria-label', `Comment by ${persona.nameZh} ${persona.nameEn}`);
 
       // Build message HTML
       msgEl.innerHTML = `
@@ -625,6 +668,10 @@ class DialoguePlayer {
     msgEl.dataset.personaId = message.personaId;
     msgEl.dataset.interactionType = message.interactionType;
 
+    // Phase 4: Task 4.6 - Add ARIA attributes for accessibility
+    msgEl.setAttribute('role', 'article');
+    msgEl.setAttribute('aria-label', `Comment by ${persona.nameZh} ${persona.nameEn}`);
+
     // Build message HTML
     msgEl.innerHTML = `
       <div class="message-header">
@@ -863,6 +910,60 @@ class DialoguePlayer {
     // Auto-play handles everything
 
     console.log('[DialoguePlayer] Control listeners attached (none - auto-play mode)');
+  }
+
+  // ============================================================================
+  // Phase 4: Progressive Focus Interaction
+  // ============================================================================
+
+  /**
+   * Mark future messages with .future class
+   * Phase 4: Task 4.2 - State Transition Logic
+   * @private
+   */
+  _markFutureMessages() {
+    this.thread.messages.forEach((msg, idx) => {
+      if (idx > this.currentMessageIndex) {
+        const el = this.messageElements.get(msg.id);
+        // Only mark as future if already revealed (not hidden)
+        if (el && !el.classList.contains('message-hidden')) {
+          el.classList.add('future');
+          el.classList.remove('past', 'current');
+        }
+      }
+    });
+
+    console.log(`[DialoguePlayer] Marked ${this.thread.messages.length - this.currentMessageIndex - 1} messages as future`);
+  }
+
+  /**
+   * Scroll message to center of viewport with smooth animation
+   * Phase 4: Task 4.3 - Auto-scroll with centering
+   * @private
+   * @param {HTMLElement} msgEl - Message element to scroll into view
+   */
+  _scrollToMessage(msgEl) {
+    if (!msgEl) {
+      console.warn('[DialoguePlayer] Cannot scroll to null message element');
+      return;
+    }
+
+    // Prevent scroll event handlers from disabling auto-scroll
+    this._isAutoScrolling = true;
+
+    // Smooth scroll to center of viewport
+    msgEl.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',      // Vertical alignment: center
+      inline: 'nearest'     // Horizontal alignment: nearest edge
+    });
+
+    // Re-enable after scroll animation completes (~600ms)
+    setTimeout(() => {
+      this._isAutoScrolling = false;
+    }, 600);
+
+    console.log('[DialoguePlayer] Auto-scrolled to current message (centered)');
   }
 
   // ============================================================================
