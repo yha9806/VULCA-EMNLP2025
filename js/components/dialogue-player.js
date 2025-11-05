@@ -25,17 +25,42 @@ class DialoguePlayer {
    * @param {string} options.lang - Language for rendering ('zh'|'en', default: 'zh')
    */
   constructor(dialogueThread, container, options = {}) {
-    // Validate inputs
-    if (!dialogueThread || !dialogueThread.messages) {
-      throw new Error('[DialoguePlayer] Invalid dialogue thread provided');
-    }
+    // Phase 3: Enhanced validation with defensive null checks
     if (!container || !(container instanceof HTMLElement)) {
       throw new Error('[DialoguePlayer] Invalid container element provided');
     }
 
+    // Store container reference first for error state rendering
+    this.container = container;
+    this.state = 'loading'; // Phase 3: Initial state
+
+    // Validate dialogue thread with detailed error messages
+    if (!dialogueThread) {
+      const error = new Error('[DialoguePlayer] No dialogue thread data provided');
+      this._showErrorState(error.message);
+      throw error;
+    }
+
+    if (!dialogueThread.messages || !Array.isArray(dialogueThread.messages)) {
+      const error = new Error('[DialoguePlayer] Thread.messages is missing or invalid (must be array)');
+      this._showErrorState(error.message);
+      throw error;
+    }
+
+    if (dialogueThread.messages.length === 0) {
+      console.warn('[DialoguePlayer] Thread has no messages, showing empty state');
+      this._showEmptyState();
+      return; // Early return, don't initialize further
+    }
+
+    if (!dialogueThread.participants || dialogueThread.participants.length === 0) {
+      console.warn('[DialoguePlayer] No participants data, using fallback');
+      // Non-fatal, proceed with render
+    }
+
     // Core state
     this.thread = dialogueThread;
-    this.container = container;
+    this.state = 'success'; // Phase 3: Mark as loaded successfully
     this.options = {
       speed: options.speed || 1.0,
       autoPlay: options.autoPlay || false,
@@ -838,6 +863,147 @@ class DialoguePlayer {
     // Auto-play handles everything
 
     console.log('[DialoguePlayer] Control listeners attached (none - auto-play mode)');
+  }
+
+  // ============================================================================
+  // Phase 3: Content Visibility - Error Handling & State Management
+  // ============================================================================
+
+  /**
+   * Show error state UI when dialogue fails to load or render
+   * @private
+   * @param {string} errorMessage - User-friendly error message
+   */
+  _showErrorState(errorMessage) {
+    // Convert technical errors to user-friendly messages
+    const userMessage = this._sanitizeErrorMessage(errorMessage);
+
+    this.container.innerHTML = `
+      <div class="dialogue-player-error">
+        <div class="error-icon" role="img" aria-label="Error">⚠️</div>
+        <h3>Unable to Load Dialogue</h3>
+        <p class="error-message">${userMessage}</p>
+        <button class="error-retry-btn" onclick="window.location.reload();">
+          Retry
+        </button>
+      </div>
+    `;
+
+    console.error('[DialoguePlayer] Error state displayed:', errorMessage);
+  }
+
+  /**
+   * Show empty state UI when dialogue has no messages
+   * @private
+   */
+  _showEmptyState() {
+    this.container.innerHTML = `
+      <div class="dialogue-player-error">
+        <div class="error-icon" role="img" aria-label="Info">ℹ️</div>
+        <h3>No Dialogue Content</h3>
+        <p class="error-message">This dialogue thread contains no messages yet.</p>
+      </div>
+    `;
+
+    console.log('[DialoguePlayer] Empty state displayed');
+  }
+
+  /**
+   * Show loading state UI while dialogue is initializing
+   * @private
+   */
+  _showLoadingState() {
+    this.container.innerHTML = `
+      <div class="dialogue-player-loading">
+        <div class="spinner" role="status" aria-label="Loading"></div>
+        <p>Loading dialogue...</p>
+      </div>
+    `;
+
+    console.log('[DialoguePlayer] Loading state displayed');
+  }
+
+  /**
+   * Hide loading state UI
+   * @private
+   */
+  _hideLoadingState() {
+    const loadingEl = this.container.querySelector('.dialogue-player-loading');
+    if (loadingEl) {
+      loadingEl.remove();
+      console.log('[DialoguePlayer] Loading state hidden');
+    }
+  }
+
+  /**
+   * Sanitize error messages for user display
+   * Converts technical errors to user-friendly messages
+   * @private
+   * @param {string} technicalError - Raw error message
+   * @returns {string} User-friendly error message
+   */
+  _sanitizeErrorMessage(technicalError) {
+    const errorMap = {
+      'No dialogue thread data provided': 'Dialogue data is missing. Please refresh the page.',
+      'Thread.messages is missing or invalid': 'Dialogue format is incorrect. Please contact support.',
+      'Invalid dialogue thread provided': 'Unable to load dialogue data. Please try again.',
+      'Invalid container element provided': 'Page rendering error. Please refresh the page.'
+    };
+
+    // Check if error message matches known patterns
+    for (const [technical, friendly] of Object.entries(errorMap)) {
+      if (technicalError.includes(technical)) {
+        return friendly;
+      }
+    }
+
+    // Default fallback message
+    return 'Something went wrong while loading the dialogue. Please refresh the page and try again.';
+  }
+
+  /**
+   * Validate dialogue thread data structure
+   * Phase 3: Task 3.4 - Data validation method
+   * @private
+   * @param {Object} thread - Dialogue thread to validate
+   * @throws {Error} If validation fails with descriptive message
+   */
+  _validateThreadData(thread) {
+    if (!thread) {
+      throw new Error('[DialoguePlayer] No dialogue thread data provided');
+    }
+
+    // Required fields
+    if (!thread.id) {
+      throw new Error('[DialoguePlayer] Thread missing required field: id');
+    }
+    if (!thread.topic) {
+      throw new Error('[DialoguePlayer] Thread missing required field: topic');
+    }
+    if (!Array.isArray(thread.messages)) {
+      throw new Error('[DialoguePlayer] Thread.messages must be an array');
+    }
+    if (!Array.isArray(thread.participants)) {
+      throw new Error('[DialoguePlayer] Thread.participants must be an array');
+    }
+
+    // Validate messages
+    thread.messages.forEach((msg, idx) => {
+      if (!msg.id) {
+        throw new Error(`[DialoguePlayer] Message ${idx} missing required field: id`);
+      }
+      if (!msg.personaId) {
+        throw new Error(`[DialoguePlayer] Message ${msg.id} missing required field: personaId`);
+      }
+      if (!msg.text) {
+        throw new Error(`[DialoguePlayer] Message ${msg.id} missing required field: text`);
+      }
+      if (typeof msg.timestamp !== 'number') {
+        throw new Error(`[DialoguePlayer] Message ${msg.id} missing or invalid timestamp (must be number)`);
+      }
+    });
+
+    console.log('[DialoguePlayer] Data validation passed ✓');
   }
 
   /**
