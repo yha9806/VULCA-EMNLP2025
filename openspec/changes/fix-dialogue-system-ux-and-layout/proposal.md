@@ -110,10 +110,10 @@ Full Content Visible → Optional "Animate" Button → Enhanced Experience
 - [x] No layout collapse (computed height matches content height)
 
 ### Should Have (P1)
-- [ ] Optional animation toggle per dialogue
+- [x] Optional animation toggle per dialogue (Phase 3 complete)
 - [ ] First dialogue auto-expanded as example
-- [ ] Visual hierarchy: 80% content, 20% controls
-- [ ] User guidance ("6 dialogues available" counter)
+- [ ] Visual hierarchy: 80% content, 20% controls (Phase 4 pending)
+- [ ] User guidance ("6 dialogues available" counter) (Phase 4 pending)
 
 ### Nice to Have (P2)
 - [ ] "Play All" button for batch animation
