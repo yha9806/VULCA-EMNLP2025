@@ -1605,9 +1605,393 @@ _getQuoteByIdFromCurrentMessages(quoteId) {
 
 ---
 
-## Summary
+## Phase 7: Integration to Main Gallery (2-3 hours)
 
-**Total Estimated Time**: 6-10 hours
+**Prerequisite**: Complete Phase 1-6 first
+
+**Objective**: Integrate DialoguePlayer component into main gallery page (`index.html`), replacing or supplementing the current static critique display system.
+
+---
+
+### Task 7.1: Analyze Current Static Critique System (30 min)
+
+**Investigation**:
+1. Read `index.html` structure - locate critique rendering points
+2. Read `js/gallery-hero.js` - understand how artworks are displayed
+3. Read `js/data.js` - understand current critique data structure
+4. Identify integration points:
+   - Where are critiques currently rendered?
+   - How are they triggered (page load, click, scroll)?
+   - What data format do they use?
+
+**Documentation**:
+Create integration notes answering:
+- Current critique display method: [Static HTML | Dynamic JS | Mixed]
+- Trigger mechanism: [Auto | Click | Scroll]
+- Data source: [data.js location]
+- Conflict risks: [List potential issues]
+
+**Success Criteria**:
+- [ ] Understand current critique rendering flow
+- [ ] Identify all files that need modification
+- [ ] Document integration approach (replace vs. supplement)
+- [ ] List potential compatibility issues
+
+---
+
+### Task 7.2: Design Integration Strategy (30 min)
+
+**Decision Points**:
+
+**A. Integration Approach**:
+- Option 1: **Replace** static critiques entirely with DialoguePlayer
+- Option 2: **Add toggle** - user chooses static or dialogue mode
+- Option 3: **Supplement** - show static by default, dialogue on demand
+
+**B. Trigger Mechanism**:
+- Option 1: Auto-play dialogue when artwork is viewed
+- Option 2: Show "Play Dialogue" button, user clicks to start
+- Option 3: Replace critique panel with dialogue player
+
+**C. Data Structure**:
+- Option 1: Keep existing `VULCA_DATA.critiques`, convert to dialogue format
+- Option 2: Use `VULCA_DATA.dialogues` directly (already exists from Phase 0)
+- Option 3: Hybrid - use dialogues if available, fallback to static
+
+**Recommendation**:
+```markdown
+Approach: Option 2 (Add toggle)
+Trigger: Option 2 (Play button)
+Data: Option 2 (Use existing dialogues)
+
+Rationale:
+- Preserves existing static critiques for users who prefer reading
+- Allows gradual rollout and A/B testing
+- Uses existing dialogue data structure (no migration needed)
+```
+
+**Deliverables**:
+- Integration design document (500 words)
+- Mockup or wireframe showing toggle UI
+- Data flow diagram (static vs. dialogue)
+
+**Success Criteria**:
+- [ ] Integration approach decided and documented
+- [ ] Trigger mechanism defined
+- [ ] Data structure strategy clear
+- [ ] User experience flow mapped out
+
+---
+
+### Task 7.3: Add DialoguePlayer to Main Page HTML (20 min)
+
+**File**: `index.html`
+
+**Changes**:
+```html
+<!-- Add after line 31 (after main.css) -->
+<link rel="stylesheet" href="/styles/components/dialogue-player.css?v=1">
+
+<!-- Add before closing </body> tag, after data.js -->
+<script src="/js/components/dialogue-player.js?v=1"></script>
+<script src="/js/gallery-dialogue-integration.js?v=1"></script>
+```
+
+**Success Criteria**:
+- [ ] CSS loaded without 404 errors
+- [ ] JS loaded without syntax errors
+- [ ] No conflicts with existing scripts
+- [ ] Console shows DialoguePlayer class available
+
+**Testing**:
+```javascript
+// In browser console after page load
+console.log(typeof DialoguePlayer);  // Should output: "function"
+console.log(window.VULCA_DATA.dialogues.length);  // Should output: 24
+```
+
+---
+
+### Task 7.4: Create Integration Bridge Script (60 min)
+
+**File**: `js/gallery-dialogue-integration.js` (NEW)
+
+**Responsibilities**:
+1. Listen for artwork view/click events
+2. Find dialogue threads for current artwork
+3. Instantiate DialoguePlayer with correct data
+4. Handle mode switching (static ↔ dialogue)
+5. Manage state persistence (localStorage)
+
+**Implementation**:
+```javascript
+/**
+ * Gallery Dialogue Integration
+ * Bridges DialoguePlayer component with main gallery system
+ */
+class GalleryDialogueIntegration {
+  constructor() {
+    this.currentArtworkId = null;
+    this.activePlayer = null;
+    this.mode = localStorage.getItem('critiqueMode') || 'static';
+
+    this._initUI();
+    this._attachListeners();
+  }
+
+  /**
+   * Initialize UI elements (mode toggle button)
+   */
+  _initUI() {
+    // Create toggle button: "Static View" | "Dialogue View"
+    // Insert into critiques-panel header
+  }
+
+  /**
+   * Attach event listeners
+   */
+  _attachListeners() {
+    // Listen for artwork changes (unified-navigation.js events?)
+    // Listen for mode toggle clicks
+    // Listen for play/pause commands
+  }
+
+  /**
+   * Switch between static and dialogue modes
+   */
+  switchMode(mode) {
+    if (mode === 'dialogue') {
+      this._showDialoguePlayer();
+    } else {
+      this._showStaticCritiques();
+    }
+    localStorage.setItem('critiqueMode', mode);
+  }
+
+  /**
+   * Show dialogue player for current artwork
+   */
+  _showDialoguePlayer() {
+    const dialogues = this._getDialoguesForCurrentArtwork();
+    if (!dialogues || dialogues.length === 0) {
+      console.warn('No dialogues for artwork:', this.currentArtworkId);
+      return;
+    }
+
+    // Pick first dialogue thread (or let user choose?)
+    const thread = dialogues[0];
+
+    // Find or create container
+    const container = document.getElementById('dialogue-container')
+                   || this._createDialogueContainer();
+
+    // Destroy previous player if exists
+    if (this.activePlayer) {
+      this.activePlayer.destroy();
+    }
+
+    // Instantiate new player
+    this.activePlayer = new DialoguePlayer(thread, container, {
+      autoPlay: false,
+      lang: document.documentElement.getAttribute('data-lang') || 'zh'
+    });
+
+    console.log('[Integration] DialoguePlayer initialized for:', thread.id);
+  }
+
+  /**
+   * Show static critiques (restore original view)
+   */
+  _showStaticCritiques() {
+    if (this.activePlayer) {
+      this.activePlayer.destroy();
+      this.activePlayer = null;
+    }
+
+    // Show original critique panels (unhide)
+    const critiquesContainer = document.querySelector('.critiques-container');
+    if (critiquesContainer) {
+      critiquesContainer.style.display = 'block';
+    }
+  }
+
+  /**
+   * Get dialogue threads for current artwork
+   */
+  _getDialoguesForCurrentArtwork() {
+    if (!window.VULCA_DATA || !window.VULCA_DATA.dialogues) {
+      console.error('[Integration] Dialogue data not found');
+      return [];
+    }
+
+    return window.VULCA_DATA.dialogues.filter(
+      thread => thread.artworkId === this.currentArtworkId
+    );
+  }
+
+  /**
+   * Create dialogue container element
+   */
+  _createDialogueContainer() {
+    const container = document.createElement('div');
+    container.id = 'dialogue-container';
+    container.className = 'dialogue-container';
+
+    const critiquesPanel = document.getElementById('critiques-panel');
+    if (critiquesPanel) {
+      critiquesPanel.appendChild(container);
+    }
+
+    return container;
+  }
+}
+
+// Auto-initialize when DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  window.galleryDialogueIntegration = new GalleryDialogueIntegration();
+  console.log('[Integration] Gallery Dialogue Integration initialized');
+});
+```
+
+**Success Criteria**:
+- [ ] Script loads without errors
+- [ ] GalleryDialogueIntegration class instantiates
+- [ ] Can retrieve dialogues for any artwork
+- [ ] Mode toggle switches views correctly
+- [ ] localStorage persists mode preference
+
+---
+
+### Task 7.5: Update Gallery Hero to Support Dialogue (40 min)
+
+**File**: `js/gallery-hero.js` (MODIFY)
+
+**Changes**:
+1. Add event emission when artwork changes
+2. Expose current artwork ID to integration script
+3. Add dialogue mode indicator to UI
+
+**Example**:
+```javascript
+// In _updateCurrentArtwork() method
+_updateCurrentArtwork(artworkId) {
+  this.currentArtwork = artworkId;
+
+  // NEW: Emit event for integration script
+  window.dispatchEvent(new CustomEvent('artworkChanged', {
+    detail: { artworkId: artworkId }
+  }));
+
+  // ... existing render logic ...
+}
+```
+
+**Success Criteria**:
+- [ ] `artworkChanged` event fires on artwork switch
+- [ ] Event detail contains correct artworkId
+- [ ] No regressions in existing gallery functionality
+- [ ] Integration script can listen to events
+
+---
+
+### Task 7.6: Add Mode Toggle UI (30 min)
+
+**File**: `index.html` (ADD UI), `styles/main.css` (ADD STYLES)
+
+**HTML** (add to critiques-panel header):
+```html
+<div class="critique-mode-toggle" id="critique-mode-toggle">
+  <button class="mode-btn" data-mode="static" aria-pressed="true">
+    <span lang="zh">静态评论</span>
+    <span lang="en">Static View</span>
+  </button>
+  <button class="mode-btn" data-mode="dialogue" aria-pressed="false">
+    <span lang="zh">对话模式</span>
+    <span lang="en">Dialogue Mode</span>
+  </button>
+</div>
+```
+
+**CSS**:
+```css
+.critique-mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.mode-btn {
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn[aria-pressed="true"] {
+  background: linear-gradient(135deg, #B85C3C 0%, #D4A574 100%);
+  border-color: #B85C3C;
+  color: #fff;
+}
+
+.mode-btn:hover {
+  border-color: #B85C3C;
+}
+```
+
+**Success Criteria**:
+- [ ] Toggle buttons display correctly
+- [ ] Active button shows warm gradient
+- [ ] Click switches modes smoothly
+- [ ] ARIA attributes update correctly
+
+---
+
+### Task 7.7: Test Integration Flow (30 min)
+
+**Test Cases**:
+
+**Test 1: Static to Dialogue Switch**
+1. Load main page → Static critiques visible
+2. Click "Dialogue Mode" → DialoguePlayer appears
+3. Click "Play" → Messages animate smoothly
+4. Verify: Static critiques hidden, dialogue playing
+
+**Test 2: Dialogue to Static Switch**
+1. In dialogue mode, playing a thread
+2. Click "Static View" → DialoguePlayer destroyed
+3. Verify: Static critiques restored, no memory leaks
+
+**Test 3: Artwork Navigation**
+1. Start dialogue for Artwork 1
+2. Navigate to Artwork 2 (via carousel/navigation)
+3. Verify: Dialogue switches to Artwork 2's threads
+4. Verify: No crashes or double-loading
+
+**Test 4: Mode Persistence**
+1. Switch to dialogue mode
+2. Refresh page (F5)
+3. Verify: Dialogue mode restored from localStorage
+4. Verify: Correct artwork's dialogue loaded
+
+**Test 5: Edge Cases**
+1. Switch modes rapidly 10 times
+2. Navigate between artworks while dialogue playing
+3. Resize window during dialogue playback
+4. Verify: No console errors, smooth transitions
+
+**Success Criteria**:
+- [ ] All 5 test cases pass
+- [ ] Zero console errors during switches
+- [ ] Smooth visual transitions (<300ms)
+- [ ] No memory leaks (check DevTools Memory tab)
+
+---
+
+## Summary (Updated)
+
+**Total Estimated Time**: 8-13 hours
 
 | Phase | Tasks | Time Estimate |
 |-------|-------|---------------|
@@ -1617,7 +2001,8 @@ _getQuoteByIdFromCurrentMessages(quoteId) {
 | Phase 4: Progressive Focus | 6 tasks | 2-3 hours |
 | Phase 5: Quote Interaction | 5 tasks | 1-2 hours |
 | Phase 6: Integration Testing | 3 tasks | 1 hour |
-| **Total** | **29 tasks** | **6-10 hours** |
+| **Phase 7: Main Gallery Integration** | **7 tasks** | **2-3 hours** |
+| **Total** | **36 tasks** | **8-13 hours** |
 
 ---
 
