@@ -1,0 +1,567 @@
+/**
+ * DialoguePlayer Component Styles
+ *
+ * Animated dialogue playback UI with:
+ * - Message bubbles with persona styling
+ * - Interaction type badges
+ * - Quote blocks for threaded conversations
+ * - Playback controls (play/pause/speed/scrubber)
+ * - Smooth appearing animations
+ *
+ * @version 1.0.0
+ * @created 2025-11-04
+ */
+
+/* ============================================================================
+   Container & Layout
+   ========================================================================== */
+
+.dialogue-player {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  min-height: 500px;        /* NEW: Establish height context */
+  height: auto;             /* NEW: Allow natural growth */
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* ============================================================================
+   Header
+   ========================================================================== */
+
+.dialogue-player__header {
+  padding: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+
+.dialogue-player__topic {
+  margin: 0 0 12px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.dialogue-player__topic-zh {
+  display: block;
+}
+
+.dialogue-player__topic-en {
+  display: block;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+.dialogue-player__participants {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dialogue-player__participant {
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+/* ============================================================================
+   Messages Container
+   ========================================================================== */
+
+.dialogue-player__messages {
+  min-height: 400px;        /* NEW: Enforce minimum */
+  max-height: 600px;        /* UPDATED: Increased from 500px */
+  flex: 1 1 auto;           /* CHANGED: Allow grow/shrink */
+  padding: 24px;
+  overflow-y: auto;
+  background: #f9fafb;
+  position: relative;       /* NEW: For absolute children */
+}
+
+/* Custom scrollbar */
+.dialogue-player__messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dialogue-player__messages::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.dialogue-player__messages::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 4px;
+}
+
+.dialogue-player__messages::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* ============================================================================
+   Message Bubbles
+   ========================================================================== */
+
+.dialogue-message {
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Appearing animation */
+.dialogue-message.appearing {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+.dialogue-message.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.dialogue-message:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ============================================================================
+   Message Header
+   ========================================================================== */
+
+.message-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.message-author {
+  font-weight: 600;
+  font-size: 0.95rem;
+  /* color set inline via persona.color */
+}
+
+.interaction-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* Interaction type colors (matching INTERACTION_TYPES from data) */
+.interaction-badge.initial {
+  background: #eef2ff;
+  color: #6366f1;
+  border: 1px solid #c7d2fe;
+}
+
+.interaction-badge.agree-extend {
+  background: #f0fdf4;
+  color: #22c55e;
+  border: 1px solid #bbf7d0;
+}
+
+.interaction-badge.question-challenge {
+  background: #fefce8;
+  color: #eab308;
+  border: 1px solid #fde047;
+}
+
+.interaction-badge.synthesize {
+  background: #faf5ff;
+  color: #8b5cf6;
+  border: 1px solid #e9d5ff;
+}
+
+.interaction-badge.counter {
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+}
+
+.interaction-badge.reflect {
+  background: #eff6ff;
+  color: #3b82f6;
+  border: 1px solid #bfdbfe;
+}
+
+/* ============================================================================
+   Message Content
+   ========================================================================== */
+
+.message-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.message-content p {
+  margin: 0 0 8px 0;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================================
+   Quote Blocks
+   ========================================================================== */
+
+.message-quote {
+  margin: 0 0 12px 0;
+  padding: 12px 16px;
+  background: #f3f4f6;
+  border-left: 4px solid #9ca3af;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.message-quote cite {
+  display: block;
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom: 4px;
+  /* color set inline via referenced persona.color */
+}
+
+.message-quote p {
+  margin: 0;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Controls Container
+   ========================================================================== */
+
+.dialogue-player__controls {
+  padding: 20px 24px;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Primary controls row (play/pause + speed) */
+.controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Play/Pause button */
+.control-button {
+  padding: 10px 20px;
+  background: #667eea;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.control-button:hover {
+  background: #5568d3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.control-button:active {
+  transform: translateY(0);
+}
+
+.control-button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Speed selector */
+.speed-selector {
+  padding: 8px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.speed-selector:hover {
+  border-color: #667eea;
+}
+
+.speed-selector:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Timeline scrubber */
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timeline-scrubber {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #e5e7eb;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.timeline-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #667eea;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeline-scrubber::-webkit-slider-thumb:hover {
+  background: #5568d3;
+  transform: scale(1.2);
+}
+
+.timeline-scrubber::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: #667eea;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeline-scrubber::-moz-range-thumb:hover {
+  background: #5568d3;
+  transform: scale(1.2);
+}
+
+/* Time display */
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+   Responsive Design
+   ========================================================================== */
+
+/* Phase 1: CSS Layout Fix - Responsive min-heights */
+@media (max-width: 767px) {
+  .dialogue-player {
+    min-height: 400px;
+  }
+  .dialogue-player__messages {
+    min-height: 300px;
+    max-height: 400px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dialogue-player__messages {
+    min-height: 350px;
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dialogue-player {
+    border-radius: 0;
+  }
+
+  .dialogue-player__header {
+    padding: 20px 16px;
+  }
+
+  .dialogue-player__topic {
+    font-size: 1.25rem;
+  }
+
+  .dialogue-player__messages {
+    padding: 16px;
+    max-height: 400px;
+  }
+
+  .dialogue-message {
+    padding: 12px;
+  }
+
+  .message-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .dialogue-player__controls {
+    padding: 16px;
+  }
+
+  .controls-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .control-button,
+  .speed-selector {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .dialogue-player__topic {
+    font-size: 1.1rem;
+  }
+
+  .dialogue-player__topic-en {
+    font-size: 0.95rem;
+  }
+
+  .dialogue-player__participants {
+    font-size: 0.8rem;
+  }
+
+  .message-content {
+    font-size: 0.9rem;
+  }
+
+  .dialogue-player__messages {
+    max-height: 300px;
+  }
+
+  /* Phase 5: Compact mode for very small screens */
+  .dialogue-player.compact-mode .dialogue-player__messages {
+    max-height: 30vh;
+    font-size: 0.8rem;
+  }
+
+  .dialogue-player.compact-mode .dialogue-player__header {
+    padding: 12px 16px;
+  }
+
+  .dialogue-player.compact-mode .dialogue-player__topic {
+    font-size: 1rem;
+  }
+
+  .dialogue-player.compact-mode .dialogue-message {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .dialogue-player.compact-mode .message-header {
+    font-size: 0.85rem;
+  }
+
+  .dialogue-player.compact-mode .message-content {
+    font-size: 0.85rem;
+  }
+
+  /* Hide timeline scrubber and replay button on mobile */
+  .dialogue-player.compact-mode .timeline-container,
+  .dialogue-player.compact-mode .replay-btn {
+    display: none;
+  }
+
+  .dialogue-player.compact-mode .controls-row {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .dialogue-player.compact-mode .control-button {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .dialogue-player.compact-mode .speed-selector {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 70px;
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================================================
+   Dark Mode Support (Optional)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .dialogue-player {
+    background: #1f2937;
+  }
+
+  .dialogue-player__messages {
+    background: #111827;
+  }
+
+  .dialogue-message {
+    background: #1f2937;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .message-content {
+    color: #d1d5db;
+  }
+
+  .message-quote {
+    background: #374151;
+    border-left-color: #6b7280;
+    color: #9ca3af;
+  }
+
+  .dialogue-player__controls {
+    background: #1f2937;
+    border-top-color: #374151;
+  }
+
+  .speed-selector {
+    background: #374151;
+    border-color: #4b5563;
+    color: #d1d5db;
+  }
+
+  .timeline-scrubber {
+    background: #374151;
+  }
+
+  .time-display {
+    color: #9ca3af;
+  }
+}
