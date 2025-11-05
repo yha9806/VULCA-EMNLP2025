@@ -39,12 +39,8 @@ class DialoguePlayer {
     this.options = {
       speed: options.speed || 1.0,
       autoPlay: options.autoPlay || false,
-      lang: options.lang || 'zh',
-      displayMode: options.displayMode || 'static' // Phase 3: 'static' | 'animated'
+      lang: options.lang || 'zh'
     };
-
-    // Display mode state (Phase 3)
-    this.displayMode = this.options.displayMode;
 
     // Playback state
     this.currentTime = 0;
@@ -82,10 +78,10 @@ class DialoguePlayer {
     console.log(`[DialoguePlayer] Initialized for thread: ${this.thread.id}`);
     console.log(`[DialoguePlayer] Messages: ${this.thread.messages.length}, Duration: ${this.totalDuration}ms`);
 
-    // Auto-play if requested
-    if (this.options.autoPlay) {
-      this.play();
-    }
+    // Natural Timing: Auto-start playback with natural timing
+    requestAnimationFrame(() => {
+      this._startNaturalPlayback();
+    });
   }
 
   /**
@@ -104,6 +100,98 @@ class DialoguePlayer {
 
     // Add 3 seconds buffer after last message for reading
     return maxTimestamp + 3000;
+  }
+
+  /**
+   * Generate random delay within range (Natural Timing)
+   * @private
+   * @param {number} min - Minimum delay (ms)
+   * @param {number} max - Maximum delay (ms)
+   * @returns {number} Random delay in milliseconds
+   */
+  _randomDelay(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  /**
+   * Calculate natural delay for message appearance (Natural Timing)
+   * Simulates thinking time based on message length
+   * @private
+   * @param {Object} message - Message object
+   * @param {number} index - Message index in thread
+   * @returns {number} Delay in milliseconds
+   */
+  _calculateNaturalDelay(message, index) {
+    const THINKING_MIN = 1500;
+    const THINKING_MAX = 3000;
+
+    // Base random thinking time
+    let delay = this._randomDelay(THINKING_MIN, THINKING_MAX);
+
+    // Adjust for message length (500ms per 100 chars)
+    const lang = document.documentElement.getAttribute('data-lang') || 'zh';
+    const text = lang === 'en' ? message.textEn : message.textZh;
+    const lengthAdjustment = Math.floor(text.length / 100) * 500;
+    delay += lengthAdjustment;
+
+    // First message appears faster (80% of normal delay)
+    if (index === 0) {
+      delay = Math.floor(delay * 0.8);
+    }
+
+    // Cap maximum delay at 5 seconds
+    delay = Math.min(delay, 5000);
+
+    console.log(`[DialoguePlayer] Message ${index} delay: ${delay}ms (length: ${text.length} chars)`);
+    return delay;
+  }
+
+  /**
+   * Reveal a hidden message with animation (Natural Timing)
+   * @private
+   * @param {string} messageId - Message ID to reveal
+   */
+  _revealMessage(messageId) {
+    const msgEl = this.messageElements.get(messageId);
+    if (!msgEl) {
+      console.warn(`[DialoguePlayer] Message element not found: ${messageId}`);
+      return;
+    }
+
+    // Remove hidden class, add appearing animation
+    msgEl.classList.remove('message-hidden');
+    msgEl.classList.add('message-appearing');
+
+    // Scroll into view (smooth)
+    msgEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+    console.log(`[DialoguePlayer] Revealed message: ${messageId}`);
+  }
+
+  /**
+   * Start natural playback with random timing (Natural Timing)
+   * @private
+   */
+  _startNaturalPlayback() {
+    console.log('[DialoguePlayer] Starting natural playback...');
+
+    // Track timeouts for cleanup
+    this._playbackTimeouts = [];
+
+    let cumulativeDelay = 0;
+
+    this.thread.messages.forEach((message, index) => {
+      const delay = this._calculateNaturalDelay(message, index);
+      cumulativeDelay += delay;
+
+      const timeoutId = setTimeout(() => {
+        this._revealMessage(message.id);
+      }, cumulativeDelay);
+
+      this._playbackTimeouts.push(timeoutId);
+    });
+
+    console.log(`[DialoguePlayer] Scheduled ${this.thread.messages.length} messages, total duration: ${cumulativeDelay}ms`);
   }
 
   /**
@@ -129,7 +217,7 @@ class DialoguePlayer {
 
       // Create message element
       const msgEl = document.createElement('div');
-      msgEl.className = 'dialogue-message static-display visible';
+      msgEl.className = 'dialogue-message message-hidden'; // Natural Timing: Start hidden
       msgEl.dataset.messageId = message.id;
       msgEl.dataset.personaId = message.personaId;
       msgEl.dataset.interactionType = message.interactionType;
@@ -165,7 +253,7 @@ class DialoguePlayer {
       this.renderedMessages.add(message.id);
     });
 
-    console.log(`[DialoguePlayer] Rendered ${this.thread.messages.length} messages in static mode`);
+    console.log(`[DialoguePlayer] Pre-rendered ${this.thread.messages.length} hidden messages (natural timing mode)`);
 
     // Draw all connection lines immediately (if ThoughtChainVisualizer is available)
     if (this.thoughtChainVisualizer) {
@@ -734,72 +822,11 @@ class DialoguePlayer {
    * @private
    */
   _initializeControls() {
-    // Phase 3: Mode toggle buttons at the top
-    const modeToggleHTML = `
-      <div class="mode-toggle-container">
-        <span class="mode-toggle-label">显示模式 / Display Mode:</span>
-        <div class="mode-toggle-buttons">
-          <button class="mode-toggle-btn ${this.displayMode === 'static' ? 'active' : ''}" data-mode="static" aria-label="Static view mode">
-            <span class="btn-icon">📄</span>
-            <span class="btn-label">查看 / View</span>
-          </button>
-          <button class="mode-toggle-btn ${this.displayMode === 'animated' ? 'active' : ''}" data-mode="animated" aria-label="Animated playback mode">
-            <span class="btn-icon">🎬</span>
-            <span class="btn-label">动画 / Animate</span>
-          </button>
-        </div>
-      </div>
-    `;
+    // Natural flow redesign: No controls needed
+    // Dialogue auto-plays with natural timing
+    this.controlsContainer.innerHTML = '';
 
-    // Playback controls (only shown in animated mode)
-    const playbackControlsHTML = `
-      <div class="playback-controls" style="display: ${this.displayMode === 'animated' ? 'block' : 'none'};">
-        <div class="controls-row">
-          <button class="control-button play-pause-btn" aria-label="Play dialogue" data-action="play">
-            <span class="btn-icon">▶</span>
-            <span class="btn-label">播放</span>
-          </button>
-
-          <select class="speed-selector" aria-label="Playback speed">
-            <option value="0.5">0.5x</option>
-            <option value="1.0" selected>1.0x</option>
-            <option value="1.5">1.5x</option>
-            <option value="2.0">2.0x</option>
-          </select>
-
-          <button class="control-button replay-btn" aria-label="Replay dialogue">
-            <span class="btn-icon">↻</span>
-            <span class="btn-label">重播</span>
-          </button>
-        </div>
-
-        <div class="timeline-container">
-          <input type="range" class="timeline-scrubber" min="0" max="${this.totalDuration}" value="0" step="100" aria-label="Timeline position" />
-          <div class="time-display">
-            <span class="current-time">0:00</span>
-            <span class="time-separator">/</span>
-            <span class="total-time">${this._formatTime(this.totalDuration)}</span>
-          </div>
-        </div>
-      </div>
-    `;
-
-    this.controlsContainer.innerHTML = modeToggleHTML + playbackControlsHTML;
-
-    // Store control element references
-    this.modeToggleBtns = this.controlsContainer.querySelectorAll('.mode-toggle-btn');
-    this.playbackControlsContainer = this.controlsContainer.querySelector('.playback-controls');
-    this.playPauseBtn = this.controlsContainer.querySelector('.play-pause-btn');
-    this.speedSelector = this.controlsContainer.querySelector('.speed-selector');
-    this.replayBtn = this.controlsContainer.querySelector('.replay-btn');
-    this.timelineScrubber = this.controlsContainer.querySelector('.timeline-scrubber');
-    this.currentTimeDisplay = this.controlsContainer.querySelector('.current-time');
-    this.totalTimeDisplay = this.controlsContainer.querySelector('.total-time');
-
-    // Attach event listeners
-    this._attachControlListeners();
-
-    console.log('[DialoguePlayer] Controls initialized with mode toggle');
+    console.log('[DialoguePlayer] Controls initialized (minimal - no UI)');
   }
 
   /**
@@ -807,206 +834,20 @@ class DialoguePlayer {
    * @private
    */
   _attachControlListeners() {
-    // Phase 3: Mode toggle buttons
-    this.modeToggleBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetMode = btn.dataset.mode;
-        if (targetMode === 'static') {
-          this.switchToStaticMode();
-        } else if (targetMode === 'animated') {
-          this.switchToAnimatedMode();
-        }
-      });
-    });
+    // Natural flow redesign: No control listeners needed
+    // Auto-play handles everything
 
-    // Play/Pause button
-    this.playPauseBtn.addEventListener('click', () => {
-      if (this.isPlaying) {
-        this.pause();
-      } else {
-        this.play();
-      }
-      this._updatePlayPauseButton();
-    });
-
-    // Speed selector
-    this.speedSelector.addEventListener('change', (e) => {
-      const speed = parseFloat(e.target.value);
-      this.setSpeed(speed);
-    });
-
-    // Replay button
-    this.replayBtn.addEventListener('click', () => {
-      this.reset();
-      this.play();
-      this._updatePlayPauseButton();
-    });
-
-    // Timeline scrubber
-    this.timelineScrubber.addEventListener('input', (e) => {
-      const time = parseInt(e.target.value);
-      this.scrubTo(time);
-      this._updateTimeDisplay();
-    });
-
-    // Update timeline during playback
-    this._startTimelineUpdater();
-
-    console.log('[DialoguePlayer] Control listeners attached');
-  }
-
-  /**
-   * Update play/pause button state
-   * @private
-   */
-  _updatePlayPauseButton() {
-    const icon = this.playPauseBtn.querySelector('.btn-icon');
-    const label = this.playPauseBtn.querySelector('.btn-label');
-
-    if (this.isPlaying) {
-      icon.textContent = '⏸';
-      label.textContent = '暂停';
-      this.playPauseBtn.setAttribute('aria-label', 'Pause dialogue');
-      this.playPauseBtn.dataset.action = 'pause';
-    } else {
-      icon.textContent = '▶';
-      label.textContent = '播放';
-      this.playPauseBtn.setAttribute('aria-label', 'Play dialogue');
-      this.playPauseBtn.dataset.action = 'play';
-    }
-  }
-
-  /**
-   * Update time display
-   * @private
-   */
-  _updateTimeDisplay() {
-    this.currentTimeDisplay.textContent = this._formatTime(this.currentTime);
-    this.timelineScrubber.value = this.currentTime;
-  }
-
-  /**
-   * Start timeline updater interval
-   * @private
-   */
-  _startTimelineUpdater() {
-    // Update timeline and time display every 100ms
-    this._timelineUpdateInterval = setInterval(() => {
-      if (this.isPlaying) {
-        this._updateTimeDisplay();
-      }
-    }, 100);
-  }
-
-  /**
-   * Format time in milliseconds to MM:SS
-   * @private
-   * @param {number} ms - Time in milliseconds
-   * @returns {string} Formatted time string
-   */
-  _formatTime(ms) {
-    const totalSeconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  }
-
-  /**
-   * Switch to animated mode (Phase 3)
-   * Clear existing messages and prepare for animated playback
-   */
-  switchToAnimatedMode() {
-    if (this.displayMode === 'animated') {
-      console.log('[DialoguePlayer] Already in animated mode');
-      return;
-    }
-
-    console.log('[DialoguePlayer] Switching to animated mode...');
-    this.displayMode = 'animated';
-
-    // Update mode toggle button states
-    this.modeToggleBtns.forEach(btn => {
-      if (btn.dataset.mode === 'animated') {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-
-    // Show playback controls
-    this.playbackControlsContainer.style.display = 'block';
-
-    // Clear all messages and prepare for animation
-    this.messagesContainer.innerHTML = '';
-    this.renderedMessages.clear();
-    this.currentTime = 0;
-    this.isPlaying = false;
-    this.isPaused = false;
-
-    // Reset timeline scrubber
-    this.timelineScrubber.value = 0;
-    this._updateTimeDisplay();
-    this._updatePlayPauseButton();
-
-    // Clear ThoughtChainVisualizer connections
-    if (this.thoughtChainVisualizer) {
-      this.thoughtChainVisualizer.clearAllConnections();
-    }
-
-    console.log('[DialoguePlayer] Switched to animated mode. Click Play to start animation.');
-  }
-
-  /**
-   * Switch to static mode (Phase 3)
-   * Display all messages immediately without animation
-   */
-  switchToStaticMode() {
-    if (this.displayMode === 'static') {
-      console.log('[DialoguePlayer] Already in static mode');
-      return;
-    }
-
-    console.log('[DialoguePlayer] Switching to static mode...');
-    this.displayMode = 'static';
-
-    // Update mode toggle button states
-    this.modeToggleBtns.forEach(btn => {
-      if (btn.dataset.mode === 'static') {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-
-    // Hide playback controls
-    this.playbackControlsContainer.style.display = 'none';
-
-    // Stop any ongoing animation
-    if (this.isPlaying) {
-      this.pause();
-    }
-
-    // Clear existing messages
-    this.messagesContainer.innerHTML = '';
-    this.renderedMessages.clear();
-    this.messageElements.clear();
-
-    // Re-render all messages in static mode
-    this._renderAllMessages();
-
-    console.log('[DialoguePlayer] Switched to static mode. All messages now visible.');
+    console.log('[DialoguePlayer] Control listeners attached (none - auto-play mode)');
   }
 
   /**
    * Destroy player and clean up resources
    */
   destroy() {
-    this.pause();
-
-    // Clear timeline updater interval
-    if (this._timelineUpdateInterval) {
-      clearInterval(this._timelineUpdateInterval);
-      this._timelineUpdateInterval = null;
+    // Stop any pending timeouts
+    if (this._playbackTimeouts) {
+      this._playbackTimeouts.forEach(timeout => clearTimeout(timeout));
+      this._playbackTimeouts = [];
     }
 
     this.container.innerHTML = '';
