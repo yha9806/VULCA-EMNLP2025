@@ -104,10 +104,10 @@ Full Content Visible → Optional "Animate" Button → Enhanced Experience
 ## Success Criteria
 
 ### Must Have (P0)
-- [ ] All dialogue messages visible without clicking play
-- [ ] Messages container height >400px with scrollable content
-- [ ] Information density parity: Dialogue mode ≈ Static mode
-- [ ] No layout collapse (computed height matches content height)
+- [x] All dialogue messages visible without clicking play
+- [x] Messages container height >400px with scrollable content
+- [x] Information density parity: Dialogue mode ≈ Static mode
+- [x] No layout collapse (computed height matches content height)
 
 ### Should Have (P1)
 - [ ] Optional animation toggle per dialogue
