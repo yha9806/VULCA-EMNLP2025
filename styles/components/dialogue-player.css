@@ -154,6 +154,63 @@
   }
 }
 
+/* ============================================================================
+   Progressive Focus States (Phase 4: Progressive Focus Interaction)
+   ========================================================================== */
+
+/* GPU acceleration hint for smooth transitions */
+.dialogue-message {
+  will-change: opacity, transform;
+}
+
+/* Past messages (dimmed, context) */
+.dialogue-message.past {
+  opacity: 0.4;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Current message (highlighted, centered) */
+.dialogue-message.current {
+  opacity: 1;
+  transform: scale(1.02); /* Subtle emphasis */
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  box-shadow: 0 4px 16px rgba(184, 92, 60, 0.2); /* Warm glow matching color system */
+}
+
+/* Future messages (dimmed, pending) */
+.dialogue-message.future {
+  opacity: 0.4;
+  transition: opacity 0.3s ease-out;
+  position: relative; /* For ::after badge */
+}
+
+/* "生成中..." badge for future messages */
+.dialogue-message.future::after {
+  content: "生成中...";
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  padding: 4px 12px;
+  background: rgba(184, 92, 60, 0.15); /* Warm terracotta tint */
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #B85C3C;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* English version for future badge (when lang="en") */
+[data-lang="en"] .dialogue-message.future::after {
+  content: "Generating...";
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* End Progressive Focus States */
+
 .dialogue-message:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
@@ -246,6 +303,188 @@
 .message-content p:last-child {
   margin-bottom: 0;
 }
+
+/* ============================================================================
+   Quote Reference & Tooltip (Phase 5: Quote Interaction Enhancement)
+   ========================================================================== */
+
+/* Inline quote reference */
+.quote-ref {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #6b7280;
+  cursor: pointer;
+  margin-bottom: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.quote-ref:hover {
+  background-color: #f3f4f6;
+}
+
+.quote-ref-author {
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Desktop hover tooltip (only on devices with precise pointers) */
+@media (hover: hover) and (pointer: fine) {
+  .quote-ref-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    max-width: 400px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    white-space: normal;
+    font-style: normal;
+  }
+
+  .quote-ref:hover .quote-ref-tooltip {
+    display: block;
+    animation: fadeInTooltip 200ms ease-out;
+  }
+
+  @keyframes fadeInTooltip {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  /* Tooltip arrow pointing down */
+  .quote-ref-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #ffffff;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+  }
+
+  .quote-tooltip-author {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  .quote-tooltip-text {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #374151;
+    margin: 0;
+  }
+}
+
+/* Mobile click modal (only on touch devices) */
+@media (hover: none) or (pointer: coarse) {
+  .quote-ref-tooltip {
+    display: none !important; /* Hide desktop tooltip on mobile */
+  }
+
+  .quote-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInBackdrop 300ms ease-out;
+  }
+
+  .quote-modal-backdrop.active {
+    display: flex;
+  }
+
+  @keyframes fadeInBackdrop {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .quote-modal {
+    position: relative;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    animation: slideUpModal 300ms ease-out;
+  }
+
+  @keyframes slideUpModal {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .quote-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #6b7280;
+    transition: background 0.2s ease;
+  }
+
+  .quote-modal-close:hover {
+    background: #e5e7eb;
+  }
+
+  .quote-modal-author {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .quote-modal-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #374151;
+    margin: 0;
+  }
+}
+
+/* End Quote Reference & Modal */
 
 /* ============================================================================
    Quote Blocks
@@ -669,4 +908,81 @@
   .time-display {
     color: #9ca3af;
   }
+}
+
+/* ============================================================================
+   Loading & Error States (Phase 3: Content Visibility)
+   ========================================================================== */
+
+/* Loading state */
+.dialogue-player-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #6b7280;
+}
+
+.dialogue-player-loading .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #B85C3C; /* Warm terracotta matching new color system */
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+.dialogue-player-loading p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error state */
+.dialogue-player-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.dialogue-player-error .error-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.dialogue-player-error h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 8px 0;
+}
+
+.dialogue-player-error .error-message {
+  font-size: 0.95rem;
+  margin: 0 0 24px 0;
+  max-width: 400px;
+}
+
+.dialogue-player-error .error-retry-btn {
+  padding: 10px 20px;
+  background: #B85C3C; /* Warm terracotta matching new color system */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dialogue-player-error .error-retry-btn:hover {
+  background: #A04B2F; /* Darker terracotta */
 }
