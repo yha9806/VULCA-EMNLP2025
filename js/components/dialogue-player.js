@@ -39,8 +39,12 @@ class DialoguePlayer {
     this.options = {
       speed: options.speed || 1.0,
       autoPlay: options.autoPlay || false,
-      lang: options.lang || 'zh'
+      lang: options.lang || 'zh',
+      displayMode: options.displayMode || 'static' // Phase 3: 'static' | 'animated'
     };
+
+    // Display mode state (Phase 3)
+    this.displayMode = this.options.displayMode;
 
     // Playback state
     this.currentTime = 0;
@@ -730,37 +734,61 @@ class DialoguePlayer {
    * @private
    */
   _initializeControls() {
-    this.controlsContainer.innerHTML = `
-      <div class="controls-row">
-        <button class="control-button play-pause-btn" aria-label="Play dialogue" data-action="play">
-          <span class="btn-icon">▶</span>
-          <span class="btn-label">播放</span>
-        </button>
-
-        <select class="speed-selector" aria-label="Playback speed">
-          <option value="0.5">0.5x</option>
-          <option value="1.0" selected>1.0x</option>
-          <option value="1.5">1.5x</option>
-          <option value="2.0">2.0x</option>
-        </select>
-
-        <button class="control-button replay-btn" aria-label="Replay dialogue">
-          <span class="btn-icon">↻</span>
-          <span class="btn-label">重播</span>
-        </button>
-      </div>
-
-      <div class="timeline-container">
-        <input type="range" class="timeline-scrubber" min="0" max="${this.totalDuration}" value="0" step="100" aria-label="Timeline position" />
-        <div class="time-display">
-          <span class="current-time">0:00</span>
-          <span class="time-separator">/</span>
-          <span class="total-time">${this._formatTime(this.totalDuration)}</span>
+    // Phase 3: Mode toggle buttons at the top
+    const modeToggleHTML = `
+      <div class="mode-toggle-container">
+        <span class="mode-toggle-label">显示模式 / Display Mode:</span>
+        <div class="mode-toggle-buttons">
+          <button class="mode-toggle-btn ${this.displayMode === 'static' ? 'active' : ''}" data-mode="static" aria-label="Static view mode">
+            <span class="btn-icon">📄</span>
+            <span class="btn-label">查看 / View</span>
+          </button>
+          <button class="mode-toggle-btn ${this.displayMode === 'animated' ? 'active' : ''}" data-mode="animated" aria-label="Animated playback mode">
+            <span class="btn-icon">🎬</span>
+            <span class="btn-label">动画 / Animate</span>
+          </button>
         </div>
       </div>
     `;
 
+    // Playback controls (only shown in animated mode)
+    const playbackControlsHTML = `
+      <div class="playback-controls" style="display: ${this.displayMode === 'animated' ? 'block' : 'none'};">
+        <div class="controls-row">
+          <button class="control-button play-pause-btn" aria-label="Play dialogue" data-action="play">
+            <span class="btn-icon">▶</span>
+            <span class="btn-label">播放</span>
+          </button>
+
+          <select class="speed-selector" aria-label="Playback speed">
+            <option value="0.5">0.5x</option>
+            <option value="1.0" selected>1.0x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2.0">2.0x</option>
+          </select>
+
+          <button class="control-button replay-btn" aria-label="Replay dialogue">
+            <span class="btn-icon">↻</span>
+            <span class="btn-label">重播</span>
+          </button>
+        </div>
+
+        <div class="timeline-container">
+          <input type="range" class="timeline-scrubber" min="0" max="${this.totalDuration}" value="0" step="100" aria-label="Timeline position" />
+          <div class="time-display">
+            <span class="current-time">0:00</span>
+            <span class="time-separator">/</span>
+            <span class="total-time">${this._formatTime(this.totalDuration)}</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    this.controlsContainer.innerHTML = modeToggleHTML + playbackControlsHTML;
+
     // Store control element references
+    this.modeToggleBtns = this.controlsContainer.querySelectorAll('.mode-toggle-btn');
+    this.playbackControlsContainer = this.controlsContainer.querySelector('.playback-controls');
     this.playPauseBtn = this.controlsContainer.querySelector('.play-pause-btn');
     this.speedSelector = this.controlsContainer.querySelector('.speed-selector');
     this.replayBtn = this.controlsContainer.querySelector('.replay-btn');
@@ -771,7 +799,7 @@ class DialoguePlayer {
     // Attach event listeners
     this._attachControlListeners();
 
-    console.log('[DialoguePlayer] Controls initialized');
+    console.log('[DialoguePlayer] Controls initialized with mode toggle');
   }
 
   /**
@@ -779,6 +807,18 @@ class DialoguePlayer {
    * @private
    */
   _attachControlListeners() {
+    // Phase 3: Mode toggle buttons
+    this.modeToggleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetMode = btn.dataset.mode;
+        if (targetMode === 'static') {
+          this.switchToStaticMode();
+        } else if (targetMode === 'animated') {
+          this.switchToAnimatedMode();
+        }
+      });
+    });
+
     // Play/Pause button
     this.playPauseBtn.addEventListener('click', () => {
       if (this.isPlaying) {
@@ -869,6 +909,92 @@ class DialoguePlayer {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  /**
+   * Switch to animated mode (Phase 3)
+   * Clear existing messages and prepare for animated playback
+   */
+  switchToAnimatedMode() {
+    if (this.displayMode === 'animated') {
+      console.log('[DialoguePlayer] Already in animated mode');
+      return;
+    }
+
+    console.log('[DialoguePlayer] Switching to animated mode...');
+    this.displayMode = 'animated';
+
+    // Update mode toggle button states
+    this.modeToggleBtns.forEach(btn => {
+      if (btn.dataset.mode === 'animated') {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    // Show playback controls
+    this.playbackControlsContainer.style.display = 'block';
+
+    // Clear all messages and prepare for animation
+    this.messagesContainer.innerHTML = '';
+    this.renderedMessages.clear();
+    this.currentTime = 0;
+    this.isPlaying = false;
+    this.isPaused = false;
+
+    // Reset timeline scrubber
+    this.timelineScrubber.value = 0;
+    this._updateTimeDisplay();
+    this._updatePlayPauseButton();
+
+    // Clear ThoughtChainVisualizer connections
+    if (this.thoughtChainVisualizer) {
+      this.thoughtChainVisualizer.clearAllConnections();
+    }
+
+    console.log('[DialoguePlayer] Switched to animated mode. Click Play to start animation.');
+  }
+
+  /**
+   * Switch to static mode (Phase 3)
+   * Display all messages immediately without animation
+   */
+  switchToStaticMode() {
+    if (this.displayMode === 'static') {
+      console.log('[DialoguePlayer] Already in static mode');
+      return;
+    }
+
+    console.log('[DialoguePlayer] Switching to static mode...');
+    this.displayMode = 'static';
+
+    // Update mode toggle button states
+    this.modeToggleBtns.forEach(btn => {
+      if (btn.dataset.mode === 'static') {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    // Hide playback controls
+    this.playbackControlsContainer.style.display = 'none';
+
+    // Stop any ongoing animation
+    if (this.isPlaying) {
+      this.pause();
+    }
+
+    // Clear existing messages
+    this.messagesContainer.innerHTML = '';
+    this.renderedMessages.clear();
+    this.messageElements.clear();
+
+    // Re-render all messages in static mode
+    this._renderAllMessages();
+
+    console.log('[DialoguePlayer] Switched to static mode. All messages now visible.');
   }
 
   /**

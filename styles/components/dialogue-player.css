@@ -274,6 +274,74 @@
   gap: 16px;
 }
 
+/* Phase 3: Mode Toggle Container */
+.mode-toggle-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mode-toggle-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mode-toggle-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.mode-toggle-btn {
+  flex: 1;
+  padding: 10px 16px;
+  background: #f3f4f6;
+  color: #374151;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mode-toggle-btn:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+}
+
+.mode-toggle-btn:active {
+  transform: translateY(0);
+}
+
+.mode-toggle-btn.active {
+  background: #667eea;
+  color: #ffffff;
+  border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.mode-toggle-btn.active:hover {
+  background: #5568d3;
+  border-color: #5568d3;
+}
+
+/* Playback controls wrapper (shown only in animated mode) */
+.playback-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 /* Primary controls row (play/pause + speed) */
 .controls-row {
   display: flex;
@@ -444,6 +512,16 @@
 
   .dialogue-player__controls {
     padding: 16px;
+  }
+
+  /* Phase 3: Mode toggle responsive */
+  .mode-toggle-label {
+    font-size: 0.8rem;
+  }
+
+  .mode-toggle-btn {
+    font-size: 0.85rem;
+    padding: 8px 12px;
   }
 
   .controls-row {
