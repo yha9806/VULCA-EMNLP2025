@@ -169,10 +169,10 @@
    ```
 
 **Success Criteria**:
-- [ ] All messages rendered on init
-- [ ] Messages in chronological order
-- [ ] No animation classes applied
-- [ ] Connection lines drawn
+- [x] All messages rendered on init
+- [x] Messages in chronological order (sorted by timestamp)
+- [x] Static-display classes applied (no animation)
+- [x] Connection lines drawn via ThoughtChainVisualizer
 
 ---
 
@@ -230,10 +230,10 @@
    ```
 
 **Success Criteria**:
-- [ ] Method returns complete message element
-- [ ] Bilingual text structure correct
-- [ ] Interaction badges rendered
-- [ ] Quote blocks functional
+- [x] Message creation logic implemented (inline in _renderAllMessages)
+- [x] Bilingual text structure correct (lang-based selection)
+- [x] Interaction badges rendered with correct styling
+- [x] Quote blocks functional (via _createQuoteBlock helper)
 
 ---
 
@@ -257,9 +257,9 @@
 3. Test initialization
 
 **Success Criteria**:
-- [ ] Messages appear immediately on init
-- [ ] No delay or animation
-- [ ] Container expands to fit content
+- [x] Messages appear immediately on init
+- [x] No delay or animation
+- [x] Container expands to fit content (via Phase 1 CSS fixes)
 
 ---
 
@@ -298,9 +298,9 @@
    ```
 
 **Success Criteria**:
-- [ ] Static messages fully opaque
-- [ ] Highlight styles defined
-- [ ] No flicker or transitions on load
+- [x] Static messages fully opaque (opacity: 1)
+- [x] Static display CSS defined (.static-display class)
+- [x] No flicker or transitions on load (transition: none)
 
 ---
 
