@@ -1,3 +1,22 @@
+<!-- OPENSPEC:START -->
+# OpenSpec Instructions
+
+These instructions are for AI assistants working in this project.
+
+Always open `@/openspec/AGENTS.md` when the request:
+- Mentions planning or proposals (words like proposal, spec, change, plan)
+- Introduces new capabilities, breaking changes, architecture shifts, or big performance/security work
+- Sounds ambiguous and you need the authoritative spec before coding
+
+Use `@/openspec/AGENTS.md` to learn:
+- How to create and apply change proposals
+- Spec format and conventions
+- Project structure and guidelines
+
+Keep this managed block so 'openspec update' can refresh the instructions.
+
+<!-- OPENSPEC:END -->
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -6,7 +25,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # CLAUDE.md - Claude Code 工作指南
 
-**最后更新**: 2025-11-04
+**最后更新**: 2025-11-06
 **项目**: VULCA - 艺术评论展览平台（沉浸式艺术评论展览）
 **网址**: https://vulcaart.art
 **GitHub**: https://github.com/yha9806/VULCA-EMNLP2025
@@ -816,6 +835,50 @@ Closes #42
 
 ---
 
+### ✅ Phase 2: 对话数据结构转换完成 (2025-11-06)
+
+**解决的问题**:
+- ❌ 之前: 每个作品有 6 个分散的对话线程，叙事不连贯
+- ✅ 现在: 每个作品 1 个连续对话，自然时间流动（4-7秒间隔）
+
+**实施内容**:
+1. **数据结构转换** (`js/data/dialogues/*.js`)
+   - 从 `artwork1Dialogues = [thread1, ..., thread6]` (数组)
+   - 转换为 `artwork1Dialogue = { id, messages: [...] }` (单一对话对象)
+   - 4 个作品 × 1 个对话 = 4 个对话对象（之前是 16 个线程）
+   - 总消息数: 85 条 (30+19+18+18)
+
+2. **时间戳重新生成** (`scripts/merge-threads-helper.js`)
+   - 随机间隔 4000-7000ms（平均 5.6 秒）
+   - 模拟自然对话节奏
+   - 总时长: artwork-1 (2.6分钟), artwork-2 (1.7分钟), artwork-3 (1.6分钟), artwork-4 (1.5分钟)
+
+3. **验证系统** (`scripts/validate-dialogue-data.js`)
+   - 6 项验证检查（必填字段、唯一ID、回复链、时间戳、参与者、知识库引用）
+   - 所有 4 个对话通过验证
+   - 34 条回复消息验证有效（40% 的消息包含回复关系）
+
+4. **知识库引用准备就绪**
+   - `references` 字段已定义（可选）
+   - Phase 1A 知识库已完成（6位评论家，~2000行，300+引用）
+   - Phase 3 将填充 references 数组
+
+**数据完整性**:
+- ✅ 所有消息内容保留（无数据丢失）
+- ✅ 所有 replyTo 引用有效
+- ✅ 所有参与者一致性检查通过
+- ✅ 唯一消息 ID（无重复）
+
+**向后兼容性**:
+- DialoguePlayer 组件自动检测新旧格式（无需修改）
+- index.js 导出 `DIALOGUES`（新）和 `DIALOGUE_THREADS`（别名，向后兼容）
+
+**相关文档**:
+- `PHASE_2_TRANSFORMATION_SUMMARY.md` - 完整转换报告
+- `openspec/changes/merge-threads-to-continuous-dialogue/` - OpenSpec 提案
+
+---
+
 ### ✅ Phase 1: 艺术作品图片 Placeholder 系统已实施 (2025-11-02)
 
 **解决的问题**:
@@ -845,6 +908,374 @@ Closes #42
 - ♿ **完全可访问**: 符合 WCAG 2.1 AA 标准
 
 **相关文档**: 参见 `openspec/changes/fix-artwork-image-display-system/`
+
+---
+
+## 🎭 动态对话系统 (Dialogue Player System)
+
+### 概述
+
+本项目包含一个完整的**评论家对话动画系统**，用于展示6位评论家对艺术作品的深度对话。
+
+**核心功能**:
+- ✅ 自动播放动画对话（无需手动控制）
+- ✅ 自然时间间隔（4-7秒随机延迟，模拟思考过程）
+- ✅ 思维链可视化（显示评论家"思考中..."的过程）
+- ✅ 引文系统（消息间引用与回复关系）
+- ✅ 双语支持（中/英文切换）
+- ✅ 响应式设计（桌面/移动端）
+
+### 架构组成
+
+```
+动态对话系统
+├── DialoguePlayer 类 (js/components/dialogue-player.js)
+│   ├── 自动播放引擎（Natural Timing）
+│   ├── 思维链轮播（Thought Chain Carousel）
+│   ├── 引文交互（Quote Interaction）
+│   └── 响应式布局
+├── 对话数据 (js/data/dialogues/)
+│   ├── artwork-1.js ~ artwork-4.js（Phase 2: 4个连续对话，85条消息）
+│   ├── types.js（类型定义，包含知识库引用）
+│   └── index.js（数据导出: DIALOGUES, DIALOGUE_THREADS）
+├── 样式系统 (styles/components/dialogue-player.css)
+│   ├── 赤陶色/金色暖色调（Terracotta → Gold）
+│   ├── 评论家颜色区分
+│   └── 响应式断点（768px/1024px）
+└── 测试页面
+    ├── test-quote-interaction.html ⭐ **推荐**（完整功能）
+    ├── test-thought-chain.html（思维链测试）
+    ├── test-dialogue-colors.html（颜色系统）
+    └── test-typography.html（排版测试）
+```
+
+### ⭐ 推荐实现: test-quote-interaction.html
+
+**重要**: 这是**用户最满意的实现版本**，未来集成到主网站时应使用此页面的设计和功能。
+
+**访问地址**: `http://localhost:9999/test-quote-interaction.html`
+
+**包含功能**:
+1. **自动播放对话动画**
+   - 页面加载后自动开始
+   - 随机时间间隔（4-7秒）
+   - 无需手动点击"播放"按钮
+
+2. **引文系统** ⭐ 核心功能
+   - 显示 `↩ 回复 [评论家名字]` 标签
+   - 显示被引用的原文内容
+   - **桌面端**: 鼠标悬停显示白色工具提示
+   - **移动端**: 点击打开全屏模态框
+   - 点击引用自动滚动到原始消息
+
+3. **思维链可视化**
+   - 未来消息显示"思考中..."状态
+   - 每2秒轮播切换思考内容
+   - "生成中..." 标签显示在右上角
+
+4. **视觉设计**
+   - 赤陶色/金色渐变（#B85C3C → #D4A574）
+   - 评论家颜色区分（Su Shi: #B85C3C, Guo Xi: #2D5F4F）
+   - 圆角卡片、微阴影
+
+### DialoguePlayer 类使用方法
+
+```javascript
+// 1. 确保 VULCA_DATA 已加载（包含 personas 数据）
+// 2. 创建对话线程对象
+const dialogueThread = {
+  id: 'thread-1',
+  artworkId: 'artwork-1',
+  topic: '对话主题',
+  topicEn: 'Dialogue Topic',
+  participants: ['su-shi', 'guo-xi', 'john-ruskin'],
+  messages: [
+    {
+      id: 'msg-1',
+      personaId: 'su-shi',
+      textZh: '中文评论内容...',
+      textEn: 'English critique...',
+      timestamp: 0,
+      replyTo: null,
+      interactionType: 'initial'
+    },
+    {
+      id: 'msg-2',
+      personaId: 'guo-xi',
+      textZh: '回复内容...',
+      textEn: 'Reply content...',
+      timestamp: 3000,
+      replyTo: 'su-shi',
+      interactionType: 'agree-extend',
+      quotedText: '被引用的原文片段'  // ⭐ 引文系统关键字段
+    }
+  ]
+};
+
+// 3. 实例化 DialoguePlayer
+const container = document.getElementById('dialogue-container');
+const player = new DialoguePlayer(dialogueThread, container, {
+  speed: 1.0,          // 播放速度（1.0 = 正常）
+  autoPlay: true,      // 自动播放（推荐 true）
+  lang: 'zh'           // 默认语言（'zh' 或 'en'）
+});
+
+// 4. DialoguePlayer 自动处理一切！
+// - 自动开始播放
+// - 自动显示思维链
+// - 自动处理引文交互
+// - 自动响应式布局
+```
+
+### 对话数据结构
+
+**Message 对象** (当前实现):
+```javascript
+{
+  id: string,              // 消息唯一ID
+  personaId: string,       // 评论家ID（对应 VULCA_DATA.personas）
+  textZh: string,          // 中文内容
+  textEn: string,          // 英文内容
+  timestamp: number,       // 显示时间戳（毫秒，从0开始）
+  replyTo: string|null,    // 回复的评论家ID
+  interactionType: string, // 交互类型（initial, agree-extend, question-challenge, etc.）
+  quotedText?: string      // ⭐ 被引用的原文（可选，用于引文系统）
+}
+```
+
+**Message 对象** (Phase 2 扩展 - 待实施):
+```javascript
+{
+  // ... 现有字段 ...
+  chapterNumber?: number,        // 章节编号 (1-5)
+  highlightImage?: string,       // 高亮图像 ID
+  imageAnnotation?: {            // 图像注释
+    zh: string,
+    en: string
+  },
+  references?: Array<{           // 知识库引用
+    critic: string,              // 评论家 ID
+    source: string,              // 来源文档
+    quote: string,               // 引用文本
+    page?: string                // 页码/章节
+  }>
+}
+```
+
+### 交互类型 (Interaction Types)
+
+```javascript
+const INTERACTION_TYPES = {
+  'initial': { labelZh: '首发', labelEn: 'INITIAL' },
+  'agree-extend': { labelZh: '赞同并延伸', labelEn: 'AGREE & EXTEND' },
+  'question-challenge': { labelZh: '质疑', labelEn: 'QUESTION' },
+  'counter': { labelZh: '反驳', labelEn: 'COUNTER' },
+  'synthesize': { labelZh: '综合', labelEn: 'SYNTHESIZE' },
+  'reflect': { labelZh: '反思', labelEn: 'REFLECT' }
+};
+```
+
+### 本地测试
+
+```bash
+# 1. 启动本地服务器
+python -m http.server 9999
+
+# 2. 访问测试页面
+http://localhost:9999/test-quote-interaction.html  # ⭐ 推荐
+http://localhost:9999/test-thought-chain.html
+http://localhost:9999/test-dialogue-colors.html
+http://localhost:9999/test-typography.html
+```
+
+### 相关 OpenSpec 项目
+
+- **`natural-dialogue-flow-redesign`** (已归档 2025-11-05)
+  - 从"媒体播放器模式"改为"自然对话流动模式"
+  - 移除播放控制按钮，自动播放
+  - 随机时间间隔，模拟自然思考
+
+- **`fix-dialogue-system-ux-and-layout`** (已归档 2025-11-05)
+  - CSS 布局修复
+  - 内容可见性修复
+  - 响应式设计优化
+
+### 未来集成计划
+
+**目标**: 将 `test-quote-interaction.html` 集成到主网站
+
+**步骤**:
+1. 创建 `pages/dialogues.html`（基于 test-quote-interaction.html）
+2. 更新导航菜单（添加"对话"链接）
+3. 加载真实对话数据（从 `js/data/dialogues/`）
+4. 集成到主网站导航流程
+
+**注意**: 保持 test-quote-interaction.html 的所有功能和设计风格！
+
+---
+
+## 📚 知识库系统 (Knowledge Base System)
+
+### 概述
+
+本项目为 **6 位评论家** 构建了完整的知识库，用于生成深度对话内容。
+
+**状态**: ✅ Phase 1A 完成（2025-11-06，Session 1-2）
+
+### 评论家列表
+
+| 评论家 | 文化背景 | 时代 | 核心方法论 | 文件路径 |
+|--------|---------|------|-----------|---------|
+| **Su Shi (苏轼)** | 北宋文人画 | 1037-1101 | 哲学-诗意 | `knowledge-base/critics/su-shi/` |
+| **Guo Xi (郭熙)** | 北宋画院 | 1020-1090 | 技术-系统 | `knowledge-base/critics/guo-xi/` |
+| **John Ruskin** | 维多利亚英国 | 1819-1900 | 道德-政治 | `knowledge-base/critics/john-ruskin/` |
+| **Mama Zola** | 西非 Griot | 2000+ 年传统 | 社区-去殖民 | `knowledge-base/critics/mama-zola/` |
+| **Professor Petrova** | 俄国形式主义 | 1910s-1930s | 形式-结构 | `knowledge-base/critics/professor-petrova/` |
+| **AI Ethics Reviewer** | 当代科技伦理 | 2018-present | 权力-系统 | `knowledge-base/critics/ai-ethics-reviewer/` |
+
+### 知识库结构
+
+每位评论家的知识库包含:
+
+```
+knowledge-base/critics/[critic-id]/
+├── README.md                     # 完整使用指南
+│   ├── Biography（传记）
+│   ├── Core Philosophy（5个核心原则）
+│   ├── Voice Characteristics（声音特征）
+│   ├── Application to AI Art（AI艺术批评框架）
+│   └── Example Critique（示例评论）
+├── [topic].md                    # 主题引用文件（50+ 引用）
+│   ├── Su Shi: poetry-and-theory.md
+│   ├── Guo Xi: landscape-theory.md
+│   ├── John Ruskin: art-and-morality.md
+│   ├── Mama Zola: griot-aesthetics-oral-tradition.md
+│   ├── Petrova: formalism-and-device.md
+│   └── AI Ethics: algorithmic-justice-and-power.md
+├── key-concepts.md               # 5个核心概念详解
+└── references.md                 # 参考文献列表
+```
+
+### 核心原则示例
+
+**Mama Zola (西非 Griot)**:
+1. **Ubuntu** — "我在故我们在" (umuntu ngumuntu ngabantu)
+2. **Griot Ethics** — 社区记忆守护者
+3. **Call-and-Response** — 参与式美学
+4. **Sankofa** — 从祖先学习
+5. **Spiral Time** — 非线性时间性
+
+**Professor Petrova (俄国形式主义)**:
+1. **Defamiliarization (Остранение)** — 陌生化
+2. **Device (Прием)** — 设备/技巧
+3. **Literariness** — 文学性
+4. **Automatization vs. Enstrangement** — 自动化 vs 陌生化
+5. **Structural Analysis** — 结构分析
+
+### 使用知识库生成对话
+
+**Phase 3 计划** (待实施):
+1. 读取评论家知识库（README.md, key-concepts.md）
+2. 使用 LLM 生成对话内容
+3. 为每条消息添加 `references` 字段（引用具体来源）
+4. 验证对话符合评论家声音特征
+
+**示例**:
+```javascript
+// Phase 3: 带知识库引用的消息
+{
+  id: 'msg-1',
+  personaId: 'su-shi',
+  textZh: '观此作，机械与自然交织...',
+  references: [
+    {
+      critic: 'su-shi',
+      source: '东坡诗集',
+      quote: '笔墨当随时代',
+      page: '卷三'
+    }
+  ]
+}
+```
+
+### 相关文档
+
+- **SESSION_2_SUMMARY.md** — Session 2 完整工作记录
+- **WORK_SESSION_LOG.md** — Session 1 工作记录
+- **openspec/changes/expand-dialogue-with-knowledge-base/** — OpenSpec 提案
+
+---
+
+## 🚧 Phase 2: 数据结构扩展 (准备就绪)
+
+### 状态
+
+- ✅ Phase 1A: Knowledge Base Construction (100% 完成)
+- ⏸️ Phase 2: Data Structure Extensions (已启动，数据结构分析完成)
+
+### Phase 2 目标
+
+扩展对话数据结构，支持：
+1. **章节化叙事** (5 chapters per artwork)
+2. **图像同步** (highlightImage 字段)
+3. **知识库引用** (references 数组)
+4. **图像注释** (imageAnnotation 对象)
+
+### 待实施任务
+
+| 任务 | 预计时长 | 状态 |
+|------|---------|------|
+| Task 2.2: 扩展 Message 数据结构 | 2小时 | ⏳ 待开始 |
+| Task 2.3: 创建 Chapter 数据结构 | 2小时 | ⏳ 待开始 |
+| Task 2.5: 更新现有对话数据 | 4小时 | ⏳ 待开始 |
+| Task 2.7: 创建数据验证脚本 | 4小时 | ⏳ 待开始 |
+| Task 2.10: 更新文档 | 2小时 | ⏳ 待开始 |
+| **总计** | **14.5小时** | — |
+
+### Chapter 结构 (5 章节模板)
+
+```javascript
+const DIALOGUE_CHAPTERS = [
+  {
+    id: 1,
+    title: '初见印象',
+    titleEn: 'First Impressions',
+    description: '评论家的初步观察与即时反应',
+    descriptionEn: 'Initial observations and immediate reactions',
+    messageIds: ['msg-1', 'msg-2', ...]  // 3-4条消息
+  },
+  {
+    id: 2,
+    title: '技法解析',
+    titleEn: 'Technical Analysis',
+    // ... 3-4条消息
+  },
+  {
+    id: 3,
+    title: '哲学思辨',
+    titleEn: 'Philosophical Reflection',
+    // ... 3-4条消息
+  },
+  {
+    id: 4,
+    title: '美学评判',
+    titleEn: 'Aesthetic Judgment',
+    // ... 3-4条消息
+  },
+  {
+    id: 5,
+    title: '文化对话',
+    titleEn: 'Cultural Dialogue',
+    // ... 3-4条消息
+  }
+];
+```
+
+### 下次会话开始
+
+**快速启动**: 阅读 `NEXT_SESSION_START_HERE.md` 和 `SESSION_2_SUMMARY.md`
+
+**实施指南**: 参见 `openspec/changes/expand-dialogue-with-knowledge-base/tasks.md` (lines 559-658)
 
 ---
 

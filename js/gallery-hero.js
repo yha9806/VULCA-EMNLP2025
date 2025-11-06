@@ -262,13 +262,22 @@ window.GalleryHeroRenderer = (function() {
   }
 
   /**
-   * Render current artwork and critics
+   * Render current artwork and dialogue (Phase 3.3)
    */
   function render(carousel) {
     renderHeroTitle(carousel);
     renderArtworkHeader(carousel);
     // renderArtworkImage(carousel);  // Now handled by UnifiedNavigation component
-    renderCritiques(carousel);
+
+    // Phase 3.3: Replace static critiques with dynamic dialogue
+    const currentArtwork = carousel.artworks[carousel.currentIndex];
+    if (currentArtwork) {
+      renderDialogue(currentArtwork.id);
+    } else {
+      console.error('[Gallery Hero] No current artwork found');
+    }
+
+    // renderCritiques(carousel);     // DEPRECATED: Replaced by renderDialogue()
     // updateIndicator(carousel);     // Now handled by UnifiedNavigation component
     // renderDots(carousel);           // Removed (old navigation)
   }
@@ -498,7 +507,8 @@ window.GalleryHeroRenderer = (function() {
   }
 
   /**
-   * Render critic reviews
+   * Render critic reviews (DEPRECATED - Phase 3.3)
+   * Replaced by renderDialogue() for dynamic dialogue system
    */
   function renderCritiques(carousel) {
     const container = document.getElementById('critiques-panel');
@@ -522,6 +532,80 @@ window.GalleryHeroRenderer = (function() {
     });
 
     console.log(`✓ Rendered ${visibleCritics.length} critic reviews`);
+  }
+
+  /**
+   * Get current language setting
+   * @returns {string} 'zh' or 'en'
+   */
+  function getCurrentLang() {
+    return document.documentElement.getAttribute('data-lang') || 'zh';
+  }
+
+  /**
+   * Render dialogue for specified artwork using DialoguePlayer (Phase 3.3)
+   * Replaces static critique cards with dynamic dialogue system
+   * @param {string} artworkId - Artwork ID (e.g., 'artwork-1')
+   */
+  function renderDialogue(artworkId) {
+    const container = document.getElementById('critiques-panel');
+    if (!container) {
+      console.error('[Gallery Hero] critiques-panel not found');
+      return;
+    }
+
+    // Destroy previous DialoguePlayer instance (memory management)
+    if (window.currentDialoguePlayer) {
+      console.log('[Gallery Hero] Destroying previous DialoguePlayer');
+      window.currentDialoguePlayer.destroy();
+      window.currentDialoguePlayer = null;
+    }
+
+    // Clear container
+    container.innerHTML = '';
+
+    // Get dialogue data from global variable (exported by dialogues/index.js)
+    const dialogue = window.getDialogueForArtwork?.(artworkId);
+    if (!dialogue) {
+      console.error(`[Gallery Hero] No dialogue found for: ${artworkId}`);
+
+      // Show error message (bilingual)
+      const errorMsg = document.createElement('p');
+      errorMsg.className = 'dialogue-error';
+      errorMsg.innerHTML = `
+        <span lang="zh">对话数据加载失败</span>
+        <span lang="en">Dialogue data not found</span>
+      `;
+      container.appendChild(errorMsg);
+      return;
+    }
+
+    console.log(`[Gallery Hero] Loading dialogue for ${artworkId}:`, dialogue.id);
+
+    // Create DialoguePlayer instance
+    try {
+      const player = new DialoguePlayer(dialogue, container, {
+        autoPlay: true,              // Auto-play on load (natural dialogue flow)
+        speed: 1.0,                  // Normal speed
+        lang: getCurrentLang()       // Current language setting
+      });
+
+      // Store reference for cleanup on next artwork switch
+      window.currentDialoguePlayer = player;
+
+      console.log(`✓ [Gallery Hero] DialoguePlayer initialized for ${artworkId}`);
+    } catch (error) {
+      console.error('[Gallery Hero] Failed to create DialoguePlayer:', error);
+
+      // Show error message
+      const errorMsg = document.createElement('p');
+      errorMsg.className = 'dialogue-error';
+      errorMsg.innerHTML = `
+        <span lang="zh">对话加载失败</span>
+        <span lang="en">Dialogue loading failed</span>
+      `;
+      container.appendChild(errorMsg);
+    }
   }
 
   /**
