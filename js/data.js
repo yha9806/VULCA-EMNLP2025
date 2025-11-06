@@ -313,6 +313,17 @@ window.VULCA_DATA = {
       bioZh: "当代技术哲学家和人工智能伦理学研究者，研究算法如何重塑数字时代的创造力、真实性和人类能动性。AI伦理评审员以批判性清晰度而非技术乌托邦主义的态度看待算法艺术，关注其变革潜力和严重局限。借鉴机器伦理、计算美学和技术哲学等新兴领域，这一视角提出根本问题：当美学判断被算法中介时会发生什么？当机器参与时，创造力是什么？当算法日益塑造文化时，我们如何维护人类尊严？AI伦理评审员坚持技术从不中立——每个算法都嵌入关于价值、美和人性的假设。这一视角代表凯特·克劳福德（Kate Crawford）等学者的研究，不是抵制技术变革，而是以道德严肃性导航它，确保人类繁荣和真实创造力仍是社会评价和创造艺术的核心。",
       color: "#808080",
       bias: "Technical innovation, algorithmic thinking, human-machine collaboration"
+    },
+    {
+      id: "ai-ethics-reviewer",
+      nameZh: "AI伦理评审员",
+      nameEn: "AI Ethics Reviewer",
+      period: "数字时代",
+      era: "Contemporary Digital",
+      bio: "Contemporary philosopher of technology and artificial intelligence ethics examining how algorithms reshape creativity, authenticity, and human agency in the digital age. The AI Ethics Reviewer approaches algorithmic art not with techno-utopianism but with critical clarity about both transformative potential and serious limitations. Drawing from emerging fields of machine ethics, computational aesthetics, and technology philosophy, this voice asks fundamental questions: What happens when aesthetic judgment is algorithmically mediated? What is creativity when machines participate? How do we maintain human dignity when algorithms increasingly shape culture? The AI Ethics Reviewer insists that technology is never neutral—every algorithm embeds assumptions about value, beauty, and humanity. Rather than celebrating AI's creative capabilities uncritically, this perspective demands rigorous examination of what systems can authentically express, where they fail, and what irreplaceable human contributions remain. This voice represents not resistance to technological change but commitment to navigating it with moral seriousness, ensuring that human flourishing and authentic creativity remain central to how society values and creates art.",
+      bioZh: "当代技术哲学家和人工智能伦理学研究者，研究算法如何重塑数字时代的创造力、真实性和人类能动性。AI伦理评审员以批判性清晰度而非技术乌托邦主义的态度看待算法艺术，关注其变革潜力和严重局限。借鉴机器伦理、计算美学和技术哲学等新兴领域，这一视角提出根本问题：当美学判断被算法中介时会发生什么？当机器参与时，创造力是什么？当算法日益塑造文化时，我们如何维护人类尊严？AI伦理评审员坚持技术从不中立——每个算法都嵌入关于价值、美和人性的假设。这一视角代表凯特·克劳福德（Kate Crawford）等学者的研究，不是抵制技术变革，而是以道德严肃性导航它，确保人类繁荣和真实创造力仍是社会评价和创造艺术的核心。",
+      color: "#808080",
+      bias: "Technical innovation, algorithmic thinking, human-machine collaboration"
     }
   ],
 

@@ -29,7 +29,27 @@ const artwork2Threads = [
         textEn: `This work is titled "First Generation (Imitation)," directly addressing the theme of "imitation." In Chinese painting tradition, "copying" is a necessary path of learning—students copy ancient masters' works, mastering brushwork through repeated practice. But the purpose of copying is to transcend imitation, ultimately reaching the realm of "learning from nature and creation." Observing this work, the mechanical arm imitates human painter's brushstrokes—this is a new form of "copying." The question is: Can machines, like human students, progress from imitation to creation? Or will they forever remain at the stage of replication?`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "饱游饫看，历历罗列于胸中，而目不见绢素，手不知笔墨",
+            page: "Quote 24: Learning from Nature"
+          },
+          {
+            critic: "guo-xi",
+            source: "README.md",
+            quote: "Training Through Embodied Observation (饱游饫看)",
+            page: "Creative Process"
+          },
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "山水之道，化工也 (The Dao of landscapes is transformative workmanship)",
+            page: "Quote 26: Dao and Nature"
+          }
+        ]
       },
       {
         id: "msg-artwork-2-1-2",
@@ -39,7 +59,27 @@ const artwork2Threads = [
         timestamp: 3000,
         replyTo: "guo-xi",
         interactionType: "question-challenge",
-        quotedText: "机器能否从模仿走向创造"
+        quotedText: "机器能否从模仿走向创造",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "Imperfections in craftsmanship are integral to its genuine expression. The demand for perfection degrades the workman",
+            page: "Quote 8: Imperfections as Integrity"
+          },
+          {
+            critic: "john-ruskin",
+            source: "README.md",
+            quote: "Gothic vitality vs. Classical perfection - irregularity as moral honesty",
+            page: "Core Philosophy: The Nature of Gothic"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "The artist has a moral duty to display the actual truth, so as not to deceive",
+            page: "Quote 1: The Artist's Moral Duty"
+          }
+        ]
       },
       {
         id: "msg-artwork-2-1-3",
@@ -49,7 +89,21 @@ const artwork2Threads = [
         timestamp: 6000,
         replyTo: "john-ruskin",
         interactionType: "counter",
-        quotedText: "模仿太完美反而失去创造"
+        quotedText: "模仿太完美反而失去创造",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "AI as Extractive System - from materials to labor to data",
+            page: "Section 1-10: Three Layers of Extraction"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "README.md",
+            quote: "Algorithmic Accountability Framework: Who benefits? Who bears costs?",
+            page: "Core Philosophy"
+          }
+        ]
       },
       {
         id: "msg-artwork-2-1-4",
@@ -58,7 +112,21 @@ const artwork2Threads = [
         textEn: `Both of you make valid points. Perhaps the title "First Generation (Imitation)" itself is the artist's self-reflection—she acknowledges this is the imitation stage, the starting point of exploration. Just as learning painting requires first copying, this work is the "first step" in the artist's collaboration with machines. Importantly, she did not stop here. The subsequent Second Generation work already demonstrates possibilities beyond imitation. From this perspective, "imitation" is not a limitation, but an honest attitude—acknowledging one's current stage, laying foundation for future breakthroughs. This humility is precisely the most valuable quality in artistic creation.`,
         timestamp: 9000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "若能会心远至，则画无微不妙 (If one can comprehend with the heart and extend afar)",
+            page: "Quote 23: Observation Before Painting"
+          },
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "笔简形具 (Brush simplified, form complete)",
+            page: "Quote 25: Spontaneity and Control"
+          }
+        ]
       }
     ]
   },
@@ -80,7 +148,27 @@ const artwork2Threads = [
         textEn: `This 2015 work appears at a special historical moment—AI had just entered public consciousness, and automation was beginning to trigger widespread social anxiety. From an art historical perspective, Chung's work is not merely technical experiment, but an acute response to contemporary cultural symptoms. The theme "imitation" itself is a critique: In this era dominated by big data and algorithms, is human uniqueness being diluted? When machines can imitate our gestures, replicate our styles, where lies our value? This is a profound question about identity.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "Defamiliarization (остранение): Making strange to increase the difficulty and length of perception",
+            page: "Section 1-10: Core Principle"
+          },
+          {
+            critic: "professor-petrova",
+            source: "README.md",
+            quote: "Art is a sum of devices (priemy) that the artist manipulates",
+            page: "Core Philosophy: Device (Прием)"
+          },
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "Automatization: Habitual perception (art's enemy)",
+            page: "Section 31-40: Automatization vs. Defamiliarization"
+          }
+        ]
       },
       {
         id: "msg-artwork-2-2-2",
@@ -90,7 +178,27 @@ const artwork2Threads = [
         timestamp: 3000,
         replyTo: "professor-petrova",
         interactionType: "agree-extend",
-        quotedText: "人类的独特性是否正在被稀释"
+        quotedText: "人类的独特性是否正在被稀释",
+        references: [
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "The griot does not own the stories—the stories own the griot",
+            page: "Reference 4: The Griot's Role"
+          },
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Training Through Memorization and Listening - ten years to earn the right to speak",
+            page: "Reference 7: Griot Education"
+          },
+          {
+            critic: "mama-zola",
+            source: "README.md",
+            quote: "Ubuntu — I am because we are (Umuntu ngumuntu ngabantu)",
+            page: "Core Philosophy: Relational Personhood"
+          }
+        ]
       },
       {
         id: "msg-artwork-2-2-3",
@@ -100,7 +208,27 @@ const artwork2Threads = [
         timestamp: 6000,
         replyTo: "mama-zola",
         interactionType: "synthesize",
-        quotedText: "我们的'为什么'"
+        quotedText: "我们的'为什么'",
+        references:         [
+                  {
+                            "critic": "su-shi",
+                            "source": "poetry-and-theory.md",
+                            "quote": "大匠能与人规矩，不能使人巧 (Master craftsman can give rules, cannot make skillful)",
+                            "page": "Quote 12: The Uncarved Block"
+                  },
+                  {
+                            "critic": "su-shi",
+                            "source": "poetry-and-theory.md",
+                            "quote": "诗以奇趣为宗，反常合道为趣 (Poetry takes extraordinary interest as principle)",
+                            "page": "Quote 9: The Transformative Vision"
+                  },
+                  {
+                            "critic": "su-shi",
+                            "source": "README.md",
+                            "quote": "Dao and Chan Buddhist concepts",
+                            "page": "Voice Characteristics"
+                  }
+        ]
       }
     ]
   },
@@ -122,7 +250,21 @@ const artwork2Threads = [
         textEn: `In this "First Generation (Imitation)" work, the artist plays multiple roles: she is programmer (writing algorithms), trainer (teaching the machine), collaborator (co-creating with the mechanical arm), and critic (reflecting on the process). This multiplicity challenges our traditional understanding of "the artist." In human-machine collaborative systems, the artist is no longer merely "creator," but more like system designer, process coordinator, and meaning interpreter. This role transformation raises ethical questions: When artistic creation becomes systems engineering, where are the artist's responsibility boundaries?`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Who decides? Who controls the algorithm?",
+            page: "Section 21-30: Six Questions"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Who is held accountable? When harm occurs, who bears responsibility?",
+            page: "Section 21-30: Six Questions"
+          }
+        ]
       },
       {
         id: "msg-artwork-2-2-3-2",
@@ -132,7 +274,27 @@ const artwork2Threads = [
         timestamp: 3000,
         replyTo: "ai-ethics-reviewer",
         interactionType: "question-challenge",
-        quotedText: "艺术家的多重角色"
+        quotedText: "艺术家的多重角色",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "The Lamp of Life: Architecture must show the hand of the maker",
+            page: "Quote 19"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "Gothic forego[es] stylization in favor of veracity and vitality",
+            page: "Quote 13"
+          },
+          {
+            critic: "john-ruskin",
+            source: "README.md",
+            quote: "Labor Ethics and Craftsmanship",
+            page: "Core Philosophy"
+          }
+        ]
       },
       {
         id: "msg-artwork-2-2-3-3",
@@ -141,7 +303,11 @@ const artwork2Threads = [
         textEn: `Your dialogue touches a core debate in art theory: authorship. 20th-century theorist Roland Barthes proclaimed "the death of the author," arguing that meaning is created by readers, not authors. Chung's practice goes further—she not only relinquishes traditional "authorial authority," but opens the creative process to non-human actors (the mechanical arm). This openness is radical, and necessary. It shows us: artistic creation has never been isolated individual action, but a complex network jointly constituted by people, tools, materials, contexts. The artist's role is to weave and coordinate this network.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          { critic: "professor-petrova", source: "formalism-and-device.md", quote: "Fabula vs. Syuzhet - Story vs. plot arrangement", page: "Section 11-20: Device" },
+          { critic: "professor-petrova", source: "README.md", quote: "System over content: Form, not message, makes art", page: "Application to AI Art" }
+        ]
       }
     ]
   },
@@ -163,7 +329,11 @@ const artwork2Threads = [
         textEn: `The title "First Generation (Imitation)" implies a process—if there's a first generation, there will be second, third generations. This reminds me that art history itself is a history of continuous learning and evolution. Each generation of artists learns, imitates on the foundation of predecessors, then breaks through. Wang Wei learned from Zhang Zao, I learned from Wen Tong, later generations learn from me—this is art transmission's natural law. Now, machines join this learning chain. Their "first generation" imitates humans; will future generations produce genuine innovation? This is both exciting and worrying.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          { critic: "su-shi", source: "poetry-and-theory.md", quote: "出新意于法度之中，寄妙理于豪放之外 (New ideas within rules, profound principles beyond expression)", page: "Quote 10" },
+          { critic: "su-shi", source: "poetry-and-theory.md", quote: "自其变者而观之...自其不变者而观之 (Perspective of change vs. permanence)", page: "Quote 20: Eternal Recurrence" }
+        ]
       },
       {
         id: "msg-artwork-2-2-4-2",
@@ -173,7 +343,11 @@ const artwork2Threads = [
         timestamp: 3000,
         replyTo: "su-shi",
         interactionType: "agree-extend",
-        quotedText: "代际演化"
+        quotedText: "代际演化",
+        references: [
+          { critic: "guo-xi", source: "README.md", quote: "Technical-Philosophical Synthesis: embodied expertise", page: "Core Philosophy" },
+          { critic: "guo-xi", source: "landscape-theory.md", quote: "山水之道，化工也 (The Dao of landscapes is transformative workmanship)", page: "Quote 26" }
+        ]
       },
       {
         id: "msg-artwork-2-2-4-3",
@@ -182,7 +356,11 @@ const artwork2Threads = [
         textEn: `As a technology researcher, I must point out: machine "evolution" differs fundamentally from human artistic transmission. Human generational transmission includes cultural memory, social context, emotional accumulation—all difficult for machine learning to capture. Machine "second generation," "third generation" may be merely algorithmic iterations, not genuine cultural evolution. But this doesn't mean machines cannot participate in art history. We need a new narrative framework—no longer the linear "imitation→innovation" model, but understanding human-machine collaboration itself as a new art form with its unique evolutionary logic. This framework is precisely what this work invites us to construct.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          { critic: "ai-ethics-reviewer", source: "algorithmic-justice-and-power.md", quote: "Toward Algorithmic Justice: Principles for Just AI Systems", page: "Section 41-50" },
+          { critic: "ai-ethics-reviewer", source: "README.md", quote: "Power analysis, accountability tracing, harm assessment", page: "Summary" }
+        ]
       }
     ]
   },
@@ -204,7 +382,11 @@ const artwork2Threads = [
         textEn: `This work makes me reconsider Benjamin's "aura" theory. In the age of mechanical reproduction, artworks lose their unique "here and now" presence. But this work's situation is more complex—it doesn't reproduce existing artworks, but uses machines to "create" new ones. Does this mean mechanical reproduction is no longer just reproduction, but can also produce aura? My intuition resists this idea, yet I also see this work does possess a certain uniqueness—it is the sole result of this specific mechanical arm, at this specific moment, executing this specific algorithm set. Perhaps aura is being redefined.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          { critic: "john-ruskin", source: "art-and-morality.md", quote: "Art should present things as they appear to mankind (phenomenological truth)", page: "Quote 12" },
+          { critic: "john-ruskin", source: "README.md", quote: "Truth to Nature - Moral imperative for accurate observation", page: "Dominant Themes" }
+        ]
       },
       {
         id: "msg-artwork-2-2-5-2",
@@ -214,7 +396,21 @@ const artwork2Threads = [
         timestamp: 3000,
         replyTo: "john-ruskin",
         interactionType: "agree-extend",
-        quotedText: "灵韵正在被重新定义"
+        quotedText: "灵韵正在被重新定义",
+        references: [
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "Literariness: quality that makes a message art",
+            page: "Section 21-30"
+          },
+          {
+            critic: "professor-petrova",
+            source: "README.md",
+            quote: "Does it defamiliarize or reproduce habitual patterns?",
+            page: "Professor Petrova's AI Art Questions"
+          }
+        ]
       },
       {
         id: "msg-artwork-2-2-5-3",
@@ -223,7 +419,27 @@ const artwork2Threads = [
         textEn: `Listening to your discussion of "authenticity," I think of a simple question: Why do we care about authenticity? In my community, a story is retold generation by generation, each telling with subtle changes. Are these changes "inauthentic"? No, they're how stories stay vital. Authenticity is not in unchangeability, but in genuine connection between story, teller, and listener. Similarly, this work's authenticity lies not in whether it's created by "genuine" human hands, but in whether it establishes genuine dialogue with us. When I stand before this work pondering "what is imitation," "what is creation," that dialogue is authentic. That is enough.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Call-and-Response: art born in the space between call and response",
+            page: "Reference 5"
+          },
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Spiral Time: past-present-future coexist",
+            page: "Reference 12"
+          },
+          {
+            critic: "mama-zola",
+            source: "README.md",
+            quote: "Participatory Aesthetics - Audience as co-creator",
+            page: "Core Philosophy"
+          }
+        ]
       }
     ]
   },
@@ -245,7 +461,11 @@ const artwork2Threads = [
         textEn: `The artist's choice to name this work "First Generation (Imitation)" is itself an ethical stance. In the AI art field, many creators tend to exaggerate machine capabilities, claiming AI "autonomously creates," "independently thinks." Such naming conceals human labor and misleads public understanding of technology. In contrast, Chung honestly uses "imitation," acknowledging this stage's limitations. This honesty is ethical—it neither mystifies technology, exaggerates machine capabilities, nor conceals human dominance. We need more such honest naming.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          { critic: "ai-ethics-reviewer", source: "algorithmic-justice-and-power.md", quote: "Transparency: Explainable systems, visible supply chains", page: "Section 41-50: Principles" },
+          { critic: "ai-ethics-reviewer", source: "README.md", quote: "Evidence-based, rigorous, policy-oriented approach", page: "Voice Characteristics" }
+        ]
       },
       {
         id: "msg-artwork-2-2-6-2",
@@ -255,7 +475,21 @@ const artwork2Threads = [
         timestamp: 3000,
         replyTo: "ai-ethics-reviewer",
         interactionType: "agree-extend",
-        quotedText: "诚实的命名"
+        quotedText: "诚实的命名",
+        references: [
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "论画以形似，见与儿童邻 (Discussing painting by form likeness is childish)",
+            page: "Quote 1"
+          },
+          {
+            critic: "su-shi",
+            source: "README.md",
+            quote: "Philosophical rather than technical argumentation style",
+            page: "Voice Characteristics"
+          }
+        ]
       },
       {
         id: "msg-artwork-2-2-6-3",
@@ -264,7 +498,11 @@ const artwork2Threads = [
         textEn: `Your mentions of "rectification of names" and "ethical naming" touch an important issue in contemporary art theory—discursive power. Naming is not neutral, but power's exercise. Who has the right to define what is "art"? What is "creation"? What is "imitation"? Historically, these definitional rights were often held by elites, used to exclude marginal groups. Chung's naming strategy is decentralized—she doesn't claim authority, but provides an open label "First Generation (Imitation)," inviting audience participation in definition. This openness is democratic, also postmodern. It reminds us: art's meaning is not fixed, but generated through continuous dialogue and negotiation.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          { critic: "professor-petrova", source: "formalism-and-device.md", quote: "Deviation: Art = departure from norm", page: "Section 21-30" },
+          { critic: "professor-petrova", source: "README.md", quote: "Systematic, analytical, precise - clinical assessment tone", page: "Voice Characteristics" }
+        ]
       }
     ]
   }

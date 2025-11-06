@@ -29,7 +29,21 @@ const artwork4Threads = [
         textEn: `"Exquisite Dialogue: Sepals, Petals, Thorns"—this title uses plant parts as metaphor, reminding me of Chinese painting's "Four Gentlemen" (plum, orchid, bamboo, chrysanthemum) tradition. We don't merely depict plants, but express aspirations through plants. Plum represents resilience, orchid elegance, bamboo integrity. Similarly, "sepals, petals, thorns" in this work are not just forms, but different facets of artistic creation—sepals are protection and gestation, petals are blooming and beauty, thorns are defense and danger. This botanical metaphor reminds us: art has never been singular beauty, but manifestation of complex vitality.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+                    critic: "guo-xi",
+                    source: "林泉高致 (Linquan Gaozhi)",
+                    quote: "山有可行者，有可望者，有可游者，有可居者",
+                    translation: "Landscapes have those one can walk through, those one can gaze upon, those one can wander within, and those one can dwell in"
+          },
+          {
+                    critic: "guo-xi",
+                    source: "林泉高致 (Linquan Gaozhi)",
+                    quote: "山以云烟为神采",
+                    translation: "Mountains take mist and clouds as their spiritual vitality"
+          }
+]
       },
       {
         id: "msg-artwork-4-1-2",
@@ -39,7 +53,21 @@ const artwork4Threads = [
         timestamp: 3000,
         replyTo: "guo-xi",
         interactionType: "agree-extend",
-        quotedText: "复杂生命力"
+        quotedText: "复杂生命力",
+        references: [
+          {
+                    critic: "mama-zola",
+                    source: "Ubuntu Philosophy",
+                    quote: "Umuntu ngumuntu ngabantu",
+                    translation: "A person is a person through other people"
+          },
+          {
+                    critic: "mama-zola",
+                    source: "Griot Oral Tradition",
+                    quote: "The griot does not own the stories—the stories own the griot",
+                    translation: "Responsibility of communal memory keeper"
+          }
+]
       },
       {
         id: "msg-artwork-4-1-3",
@@ -48,7 +76,21 @@ const artwork4Threads = [
         textEn: `You both speak truly. This reminds me of a line from "Night Visit to Chengtian Temple": "Which night has no moon? Which place has no bamboo and cypress? But few idle people like us two." Meaning, beauty is everywhere; the key is whether we have eyes to discover it. Similarly, "sepals, petals, thorns" always coexist, but we often only see petals' beauty, overlooking sepals' support and thorns' protection. This work forces us to see the complete picture—creation is not only beauty's production, but also structure's establishment (sepals) and critical stance (thorns). This completeness is truly "exquisite dialogue."`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+                    critic: "su-shi",
+                    source: "记承天寺夜游 (Night Visit to Chengtian Temple)",
+                    quote: "何夜无月？何处无竹柏？但少闲人如吾两人者耳",
+                    translation: "Which night has no moon? Which place has no bamboo and cypress? But few idle people like us two"
+          },
+          {
+                    critic: "su-shi",
+                    source: "Art Theory",
+                    quote: "诗画本一律，天工与清新",
+                    translation: "Poetry and painting share one fundamental rule: natural genius and freshness"
+          }
+]
       }
     ]
   },
@@ -70,7 +112,21 @@ const artwork4Threads = [
         textEn: `The juxtaposition of "petals" and "thorns" reminds me of art history's recurring theme: creation necessarily accompanies destruction. Picasso said "every painting is a murder of its predecessor"; Rauschenberg erased de Kooning's drawing; Dadaists dismantled traditional aesthetics. Creation is not only addition but deletion; not only construction but deconstruction. Chung's work cleverly expresses this tension through botanical metaphor—petals' beauty depends on thorns' protection, while thorns' existence also reminds us: beauty is fragile, needs defending. This dialectical relationship is key to understanding art.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+                    critic: "professor-petrova",
+                    source: "Viktor Shklovsky: Art as Technique (1917)",
+                    quote: "The purpose of art is to make objects 'unfamiliar', to make forms difficult",
+                    translation: "Defamiliarization (остранение) as core artistic function"
+          },
+          {
+                    critic: "professor-petrova",
+                    source: "Russian Formalism",
+                    quote: "Art is a sum of devices (priemy) that the artist manipulates",
+                    translation: "Formal analysis of constituent mechanisms"
+          }
+]
       },
       {
         id: "msg-artwork-4-2-2",
@@ -80,7 +136,21 @@ const artwork4Threads = [
         timestamp: 3000,
         replyTo: "professor-petrova",
         interactionType: "question-challenge",
-        quotedText: "创造必然伴随着破坏"
+        quotedText: "创造必然伴随着破坏",
+        references: [
+          {
+                    critic: "john-ruskin",
+                    source: "The Nature of Gothic (The Stones of Venice)",
+                    quote: "Gothic permits and demands the freedom, individuality, and spontaneity of its workers",
+                    translation: "Aesthetic freedom reflects social freedom"
+          },
+          {
+                    critic: "john-ruskin",
+                    source: "Modern Painters",
+                    quote: "Imperfections in craftsmanship are integral to its genuine expression",
+                    translation: "Handmade irregularities as signs of human agency"
+          }
+]
       },
       {
         id: "msg-artwork-4-2-3",
@@ -89,7 +159,21 @@ const artwork4Threads = [
         textEn: `Mr. Ruskin's "balance" question is crucial. In AI ethics, we face similar trade-offs: technological innovation necessarily disrupts existing order (destruction), but without new ethical frameworks protecting human values (sepals, petals), destruction becomes uncontrolled. Chung's work provides a model: the three (sepals, petals, thorns) are a whole—thorns are not for destruction's sake, but to protect petals; sepals are not rigid structure, but framework supporting growth. Similarly, art's critical edge (thorns) should defend beauty and meaning (petals), not nihilistic destruction. This is "exquisite dialogue's" meaning—parts coexist in dialogue.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+                    critic: "ai-ethics-reviewer",
+                    source: "Kate Crawford: Atlas of AI (2021)",
+                    quote: "AI is a technology of extraction: from minerals to labor to data",
+                    translation: "Three-layer analysis of AI's material costs"
+          },
+          {
+                    critic: "ai-ethics-reviewer",
+                    source: "Algorithmic Accountability Framework",
+                    quote: "Who benefits? Who bears costs? Who decides?",
+                    translation: "Six essential questions for any AI system"
+          }
+]
       }
     ]
   },
@@ -111,7 +195,21 @@ const artwork4Threads = [
         textEn: `"Thorns" make me think of a profound question: Why do beautiful things need protection? Roses have thorns, cacti have thorns, artists have boundaries. We often say "art is fragile," but perhaps more accurately, art is "defensively fragile." It acknowledges its fragility (petals easily broken), but simultaneously establishes defense (thorns' existence). This reminds me of women in our community—they gently nurture children (petals), but when facing injustice, resolutely resist (thorns). Vulnerability is not weakness, but honesty; defense is not attack, but self-protection. This dialectic is vividly embodied in art.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+                    critic: "mama-zola",
+                    source: "Griot Tradition",
+                    quote: "When I sing, you answer. When I drum, you dance. This is how art is born—in the space between",
+                    translation: "Call-and-response as participatory aesthetics"
+          },
+          {
+                    critic: "mama-zola",
+                    source: "Sankofa Wisdom (Akan)",
+                    quote: "Go back and fetch it—wisdom from the past illuminates the future",
+                    translation: "Ancestral remembering as living resource"
+          }
+]
       },
       {
         id: "msg-artwork-4-3-2",
@@ -121,7 +219,21 @@ const artwork4Threads = [
         timestamp: 3000,
         replyTo: "mama-zola",
         interactionType: "agree-extend",
-        quotedText: "有防御性的脆弱"
+        quotedText: "有防御性的脆弱",
+        references: [
+          {
+                    critic: "su-shi",
+                    source: "Calligraphy Theory",
+                    quote: "短长肥瘦各有态，玉环飞燕谁敢憎",
+                    translation: "Short or tall, plump or slender, each has its own bearing—aesthetic pluralism"
+          },
+          {
+                    critic: "su-shi",
+                    source: "Poetry",
+                    quote: "萧散简远，寄至味于澹泊",
+                    translation: "Sparse and distant simplicity, finding profound meaning in tranquil plainness"
+          }
+]
       },
       {
         id: "msg-artwork-4-3-3",
@@ -130,7 +242,21 @@ const artwork4Threads = [
         textEn: `Your dialogue brings to mind an important issue in feminist art: how to maintain strength while expressing vulnerability. For long, women's vulnerability was seen as weakness, while male defensiveness was seen as strength. But Chung's work offers a perspective beyond gender binaries—vulnerability and defense are not opposed, but symbiotic. Petals' beauty needs thorns' protection; thorns' meaning comes from guarding petals. This interdependence breaks the simple "strong/weak" opposition, proposing a more complex, more authentic model of strength. Perhaps true strength is not rejecting vulnerability, but establishing defense within vulnerability.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+                    critic: "professor-petrova",
+                    source: "Roman Jakobson: Poetic Function",
+                    quote: "Literature is organized violence committed on ordinary speech",
+                    translation: "Art as systematic deviation from norms"
+          },
+          {
+                    critic: "professor-petrova",
+                    source: "Formalist Theory",
+                    quote: "Literariness is a quality that makes a message art",
+                    translation: "Specific quality distinguishing art from non-art"
+          }
+]
       }
     ]
   },
@@ -152,7 +278,21 @@ const artwork4Threads = [
         textEn: `The title "Exquisite Dialogue" makes me reconsider beauty and ethics' relationship. I've always believed true beauty necessarily contains moral dimension—beauty is not only pleasing to the eye, but should be good. But this work reminds me: beauty can also be dangerous (thorns), beauty also needs questioning (dialogue). Perhaps "exquisite" is not flawless beauty, but beauty that has undergone dialogue, critique, defense. This beauty doesn't passively await appreciation, but actively dialogues with the world. This agency itself is an ethical stance.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+                    critic: "john-ruskin",
+                    source: "Modern Painters",
+                    quote: "The fineness of the possible art is an index of the moral purity of the emotion it expresses",
+                    translation: "Art quality = mathematical function of societal ethics"
+          },
+          {
+                    critic: "john-ruskin",
+                    source: "Modern Painters",
+                    quote: "All beauty, if properly regarded, is theophany, the revelation of God",
+                    translation: "Beauty as divine revelation—aesthetic experience as moral transformation"
+          }
+]
       },
       {
         id: "msg-artwork-4-4-2",
@@ -162,7 +302,21 @@ const artwork4Threads = [
         timestamp: 3000,
         replyTo: "john-ruskin",
         interactionType: "agree-extend",
-        quotedText: "美的主动性"
+        quotedText: "美的主动性",
+        references: [
+          {
+                    critic: "ai-ethics-reviewer",
+                    source: "Ruha Benjamin: Race After Technology (2019)",
+                    quote: "The New Jim Code shows how discriminatory designs encode inequity",
+                    translation: "Technology as bias accelerator, not neutral tool"
+          },
+          {
+                    critic: "ai-ethics-reviewer",
+                    source: "Data Justice Framework",
+                    quote: "Allocative, representational, dignitary, epistemic, autonomy harms",
+                    translation: "Five categories of algorithmic harm"
+          }
+]
       },
       {
         id: "msg-artwork-4-4-3",
@@ -171,7 +325,21 @@ const artwork4Threads = [
         textEn: `Your "responsible aesthetics" reminds me of a story. Our village has an old singer who sings songs both beautiful and sad—singing colonial history's pain, resistance's courage, hope's glimmer. Young people ask her: "Why not only sing happy songs?" She says: "If beauty is only happiness, it's an anesthetic. True beauty must contain truth—pain, struggle, hope, all of it." This is "exquisite dialogue's" meaning—beauty doesn't escape dialogue, but becomes more profound through dialogue. Thorns are not beauty's opposite, but part of beauty. Only beauty containing thorns is worth singing for.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+                    critic: "mama-zola",
+                    source: "Griot Ethics",
+                    quote: "The colonizer took our bodies. Now they take our images",
+                    translation: "Data colonialism as continuation of colonial extraction"
+          },
+          {
+                    critic: "mama-zola",
+                    source: "Ngũgĩ wa Thiong'o: Decolonising the Mind",
+                    quote: "Language as culture is the collective memory bank of a people's experience",
+                    translation: "Language/aesthetics carry worldviews—colonization through imposed forms"
+          }
+]
       }
     ]
   },
@@ -193,7 +361,21 @@ const artwork4Threads = [
         textEn: `"Sepals, petals, thorns" are not only plant spatial structure, but also imply temporal process—sepals protect buds before blooming, petals display beauty during full bloom, thorns remain after flowers fade. This reminds me of life's impermanence and cycles. Buddhism says "all things are impermanent"—everything exists in arising and ceasing. Art is the same—creation is blooming, works decay, but thought (thorns) persists. This temporality reminds us: don't cling to "petals'" transient beauty, but understand the whole life cycle's completeness. True art, like plants, should contain all stages of growth, blooming, and decay.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+                    critic: "su-shi",
+                    source: "Red Cliff Rhapsody (前赤壁赋)",
+                    quote: "自其变者而观之，则天地曾不能以一瞬；自其不变者而观之，则物与我皆无尽也",
+                    translation: "View from change: nothing lasts. View from permanence: all is inexhaustible"
+          },
+          {
+                    critic: "su-shi",
+                    source: "Buddhist Philosophy",
+                    quote: "诸行无常",
+                    translation: "All things are impermanent—reality exists in arising and ceasing"
+          }
+]
       },
       {
         id: "msg-artwork-4-5-2",
@@ -203,7 +385,21 @@ const artwork4Threads = [
         timestamp: 3000,
         replyTo: "su-shi",
         interactionType: "agree-extend",
-        quotedText: "整个生命周期的完整性"
+        quotedText: "整个生命周期的完整性",
+        references: [
+          {
+                    critic: "guo-xi",
+                    source: "林泉高致 (Linquan Gaozhi)",
+                    quote: "春山淡冶而如笑，夏山苍翠而如滴，秋山明净而如妆，冬山惨淡而如睡",
+                    translation: "Spring mountains smile, summer mountains drip, autumn mountains adorn, winter mountains sleep"
+          },
+          {
+                    critic: "guo-xi",
+                    source: "林泉高致 (Linquan Gaozhi)",
+                    quote: "春融冶，夏蓊郁，秋疏薄，冬黯淡",
+                    translation: "Seasonal density: spring harmonious, summer lush, autumn sparse, winter somber"
+          }
+]
       },
       {
         id: "msg-artwork-4-5-3",
@@ -212,7 +408,21 @@ const artwork4Threads = [
         textEn: `Your discussion of "temporality" touches contemporary art theory's core question: how to understand art's persistence? In the consumerist era, artworks are often forgotten after exhibitions end. But Chung's work proposes a different temporal model—"thorns'" persistence. Even when "petals" (exhibition) have withered, "thorns" (critical thought, aesthetic experiments) still exist, continuing to influence successors. This is art's true vitality—not in material carriers' permanent preservation, but in thought's dissemination and evolution. This temporal view lets us reconsider what is "classic"—not immortal objects, but thoughts that continuously spark dialogue.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+                    critic: "professor-petrova",
+                    source: "Boris Eichenbaum: Theory of Formal Method",
+                    quote: "Fabula vs. Syuzhet: Story (raw events) vs. plot (how events are arranged)",
+                    translation: "Temporal structure as compositional device"
+          },
+          {
+                    critic: "professor-petrova",
+                    source: "Formalist Concept",
+                    quote: "Dominanta: The dominant device that organizes a work",
+                    translation: "Identifying organizing principles in artistic systems"
+          }
+]
       }
     ]
   },
@@ -234,7 +444,21 @@ const artwork4Threads = [
         textEn: `"Exquisite Dialogue"—the word "dialogue" in the title is crucial. This is not monologue but dialogue; not unidirectional proclamation but multidirectional exchange. From Bakhtin's dialogic theory to contemporary relational aesthetics, "dialogue" has become an artistic form itself. Chung's work practices this dialogue at multiple levels: human-machine dialogue, sepal-petal-thorn dialogue, work-audience dialogue. This multilayered dialogic structure reminds us: art's meaning is not determined by the artist alone, but generated in dialogue. This is a democratic aesthetics.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+                    critic: "professor-petrova",
+                    source: "Bakhtin's Dialogic Theory",
+                    quote: "Dialogue as multidirectional exchange, not monologue",
+                    translation: "Meaning generated in dialogue, not determined by author alone"
+          },
+          {
+                    critic: "professor-petrova",
+                    source: "Contemporary Relational Aesthetics",
+                    quote: "Dialogue has become an artistic form itself",
+                    translation: "Participatory exchange as medium, not just subject"
+          }
+]
       },
       {
         id: "msg-artwork-4-6-2",
@@ -244,7 +468,21 @@ const artwork4Threads = [
         timestamp: 3000,
         replyTo: "professor-petrova",
         interactionType: "agree-extend",
-        quotedText: "民主的美学"
+        quotedText: "民主的美学",
+        references: [
+          {
+                    critic: "ai-ethics-reviewer",
+                    source: "Participatory Design Principle",
+                    quote: "Technology should not be determined by elites, but involve all stakeholders",
+                    translation: "Democratic development processes—inclusion of affected communities"
+          },
+          {
+                    critic: "ai-ethics-reviewer",
+                    source: "Algorithmic Justice Framework",
+                    quote: "Who imagines alternatives? Whose visions of better systems are heard?",
+                    translation: "Center marginalized voices in redesigning systems"
+          }
+]
       },
       {
         id: "msg-artwork-4-6-3",
@@ -253,7 +491,21 @@ const artwork4Threads = [
         textEn: `Your "open invitation" reminds me of our community gatherings. Everyone can speak, no one's voice is more important than others. Elders tell history, youth discuss future, children sing—all voices form a complex chorus. This work is the same—it doesn't aim to give answers, but to open dialogue. "Sepals, petals, thorns" are not three separate parts, but three modes of dialogue: sepals ask "how to support," petals ask "how to bloom," thorns ask "how to protect." These three questions have no ultimate answers, but precisely these questions keep dialogue continuing. Art's value is not in ending dialogue, but in making dialogue never cease.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+                    critic: "mama-zola",
+                    source: "Call-and-Response Performance",
+                    quote: "Everyone can speak, no one's voice is more important than others",
+                    translation: "Communal storytelling without hierarchy"
+          },
+          {
+                    critic: "mama-zola",
+                    source: "Ubuntu Ethics",
+                    quote: "I am because we are, and since we are, therefore I am",
+                    translation: "Relational ontology—identity constituted through community"
+          }
+]
       }
     ]
   }

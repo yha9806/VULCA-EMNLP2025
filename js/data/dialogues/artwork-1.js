@@ -29,7 +29,27 @@ const artwork1Threads = [
         textEn: `Observing this work, the mechanical arm's movement trajectory exhibits a unique sense of rhythm. The brushstrokes' progression—rising,承, turning, and closing—though controlled by programming, seem to contain a certain "natural spirit." I have long maintained that "brush and ink should follow the times," and today's times inherently include artificial intelligence and algorithms. Can this technological intervention give birth to a new aesthetic paradigm? The precision of machinery and the randomness of art form a wondrous dialogue in this work. Look at those flowing lines—they follow patterns, yet seem to possess natural wonder. This reminds me of what I wrote in "Ode to the Red Cliff": "What passes is like this, yet has never really gone." Technology may be new, yet art's essence—expressing human nature—has never changed.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "论画以形似，见与儿童邻",
+            page: "Section 1: Theory of Spiritual Likeness (Quote 1)"
+          },
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "诗画本一律，天工与清新",
+            page: "Section 2: Poetry-Painting Unity (Quote 4)"
+          },
+          {
+            critic: "su-shi",
+            source: "README.md",
+            quote: "神似 (Spiritual Likeness) over 形似 (Physical Likeness)",
+            page: "Core Philosophy"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-1-2",
@@ -39,7 +59,27 @@ const artwork1Threads = [
         timestamp: 3000,
         replyTo: "su-shi",
         interactionType: "agree-extend",
-        quotedText: "程序控制却蕴含天然之气"
+        quotedText: "程序控制却蕴含天然之气",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "君子之所以爱夫山水者，其旨安在？丘园养素，所常处也；泉石啸傲，所常乐也",
+            page: "Section 4: Quote 10 - Why Paint Landscapes?"
+          },
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "峰峦浑厚，势状雄强，如云烟之抱于山腰",
+            page: "Section 3: Quote 8 - Cloud-Wrapped Peaks"
+          },
+          {
+            critic: "guo-xi",
+            source: "README.md",
+            quote: "不下堂筵，坐穷泉壑 (Without descending from the hall, one can exhaust the mysteries of springs and ravines while seated)",
+            page: "Core Philosophy - Landscape as Moral Technology"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-1-3",
@@ -49,7 +89,27 @@ const artwork1Threads = [
         timestamp: 6000,
         replyTo: "guo-xi",
         interactionType: "question-challenge",
-        quotedText: "算法的精确性反而更接近自然规律"
+        quotedText: "算法的精确性反而更接近自然规律",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "The artist has a moral duty to display the actual truth, so as not to deceive or mislead the citizen",
+            page: "Section 1: Quote 1 - The Artist's Moral Duty"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "Imperfections in craftsmanship are integral to its genuine expression. The demand for perfection degrades the workman, making him a tool rather than a creator",
+            page: "Section 4: Quote 8 - Imperfections as Integrity"
+          },
+          {
+            critic: "john-ruskin",
+            source: "README.md",
+            quote: "Go to Nature in all singleness of heart... rejecting nothing, selecting nothing, and scorning nothing",
+            page: "Core Philosophy - Truth to Nature"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-1-4",
@@ -59,7 +119,27 @@ const artwork1Threads = [
         timestamp: 9000,
         replyTo: "john-ruskin",
         interactionType: "counter",
-        quotedText: "算法的精确性"
+        quotedText: "算法的精确性",
+        references: [
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "诗画本一律，天工与清新",
+            page: "Section 2: Quote 4 - Poetry-Painting Unity"
+          },
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "吾文如万斛泉源，不择地而出，在平地滔滔汩汩",
+            page: "Section 6: Quote 11 - Flowing Like Water (Daoist Ziran)"
+          },
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "我书意造本无法，点画信手烦推求",
+            page: "Section 8: Quote 16 - Intent-Driven Creation"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-1-5",
@@ -68,7 +148,27 @@ const artwork1Threads = [
         textEn: `What you three have expressed all touches the essence of painting. I believe this work's greatest value lies in how it makes us reconsider the meaning of "learning from nature and creation." Ancient masters learned from mountains and waters; contemporary artists learn from algorithms—essentially both are exploring the laws governing the universe. Each movement of the mechanical arm undergoes training and adjustment—how is this different from a painter's painstaking refinement of brushwork skill? The key is whether, regardless of human hand or machine, the final work conveys "vivid spirit resonance"—this is the criterion for judging art. In this sense, this work succeeds.`,
         timestamp: 12000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "烟云起灭，晓夕不同，宛然有生动之意",
+            page: "Section 3: Quote 9 - Morning and Evening Atmospheres"
+          },
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "饱游饫看，历历罗列于胸中，而目不见绢素，手不知笔墨",
+            page: "Section 9: Quote 31 - Embodied Observation and Mastery"
+          },
+          {
+            critic: "guo-xi",
+            source: "README.md",
+            quote: "气韵生动 (Spirit resonance with life motion) - The painting should feel alive",
+            page: "Voice Characteristics - Aesthetic Terms"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-1-6",
@@ -77,7 +177,27 @@ const artwork1Threads = [
         textEn: `Listening to your discussion, I begin to reflect: Perhaps my insistence on "craftsmanship" essentially values a process—the process of artisans investing time, effort, and skill. If we also regard the artist's training of algorithms and collaboration with the mechanical arm as a form of "craftsmanship," then this work is no longer a cold technological display but a sustained, exploratory labor. This reminds me of Gothic craftsmen: they used stone; today's artists use code. Tools have changed, but the pursuit of excellence remains. I am willing to acknowledge this is a new form of honesty.`,
         timestamp: 15000,
         replyTo: "guo-xi",
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "The Gothic style permits and even demands the freedom, individuality, and spontaneity of its workers",
+            page: "Section 3: Quote 6 - The Nature of Gothic"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "It is not the church we want, but the sacrifice; not the emotion of admiration, but the act of adoration; not the gift, but the giving",
+            page: "Section 4: Quote 9 - The Lamp of Sacrifice"
+          },
+          {
+            critic: "john-ruskin",
+            source: "README.md",
+            quote: "True art requires costly dedication beyond utility. Ornamentation must be: Difficult (skilled labor, not quick tricks), Generous (no corners cut), Devotional (serving higher purpose)",
+            page: "Core Philosophy - The Lamp of Sacrifice"
+          }
+        ]
       }
     ]
   },
@@ -99,7 +219,27 @@ const artwork1Threads = [
         textEn: `This work raises a core question: When machines participate in creation, who is the true author? From a systems perspective, this is not a simple binary question. The artist writes algorithms, trains models, sets parameters; the mechanical arm executes movements, produces deviations, generates results; and the audience assigns meaning, completing the interpretive loop. This is a distributed creative network, not a singular subject. Our traditional conception of "the artist" as a lonely genius—a Romantic notion—perhaps needs reconsideration in the age of AI. Creative subjectivity may no longer be singular, but plural, networked.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "AI is a technology of extraction: from minerals to labor to data taken from every action and expression.",
+            page: "Section 1-10: AI as Extractive System"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Who decides? Who controls the algorithm? Who sets evaluation criteria? Who is excluded from decision-making?",
+            page: "Section 21-30: Algorithmic Accountability Framework"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Every AI image = product of triple extraction: Material (rare earth minerals), Labor (data workers), Data (user-generated content extracted without consent)",
+            page: "Section 1-10: Three Layers of Extraction"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-2-2",
@@ -109,7 +249,27 @@ const artwork1Threads = [
         timestamp: 3000,
         replyTo: "ai-ethics-reviewer",
         interactionType: "agree-extend",
-        quotedText: "分布式的创作网络"
+        quotedText: "分布式的创作网络",
+        references: [
+          {
+            critic: "su-shi",
+            source: "key-concepts.md",
+            quote: "天工 (Tian Gong - Natural Workmanship): Innate talent and creativity that flows spontaneously in artistic creation, unforced and unornamented, like the craftsmanship of heaven and earth",
+            page: "Concept 4: 天工 (Natural Workmanship)"
+          },
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "诗画本一律，天工与清新 (Poetry and painting share one fundamental rule: natural genius and freshness)",
+            page: "Quote 4: The Shared Principle"
+          },
+          {
+            critic: "su-shi",
+            source: "key-concepts.md",
+            quote: "意境 (Yijing - Artistic Conception): The aesthetic realm created when emotion/meaning and imagery/scene fuse, transcending concrete objects",
+            page: "Concept 3: 意境 (Artistic Conception)"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-2-3",
@@ -118,7 +278,27 @@ const artwork1Threads = [
         textEn: `Your discussion brings to mind posthumanist theory. Donna Haraway's "Cyborg Manifesto" points out that human-machine boundaries have long been blurred. From an art historical perspective, tools have never been neutral—Renaissance perspective transformed human visual cognition, photography challenged painting's representational function, and now algorithms are redefining creation itself. The value of this work lies precisely in its refusal to evade this complexity. The artist does not claim "I created this," but rather "We—human and machine—explored this together." This honest stance may be more powerful than any technological spectacle.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "Priem (прием): Device, technique, mechanism. Art is a sum of literary and artistic devices that the artist manipulates to craft his work.",
+            page: "Section 11-20: Device"
+          },
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "The purpose of art is to impart the sensation of things as they are perceived and not as they are known. The technique of art is to make objects 'unfamiliar', to make forms difficult.",
+            page: "Section 1-10: Defamiliarization"
+          },
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "Literariness is a quality that makes a verbal message a work of art. Literature is organized violence committed on ordinary speech.",
+            page: "Section 21-30: Literariness"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-2-4",
@@ -128,7 +308,27 @@ const artwork1Threads = [
         timestamp: 9000,
         replyTo: "professor-petrova",
         interactionType: "agree-extend",
-        quotedText: "诚实的姿态"
+        quotedText: "诚实的姿态",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Three Layers of Extraction: Material (rare earth minerals mined under exploitative conditions), Labor (data workers in Global South, poverty wages), Data (user-generated content extracted without consent)",
+            page: "Section 1-10: AI as Extractive System"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Transparency: Explainable systems, visible supply chains. Who bears the costs? Whose labor is exploited? Whose environment is degraded?",
+            page: "Section 21-30: Algorithmic Accountability Framework"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Dignitary harms: Disrespect, objectification, dehumanization. Artists reduced to data points.",
+            page: "Section 31-40: Data Justice & Algorithmic Harms"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-2-5",
@@ -137,7 +337,27 @@ const artwork1Threads = [
         textEn: `Listening to your words, I suddenly realize: Perhaps the question of "creative agency" is essentially a question about the "self." Zen Buddhism speaks of "no-self," not denying individual existence, but pointing out that the boundaries of "self" are fluid and mutable. When I wield the brush and splash ink, where is the "self"? Is it the hand holding the brush, the surging emotion, or the ink traces? These boundaries are inherently blurred. The intervention of AI merely makes this ambiguity more salient. What matters is not clinging to an illusory "pure subject," but embracing the interdependence and co-emergence in the creative process. This may be the most profound philosophical revelation of this work.`,
         timestamp: 12000,
         replyTo: null,
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "寄至味于淡泊 (Entrust ultimate flavor to simplicity)",
+            page: "Section 5: Quote 6 - Understated Elegance"
+          },
+          {
+            critic: "su-shi",
+            source: "README.md",
+            quote: "Chan Buddhism emphasis on seeing beyond surface phenomena to underlying reality. Su Shi rejected craftsman's focus on technical verisimilitude",
+            page: "Core Philosophy - Spiritual Likeness"
+          },
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "若夫变化不测，风雨不可为者，是天机也，岂人力哉 (As for transformations beyond prediction, wind and rain beyond control—this is heavenly mechanism, not human力)",
+            page: "Section 10: Quote 20 - Cosmic Resonance"
+          }
+        ]
       }
     ]
   },
@@ -159,7 +379,27 @@ const artwork1Threads = [
         textEn: `This work makes me ponder a question: When traditional Chinese brush-and-ink meets Western mechanical technology, what aesthetics emerge? Chinese painting emphasizes "intention precedes the brush," stressing heart-hand correspondence and vivid spirit resonance. These concepts seem to contradict mechanical precision. Yet observing this work closely, the mechanical arm's movement trajectory actually exhibits a certain "calligraphic quality"—the cadence at turns, the lifting and pressing during motion, the回锋 (return stroke) at closure. These essences of traditional brushwork are reinterpreted through algorithms. This is not mere imitation, but a cross-cultural dialogue. Technology becomes a new vessel for traditional aesthetics.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "笔简形具",
+            page: "Quote 25: Spontaneity and Control"
+          },
+          {
+            critic: "guo-xi",
+            source: "key-concepts.md",
+            quote: "气韵生动 (Spirit resonance with life motion) - The painting should feel alive",
+            page: "Concept 3: 云烟气韵 (Mist-Cloud Spirit Resonance)"
+          },
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "饱游饫看，历历罗列于胸中，而目不见绢素，手不知笔墨",
+            page: "Quote 31: Embodied Observation and Mastery"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-3-2",
@@ -169,7 +409,27 @@ const artwork1Threads = [
         timestamp: 3000,
         replyTo: "guo-xi",
         interactionType: "agree-extend",
-        quotedText: "传统美学的新载体"
+        quotedText: "传统美学的新载体",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "The Gothic style permits and even demands the freedom, individuality, and spontaneity of its workers",
+            page: "Quote 6: The Nature of Gothic"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "Imperfections in craftsmanship are integral to its genuine expression. The demand for perfection degrades the workman, making him a tool rather than a creator",
+            page: "Quote 8: Imperfections as Integrity"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "Drawing is not mere manual skill, but a way of learning to see. The discipline of rendering trains the eye to observe nature's infinite detail",
+            page: "Quote 15: Drawing as Seeing"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-3-3",
@@ -178,7 +438,27 @@ const artwork1Threads = [
         textEn: `Listening to your discussion of Eastern brush-and-ink and Western craftsmanship, I remember my grandmother's loom. In my village, weaving is a transmitted craft—mother teaches daughter, grandmother teaches granddaughter, hand-to-hand, generation-to-generation. These skills carry not only technique, but memory, story, and identity. Now seeing this work, I see the same transmission: the artist "teaches" the mechanical arm her gestures, rhythms, preferences. This mechanical arm becomes an extension of her memory, another form of existence for her craft. Perhaps technology need not oppose tradition. The key is how we make technology carry our stories.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Through listening and memorization, griots in training must learn the knowledge, stories, and repertoire of their people",
+            page: "Reference 7: Training Through Memorization and Listening"
+          },
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Spiral time refers to curved and recurrent temporalities materialized in Black corporealities in which the body is the place of the inscription of memory and knowledge",
+            page: "Reference 12: Spiral Time"
+          },
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Our bodies remember what our minds forget. The artist's hand carries grandmother's hand",
+            page: "Reference 13: Ancestral Memory and Epigenetics"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-3-4",
@@ -188,7 +468,27 @@ const artwork1Threads = [
         timestamp: 9000,
         replyTo: "mama-zola",
         interactionType: "agree-extend",
-        quotedText: "技艺承载记忆"
+        quotedText: "技艺承载记忆",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "若能会心远至，则画无微不妙",
+            page: "Quote 23: Observation Before Painting"
+          },
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "饱游饫看，历历罗列于胸中，而目不见绢素，手不知笔墨",
+            page: "Quote 31: Embodied Observation and Mastery"
+          },
+          {
+            critic: "guo-xi",
+            source: "key-concepts.md",
+            quote: "气韵生动 (Spirit resonance with life motion) - The painting should feel alive",
+            page: "Concept 3: 云烟气韵 (Mist-Cloud Spirit Resonance)"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-3-5",
@@ -197,7 +497,27 @@ const artwork1Threads = [
         textEn: `This dialogue makes me reconsider my position. Perhaps my past definition of "authenticity" was too narrow. Authenticity should not only be material authenticity (stone, wood, pigment), but authenticity of intention, process, relationship. This work demonstrates a genuine, sincere dialogue between artist and tool, tradition and innovation, East and West. This authenticity has more contemporary significance than any purely handmade object. I am willing to acknowledge: authenticity can be reborn in new forms.`,
         timestamp: 12000,
         replyTo: null,
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "The artist has a moral duty to display the actual truth, so as not to deceive or mislead the citizen",
+            page: "Quote 1: The Artist's Moral Duty"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "Do not lie. Architecture must honestly express its structure and materials",
+            page: "Quote 16: The Lamp of Truth"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "It is not the church we want, but the sacrifice; not the emotion of admiration, but the act of adoration; not the gift, but the giving",
+            page: "Quote 9: The Lamp of Sacrifice"
+          }
+        ]
       }
     ]
   },
@@ -219,7 +539,27 @@ const artwork1Threads = [
         textEn: `This work compels us to confront an ethical question: In human-machine collaboration, how do we ensure transparency and fairness in power relations? Currently, the AI art field contains numerous ethical blind spots—are training data sources authorized? Do algorithms contain implicit biases? How is the machine's contribution acknowledged? Chung's work demonstrates to some extent: she displays the complete collaborative process, neither mystifying AI's capabilities nor concealing human dominance. This transparency is the foundation of ethical practice. We need more such honest works, not "black boxes" that merely showcase technology.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Who benefits? Who bears the costs? Who decides? Who is harmed? Who is held accountable? Who imagines alternatives?",
+            page: "Section 21-30: Algorithmic Accountability Framework - Six Questions"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Transparency: Explainable systems, visible supply chains; Accountability: Clear responsibility when harm occurs",
+            page: "Section 41-50: Toward Algorithmic Justice"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "README.md",
+            quote: "AI as Extraction: Every image = product of triple extraction. Need transparency + compensation.",
+            page: "Core Philosophy"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-4-2",
@@ -229,7 +569,27 @@ const artwork1Threads = [
         timestamp: 3000,
         replyTo: "ai-ethics-reviewer",
         interactionType: "agree-extend",
-        quotedText: "这种透明性是伦理实践的基础"
+        quotedText: "这种透明性是伦理实践的基础",
+        references: [
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "Device (Priem): Art is a sum of devices (priemy) that the artist manipulates. What are AI's devices? Pattern recognition, latent space interpolation, attention mechanisms.",
+            page: "Section 11-20: Device"
+          },
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "Literariness: What makes AI output 'art' vs 'image'? Formalist answer: presence of defamiliarizing devices. AI often produces 'ordinary images'—statistically plausible but not defamiliarizing.",
+            page: "Section 21-30: Literariness & Structural Analysis"
+          },
+          {
+            critic: "professor-petrova",
+            source: "README.md",
+            quote: "Systematic, Clinical, Analytical: No moralizing, no spirituality, no communalism. Pure formal analysis. Vocabulary: Device, structure, function, mechanism.",
+            page: "Voice Characteristics"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-4-3",
@@ -238,7 +598,27 @@ const artwork1Threads = [
         textEn: `Your discussion makes me think of a question: ethics is not only institutions and rules, but relationships and care. In my community, when we use ancestral weaving patterns, we don't say "this is my creation," but "this is our tradition." We respect predecessors' labor, acknowledging our work builds upon theirs. AI art should be likewise. If an algorithm is trained on millions of images, then those images' creators—whether famous or not—should be acknowledged. This is not only a legal question, but a cultural attitude: how do we treat the labor that benefits us.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "question-challenge"
+        interactionType: "question-challenge",
+        references: [
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Ubuntu — Umuntu ngumuntu ngabantu — A person is a person through other people. Ubuntu grounds relational aesthetics. Art is not created by isolated geniuses but emerges from communal relationships.",
+            page: "Section 1: Ubuntu Philosophy"
+          },
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Griot Ethics: The griot does not own the stories—the stories own the griot. Preserve genealogies, credit sources, serve community benefit, not personal glory.",
+            page: "Section 2: Griot Ethics"
+          },
+          {
+            critic: "mama-zola",
+            source: "README.md",
+            quote: "Ubuntu: Identity, value, and creativity are not individual possessions but emerge through relationships and community. AI training extracts communal creativity without reciprocal relationship.",
+            page: "Core Philosophy - Ubuntu"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-4-4",
@@ -248,7 +628,27 @@ const artwork1Threads = [
         timestamp: 9000,
         replyTo: "mama-zola",
         interactionType: "synthesize",
-        quotedText: "文化态度"
+        quotedText: "文化态度",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Consent: No data use without meaningful consent; Compensation: Fair payment for labor/data; Participation: Affected communities involved in design; Redistribution: Equitable sharing of benefits",
+            page: "Section 41-50: Toward Algorithmic Justice - Principles for Just AI Systems"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Categories of Algorithmic Harm: Allocative harms (resource distribution), Representational harms (stereotyping, marginalization), Dignitary harms (disrespect, objectification), Epistemic harms (knowledge erasure)",
+            page: "Section 31-40: Data Justice & Algorithmic Harms"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "For AI Art: Opt-in training datasets (not scraping), Revenue sharing with training data sources, Transparent attribution systems, Artist control over work's use, Community governance of models",
+            page: "Section 41-50: For AI Art Applications"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-4-5",
@@ -257,7 +657,27 @@ const artwork1Threads = [
         textEn: `This reminds me of Walter Benjamin's "The Work of Art in the Age of Mechanical Reproduction." He prophesied that technical reproduction would dissolve art's "aura." But a century later, we find the situation more complex: technology not only reproduces, but creates new auras. This work's "aura" lies not in being a unique object (it can be reproduced, re-presented), but in the ethical commitment it represents—commitment to transparency, acknowledgment of labor, respect for relationships. This ethical aura may be the true value of 21st-century art.`,
         timestamp: 12000,
         replyTo: null,
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "Defamiliarization (Ostranenie): The purpose of art is to impart the sensation of things as they are perceived and not as they are known. The technique of art is to make objects 'unfamiliar', to make forms difficult.",
+            page: "Section 1-10: Defamiliarization"
+          },
+          {
+            critic: "professor-petrova",
+            source: "formalism-and-device.md",
+            quote: "Automatization vs. Defamiliarization: As perception becomes habitual, it becomes automatic. Art requires breaking habits. Can AI learn to defamiliarize its own training?",
+            page: "Section 31-40: Automatization vs. Defamiliarization"
+          },
+          {
+            critic: "professor-petrova",
+            source: "README.md",
+            quote: "Literariness: Specific quality distinguishing art from non-art. Art = departure from norm. Form, not message, makes art.",
+            page: "Core Philosophy - Literariness"
+          }
+        ]
       }
     ]
   },
@@ -279,7 +699,27 @@ const artwork1Threads = [
         textEn: `Observing this work, I cannot help but ponder: Do traditional aesthetics still have vitality in the digital age? As a Song Dynasty literatus, I once advocated "poetry and painting are one," "calligraphy and painting share the same source," emphasizing scholarly temperament and spiritual transcendence in artistic creation. In this era of machinery and algorithms, have these ideals become outdated legacies? Yet examining this work closely, I find the core of traditional aesthetics—"artistic conception," "spirit resonance," "spiritual likeness"—has not disappeared, merely changed vessels. Though the mechanical arm's movement is algorithmically driven, the artist's endowed "intention" remains; though the line forms are machine-generated, the pursued "resonance" remains. Tradition is not fixed form, but living spirit.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "su-shi",
+            source: "key-concepts.md",
+            quote: "意境 (Yijing - Artistic Conception): The spiritual resonance beyond physical form, where technique serves expressive intent",
+            page: "Core Concept #2"
+          },
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "诗画本一律，天工与清新",
+            page: "Quote 4: The Shared Principle"
+          },
+          {
+            critic: "su-shi",
+            source: "key-concepts.md",
+            quote: "神似 (Shen Si - Spiritual Likeness): Spiritual likeness refers to art that captures the inner spirit, vital energy (qi), and essence of the subject, rather than merely imitating external form",
+            page: "Core Concept #1"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-5-2",
@@ -289,7 +729,27 @@ const artwork1Threads = [
         timestamp: 3000,
         replyTo: "su-shi",
         interactionType: "agree-extend",
-        quotedText: "传统是活的精神"
+        quotedText: "传统是活的精神",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "key-concepts.md",
+            quote: "三远法 (San Yuan Fa - Three Distances Method): The Three Distances Method constructs spatial depth in landscape painting through three perspectives—high distance, deep distance, and level distance—breaking single-point perspective to achieve multi-viewpoint spatial narrative",
+            page: "Core Concept #1"
+          },
+          {
+            critic: "guo-xi",
+            source: "key-concepts.md",
+            quote: "可游可居 (Ke You Ke Ju - Wanderable and Livable): Landscape painting should not only be viewed but create realms where spirit can wander and heart-mind can dwell, allowing viewers to gain immersive experiential presence and sense of belonging",
+            page: "Core Concept #4"
+          },
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "山形步步移，山形面面看",
+            page: "Quote 3: Three Distances Combined"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-5-3",
@@ -298,7 +758,21 @@ const artwork1Threads = [
         textEn: `Your discussion brings to mind the concept of "invention of tradition." Cultural studies scholar Eric Hobsbawm points out that many things we regard as "ancient traditions" were actually invented or reinterpreted in modern times. From this perspective, tradition is never static, but a resource bank reactivated by each generation according to their needs. Chung's work is precisely performing this activation: she extracts core principles of Chinese calligraphy (fluidity, sense of rhythm, improvisational quality), then re-implements them with contemporary technology. This is not betrayal of tradition, but creative inheritance. Perhaps this is true "transmission"—not museum-style preservation, but living use.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "山水之境，即心之境",
+            page: "Quote 22: Landscape as Mirror of the Heart"
+          },
+          {
+            critic: "guo-xi",
+            source: "landscape-theory.md",
+            quote: "山水之道，化工也",
+            page: "Quote 26: Dao and Nature"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-5-4",
@@ -308,7 +782,27 @@ const artwork1Threads = [
         timestamp: 9000,
         replyTo: "professor-petrova",
         interactionType: "reflect",
-        quotedText: "生活中的使用"
+        quotedText: "生活中的使用",
+        references: [
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "诗以奇趣为宗，反常合道为趣",
+            page: "Quote 9: The Transformative Vision"
+          },
+          {
+            critic: "su-shi",
+            source: "key-concepts.md",
+            quote: "反常合道 (Fan Chang He Dao - Departing from Convention While Aligning with the Dao): True creativity involves paradox: breaking conventional rules while simultaneously aligning with deeper universal principles",
+            page: "Core Concept #5"
+          },
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "出新意于法度之中，寄妙理于豪放之外",
+            page: "Quote 10: The Boundless Creativity"
+          }
+        ]
       }
     ]
   },
@@ -330,7 +824,27 @@ const artwork1Threads = [
         textEn: `This work forces me to confront an uncomfortable question: What is art? In my era, the answer seemed clear—art is the crystallization of human manual labor, the expression of moral sentiment, the faithful reproduction of natural truth. But this work challenges all these definitions. It is not purely handmade, its "morality" comes from algorithmic transparency, its "nature" is code-generated. I find I must acknowledge: perhaps the definition of art itself needs rewriting. This both troubles and excites me.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "The artist has a moral duty to display the actual truth",
+            page: "Quote 1: The Artist's Moral Duty"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "Art should present things not as they are in themselves but as they appear to mankind",
+            page: "Quote 12: Phenomenological Truth"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "Do not lie. Architecture must honestly express its structure and materials",
+            page: "Quote 16: The Lamp of Truth"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-6-2",
@@ -340,7 +854,27 @@ const artwork1Threads = [
         timestamp: 3000,
         replyTo: "john-ruskin",
         interactionType: "agree-extend",
-        quotedText: "艺术的定义本身需要被重新书写"
+        quotedText: "艺术的定义本身需要被重新书写",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "AI is a technology of extraction: from minerals to labor to data taken from every action and expression.",
+            page: "Section 1-10: AI as Extractive System"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "algorithmic-justice-and-power.md",
+            quote: "Who decides? Who controls the algorithm? Who sets evaluation criteria? Who is excluded from decision-making?",
+            page: "Section 21-30: Algorithmic Accountability Framework"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "README.md",
+            quote: "Policy-oriented, evidence-based. What should be done? Systematic accountability tracing.",
+            page: "Voice Characteristics"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-6-3",
@@ -349,7 +883,27 @@ const artwork1Threads = [
         textEn: `Listening to your discussion of "art's definition," I want to say: in my community, we never ask "is this art," we ask "what is this thing useful for." Is a weaving pattern art? It's textile. Is a harvest song art? It's labor's rhythm. Is a mask art? It's ritual prop. But these things are all beautiful, all carry our memories and meanings. Perhaps the real question is not "what is art," but "whom does art serve." Whom does this work serve? It helps us understand human-technology relationships, it makes us think about creation's essence, it provides space for dialogue. In this sense, it is useful, therefore it is valuable.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "question-challenge"
+        interactionType: "question-challenge",
+        references: [
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Ubuntu — Umuntu ngumuntu ngabantu — A person is a person through other people. Art is not created by isolated geniuses but emerges from communal relationships.",
+            page: "Section 1: Ubuntu Philosophy"
+          },
+          {
+            critic: "mama-zola",
+            source: "griot-aesthetics-oral-tradition.md",
+            quote: "Griot Ethics: The griot does not own the stories—the stories own the griot. Serve community benefit, not personal glory.",
+            page: "Section 2: Griot Ethics"
+          },
+          {
+            critic: "mama-zola",
+            source: "README.md",
+            quote: "Community-centered values (collective over individual). Art as social bond, not individual expression.",
+            page: "Voice Characteristics"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-6-4",
@@ -359,7 +913,27 @@ const artwork1Threads = [
         timestamp: 9000,
         replyTo: "mama-zola",
         interactionType: "synthesize",
-        quotedText: "艺术为谁服务"
+        quotedText: "艺术为谁服务",
+        references: [
+          {
+            critic: "su-shi",
+            source: "poetry-and-theory.md",
+            quote: "吾文如万斛泉源，不择地而出，在平地滔滔汩汩 (My writing flows like ten thousand hu of spring water, emerging without choosing where, on flat ground surging unceasingly)",
+            page: "Section 6: Quote 11 - Flowing Like Water (Daoist Ziran)"
+          },
+          {
+            critic: "su-shi",
+            source: "key-concepts.md",
+            quote: "自然 (Ziran - Naturalness): Spontaneous, unforced creativity arising from deep cultivation. Actions that align with the Way without artifice.",
+            page: "Concept 5: 自然 (Naturalness)"
+          },
+          {
+            critic: "su-shi",
+            source: "README.md",
+            quote: "Cross-cultural synthesis: Capable of recognizing resonances across traditions without forcing equivalence",
+            page: "Application to AI Art - Pattern Recognition"
+          }
+        ]
       },
       {
         id: "msg-artwork-1-6-5",
@@ -368,7 +942,27 @@ const artwork1Threads = [
         textEn: `You are all right. I realize I've been judging 21st-century practice by 19th-century standards—this itself is arrogance. Art's greatness lies in always transcending existing definitions, always making us rethink what is beautiful, what is true, what is good. This work achieves these things. It may not conform to my traditional image of "art," but it does what art should do: it moves us, makes us think, makes us dialogue. Perhaps future art historians will say: in the early 21st century, art's definition was rewritten once again. And we are witnesses to this rewriting.`,
         timestamp: 12000,
         replyTo: null,
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "The Gothic style permits and even demands the freedom, individuality, and spontaneity of its workers",
+            page: "Quote 6: The Nature of Gothic"
+          },
+          {
+            critic: "john-ruskin",
+            source: "art-and-morality.md",
+            quote: "Imperfections in craftsmanship are integral to its genuine expression. The demand for perfection degrades the workman, making him a tool rather than a creator",
+            page: "Quote 8: Imperfections as Integrity"
+          },
+          {
+            critic: "john-ruskin",
+            source: "README.md",
+            quote: "True art requires costly dedication beyond utility. All great art is praise. Labor invested must be visible.",
+            page: "Core Philosophy - The Lamp of Sacrifice"
+          }
+        ]
       }
     ]
   }

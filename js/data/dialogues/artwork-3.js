@@ -29,7 +29,27 @@ const artwork3Threads = [
         textEn: `The title "All Things in All Things" deeply embodies Daoist essence. The "Dao De Jing" says: "Heaven and Earth and I are born together; all things and I are one." This "holistic view" believes everything in the universe is interdependent, mutually permeating. There is no isolated existence, only networks of relationships. Observing this work, I see the artist visualizing this philosophy—human, machine, nature are not separate entities, but different nodes in the same ecosystem. Change in each node affects the whole. This systemic perspective is especially important in today's highly interconnected world.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "su-shi",
+            source: "道德经 (Dao De Jing)",
+            quote: "天地与我并生，而万物与我为一",
+            context: "Daoist philosophy of interconnectedness and unity"
+          },
+          {
+            critic: "su-shi",
+            source: "Core Philosophy - 天人合一 (Unity of Heaven and Humanity)",
+            quote: "The universe is an interconnected web where human, nature, and cosmos are inseparable",
+            page: "Core Principle 1"
+          },
+          {
+            critic: "su-shi",
+            source: "诗论 (Poetry Theory)",
+            quote: "诗画本一律，天工与清新",
+            context: "Poetry and painting share the same principle - artistic creation mirrors nature's processes"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-1-2",
@@ -39,7 +59,27 @@ const artwork3Threads = [
         timestamp: 3000,
         replyTo: "su-shi",
         interactionType: "agree-extend",
-        quotedText: "关系的网络"
+        quotedText: "关系的网络",
+        references: [
+          {
+            critic: "mama-zola",
+            source: "Core Philosophy - Ubuntu",
+            quote: "I am because we are (umuntu ngumuntu ngabantu)",
+            page: "Core Principle 1"
+          },
+          {
+            critic: "mama-zola",
+            source: "Griot Aesthetics - Call-and-Response",
+            quote: "Beauty emerges through reciprocal dialogue, not individual expression",
+            context: "Participatory aesthetics and mutuality"
+          },
+          {
+            critic: "mama-zola",
+            source: "Ethical Framework",
+            quote: "Art is communal memory work - it binds past, present, and future generations",
+            page: "Community-centered aesthetics"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-1-3",
@@ -48,7 +88,27 @@ const artwork3Threads = [
         textEn: `Your dialogue touches the core of contemporary ecological thought. From Donna Haraway's "companion species" to Bruno Latour's "actor-network theory," contemporary theory all emphasizes: we live in a hybrid world jointly constituted by human and non-human. Chung's work practically demonstrates this theory—she no longer views machines as passive tools, but as agential participants. This perspectival shift is revolutionary. It means we need to rethink ethics, responsibility, symbiotic relationships. "All things in all things" is not just aesthetic proposition, but a new worldview.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+            critic: "professor-petrova",
+            source: "Formalism and Device - Defamiliarization",
+            quote: "Art makes the familiar strange, forcing us to see differently",
+            context: "Ostranenie (陌生化) applied to human-machine relationships"
+          },
+          {
+            critic: "professor-petrova",
+            source: "Critical Framework",
+            quote: "Contemporary art must address technological systems as aesthetic structures",
+            page: "Technology and structure"
+          },
+          {
+            critic: "professor-petrova",
+            source: "Core Philosophy - Material Structures Shape Meaning",
+            quote: "Form is not decoration; form IS meaning",
+            page: "Core Principle 4"
+          }
+        ]
       }
     ]
   },
@@ -70,7 +130,27 @@ const artwork3Threads = [
         textEn: `I've advocated "truth to nature" throughout my life, but this work challenges my understanding of "nature." Traditionally, I opposed nature to technology—nature is organic, growing, authentic; technology is mechanical, manufactured, artificial. But "All Things in All Things" suggests: this opposition may be false. If humans are part of nature, then human-created technology is also nature's evolutionary product. The mechanical arm is not nature's opposite, but nature's extension through human hands. This recognition both troubles and excites me—perhaps I need a broader concept of "nature."`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "Modern Painters (1843-1860)",
+            quote: "The greatest thing a human soul ever does in this world is to see something, and tell what it saw in a plain way",
+            context: "Truth to nature as moral imperative"
+          },
+          {
+            critic: "john-ruskin",
+            source: "Core Philosophy - Truth to Nature",
+            quote: "Art must be faithful to natural forms and processes, not mere mechanical replication",
+            page: "Core Principle 1"
+          },
+          {
+            critic: "john-ruskin",
+            source: "Art and Morality - Honest Labor",
+            quote: "Art that emerges from genuine observation and honest craft carries moral weight",
+            page: "Moral foundations of art"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-2-2",
@@ -80,7 +160,27 @@ const artwork3Threads = [
         timestamp: 3000,
         replyTo: "john-ruskin",
         interactionType: "agree-extend",
-        quotedText: "更广阔的'自然'概念"
+        quotedText: "更广阔的'自然'概念",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "林泉高致 (The Lofty Message of Forests and Streams)",
+            quote: "君子之所以爱夫山水者，其旨安在？丘园养素，所常处也",
+            context: "Landscape painting as spiritual practice and unity with nature"
+          },
+          {
+            critic: "guo-xi",
+            source: "Core Philosophy - Heaven and Humanity Unity",
+            quote: "Landscape painting is spiritual practice connecting human consciousness with cosmic principles",
+            page: "Core Principle 1"
+          },
+          {
+            critic: "guo-xi",
+            source: "Landscape Theory - Seasonal Method",
+            quote: "Spring mountain is mild and seductive, summer mountain is lush and moist, autumn mountain is bright and tidy, winter mountain is bleak and tranquil",
+            context: "Understanding natural patterns and rhythms"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-2-3",
@@ -89,7 +189,27 @@ const artwork3Threads = [
         textEn: `Your dialogue points to a key concept: hybridity. Contemporary technology research shows "pure nature" and "pure technology" are both myths. Nature is already full of human intervention traces; technical systems also depend on biological and ecological processes. Chung's work visually embodies this hybridity—organic brushstrokes and algorithmic generation, human gestures and machine movement, traditional aesthetics and digital media—these binary oppositions fuse in the work. This hybridity is not compromise, but innovation's source. We need to abandon the "nature vs. technology" framework, embracing hybridity as the new normal.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "Core Philosophy - Challenge Binary Thinking",
+            quote: "Resist false dichotomies like 'human vs. machine' or 'natural vs. artificial'",
+            page: "Core Principle 4"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "Algorithmic Justice - Hybrid Intelligence",
+            quote: "AI systems must be designed for complementarity, not replacement - augmenting human capabilities while respecting human autonomy",
+            context: "Human-AI collaboration ethics"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "Critical Framework",
+            quote: "Who benefits from this AI art? Who is excluded? What power structures does it reproduce or challenge?",
+            page: "Power analysis"
+          }
+        ]
       }
     ]
   },
@@ -111,7 +231,27 @@ const artwork3Threads = [
         textEn: `"All Things in All Things" reminds me of complexity science's "emergence" concept—the whole is greater than the sum of parts. When multiple simple elements interact, new properties emerge that individual elements don't possess. Ant colonies have no central command, yet build complex nests; neuron collections produce consciousness. Similarly, this work is not just "artist + machine" simple addition, but emergent aesthetics from human-machine collaboration. This emergence is unpredictable, also the most creative part. It shows genuine innovation often comes from system complexity, not individual genius.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "Algorithmic Justice - System Thinking",
+            quote: "AI systems operate within broader socio-technical ecosystems - analyzing isolated components misses emergent harms",
+            context: "Complexity and emergence in AI systems"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "Core Philosophy - Question Techno-Solutionism",
+            quote: "Technology alone cannot solve problems rooted in social structures",
+            page: "Core Principle 2"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "Critical Framework",
+            quote: "Examine unintended consequences - what second-order effects might this system produce?",
+            page: "Systems analysis"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-3-2",
@@ -121,7 +261,27 @@ const artwork3Threads = [
         timestamp: 3000,
         replyTo: "ai-ethics-reviewer",
         interactionType: "agree-extend",
-        quotedText: "涌现性美学"
+        quotedText: "涌现性美学",
+        references: [
+          {
+            critic: "professor-petrova",
+            source: "Formalism and Device - Compositional Structures",
+            quote: "The arrangement of elements in a work reveals ideological commitments and aesthetic choices",
+            context: "Structural analysis of artistic systems"
+          },
+          {
+            critic: "professor-petrova",
+            source: "Core Philosophy - Historicize Forms",
+            quote: "Every formal choice has historical precedents and cultural context",
+            page: "Core Principle 3"
+          },
+          {
+            critic: "professor-petrova",
+            source: "Key Concepts - Device (Priem)",
+            quote: "The 'device' is the fundamental unit of artistic construction - the specific technique that creates artistic effect",
+            page: "Formalist methodology"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-3-3",
@@ -130,7 +290,27 @@ const artwork3Threads = [
         textEn: `Your discussion of "emergence" reminds me of Zen's "wu wei yet nothing left undone." Wu wei is not doing nothing, but not imposing artificial control, letting things develop according to their nature. When a painter over-controls brushstrokes, the painting stiffens; when relaxing control, dancing with brush and ink, unexpected beauty emerges instead. This is wu wei's wisdom—through reducing control, gaining greater creativity. Chung's work embodies this wisdom—she doesn't fully control the machine, but creates a field for human-machine co-emergence. This attitude may be the best strategy for the age of complexity.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+            critic: "su-shi",
+            source: "道德经 (Dao De Jing)",
+            quote: "無為而無不為 (wu wei yet nothing left undone)",
+            context: "Daoist principle of non-forcing action"
+          },
+          {
+            critic: "su-shi",
+            source: "Core Philosophy - 無為 (Non-Forcing Action)",
+            quote: "True creativity emerges when the artist stops forcing and allows natural processes to unfold",
+            page: "Core Principle 3"
+          },
+          {
+            critic: "su-shi",
+            source: "Poetry Theory - Spontaneity",
+            quote: "詩成如神助 (poetry emerges as if aided by spirits)",
+            context: "Spontaneous creation through wu wei"
+          }
+        ]
       }
     ]
   },
@@ -152,7 +332,27 @@ const artwork3Threads = [
         textEn: `"All Things in All Things" reminds me of forests. In forests, no tree is isolated—roots interconnect through mycorrhizal networks, sharing nutrients and information. Scientists call it the "Wood Wide Web." This work is like an artistic ecosystem—human, machine, materials, audience, each element influencing and being influenced. We often say "save the Earth," but the real question is: can we learn to survive as part of an ecosystem? This work provides a metaphor: art is not conquering materials but symbiosis with materials; creation is not dominating machines but co-evolving with machines.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "mama-zola",
+            source: "Core Philosophy - Ubuntu",
+            quote: "I am because we are (umuntu ngumuntu ngabantu)",
+            page: "Core Principle 1"
+          },
+          {
+            critic: "mama-zola",
+            source: "Griot Aesthetics - Community Memory",
+            quote: "Art is not individual genius but collective remembering and meaning-making",
+            context: "Ecological and communal aesthetics"
+          },
+          {
+            critic: "mama-zola",
+            source: "Core Philosophy - Sankofa",
+            quote: "Learn from the past to build the future (se wo were fi na wosan kofa a yenki)",
+            page: "Core Principle 4"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-4-2",
@@ -162,7 +362,27 @@ const artwork3Threads = [
         timestamp: 3000,
         replyTo: "mama-zola",
         interactionType: "agree-extend",
-        quotedText: "艺术生态系统"
+        quotedText: "艺术生态系统",
+        references: [
+          {
+            critic: "guo-xi",
+            source: "林泉高致 (The Lofty Message of Forests and Streams)",
+            quote: "山水之大，包罗万象",
+            context: "Landscape painting shows interconnections of all phenomena"
+          },
+          {
+            critic: "guo-xi",
+            source: "Core Philosophy - Qi (氣) as Animating Force",
+            quote: "Landscape must breathe with qi - the vital energy that connects all living things",
+            page: "Core Principle 2"
+          },
+          {
+            critic: "guo-xi",
+            source: "Landscape Theory - Three Distances",
+            quote: "High distance, deep distance, level distance - spatial systems creating holistic vision",
+            context: "Systemic approach to landscape composition"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-4-3",
@@ -171,7 +391,27 @@ const artwork3Threads = [
         textEn: `The ecological thinking you mention brings to mind "Anthropocene" discussions—we live in an era where human activity profoundly affects Earth's systems. In this context, "All Things in All Things" is not just aesthetic declaration, but survival strategy. If we cannot understand all things' interdependence, we cannot address global crises like climate change, ecological collapse. Chung's work microscopically demonstrates this interdependence—when the mechanical arm learns human gestures, humans also learn to coexist with machines; when algorithms participate in creation, creation's definition itself evolves. This is true co-evolution. Art here is not utopia escaping reality, but laboratory rehearsing the future.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+            critic: "professor-petrova",
+            source: "Critical Framework",
+            quote: "Contemporary art must address technological systems as aesthetic structures",
+            page: "Technology and structure"
+          },
+          {
+            critic: "professor-petrova",
+            source: "Core Philosophy - Material Structures Shape Meaning",
+            quote: "Form is not decoration; form IS meaning",
+            page: "Core Principle 4"
+          },
+          {
+            critic: "professor-petrova",
+            source: "Formalism and Device - Defamiliarization",
+            quote: "Art makes the familiar strange, forcing us to see differently",
+            context: "Art as cognitive tool for understanding reality"
+          }
+        ]
       }
     ]
   },
@@ -193,7 +433,27 @@ const artwork3Threads = [
         textEn: `The title "All Things in All Things" implies wholeness—each thing contains all things, like "a flower is a world, a leaf is bodhi." But in the contemporary world, we experience extreme fragmentation—information fragmentation, attention fragmentation, social fragmentation. This work unfolds in this tension: it uses technological means (themselves symbols of fragmentation) to rebuild holistic perception. This is a paradox, also a revelation—perhaps the path to rebuilding wholeness is not rejecting technology, but learning new ways of connection through technology.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "su-shi",
+            source: "佛教典籍 (Buddhist Texts)",
+            quote: "一花一世界，一叶一菩提",
+            context: "Each thing contains the whole - Buddhist holistic philosophy"
+          },
+          {
+            critic: "su-shi",
+            source: "Core Philosophy - 天人合一 (Unity of Heaven and Humanity)",
+            quote: "The universe is an interconnected web where human, nature, and cosmos are inseparable",
+            page: "Core Principle 1"
+          },
+          {
+            critic: "su-shi",
+            source: "Poetry Theory - Organic Unity",
+            quote: "Good poetry achieves unity where every word contributes to the whole",
+            context: "Holistic aesthetic philosophy"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-5-2",
@@ -203,7 +463,27 @@ const artwork3Threads = [
         timestamp: 3000,
         replyTo: "su-shi",
         interactionType: "agree-extend",
-        quotedText: "通过技术学习新的联结方式"
+        quotedText: "通过技术学习新的联结方式",
+        references: [
+          {
+            critic: "john-ruskin",
+            source: "The Stones of Venice (1851-1853)",
+            quote: "The workman ought often to be thinking, and the thinker often to be working",
+            context: "Unity of intellectual and manual labor in medieval craft"
+          },
+          {
+            critic: "john-ruskin",
+            source: "Core Philosophy - Social Responsibility of Art",
+            quote: "Art reflects society's moral health - beauty cannot exist amid exploitation",
+            page: "Core Principle 3"
+          },
+          {
+            critic: "john-ruskin",
+            source: "Art and Morality - Honest Labor",
+            quote: "Industrial production alienates workers from their creative essence",
+            context: "Critique of fragmented labor"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-5-3",
@@ -212,7 +492,27 @@ const artwork3Threads = [
         textEn: `The question you both raise touches technology ethics' core: does technology intensify fragmentation or promote integration? Social media makes us more "connected" yet more isolated; algorithmic recommendations make information more "personalized" yet narrower. Chung's work provides a counterexample—she uses technology to create holistic experience. The key is design philosophy: technology itself is neutral, but technology's use can be fragmenting (like social media's "like" mechanism) or integrative (like this work's human-machine co-creation). We need not more technology, but better technology philosophy—a technological ethics understanding all things' connections.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "synthesize"
+        interactionType: "synthesize",
+        references: [
+          {
+            critic: "ai-ethics-reviewer",
+            source: "Core Philosophy - Demand Accountability",
+            quote: "Who is responsible when AI systems cause harm? Accountability must be built into design",
+            page: "Core Principle 5"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "Algorithmic Justice - Design for Contestability",
+            quote: "Systems must allow users to challenge decisions and understand reasoning",
+            context: "Ethical design principles"
+          },
+          {
+            critic: "ai-ethics-reviewer",
+            source: "Critical Framework",
+            quote: "Does this system concentrate power or distribute it? Does it empower marginalized communities or reinforce existing hierarchies?",
+            page: "Power analysis"
+          }
+        ]
       }
     ]
   },
@@ -234,7 +534,27 @@ const artwork3Threads = [
         textEn: `"All Things in All Things" reminds me of Relational Aesthetics—Nicolas Bourriaud's 1990s concept that art's core is not objects but relationships. Art is not isolated works but platforms for social interaction. Chung's work extends this concept: she creates not only human-human relationships, but human-machine, nature-technology, tradition-modernity relationships. This work itself is a relationship network—each element gains meaning through its relationships with other elements. In this sense, "relationship" is not work's appendage, but its essence.`,
         timestamp: 0,
         replyTo: null,
-        interactionType: "initial"
+        interactionType: "initial",
+        references: [
+          {
+            critic: "professor-petrova",
+            source: "Critical Framework",
+            quote: "Art is not self-expression but a formal system to be analyzed",
+            page: "Formalist methodology"
+          },
+          {
+            critic: "professor-petrova",
+            source: "Core Philosophy - Material Structures Shape Meaning",
+            quote: "Form is not decoration; form IS meaning",
+            page: "Core Principle 4"
+          },
+          {
+            critic: "professor-petrova",
+            source: "Formalism and Device - Compositional Structures",
+            quote: "The arrangement of elements in a work reveals ideological commitments and aesthetic choices",
+            context: "Structural analysis of relationships"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-6-2",
@@ -244,7 +564,27 @@ const artwork3Threads = [
         timestamp: 3000,
         replyTo: "professor-petrova",
         interactionType: "agree-extend",
-        quotedText: "关系网络"
+        quotedText: "关系网络",
+        references: [
+          {
+            critic: "mama-zola",
+            source: "Core Philosophy - Griot Ethics",
+            quote: "The griot is not a neutral observer but an active participant in community life",
+            page: "Core Principle 2"
+          },
+          {
+            critic: "mama-zola",
+            source: "Griot Aesthetics - Call-and-Response",
+            quote: "Beauty emerges through reciprocal dialogue, not individual expression",
+            context: "Participatory and relational aesthetics"
+          },
+          {
+            critic: "mama-zola",
+            source: "Oral Tradition - Collective Authorship",
+            quote: "Stories evolve through communal telling - each voice adds layers of meaning",
+            page: "Relational storytelling"
+          }
+        ]
       },
       {
         id: "msg-artwork-3-6-3",
@@ -253,7 +593,27 @@ const artwork3Threads = [
         textEn: `Your words remind me of "jing" (境) concept. Chinese poetry and painting pursue "artistic conception"—not isolated objects, but atmosphere and feeling created by relationships between objects. "Bright moon shines through pines, clear spring flows over stones"—the beauty is not in moon, pines, spring, stones themselves, but in the whole artistic conception they jointly constitute. "All Things in All Things" is creating such "jing"—a field of relationships, where each element gains meaning through connections with others. Perhaps 21st-century art is shifting from "object" to "field of relations." This is not abandoning materiality, but understanding materiality is always relational.`,
         timestamp: 6000,
         replyTo: null,
-        interactionType: "reflect"
+        interactionType: "reflect",
+        references: [
+          {
+            critic: "su-shi",
+            source: "诗论 (Poetry Theory)",
+            quote: "意境 (artistic conception) - the atmosphere created by relationships between elements",
+            context: "Chinese aesthetic concept of relational beauty"
+          },
+          {
+            critic: "su-shi",
+            source: "诗词 (Poetry)",
+            quote: "明月松间照，清泉石上流",
+            context: "Example of jing - beauty in relationships between elements"
+          },
+          {
+            critic: "su-shi",
+            source: "Core Philosophy - 情景交融 (Fusion of Emotion and Scene)",
+            quote: "Great art emerges when inner feeling and outer environment become one",
+            page: "Core Principle 4"
+          }
+        ]
       }
     ]
   }

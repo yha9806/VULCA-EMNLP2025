@@ -1474,6 +1474,24 @@ a:focus-visible {
   padding-top: 8px; /* Add top padding to prevent header clipping */
 }
 
+/* Phase 3.3: Homepage Dialogue Integration */
+.critiques-panel .dialogue-container {
+  height: 100%; /* Fill panel height */
+  max-height: 85vh; /* Phase 3.3 optimized: Increased from 70vh to 85vh */
+  overflow-y: auto; /* Enable scrolling for long dialogues */
+}
+
+/* Error message styling */
+.critiques-panel .dialogue-error {
+  padding: 24px;
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  border: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
 .critique-panel {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
@@ -1699,26 +1717,26 @@ a:focus-visible {
 
 /* ==================== RESPONSIVE HERO LAYOUT ==================== */
 
-/* Tablet: 600px - 1023px - 2 columns, 35:65 ratio */
+/* Tablet: 600px - 1023px - Image-first ratio (Phase 3.3 corrected) */
 @media (min-width: 600px) and (max-width: 1023px) {
   .artwork-display {
     flex-direction: row;
   }
 
   .artwork-image-container {
-    flex: 0 0 60%; /* Image-first ratio for tablet */
+    flex: 0 0 60%; /* Phase 3.3 corrected: Restored original ratio */
     min-height: auto;
   }
 
   .critiques-panel {
-    flex: 0 0 40%;
-    max-height: calc(100vh - 180px); /* More generous vertical space */
+    flex: 0 0 40%; /* Phase 3.3 corrected: Restored original width */
+    max-height: calc(100vh - 140px); /* Phase 3.3: Increased vertical space only */
     overflow-y: auto;
     gap: 16px;
   }
 }
 
-/* Desktop: 1024px - 1365px - 3 columns, constrained width */
+/* Desktop: 1024px - 1365px - Image-first ratio (Phase 3.3 corrected) */
 @media (min-width: 1024px) and (max-width: 1365px) {
   .gallery-hero {
     max-width: 1400px; /* Constrain for readability */
@@ -1731,12 +1749,12 @@ a:focus-visible {
   }
 
   .artwork-image-container {
-    flex: 0 0 60%; /* Image-first ratio */
+    flex: 0 0 60%; /* Phase 3.3 corrected: Restored original ratio */
   }
 
   .critiques-panel {
-    flex: 0 0 40%;
-    max-height: calc(100vh - 220px);
+    flex: 0 0 40%; /* Phase 3.3 corrected: Restored original width */
+    max-height: calc(100vh - 140px); /* Phase 3.3: Increased vertical space only */
     gap: 16px;
   }
 
@@ -1758,7 +1776,7 @@ a:focus-visible {
   */
 }
 
-/* Large Desktop: 1366px - 1919px - 4 columns */
+/* Large Desktop: 1366px - 1919px - Image-first ratio (Phase 3.3 corrected) */
 @media (min-width: 1366px) and (max-width: 1919px) {
   .gallery-hero {
     max-width: 1600px; /* Wider constraint for large displays */
@@ -1771,12 +1789,12 @@ a:focus-visible {
   }
 
   .artwork-image-container {
-    flex: 0 0 60%; /* Image-first ratio */
+    flex: 0 0 60%; /* Phase 3.3 corrected: Restored original ratio */
   }
 
   .critiques-panel {
-    flex: 0 0 40%;
-    max-height: calc(100vh - 240px);
+    flex: 0 0 40%; /* Phase 3.3 corrected: Restored original width */
+    max-height: calc(100vh - 140px); /* Phase 3.3: Increased vertical space only */
     gap: 16px;
   }
 
@@ -1798,7 +1816,7 @@ a:focus-visible {
   */
 }
 
-/* Ultra-Wide: 1920px+ - 4 columns, max-width constraint */
+/* Ultra-Wide: 1920px+ - Image-first ratio (Phase 3.3 corrected) */
 @media (min-width: 1920px) {
   .gallery-hero {
     max-width: 1600px; /* Cap to prevent excessive line length */
@@ -1811,12 +1829,12 @@ a:focus-visible {
   }
 
   .artwork-image-container {
-    flex: 0 0 60%;
+    flex: 0 0 60%; /* Phase 3.3 corrected: Restored original ratio */
   }
 
   .critiques-panel {
-    flex: 0 0 40%;
-    max-height: calc(100vh - 240px);
+    flex: 0 0 40%; /* Phase 3.3 corrected: Restored original width */
+    max-height: calc(100vh - 140px); /* Phase 3.3: Increased vertical space only */
     gap: 16px;
   }
 
@@ -1883,6 +1901,12 @@ a:focus-visible {
     flex: 1;
     /* max-height removed - allow full scrollability */
     overflow-y: visible; /* Mobile: use document scroll instead of panel scroll */
+  }
+
+  /* Phase 3.3: Mobile dialogue container styling */
+  .critiques-panel .dialogue-container {
+    max-height: 70vh; /* Phase 3.3 optimized: Increased from 60vh to 70vh */
+    overflow-y: auto;
   }
 
   .critique-panel {

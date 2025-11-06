@@ -35,10 +35,11 @@ export function mergeThreads(threads) {
   const participants = [...new Set(allMessages.map(m => m.personaId))];
 
   // 5. Create single dialogue object
+  // Note: topic will be dynamically replaced by DialoguePlayer with artwork title
   return {
     id: `${artworkId}-dialogue`,
     artworkId: artworkId,
-    topic: `Complete Dialogue on ${artworkId}`,
+    topic: `关于 ${artworkId} 的完整对话`,
     topicEn: `Complete Dialogue on ${artworkId}`,
     participants: participants,
     messages: messagesWithTimestamps

@@ -92,5 +92,21 @@ export function getDialogueStats() {
   };
 }
 
+// Export as global variables for non-module scripts (gallery-hero.js)
+// Phase 3.3: Main Site Integration (Homepage Replacement)
+if (typeof window !== 'undefined') {
+  window.DIALOGUES = DIALOGUES;
+  window.getDialogueForArtwork = getDialogueForArtwork;
+  window.getDialogueById = getDialogueById;
+  window.getDialoguesWithPersona = getDialoguesWithPersona;
+  window.getDialogueStats = getDialogueStats;
+
+  console.log('[Dialogues] Global exports available:', {
+    DIALOGUES: window.DIALOGUES.length,
+    getDialogueForArtwork: typeof window.getDialogueForArtwork,
+    helpers: ['getDialogueById', 'getDialoguesWithPersona', 'getDialogueStats']
+  });
+}
+
 // Backward compatibility: Export DIALOGUE_THREADS for existing code
 export const DIALOGUE_THREADS = DIALOGUES;

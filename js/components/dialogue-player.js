@@ -14,6 +14,66 @@
  * @created 2025-11-04
  */
 
+// Thought chain templates for each persona (simulated thinking process)
+const THOUGHT_CHAINS = {
+  'su-shi': {
+    zh: [
+      '观察作品的形式与意境...',
+      '回忆古代书画理论...',
+      '思考自然与技艺的关系...',
+      '构思以传统视角论之...'
+    ],
+    en: [
+      'Observing form and artistic conception...',
+      'Recalling ancient painting theories...',
+      'Contemplating nature and craftsmanship...',
+      'Framing a traditional perspective...'
+    ]
+  },
+  'guo-xi': {
+    zh: [
+      '分析笔触的韵律感...',
+      '思考山水画的精神本质...',
+      '寻找自然与技术的联系...',
+      '酝酿山林之气的表达...'
+    ],
+    en: [
+      'Analyzing the rhythm of brushwork...',
+      'Pondering the essence of landscape painting...',
+      'Finding connections between nature and technique...',
+      'Brewing the expression of mountain spirit...'
+    ]
+  },
+  'john-ruskin': {
+    zh: [
+      '审视道德意义...',
+      '思考神圣秩序...',
+      '评估艺术的真实性...',
+      '构建批判性论点...'
+    ],
+    en: [
+      'Examining moral implications...',
+      'Considering the divine order...',
+      'Evaluating artistic authenticity...',
+      'Constructing critical arguments...'
+    ]
+  },
+  'default': {
+    zh: [
+      '分析作品特征...',
+      '回顾相关理论...',
+      '思考深层含义...',
+      '组织评论思路...'
+    ],
+    en: [
+      'Analyzing artwork features...',
+      'Reviewing relevant theories...',
+      'Contemplating deeper meanings...',
+      'Organizing critical thoughts...'
+    ]
+  }
+};
+
 class DialoguePlayer {
   /**
    * Create a DialoguePlayer instance
@@ -85,6 +145,10 @@ class DialoguePlayer {
     this.autoScrollDisabled = false;   // Auto-scroll toggle
     this._isAutoScrolling = false;     // Prevent scroll event conflicts
 
+    // Phase 5: Thought chain tracking (for future messages)
+    this._thoughtChainIntervals = new Map();  // Track intervals for each message
+    this._thoughtChainStates = new Map();     // Track current state for each message
+
     // Calculate total duration (max timestamp + buffer)
     this.totalDuration = this._calculateTotalDuration();
 
@@ -153,25 +217,25 @@ class DialoguePlayer {
    * @returns {number} Delay in milliseconds
    */
   _calculateNaturalDelay(message, index) {
-    const THINKING_MIN = 2000;  // Increased from 1500ms
-    const THINKING_MAX = 4000;  // Increased from 3000ms
+    const THINKING_MIN = 4000;  // Increased from 2000ms - slower reveal
+    const THINKING_MAX = 7000;  // Increased from 4000ms - more thinking time
 
     // Base random thinking time
     let delay = this._randomDelay(THINKING_MIN, THINKING_MAX);
 
-    // Adjust for message length (300ms per 100 chars - reduced multiplier for subtlety)
+    // Adjust for message length (500ms per 100 chars - increased for more reading time)
     const lang = document.documentElement.getAttribute('data-lang') || 'zh';
     const text = lang === 'en' ? message.textEn : message.textZh;
-    const lengthAdjustment = Math.floor(text.length / 100) * 300;
+    const lengthAdjustment = Math.floor(text.length / 100) * 500;
     delay += lengthAdjustment;
 
-    // First message appears slightly faster (90% of normal delay for less aggressive reduction)
+    // First message appears slightly faster (80% of normal delay)
     if (index === 0) {
-      delay = Math.floor(delay * 0.9);
+      delay = Math.floor(delay * 0.8);
     }
 
-    // Cap maximum delay at 8 seconds (increased from 5s to allow "deep thinking")
-    delay = Math.min(delay, 8000);
+    // Cap maximum delay at 12 seconds (increased for longer contemplation)
+    delay = Math.min(delay, 12000);
 
     console.log(`[DialoguePlayer] Message ${index} delay: ${delay}ms (length: ${text.length} chars)`);
     return delay;
@@ -179,35 +243,72 @@ class DialoguePlayer {
 
   /**
    * Reveal a message with Progressive Focus state management
-   * Phase 4: Task 4.2 - State Transition Logic
+   * Phase 5: Enhanced for dynamic message creation (natural dialogue flow)
    * @private
    * @param {string} messageId - Message ID to reveal
    */
   _revealMessage(messageId) {
-    const msgEl = this.messageElements.get(messageId);
-    if (!msgEl) {
-      console.warn(`[DialoguePlayer] Message element not found: ${messageId}`);
-      return;
-    }
-
     const msgIdx = this.thread.messages.findIndex(m => m.id === messageId);
     if (msgIdx === -1) {
       console.error(`[DialoguePlayer] Message not found in thread: ${messageId}`);
       return;
     }
 
+    const message = this.thread.messages[msgIdx];
+    let msgEl = this.messageElements.get(messageId);
+
+    // Phase 5: If message doesn't exist in DOM yet, create it dynamically
+    if (!msgEl) {
+      console.log(`[DialoguePlayer] Creating message ${msgIdx + 1} dynamically...`);
+
+      // Create message DOM element
+      msgEl = this._createMessageElement(message, msgIdx);
+      if (!msgEl) return;
+
+      // Add thought chain for non-first messages
+      if (msgIdx > 0) {
+        // Mark as future and add thought chain
+        msgEl.classList.add('future');
+
+        const thoughtChainEl = this._createThoughtChain(message.personaId);
+        msgEl.appendChild(thoughtChainEl);
+
+        // Start thought chain carousel
+        this._startThoughtChainCarousel(message.id, thoughtChainEl, message.personaId);
+      }
+
+      // Append to container
+      this.messagesContainer.appendChild(msgEl);
+      this.messageElements.set(message.id, msgEl);
+      this.renderedMessages.add(message.id);
+
+      console.log(`[DialoguePlayer] Message ${msgIdx + 1} DOM created with thought chain`);
+
+      // For non-first messages, schedule content reveal after thought chain plays
+      if (msgIdx > 0) {
+        // Wait 3-4 seconds to show "thinking" before revealing content
+        const thinkingDuration = 3000 + Math.random() * 1000; // 3-4 seconds
+        setTimeout(() => {
+          this._revealMessageContent(messageId);
+        }, thinkingDuration);
+
+        // Return early - content will be revealed by setTimeout
+        return;
+      }
+    }
+
     // Phase 4: Step 1 - Transition previous current to past
     if (this._currentMessageEl) {
       this._currentMessageEl.classList.remove('current');
       this._currentMessageEl.classList.add('past');
-      this._currentMessageEl.removeAttribute('aria-current'); // Phase 4: Task 4.6
+      this._currentMessageEl.removeAttribute('aria-current');
       console.log('[DialoguePlayer] Previous message transitioned to past');
     }
 
     // Phase 4: Step 2 - Reveal and set new current message
     msgEl.classList.remove('message-hidden', 'future');
     msgEl.classList.add('current', 'message-appearing');
-    msgEl.setAttribute('aria-current', 'true'); // Phase 4: Task 4.6
+    msgEl.setAttribute('aria-current', 'true');
 
     this._currentMessageEl = msgEl;
     this.currentMessageIndex = msgIdx;
@@ -218,6 +319,53 @@ class DialoguePlayer {
     this._markFutureMessages();
 
     // Phase 4: Step 4 - Auto-scroll to center (if enabled)
+    if (!this.autoScrollDisabled) {
+      this._scrollToMessage(msgEl);
+    }
+  }
+
+  /**
+   * Reveal message content after thought chain completes
+   * Phase 5: Separate method for content reveal timing
+   * @private
+   * @param {string} messageId - Message ID
+   */
+  _revealMessageContent(messageId) {
+    const msgEl = this.messageElements.get(messageId);
+    if (!msgEl) {
+      console.warn(`[DialoguePlayer] Cannot reveal content - message element not found: ${messageId}`);
+      return;
+    }
+
+    const msgIdx = this.thread.messages.findIndex(m => m.id === messageId);
+
+    // Stop thought chain carousel and remove element
+    this._stopThoughtChainCarousel(messageId);
+    const thoughtChainEl = msgEl.querySelector('.thought-chain');
+    if (thoughtChainEl) {
+      thoughtChainEl.remove();
+      console.log(`[DialoguePlayer] Removed thought chain for ${messageId}`);
+    }
+
+    // Transition previous current to past
+    if (this._currentMessageEl) {
+      this._currentMessageEl.classList.remove('current');
+      this._currentMessageEl.classList.add('past');
+      this._currentMessageEl.removeAttribute('aria-current');
+    }
+
+    // Reveal and set new current message
+    msgEl.classList.remove('message-hidden', 'future');
+    msgEl.classList.add('current', 'message-appearing');
+    msgEl.setAttribute('aria-current', 'true');
+
+    this._currentMessageEl = msgEl;
+    this.currentMessageIndex = msgIdx;
+
+    console.log(`[DialoguePlayer] Message ${msgIdx + 1} content revealed`);
+
+    // Mark future messages and auto-scroll
+    this._markFutureMessages();
     if (!this.autoScrollDisabled) {
       this._scrollToMessage(msgEl);
     }
@@ -255,73 +403,28 @@ class DialoguePlayer {
    * @private
    */
   _renderAllMessages() {
-    console.log('[DialoguePlayer] Pre-rendering all messages in static mode...');
+    console.log('[DialoguePlayer] Rendering initial message only (natural dialogue mode)...');
 
     // Sort messages by timestamp to ensure chronological order
     const sortedMessages = [...this.thread.messages].sort((a, b) => a.timestamp - b.timestamp);
 
-    // Render each message
-    sortedMessages.forEach((message, index) => {
-      const persona = this._getPersona(message.personaId);
-      if (!persona) {
-        console.warn(`[DialoguePlayer] Persona not found: ${message.personaId}`);
-        return;
-      }
+    // Phase 5: Only render the FIRST message initially
+    // Subsequent messages will be created dynamically when they appear
+    if (sortedMessages.length > 0) {
+      const firstMessage = sortedMessages[0];
+      const msgEl = this._createMessageElement(firstMessage, 0);
 
-      const lang = document.documentElement.getAttribute('data-lang') || this.options.lang;
+      // First message starts hidden but will be revealed immediately
+      msgEl.classList.add('message-hidden');
 
-      // Create message element
-      const msgEl = document.createElement('div');
-      msgEl.className = 'dialogue-message message-hidden'; // Natural Timing: Start hidden
-      msgEl.dataset.messageId = message.id;
-      msgEl.dataset.personaId = message.personaId;
-      msgEl.dataset.interactionType = message.interactionType;
-      msgEl.dataset.timestamp = message.timestamp;
-
-      // Phase 4: Task 4.4 - Set initial states for progressive focus
-      if (index === 0) {
-        // First message will become current when revealed
-        // Don't add .future class - it will get .current on first reveal
-      } else {
-        // All subsequent messages start as future (hidden)
-        msgEl.classList.add('future');
-      }
-
-      // Phase 4: Task 4.6 - Add ARIA attributes
-      msgEl.setAttribute('role', 'article');
-      msgEl.setAttribute('aria-label', `Comment by ${persona.nameZh} ${persona.nameEn}`);
-
-      // Build message HTML
-      msgEl.innerHTML = `
-        <div class="message-header">
-          <span class="message-author" style="color: ${persona.color}">
-            ${lang === 'en' ? persona.nameEn : persona.nameZh}
-          </span>
-          <span class="interaction-badge ${message.interactionType}">
-            ${this._getInteractionLabel(message.interactionType, lang)}
-          </span>
-        </div>
-        <div class="message-content">
-          ${lang === 'en' ? message.textEn : message.textZh}
-        </div>
-      `;
-
-      // Add quote block if message references another message
-      if (message.quotedText) {
-        const quoteEl = this._createQuoteBlock(message);
-        const contentEl = msgEl.querySelector('.message-content');
-        contentEl.insertBefore(quoteEl, contentEl.firstChild);
-      }
-
-      // Append to container
       this.messagesContainer.appendChild(msgEl);
+      this.messageElements.set(firstMessage.id, msgEl);
+      this.renderedMessages.add(firstMessage.id);
 
-      // Track element and mark as rendered
-      this.messageElements.set(message.id, msgEl);
-      this.renderedMessages.add(message.id);
-    });
+      console.log(`[DialoguePlayer] Rendered first message: ${firstMessage.id}`);
+    }
 
-    console.log(`[DialoguePlayer] Pre-rendered ${this.thread.messages.length} hidden messages (natural timing mode)`);
+    console.log(`[DialoguePlayer] Initial render complete (1 of ${this.thread.messages.length} messages)`);
 
     // Draw all connection lines immediately (if ThoughtChainVisualizer is available)
     if (this.thoughtChainVisualizer) {
@@ -360,13 +463,25 @@ class DialoguePlayer {
     this.container.classList.add('dialogue-player');
     this.container.innerHTML = '';
 
+    // Phase 3.3: Get artwork title dynamically from VULCA_DATA
+    let topicZh = this.thread.topic;
+    let topicEn = this.thread.topicEn;
+
+    if (window.VULCA_DATA && this.thread.artworkId) {
+      const artwork = window.VULCA_DATA.artworks?.find(a => a.id === this.thread.artworkId);
+      if (artwork) {
+        topicZh = artwork.titleZh || topicZh;
+        topicEn = artwork.titleEn || topicEn;
+      }
+    }
+
     // Create dialogue header
     const header = document.createElement('div');
     header.className = 'dialogue-player__header';
     header.innerHTML = `
       <h3 class="dialogue-player__topic">
-        <span class="dialogue-player__topic-zh">${this.thread.topic}</span>
-        <span class="dialogue-player__topic-en">${this.thread.topicEn}</span>
+        <span class="dialogue-player__topic-zh">${topicZh}</span>
+        <span class="dialogue-player__topic-en">${topicEn}</span>
       </h3>
       <div class="dialogue-player__participants">
         ${this.thread.participants.map(personaId => {
@@ -687,11 +802,26 @@ class DialoguePlayer {
       </div>
     `;
 
-    // Add quote block if message references another message
-    if (message.quotedText) {
-      const quoteEl = this._createQuoteBlock(message);
+    // Phase 5: Add inline quote reference if message references another message
+    console.log(`[DialoguePlayer] _renderMessage ${message.id}: quotedText=${!!message.quotedText}, replyTo=${message.replyTo}`);
+    if (message.quotedText && message.replyTo) {
+      console.log(`[DialoguePlayer] _renderMessage: Rendering quote ref for ${message.id}`);
+      const quoteRefEl = this._renderQuoteRef(message);
       const contentEl = msgEl.querySelector('.message-content');
-      contentEl.insertBefore(quoteEl, contentEl.firstChild);
+      if (contentEl && quoteRefEl) {
+        contentEl.insertBefore(quoteRefEl, contentEl.firstChild);
+        console.log(`[DialoguePlayer] _renderMessage: Quote ref inserted for ${message.id}`);
+      }
+    }
+
+    // Phase 3.2: Add knowledge base references badge and list
+    if (message.references && message.references.length > 0) {
+      console.log(`[DialoguePlayer] _renderMessage: Rendering ${message.references.length} KB references for ${message.id}`);
+      const refContainer = this._renderKnowledgeReferences(message, persona);
+      if (refContainer) {
+        msgEl.appendChild(refContainer);
+        console.log(`[DialoguePlayer] _renderMessage: KB references added for ${message.id}`);
+      }
     }
 
     // Enhance interaction badge (Task 4.4: Add click navigation and tooltip)
@@ -818,7 +948,249 @@ class DialoguePlayer {
   }
 
   /**
+   * Render inline quote reference element (Phase 5: Task 5.2)
+   * Creates a compact inline reference with hover tooltip (desktop) or click modal (mobile)
+   * @private
+   * @param {Object} message - Message object with quotedText and replyTo
+   * @returns {HTMLElement} Quote reference element
+   */
+  _renderQuoteRef(message) {
+    const lang = document.documentElement.getAttribute('data-lang') || this.options.lang;
+
+    // Find the referenced persona
+    const referencedPersona = this._getPersona(message.replyTo);
+    if (!referencedPersona) {
+      console.warn(`[DialoguePlayer] Referenced persona not found: ${message.replyTo}`);
+      return document.createElement('div'); // Return empty div as fallback
+    }
+
+    // Create quote reference container
+    const quoteRefEl = document.createElement('div');
+    quoteRefEl.className = 'quote-ref';
+    quoteRefEl.dataset.quoteId = message.id;
+    quoteRefEl.dataset.replyTo = message.replyTo;
+
+    // Build inline reference text
+    const replyLabel = lang === 'en' ? 'Reply to' : '回复';
+    const personaName = lang === 'en' ? referencedPersona.nameEn : referencedPersona.nameZh;
+
+    quoteRefEl.innerHTML = `
+      <span class="quote-ref-icon">↩</span>
+      <span class="quote-ref-label">${replyLabel}</span>
+      <span class="quote-ref-author" style="color: ${referencedPersona.color}">${personaName}</span>
+      <div class="quote-ref-tooltip">
+        <cite style="color: ${referencedPersona.color}">${personaName}</cite>
+        <p>${message.quotedText}</p>
+      </div>
+    `;
+
+    // Make clickable to scroll to original message (desktop)
+    // On mobile, open modal instead
+    quoteRefEl.style.cursor = 'pointer';
+    quoteRefEl.setAttribute('title', lang === 'en' ? 'Click to view original message' : '点击查看原始消息');
+
+    quoteRefEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      // Phase 5: Task 5.4 - Mobile modal detection
+      const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
+
+      if (isMobile) {
+        // Show modal on mobile
+        this._showQuoteModal(message, referencedPersona);
+      } else {
+        // Scroll to original message on desktop (hover tooltip handles quote display)
+        this._scrollToPersonaMessage(message.replyTo);
+      }
+    });
+
+    console.log(`[DialoguePlayer] Rendered quote reference for message ${message.id} → ${message.replyTo}`);
+    return quoteRefEl;
+  }
+
+  /**
+   * Render knowledge base references badge and expandable list (Phase 3.2: Task 3.2.2 & 3.2.3)
+   * Creates a reference badge button and expandable reference list
+   * @private
+   * @param {Object} message - Message object with references array
+   * @param {Object} persona - Persona object for theming
+   * @returns {HTMLElement} Reference container element
+   */
+  _renderKnowledgeReferences(message, persona) {
+    const lang = document.documentElement.getAttribute('data-lang') || this.options.lang;
+
+    // Create container
+    const refContainer = document.createElement('div');
+    refContainer.className = 'message-references';
+
+    // Set persona color as CSS variable for theming
+    refContainer.style.setProperty('--persona-color', persona.color);
+
+    // Create badge button
+    const badge = document.createElement('button');
+    badge.className = 'reference-badge';
+    badge.setAttribute('aria-expanded', 'false');
+    badge.setAttribute('aria-label',
+      lang === 'en'
+        ? `${message.references.length} knowledge base references. Click to expand.`
+        : `${message.references.length}个知识库引用。点击展开。`
+    );
+
+    badge.innerHTML = `
+      <span class="badge-icon">📚</span>
+      <span class="badge-count">${message.references.length}</span>
+      <span class="badge-label" data-lang="zh">个引用</span>
+      <span class="badge-label" data-lang="en">references</span>
+    `;
+
+    // Create reference list (initially collapsed)
+    const refList = document.createElement('div');
+    refList.className = 'reference-list';
+    refList.setAttribute('role', 'region');
+    refList.setAttribute('aria-label',
+      lang === 'en' ? 'Knowledge base references' : '知识库引用列表'
+    );
+
+    // Render individual reference items
+    refList.innerHTML = message.references.map((ref, index) => {
+      // Get critic name
+      const criticPersona = this._getPersona(ref.critic);
+      const criticName = criticPersona
+        ? (lang === 'en' ? criticPersona.nameEn : criticPersona.nameZh)
+        : ref.critic;
+
+      return `
+        <div class="reference-item" data-ref-index="${index}">
+          <div class="reference-header">
+            <strong class="reference-critic">${criticName}</strong>
+            <span class="reference-source">${ref.source}</span>
+          </div>
+          <blockquote class="reference-quote" lang="${lang}">
+            ${ref.quote}
+          </blockquote>
+          ${ref.page ? `<p class="reference-page">${ref.page}</p>` : ''}
+        </div>
+      `;
+    }).join('');
+
+    // Add toggle functionality
+    badge.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const expanded = badge.getAttribute('aria-expanded') === 'true';
+      badge.setAttribute('aria-expanded', !expanded);
+      refList.classList.toggle('expanded');
+
+      // Update aria-label
+      badge.setAttribute('aria-label',
+        lang === 'en'
+          ? `${message.references.length} knowledge base references. Click to ${expanded ? 'expand' : 'collapse'}.`
+          : `${message.references.length}个知识库引用。点击${expanded ? '展开' : '收起'}。`
+      );
+
+      console.log(`[DialoguePlayer] Toggled references for ${message.id}: ${!expanded ? 'expanded' : 'collapsed'}`);
+    });
+
+    // Assemble container
+    refContainer.appendChild(badge);
+    refContainer.appendChild(refList);
+
+    console.log(`[DialoguePlayer] Rendered ${message.references.length} KB references for message ${message.id}`);
+    return refContainer;
+  }
+
+  /**
+   * Show quote modal on mobile devices (Phase 5: Task 5.4)
+   * Creates a modal overlay with quote content
+   * @private
+   * @param {Object} message - Message object with quotedText
+   * @param {Object} referencedPersona - Persona object being quoted
+   */
+  _showQuoteModal(message, referencedPersona) {
+    const lang = document.documentElement.getAttribute('data-lang') || this.options.lang;
+
+    // Check if modal already exists (prevent duplicates)
+    let backdrop = document.querySelector('.quote-modal-backdrop');
+    if (!backdrop) {
+      // Create backdrop
+      backdrop = document.createElement('div');
+      backdrop.className = 'quote-modal-backdrop';
+      backdrop.setAttribute('role', 'dialog');
+      backdrop.setAttribute('aria-modal', 'true');
+      backdrop.setAttribute('aria-labelledby', 'quote-modal-title');
+      document.body.appendChild(backdrop);
+    }
+
+    // Build modal content
+    const closeLabel = lang === 'en' ? 'Close' : '关闭';
+    const quotedByLabel = lang === 'en' ? 'Quoted from' : '引用自';
+    const personaName = lang === 'en' ? referencedPersona.nameEn : referencedPersona.nameZh;
+
+    backdrop.innerHTML = `
+      <div class="quote-modal">
+        <div class="quote-modal-header">
+          <h4 id="quote-modal-title" style="color: ${referencedPersona.color}">
+            ${quotedByLabel} ${personaName}
+          </h4>
+          <button class="quote-modal-close" aria-label="${closeLabel}">✕</button>
+        </div>
+        <div class="quote-modal-body">
+          <blockquote>
+            <cite style="color: ${referencedPersona.color}">${personaName}</cite>
+            <p>${message.quotedText}</p>
+          </blockquote>
+        </div>
+      </div>
+    `;
+
+    // Show modal with animation
+    requestAnimationFrame(() => {
+      backdrop.classList.add('active');
+    });
+
+    // Close handlers
+    const closeBtn = backdrop.querySelector('.quote-modal-close');
+    const modal = backdrop.querySelector('.quote-modal');
+
+    const closeModal = () => {
+      backdrop.classList.remove('active');
+      // Remove backdrop after animation completes
+      setTimeout(() => {
+        if (backdrop.parentNode) {
+          backdrop.remove();
+        }
+      }, 300); // Match CSS animation duration
+    };
+
+    // Close button click
+    closeBtn.addEventListener('click', closeModal);
+
+    // Backdrop click (outside modal)
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) {
+        closeModal();
+      }
+    });
+
+    // Prevent clicks inside modal from closing
+    modal.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Escape key to close
+    const escapeHandler = (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        document.removeEventListener('keydown', escapeHandler);
+      }
+    };
+    document.addEventListener('keydown', escapeHandler);
+
+    console.log(`[DialoguePlayer] Opened quote modal for ${message.replyTo}`);
+  }
+
+  /**
    * Create quote block element for referenced messages (Task 4.3: Enhanced with click navigation)
+   * @deprecated Phase 5: Replaced by _renderQuoteRef() for inline references
    * @private
    * @param {Object} message - Message object with quotedText
    * @returns {HTMLElement} Quote block element
@@ -1107,6 +1479,157 @@ class DialoguePlayer {
     console.log('[DialoguePlayer] Data validation passed ✓');
   }
 
+  // ============================================================================
+  // Phase 5: Thought Chain (Thinking Process Display)
+  // ============================================================================
+
+  /**
+   * Create message DOM element
+   * Phase 5: Extracted from _renderAllMessages() for dynamic creation
+   * @private
+   * @param {Object} message - Message object
+   * @param {number} index - Message index in sorted array
+   * @returns {HTMLElement} Message element
+   */
+  _createMessageElement(message, index) {
+    const persona = this._getPersona(message.personaId);
+    if (!persona) {
+      console.warn(`[DialoguePlayer] Persona not found: ${message.personaId}`);
+      return null;
+    }
+
+    const lang = document.documentElement.getAttribute('data-lang') || this.options.lang;
+
+    // Create message element
+    const msgEl = document.createElement('div');
+    msgEl.className = 'dialogue-message';
+    msgEl.dataset.messageId = message.id;
+    msgEl.dataset.personaId = message.personaId;
+    msgEl.dataset.interactionType = message.interactionType;
+    msgEl.dataset.timestamp = message.timestamp;
+
+    // Phase 4: Add ARIA attributes
+    msgEl.setAttribute('role', 'article');
+    msgEl.setAttribute('aria-label', `Comment by ${persona.nameZh} ${persona.nameEn}`);
+
+    // Build message HTML
+    msgEl.innerHTML = `
+      <div class="message-header">
+        <span class="message-author" style="color: ${persona.color}">
+          ${lang === 'en' ? persona.nameEn : persona.nameZh}
+        </span>
+        <span class="interaction-badge ${message.interactionType}">
+          ${this._getInteractionLabel(message.interactionType, lang)}
+        </span>
+      </div>
+      <div class="message-content">
+        ${lang === 'en' ? message.textEn : message.textZh}
+      </div>
+    `;
+
+    // Phase 5: Add inline quote reference if message references another message
+    if (message.quotedText && message.replyTo) {
+      const quoteRefEl = this._renderQuoteRef(message);
+      const contentEl = msgEl.querySelector('.message-content');
+      if (contentEl && quoteRefEl) {
+        contentEl.insertBefore(quoteRefEl, contentEl.firstChild);
+      }
+    }
+
+    // Phase 3.2: Add knowledge base references badge and list
+    if (message.references && message.references.length > 0) {
+      console.log(`[DialoguePlayer] _createMessageElement: Rendering ${message.references.length} KB references for ${message.id}`);
+      const refContainer = this._renderKnowledgeReferences(message, persona);
+      if (refContainer) {
+        msgEl.appendChild(refContainer);
+        console.log(`[DialoguePlayer] _createMessageElement: KB references added for ${message.id}`);
+      }
+    }
+
+    return msgEl;
+  }
+
+  /**
+   * Create thought chain container
+   * @private
+   * @param {string} personaId - Persona ID for thought chain template
+   * @returns {HTMLElement} Thought chain container element
+   */
+  _createThoughtChain(personaId) {
+    const container = document.createElement('div');
+    container.className = 'thought-chain';
+
+    // Get thought chain template for this persona
+    const lang = document.documentElement.getAttribute('data-lang') || 'zh';
+    const template = THOUGHT_CHAINS[personaId] || THOUGHT_CHAINS['default'];
+    const thoughts = template[lang];
+
+    // Create all thought items (hidden initially)
+    thoughts.forEach((thought, index) => {
+      const item = document.createElement('div');
+      item.className = 'thought-chain-item';
+      item.textContent = thought;
+      item.dataset.index = index;
+      container.appendChild(item);
+    });
+
+    return container;
+  }
+
+  /**
+   * Start thought chain carousel animation
+   * @private
+   * @param {string} messageId - Message ID
+   * @param {HTMLElement} container - Thought chain container
+   * @param {string} personaId - Persona ID
+   */
+  _startThoughtChainCarousel(messageId, container, personaId) {
+    const items = Array.from(container.querySelectorAll('.thought-chain-item'));
+    if (items.length === 0) return;
+
+    // Initialize state
+    let currentIndex = 0;
+    this._thoughtChainStates.set(messageId, { currentIndex, items });
+
+    // Show first item
+    items[0].classList.add('active');
+
+    // Rotate every 2 seconds
+    const intervalId = setInterval(() => {
+      // Hide current item
+      items[currentIndex].classList.remove('active');
+
+      // Move to next item (循环)
+      currentIndex = (currentIndex + 1) % items.length;
+
+      // Show next item
+      items[currentIndex].classList.add('active');
+
+      // Update state
+      this._thoughtChainStates.set(messageId, { currentIndex, items });
+    }, 2000); // 2 seconds per thought
+
+    // Track interval for cleanup
+    this._thoughtChainIntervals.set(messageId, intervalId);
+
+    console.log(`[DialoguePlayer] Started thought chain for ${messageId} (persona: ${personaId})`);
+  }
+
+  /**
+   * Stop thought chain carousel for a message
+   * @private
+   * @param {string} messageId - Message ID
+   */
+  _stopThoughtChainCarousel(messageId) {
+    const intervalId = this._thoughtChainIntervals.get(messageId);
+    if (intervalId) {
+      clearInterval(intervalId);
+      this._thoughtChainIntervals.delete(messageId);
+      this._thoughtChainStates.delete(messageId);
+      console.log(`[DialoguePlayer] Stopped thought chain for ${messageId}`);
+    }
+  }
+
   /**
    * Destroy player and clean up resources
    */
@@ -1115,6 +1638,16 @@ class DialoguePlayer {
     if (this._playbackTimeouts) {
       this._playbackTimeouts.forEach(timeout => clearTimeout(timeout));
       this._playbackTimeouts = [];
+    }
+
+    // Phase 5: Clean up thought chain intervals
+    if (this._thoughtChainIntervals) {
+      this._thoughtChainIntervals.forEach((intervalId, messageId) => {
+        clearInterval(intervalId);
+        console.log(`[DialoguePlayer] Cleaned up thought chain interval for ${messageId}`);
+      });
+      this._thoughtChainIntervals.clear();
+      this._thoughtChainStates.clear();
     }
 
     this.container.innerHTML = '';
