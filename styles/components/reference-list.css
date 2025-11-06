@@ -1,0 +1,178 @@
+/**
+ * Reference List Component Styles
+ *
+ * Expandable list showing full knowledge base reference details
+ * - Expands/collapses when badge is clicked
+ * - Displays critic, source, quote, and page info
+ * - Uses persona color theming
+ *
+ * @version 1.0.0
+ * @created 2025-11-06
+ * @openspec add-knowledge-base-references-to-dialogues
+ */
+
+/* ============================================================================
+   Reference List Container
+   ========================================================================== */
+
+.reference-list {
+  margin-top: 1rem;
+  padding: 0;
+  background: #f9f9f9;
+  border-left: 3px solid var(--persona-color, #B85C3C);
+  border-radius: 0.5rem;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+/* Expanded state */
+.reference-list.expanded {
+  max-height: 600px; /* Increased from 500px to accommodate 3 references */
+  opacity: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/* ============================================================================
+   Reference Item
+   ========================================================================== */
+
+.reference-item {
+  padding: 0.75rem 0;
+}
+
+.reference-item + .reference-item {
+  border-top: 1px solid #e0e0e0;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.reference-item:first-child {
+  padding-top: 0;
+}
+
+.reference-item:last-child {
+  padding-bottom: 0;
+}
+
+/* ============================================================================
+   Reference Header
+   ========================================================================== */
+
+.reference-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.reference-critic {
+  font-weight: 600;
+  color: var(--persona-color, #B85C3C);
+  font-size: 0.95rem;
+}
+
+.reference-source {
+  font-size: 0.875rem;
+  color: #666;
+  font-family: 'Courier New', Courier, monospace;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ============================================================================
+   Reference Quote
+   ========================================================================== */
+
+.reference-quote {
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  background: white;
+  border-left: 3px solid var(--persona-color, #B85C3C);
+  border-radius: 4px;
+  font-style: italic;
+  color: #333;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.reference-quote::before {
+  content: '"';
+  font-size: 1.5rem;
+  color: var(--persona-color, #B85C3C);
+  opacity: 0.3;
+  margin-right: 0.25rem;
+  line-height: 0;
+}
+
+.reference-quote::after {
+  content: '"';
+  font-size: 1.5rem;
+  color: var(--persona-color, #B85C3C);
+  opacity: 0.3;
+  margin-left: 0.25rem;
+  line-height: 0;
+}
+
+/* ============================================================================
+   Reference Page/Location
+   ========================================================================== */
+
+.reference-page {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reference-page::before {
+  content: '📍';
+  font-size: 0.9rem;
+}
+
+/* ============================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .reference-list.expanded {
+    padding: 0.75rem;
+  }
+
+  .reference-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .reference-quote {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+
+  .reference-source {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reference-list.expanded {
+    max-height: 500px;
+  }
+
+  .reference-quote {
+    font-size: 0.8rem;
+  }
+
+  .reference-page {
+    font-size: 0.8rem;
+  }
+}
