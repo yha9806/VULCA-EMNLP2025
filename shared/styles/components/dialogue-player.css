@@ -1,0 +1,1065 @@
+/**
+ * DialoguePlayer Component Styles
+ *
+ * Animated dialogue playback UI with:
+ * - Message bubbles with persona styling
+ * - Interaction type badges
+ * - Quote blocks for threaded conversations
+ * - Playback controls (play/pause/speed/scrubber)
+ * - Smooth appearing animations
+ *
+ * @version 1.0.0
+ * @created 2025-11-04
+ */
+
+/* ============================================================================
+   Container & Layout
+   ========================================================================== */
+
+.dialogue-player {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  min-height: 500px;        /* NEW: Establish height context */
+  height: auto;             /* NEW: Allow natural growth */
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  scroll-margin-top: 20px;  /* Ensure header is visible when scrolled into view */
+}
+
+/* ============================================================================
+   Header
+   ========================================================================== */
+
+.dialogue-player__header {
+  padding: 16px 20px;      /* Phase 3.3 optimized: Reduced vertical padding */
+  background: linear-gradient(135deg, #B85C3C 0%, #D4A574 100%); /* Warm terracotta to gold gradient */
+  color: #ffffff;
+  min-height: auto;        /* Phase 3.3 optimized: Auto height to reduce waste */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Enhance readability on warm gradient */
+}
+
+.dialogue-player__topic {
+  margin: 0 0 8px 0;       /* Phase 3.3 optimized: Reduced margin */
+  font-weight: 600; /* Default weight, overridden in children */
+  text-shadow: inherit; /* Inherit from header for consistency */
+}
+
+.dialogue-player__topic-zh {
+  display: -webkit-box; /* Required for line-clamp */
+  -webkit-line-clamp: 2; /* Phase 3.3 optimized: Reduced to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word; /* Phase 3.3: Better word wrapping */
+  font-size: clamp(0.95rem, 2.8vw, 1.1rem); /* Phase 3.3 optimized: Slightly smaller */
+  font-weight: 600;
+  line-height: 1.2;        /* Phase 3.3 optimized: Tighter line height */
+}
+
+.dialogue-player__topic-en {
+  display: -webkit-box; /* Phase 3.3: Add line-clamp for consistency */
+  -webkit-line-clamp: 2; /* Phase 3.3 optimized: Reduced to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word; /* Phase 3.3: Better word wrapping */
+  font-size: clamp(0.8rem, 2.3vw, 0.9rem); /* Phase 3.3 optimized: Slightly smaller */
+  opacity: 0.9;
+  margin-top: 2px;         /* Phase 3.3 optimized: Reduced margin */
+  line-height: 1.3;        /* Phase 3.3 optimized: Tighter line height */
+}
+
+.dialogue-player__participants {
+  font-size: 0.8rem;       /* Phase 3.3 optimized: Smaller font */
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 6px;                /* Phase 3.3 optimized: Reduced gap */
+  flex-wrap: wrap;
+  margin-top: 4px;         /* Phase 3.3 optimized: Small top margin */
+  text-shadow: inherit; /* Inherit from header for consistency */
+}
+
+.dialogue-player__participant {
+  padding: 3px 10px;       /* Phase 3.3 optimized: Smaller padding */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  font-size: 0.75rem;      /* Phase 3.3 optimized: Slightly smaller */
+}
+
+/* ============================================================================
+   Messages Container
+   ========================================================================== */
+
+.dialogue-player__messages {
+  min-height: 400px;        /* NEW: Enforce minimum */
+  max-height: 600px;        /* UPDATED: Increased from 500px */
+  flex: 1 1 auto;           /* CHANGED: Allow grow/shrink */
+  padding: 24px;
+  overflow-y: auto;
+  background: #f9fafb;
+  position: relative;       /* NEW: For absolute children */
+}
+
+/* Custom scrollbar */
+.dialogue-player__messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dialogue-player__messages::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.dialogue-player__messages::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 4px;
+}
+
+.dialogue-player__messages::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* ============================================================================
+   Message Bubbles
+   ========================================================================== */
+
+.dialogue-message {
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Natural Timing: Hidden state (before reveal) */
+.dialogue-message.message-hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: none; /* No transition while hidden */
+}
+
+/* Future messages are visible even when "hidden" (show with dimmed state + badge) */
+.dialogue-message.message-hidden.future {
+  opacity: 0.4; /* Override hidden state - make future messages visible but dimmed */
+  transform: translateY(0); /* No transform for future messages */
+}
+
+/* Natural Timing: Appearing animation */
+.dialogue-message.message-appearing {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+   Progressive Focus States (Phase 4: Progressive Focus Interaction)
+   ========================================================================== */
+
+/* GPU acceleration hint for smooth transitions */
+.dialogue-message {
+  will-change: opacity, transform;
+}
+
+/* Past messages (dimmed, context) */
+.dialogue-message.past {
+  opacity: 0.4;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Current message (highlighted, centered) */
+.dialogue-message.current {
+  opacity: 1;
+  transform: scale(1.02); /* Subtle emphasis */
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  box-shadow: 0 4px 16px rgba(184, 92, 60, 0.2); /* Warm glow matching color system */
+}
+
+/* Future messages (dimmed, pending) */
+.dialogue-message.future {
+  opacity: 0.4;
+  transition: opacity 0.3s ease-out;
+  position: relative; /* For ::after badge */
+}
+
+/* Hide actual content in future messages - show thought chain instead */
+.dialogue-message.future .message-content {
+  display: none !important;
+}
+
+/* Hide interaction badge for future messages - it should appear AFTER content is revealed */
+.dialogue-message.future .interaction-badge {
+  display: none !important;
+}
+
+/* "生成中..." badge for future messages */
+.dialogue-message.future::after {
+  content: "生成中...";
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  padding: 4px 12px;
+  background: rgba(184, 92, 60, 0.15); /* Warm terracotta tint */
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #B85C3C;
+  animation: pulse 1.5s ease-in-out infinite;
+  z-index: 10;
+}
+
+/* English version for future badge (when lang="en") */
+[data-lang="en"] .dialogue-message.future::after {
+  content: "Generating...";
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Thought chain (thinking process display) */
+.thought-chain {
+  padding: 16px 20px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.thought-chain-item {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.thought-chain-item.active {
+  opacity: 1;
+  animation: fadeInThought 0.4s ease-in-out;
+}
+
+@keyframes fadeInThought {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* End Progressive Focus States */
+
+.dialogue-message:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ============================================================================
+   Message Header
+   ========================================================================== */
+
+.message-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.message-author {
+  font-weight: 600;
+  font-size: 0.95rem;
+  /* color set inline via persona.color */
+}
+
+.interaction-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* Interaction type colors (matching INTERACTION_TYPES from data) */
+.interaction-badge.initial {
+  background: #eef2ff;
+  color: #6366f1;
+  border: 1px solid #c7d2fe;
+}
+
+.interaction-badge.agree-extend {
+  background: #f0fdf4;
+  color: #22c55e;
+  border: 1px solid #bbf7d0;
+}
+
+.interaction-badge.question-challenge {
+  background: #fefce8;
+  color: #eab308;
+  border: 1px solid #fde047;
+}
+
+.interaction-badge.synthesize {
+  background: #faf5ff;
+  color: #8b5cf6;
+  border: 1px solid #e9d5ff;
+}
+
+.interaction-badge.counter {
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+}
+
+.interaction-badge.reflect {
+  background: #eff6ff;
+  color: #3b82f6;
+  border: 1px solid #bfdbfe;
+}
+
+/* ============================================================================
+   Message Content
+   ========================================================================== */
+
+.message-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #374151;
+  word-wrap: break-word;           /* Content Visibility: Wrap long words */
+  overflow-wrap: break-word;       /* Content Visibility: Modern browsers */
+  hyphens: auto;                   /* Content Visibility: Hyphenation */
+}
+
+.message-content p {
+  margin: 0 0 8px 0;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================================
+   Quote Reference & Tooltip (Phase 5: Quote Interaction Enhancement)
+   ========================================================================== */
+
+/* Inline quote reference */
+.quote-ref {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #6b7280;
+  cursor: pointer;
+  margin-bottom: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.quote-ref:hover {
+  background-color: #f3f4f6;
+}
+
+.quote-ref-author {
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Desktop hover tooltip (only on devices with precise pointers) */
+@media (hover: hover) and (pointer: fine) {
+  .quote-ref-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    min-width: 200px;
+    max-width: 400px;
+    width: max-content;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    white-space: normal;
+    font-style: normal;
+    text-align: left;
+  }
+
+  .quote-ref:hover .quote-ref-tooltip {
+    display: block;
+    animation: fadeInTooltip 200ms ease-out;
+  }
+
+  @keyframes fadeInTooltip {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Tooltip arrow pointing down */
+  .quote-ref-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    border: 6px solid transparent;
+    border-top-color: #ffffff;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+  }
+
+  .quote-ref-tooltip cite {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-style: normal;
+  }
+
+  .quote-ref-tooltip p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #374151;
+    margin: 0;
+    text-align: left;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+}
+
+/* Mobile click modal - always available */
+.quote-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInBackdrop 300ms ease-out;
+}
+
+.quote-modal-backdrop.active {
+  display: flex;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.quote-modal {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: slideUpModal 300ms ease-out;
+}
+
+@keyframes slideUpModal {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.quote-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.quote-modal-close {
+  width: 32px;
+  height: 32px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #6b7280;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.quote-modal-close:hover {
+  background: #e5e7eb;
+}
+
+.quote-modal-body blockquote {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.quote-modal-body cite {
+  display: block;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  font-style: normal;
+}
+
+.quote-modal-body p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0;
+}
+
+/* Mobile-only: Hide desktop tooltip on mobile */
+@media (hover: none) or (pointer: coarse) {
+  .quote-ref-tooltip {
+    display: none !important;
+  }
+}
+
+/* End Quote Reference & Modal */
+
+/* ============================================================================
+   Quote Blocks
+   ========================================================================== */
+
+.message-quote {
+  margin: 0 0 12px 0;
+  padding: 12px 16px;
+  background: #f3f4f6;
+  border-left: 4px solid #9ca3af;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.message-quote cite {
+  display: block;
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom: 4px;
+  /* color set inline via referenced persona.color */
+}
+
+.message-quote p {
+  margin: 0;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Controls Container
+   ========================================================================== */
+
+.dialogue-player__controls {
+  padding: 16px 24px;      /* Phase 4: Reduced for better proportion */
+  background: #f9fafb;     /* Phase 4: Lighter background */
+  border-top: 1px solid #e5e7eb;
+  min-height: 70px;        /* Phase 4: Establish minimum height */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;               /* Phase 4: Reduced gap */
+}
+
+/* Phase 3: Mode Toggle Container */
+.mode-toggle-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mode-toggle-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mode-toggle-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.mode-toggle-btn {
+  flex: 1;
+  padding: 10px 16px;
+  background: #f3f4f6;
+  color: #374151;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mode-toggle-btn:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+}
+
+.mode-toggle-btn:active {
+  transform: translateY(0);
+}
+
+.mode-toggle-btn.active {
+  background: linear-gradient(135deg, #B85C3C 0%, #D4A574 100%); /* Warm gradient matching header */
+  color: #ffffff;
+  border-color: #B85C3C;
+  box-shadow: 0 2px 8px rgba(184, 92, 60, 0.3); /* Terracotta shadow */
+}
+
+.mode-toggle-btn.active:hover {
+  background: linear-gradient(135deg, #A04B2F 0%, #C57158 100%); /* Darker warm gradient */
+  border-color: #A04B2F;
+}
+
+/* Playback controls wrapper (shown only in animated mode) */
+.playback-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Primary controls row (play/pause + speed) */
+.controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Play/Pause button */
+.control-button {
+  padding: 10px 20px;
+  background: #B85C3C; /* Warm terracotta */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.control-button:hover {
+  background: #A04B2F; /* Darker terracotta */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(184, 92, 60, 0.3); /* Terracotta shadow */
+}
+
+.control-button:active {
+  transform: translateY(0);
+}
+
+.control-button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Speed selector */
+.speed-selector {
+  padding: 8px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.speed-selector:hover {
+  border-color: #B85C3C; /* Warm terracotta */
+}
+
+.speed-selector:focus {
+  outline: none;
+  border-color: #B85C3C; /* Warm terracotta */
+  box-shadow: 0 0 0 3px rgba(184, 92, 60, 0.1); /* Terracotta shadow */
+}
+
+/* Timeline scrubber */
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timeline-scrubber {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #e5e7eb;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.timeline-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #B85C3C; /* Warm terracotta */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeline-scrubber::-webkit-slider-thumb:hover {
+  background: #A04B2F; /* Darker terracotta */
+  transform: scale(1.2);
+}
+
+.timeline-scrubber::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: #B85C3C; /* Warm terracotta */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeline-scrubber::-moz-range-thumb:hover {
+  background: #A04B2F; /* Darker terracotta */
+  transform: scale(1.2);
+}
+
+/* Time display */
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+   Responsive Design
+   ========================================================================== */
+
+/* Phase 1: CSS Layout Fix - Responsive min-heights */
+@media (max-width: 767px) {
+  .dialogue-player {
+    min-height: 400px;
+  }
+  .dialogue-player__messages {
+    min-height: 300px;
+    max-height: 400px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dialogue-player__messages {
+    min-height: 350px;
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dialogue-player {
+    border-radius: 0;
+  }
+
+  .dialogue-player__header {
+    padding: 14px 16px;    /* Phase 3.3 optimized: Reduced padding */
+  }
+
+  .dialogue-player__topic {
+    margin-bottom: 6px;    /* Phase 3.3 optimized: Reduced margin */
+  }
+
+  .dialogue-player__messages {
+    padding: 16px;
+    max-height: 400px;
+  }
+
+  .dialogue-message {
+    padding: 12px;
+  }
+
+  .message-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .dialogue-player__controls {
+    padding: 16px;
+  }
+
+  /* Phase 3: Mode toggle responsive */
+  .mode-toggle-label {
+    font-size: 0.8rem;
+  }
+
+  .mode-toggle-btn {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+
+  .controls-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .control-button,
+  .speed-selector {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .dialogue-player__topic {
+    font-size: 1.1rem;
+  }
+
+  .dialogue-player__topic-en {
+    font-size: 0.95rem;
+  }
+
+  .dialogue-player__participants {
+    font-size: 0.8rem;
+  }
+
+  .message-content {
+    font-size: 0.9rem;
+  }
+
+  .dialogue-player__messages {
+    max-height: 300px;
+  }
+
+  /* Phase 5: Compact mode for very small screens */
+  .dialogue-player.compact-mode .dialogue-player__messages {
+    max-height: 30vh;
+    font-size: 0.8rem;
+  }
+
+  .dialogue-player.compact-mode .dialogue-player__header {
+    padding: 10px 14px;    /* Phase 3.3 optimized: Even tighter for compact mode */
+  }
+
+  .dialogue-player.compact-mode .dialogue-player__topic {
+    font-size: 0.95rem;    /* Phase 3.3 optimized: Smaller */
+    margin-bottom: 4px;    /* Phase 3.3 optimized: Reduced margin */
+  }
+
+  .dialogue-player.compact-mode .dialogue-message {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .dialogue-player.compact-mode .message-header {
+    font-size: 0.85rem;
+  }
+
+  .dialogue-player.compact-mode .message-content {
+    font-size: 0.85rem;
+  }
+
+  /* Hide timeline scrubber and replay button on mobile */
+  .dialogue-player.compact-mode .timeline-container,
+  .dialogue-player.compact-mode .replay-btn {
+    display: none;
+  }
+
+  .dialogue-player.compact-mode .controls-row {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .dialogue-player.compact-mode .control-button {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .dialogue-player.compact-mode .speed-selector {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 70px;
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================================================
+   Dark Mode Support (Optional)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .dialogue-player {
+    background: #1f2937;
+  }
+
+  .dialogue-player__messages {
+    background: #111827;
+  }
+
+  .dialogue-message {
+    background: #1f2937;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .message-content {
+    color: #d1d5db;
+  }
+
+  .message-quote {
+    background: #374151;
+    border-left-color: #6b7280;
+    color: #9ca3af;
+  }
+
+  .dialogue-player__controls {
+    background: #1f2937;
+    border-top-color: #374151;
+  }
+
+  .speed-selector {
+    background: #374151;
+    border-color: #4b5563;
+    color: #d1d5db;
+  }
+
+  .timeline-scrubber {
+    background: #374151;
+  }
+
+  .time-display {
+    color: #9ca3af;
+  }
+}
+
+/* ============================================================================
+   Loading & Error States (Phase 3: Content Visibility)
+   ========================================================================== */
+
+/* Loading state */
+.dialogue-player-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #6b7280;
+}
+
+.dialogue-player-loading .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #B85C3C; /* Warm terracotta matching new color system */
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+.dialogue-player-loading p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error state */
+.dialogue-player-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.dialogue-player-error .error-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.dialogue-player-error h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 8px 0;
+}
+
+.dialogue-player-error .error-message {
+  font-size: 0.95rem;
+  margin: 0 0 24px 0;
+  max-width: 400px;
+}
+
+.dialogue-player-error .error-retry-btn {
+  padding: 10px 20px;
+  background: #B85C3C; /* Warm terracotta matching new color system */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dialogue-player-error .error-retry-btn:hover {
+  background: #A04B2F; /* Darker terracotta */
+}

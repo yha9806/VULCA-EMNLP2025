@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vulcaart.art/schemas/dialogue-data.schema.json",
+  "title": "Dialogue Data",
+  "description": "Schema for dialogue messages and conversations",
+  "type": "object",
+  "required": ["dialogues"],
+  "properties": {
+    "dialogues": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Array of dialogue objects",
+      "items": {
+        "type": "object",
+        "required": ["id", "artworkId", "messages"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique dialogue identifier",
+            "examples": ["artwork-1-dialogue"]
+          },
+          "artworkId": {
+            "type": "string",
+            "description": "Reference to artwork ID",
+            "examples": ["artwork-1"]
+          },
+          "topicZh": {
+            "type": "string",
+            "description": "Chinese dialogue topic"
+          },
+          "topicEn": {
+            "type": "string",
+            "description": "English dialogue topic"
+          },
+          "participants": {
+            "type": "array",
+            "description": "Array of participant persona IDs",
+            "items": {
+              "type": "string",
+              "examples": ["su-shi", "guo-xi"]
+            }
+          },
+          "messages": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Array of message objects",
+            "items": {
+              "type": "object",
+              "required": ["id", "personaId", "textZh", "textEn", "timestamp"],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique message identifier",
+                  "examples": ["msg-artwork-1-1-1"]
+                },
+                "personaId": {
+                  "type": "string",
+                  "description": "ID of persona who sent this message",
+                  "examples": ["su-shi"]
+                },
+                "textZh": {
+                  "type": "string",
+                  "description": "Chinese message text"
+                },
+                "textEn": {
+                  "type": "string",
+                  "description": "English message text"
+                },
+                "timestamp": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Message timestamp in milliseconds from dialogue start",
+                  "examples": [0, 5000, 10000]
+                },
+                "replyTo": {
+                  "type": ["string", "null"],
+                  "description": "ID of persona being replied to (null for initial messages)",
+                  "examples": ["su-shi", null]
+                },
+                "interactionType": {
+                  "type": "string",
+                  "enum": [
+                    "initial",
+                    "agree-extend",
+                    "question-challenge",
+                    "counter",
+                    "synthesize",
+                    "reflect"
+                  ],
+                  "description": "Type of interaction/response"
+                },
+                "quotedText": {
+                  "type": "string",
+                  "description": "Quoted text from previous message (for reference system)"
+                },
+                "references": {
+                  "type": "array",
+                  "description": "Knowledge base references for this message",
+                  "items": {
+                    "type": "object",
+                    "required": ["critic", "source", "quote"],
+                    "properties": {
+                      "critic": {
+                        "type": "string",
+                        "description": "Critic/persona ID",
+                        "examples": ["su-shi"]
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "Source document/book",
+                        "examples": ["poetry-and-theory.md"]
+                      },
+                      "quote": {
+                        "type": "string",
+                        "description": "Quoted text from source"
+                      },
+                      "page": {
+                        "type": "string",
+                        "description": "Page number or section reference"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

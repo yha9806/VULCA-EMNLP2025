@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vulcaart.art/schemas/api-exhibitions.schema.json",
+  "title": "Exhibitions API Response",
+  "description": "Schema for the /api/exhibitions.json endpoint response",
+  "type": "object",
+  "required": ["exhibitions", "total", "updated"],
+  "properties": {
+    "exhibitions": {
+      "type": "array",
+      "description": "Array of exhibition metadata objects",
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "titleZh", "titleEn", "year", "status", "coverImage", "url", "stats"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique exhibition identifier",
+            "examples": ["negative-space-of-the-tide"]
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL slug",
+            "examples": ["negative-space-of-the-tide"]
+          },
+          "titleZh": {
+            "type": "string",
+            "description": "Chinese title",
+            "examples": ["潮汐的负形"]
+          },
+          "titleEn": {
+            "type": "string",
+            "description": "English title",
+            "examples": ["Negative Space of the Tide"]
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 2020,
+            "description": "Exhibition year",
+            "examples": [2025]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["live", "archived", "upcoming"],
+            "description": "Exhibition status",
+            "examples": ["live"]
+          },
+          "coverImage": {
+            "type": "string",
+            "description": "URL to cover image (absolute path)",
+            "examples": ["/exhibitions/negative-space-of-the-tide/assets/cover.jpg"]
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to exhibition page (relative)",
+            "examples": ["/exhibitions/negative-space-of-the-tide/"]
+          },
+          "stats": {
+            "type": "object",
+            "required": ["artworks", "personas"],
+            "properties": {
+              "artworks": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Number of artworks",
+                "examples": [4]
+              },
+              "personas": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Number of personas",
+                "examples": [6]
+              },
+              "messages": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of dialogue messages"
+              },
+              "dialogues": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of dialogue threads"
+              }
+            }
+          },
+          "descriptionZh": {
+            "type": "string",
+            "description": "Chinese description (optional, for cards)"
+          },
+          "descriptionEn": {
+            "type": "string",
+            "description": "English description (optional, for cards)"
+          }
+        }
+      }
+    },
+    "total": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of exhibitions",
+      "examples": [1]
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp (ISO 8601)",
+      "examples": ["2025-11-10T00:00:00Z"]
+    }
+  }
+}

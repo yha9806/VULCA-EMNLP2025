@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vulcaart.art/schemas/exhibition-config.schema.json",
+  "title": "Exhibition Configuration",
+  "description": "Schema for exhibition metadata and configuration",
+  "type": "object",
+  "required": ["id", "slug", "titleZh", "titleEn", "year", "status", "stats"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique exhibition identifier (kebab-case)",
+      "examples": ["negative-space-of-the-tide"]
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "URL slug (usually same as id)",
+      "examples": ["negative-space-of-the-tide"]
+    },
+    "titleZh": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Chinese title",
+      "examples": ["潮汐的负形"]
+    },
+    "titleEn": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "English title",
+      "examples": ["Negative Space of the Tide"]
+    },
+    "year": {
+      "type": "integer",
+      "minimum": 2020,
+      "maximum": 2100,
+      "description": "Exhibition year",
+      "examples": [2025]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["live", "archived", "upcoming"],
+      "description": "Exhibition status",
+      "examples": ["live"]
+    },
+    "venue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Venue name",
+          "examples": ["EMNLP 2025 Findings"]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Venue URL",
+          "examples": ["https://aclanthology.org/2025.findings-emnlp.103/"]
+        }
+      },
+      "description": "Exhibition venue information"
+    },
+    "descriptionZh": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Chinese description for homepage card"
+    },
+    "descriptionEn": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "English description for homepage card"
+    },
+    "stats": {
+      "type": "object",
+      "required": ["artworks", "personas"],
+      "properties": {
+        "artworks": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of artworks",
+          "examples": [4]
+        },
+        "personas": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of personas/critics",
+          "examples": [6]
+        },
+        "messages": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of dialogue messages",
+          "examples": [30]
+        },
+        "dialogues": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of dialogue threads",
+          "examples": [4]
+        }
+      },
+      "description": "Exhibition statistics"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "dialogue-player",
+          "image-carousel",
+          "knowledge-base-references",
+          "thought-chain-visualization",
+          "rpait-radar",
+          "persona-matrix"
+        ]
+      },
+      "description": "Enabled features for this exhibition",
+      "examples": [
+        ["dialogue-player", "image-carousel", "knowledge-base-references"]
+      ]
+    },
+    "theme": {
+      "type": "object",
+      "properties": {
+        "primaryColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "description": "Primary theme color (hex)",
+          "examples": ["#B85C3C"]
+        },
+        "accentColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "description": "Accent theme color (hex)",
+          "examples": ["#D4A574"]
+        }
+      },
+      "description": "Theme colors"
+    },
+    "assets": {
+      "type": "object",
+      "properties": {
+        "cover": {
+          "type": "string",
+          "description": "Path to cover image (relative to exhibition directory)",
+          "examples": ["./assets/cover.jpg"]
+        },
+        "ogImage": {
+          "type": "string",
+          "description": "Path to Open Graph image (relative to exhibition directory)",
+          "examples": ["./assets/og-image.jpg"]
+        }
+      },
+      "description": "Asset paths (relative to exhibition directory)"
+    }
+  }
+}

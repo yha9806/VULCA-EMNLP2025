@@ -1,0 +1,32 @@
+{
+  "id": "negative-space-of-the-tide",
+  "slug": "negative-space-of-the-tide",
+  "titleZh": "潮汐的负形",
+  "titleEn": "Negative Space of the Tide",
+  "year": 2025,
+  "status": "live",
+  "descriptionZh": "一场关于人工智能与艺术创作的深度对话，通过6位来自不同文化背景的评论家视角，探索机器创造力的本质。",
+  "descriptionEn": "An in-depth dialogue on AI and artistic creation, exploring the nature of machine creativity through the perspectives of 6 critics from diverse cultural backgrounds.",
+  "stats": {
+    "artworks": 4,
+    "personas": 6,
+    "messages": 85,
+    "dialogues": 4
+  },
+  "features": [
+    "dialogue-player",
+    "image-carousel",
+    "knowledge-base-references",
+    "thought-chain-visualization",
+    "rpait-radar",
+    "persona-matrix"
+  ],
+  "theme": {
+    "primaryColor": "#B85C3C",
+    "accentColor": "#D4A574"
+  },
+  "assets": {
+    "cover": "./assets/cover.jpg",
+    "ogImage": "./assets/og-image.jpg"
+  }
+}

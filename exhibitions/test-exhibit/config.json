@@ -1,0 +1,28 @@
+{
+  "id": "test-exhibit",
+  "slug": "test-exhibit",
+  "titleZh": "测试展览",
+  "titleEn": "Test Exhibition",
+  "year": 2025,
+  "status": "upcoming",
+  "descriptionZh": "展览描述（请更新此内容）",
+  "descriptionEn": "Exhibition description (please update this content)",
+  "stats": {
+    "artworks": 3,
+    "personas": 4,
+    "messages": 0,
+    "dialogues": 0
+  },
+  "features": [
+    "dialogue-player",
+    "image-carousel"
+  ],
+  "theme": {
+    "primaryColor": "#B85C3C",
+    "accentColor": "#D4A574"
+  },
+  "assets": {
+    "cover": "./assets/cover.jpg",
+    "ogImage": "./assets/og-image.jpg"
+  }
+}

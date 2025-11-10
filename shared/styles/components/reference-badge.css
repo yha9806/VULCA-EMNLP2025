@@ -1,0 +1,126 @@
+/**
+ * Reference Badge Component Styles
+ *
+ * Displays knowledge base reference count as a clickable badge
+ * - Appears below dialogue messages
+ * - Click to expand/collapse reference list
+ * - Responsive design for mobile
+ *
+ * @version 1.0.0
+ * @created 2025-11-06
+ * @openspec add-knowledge-base-references-to-dialogues
+ */
+
+/* ============================================================================
+   Reference Container
+   ========================================================================== */
+
+.message-references {
+  margin-top: 0.75rem;
+}
+
+/* ============================================================================
+   Reference Badge
+   ========================================================================== */
+
+.reference-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #B85C3C, #D4A574);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reference-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.reference-badge:focus {
+  outline: 2px solid #B85C3C;
+  outline-offset: 2px;
+}
+
+.reference-badge:active {
+  transform: scale(0.98);
+}
+
+/* Expanded state: reverse gradient */
+.reference-badge[aria-expanded="true"] {
+  background: linear-gradient(135deg, #D4A574, #B85C3C);
+  box-shadow: 0 4px 12px rgba(184, 92, 60, 0.3);
+}
+
+/* ============================================================================
+   Badge Elements
+   ========================================================================== */
+
+.badge-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.badge-count {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.badge-label {
+  font-weight: 500;
+}
+
+/* Language switching */
+.badge-label[data-lang="zh"] {
+  display: none;
+}
+
+.badge-label[data-lang="en"] {
+  display: none;
+}
+
+[data-lang="zh"] .badge-label[data-lang="zh"] {
+  display: inline;
+}
+
+[data-lang="en"] .badge-label[data-lang="en"] {
+  display: inline;
+}
+
+/* ============================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .reference-badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .badge-icon {
+    font-size: 0.9rem;
+  }
+
+  .badge-count {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reference-badge {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.7rem;
+    gap: 0.4rem;
+  }
+
+  .badge-label {
+    display: none; /* Hide label on very small screens, show only icon + count */
+  }
+}
