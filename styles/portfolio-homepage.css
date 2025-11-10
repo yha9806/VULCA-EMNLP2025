@@ -1,0 +1,476 @@
+/**
+ * Portfolio Homepage Styles
+ * VULCA - Art Criticism Exhibition Platform
+ */
+
+/* ==================== CSS Variables ==================== */
+:root {
+  /* Brand Colors */
+  --color-primary: #B85C3C;    /* Terracotta */
+  --color-accent: #D4A574;      /* Gold */
+  --color-dark: #2d2d2d;
+  --color-light: #f9f9f9;
+
+  /* Status Colors */
+  --color-live: #2ecc71;
+  --color-upcoming: #3498db;
+  --color-archived: #95a5a6;
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", serif;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 6rem;
+
+  /* Layout */
+  --max-width: 1400px;
+  --card-width: 380px;
+}
+
+/* ==================== Reset & Base ==================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--color-dark);
+  background: #fff;
+  line-height: 1.6;
+}
+
+/* Language Toggle Support */
+[lang="en"] {
+  display: none;
+}
+
+html[lang="en"] [lang="zh"] {
+  display: none;
+}
+
+html[lang="en"] [lang="en"] {
+  display: inline;
+}
+
+/* ==================== Hero Section ==================== */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: linear-gradient(135deg, #B85C3C 0%, #D4A574 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.brand-title {
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.brand-name {
+  display: block;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.brand-subtitle {
+  display: block;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin-top: var(--spacing-sm);
+  opacity: 0.95;
+}
+
+.tagline {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* ==================== Exhibitions Section ==================== */
+.exhibitions-section {
+  padding: var(--spacing-xl) var(--spacing-md);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--color-dark);
+  margin: 0;
+}
+
+/* ==================== Exhibitions Grid ==================== */
+.exhibitions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+  gap: var(--spacing-md);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Loading State */
+.loading-indicator {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  color: #666;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacing-sm);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: #c41e3a;
+}
+
+.error-message button {
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: var(--spacing-sm);
+}
+
+.error-message button:hover {
+  background: #a04d2f;
+}
+
+/* ==================== Exhibition Card ==================== */
+.exhibition-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.exhibition-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.exhibition-card:active {
+  transform: translateY(-2px);
+}
+
+/* Card Image */
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 66.67%; /* 3:2 aspect ratio */
+  background: var(--color-light);
+  overflow: hidden;
+}
+
+.card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.exhibition-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+.card-image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+}
+
+.placeholder-icon {
+  font-size: 4rem;
+  opacity: 0.3;
+}
+
+/* Status Badge */
+.status-badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status-badge.status-live {
+  color: var(--color-live);
+  border: 1px solid var(--color-live);
+}
+
+.status-badge.status-upcoming {
+  color: var(--color-upcoming);
+  border: 1px solid var(--color-upcoming);
+}
+
+.status-badge.status-archived {
+  color: var(--color-archived);
+  border: 1px solid var(--color-archived);
+}
+
+/* Card Content */
+.card-content {
+  padding: var(--spacing-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--color-dark);
+}
+
+.card-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 0 0 var(--spacing-md) 0;
+  flex: 1;
+}
+
+/* Card Stats */
+.card-stats {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid #e0e0e0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.card-year {
+  color: #999;
+  font-weight: 500;
+}
+
+.card-cta {
+  color: var(--color-primary);
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.exhibition-card:hover .card-cta {
+  transform: translateX(4px);
+}
+
+/* Placeholder Card */
+.placeholder-card {
+  border: 2px dashed #ddd;
+  background: #fafafa;
+  cursor: default;
+}
+
+.placeholder-card:hover {
+  transform: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.placeholder-card .card-title {
+  color: #999;
+}
+
+.placeholder-card .card-description {
+  color: #bbb;
+}
+
+.placeholder-card .placeholder-icon {
+  font-size: 6rem;
+  opacity: 0.2;
+}
+
+/* ==================== Footer ==================== */
+.footer {
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--color-light);
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.footer-text {
+  margin: 0 0 var(--spacing-sm) 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.footer-nav {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-nav a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* ==================== Responsive Design ==================== */
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+  :root {
+    --card-width: 300px;
+  }
+
+  .hero {
+    min-height: 50vh;
+    padding: var(--spacing-md);
+  }
+
+  .exhibitions-section {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .exhibitions-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .card-stats {
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+  .brand-name {
+    font-size: 3rem;
+  }
+
+  .brand-subtitle {
+    font-size: 1rem;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .card-content {
+    padding: var(--spacing-sm);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .footer-nav {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "exhibitions": [
+    {
+      "id": "negative-space-of-the-tide",
+      "slug": "negative-space-of-the-tide",
+      "titleZh": "潮汐的负形",
+      "titleEn": "Negative Space of the Tide",
+      "year": 2025,
+      "status": "live",
+      "coverImage": "/exhibitions/negative-space-of-the-tide/assets/cover.jpg",
+      "url": "/exhibitions/negative-space-of-the-tide/",
+      "stats": {
+        "artworks": 4,
+        "personas": 6,
+        "messages": 85,
+        "dialogues": 4
+      },
+      "descriptionZh": "一场关于人工智能与艺术创作的深度对话，通过6位来自不同文化背景的评论家视角，探索机器创造力的本质。",
+      "descriptionEn": "An in-depth dialogue on AI and artistic creation, exploring the nature of machine creativity through the perspectives of 6 critics from diverse cultural backgrounds."
+    },
+    {
+      "id": "test-exhibit",
+      "slug": "test-exhibit",
+      "titleZh": "测试展览",
+      "titleEn": "Test Exhibition",
+      "year": 2025,
+      "status": "upcoming",
+      "coverImage": "/exhibitions/test-exhibit/assets/cover.jpg",
+      "url": "/exhibitions/test-exhibit/",
+      "stats": {
+        "artworks": 3,
+        "personas": 4,
+        "messages": 0,
+        "dialogues": 0
+      },
+      "descriptionZh": "展览描述（请更新此内容）",
+      "descriptionEn": "Exhibition description (please update this content)"
+    }
+  ],
+  "total": 2,
+  "updated": "2025-11-10T21:59:35.618Z"
+}
