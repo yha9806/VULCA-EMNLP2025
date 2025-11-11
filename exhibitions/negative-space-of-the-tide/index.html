@@ -1,119 +1,466 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <!-- ==================== META TAGS ==================== -->
+  <!-- Version: 3.0.0 - Art-Centric Immersive Redesign -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>潮汐的负形 | Negative Space of the Tide</title>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="一场关于人工智能与艺术创作的深度对话，通过6位来自不同文化背景的评论家视角，探索机器创造力的本质。">
-  <meta name="keywords" content="AI艺术, 艺术评论, 人工智能, 机器创造力, 文化对话">
+  <meta name="description" content="潮汐的负形 - VULCA艺术装置交互展览平台。沉浸式探索4件艺术作品，体验6位文化评论家的多维视角。">
+  <meta name="keywords" content="艺术展览, AI评论生成, 文化批评, 互动平台, 沉浸式体验">
   <meta name="author" content="VULCA">
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="潮汐的负形 | Negative Space of the Tide">
-  <meta property="og:description" content="一场关于人工智能与艺术创作的深度对话，通过6位来自不同文化背景的评论家视角，探索机器创造力的本质。">
+  <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vulcaart.art/exhibitions/negative-space-of-the-tide/">
-  <meta property="og:image" content="https://vulcaart.art/exhibitions/negative-space-of-the-tide/assets/og-image.jpg">
+  <meta property="og:url" content="https://vulcaart.art">
+  <meta property="og:title" content="潮汐的负形 | vulcaart.art">
+  <meta property="og:description" content="沉浸式艺术展览平台 - 探索AI驱动的多角度艺术评论">
+  <meta property="og:image" content="https://vulcaart.art/assets/og-image.jpg">
+  <meta property="og:locale" content="zh_CN">
 
-  <!-- Twitter Card Meta Tags -->
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="潮汐的负形 | Negative Space of the Tide">
-  <meta name="twitter:description" content="一场关于人工智能与艺术创作的深度对话，通过6位来自不同文化背景的评论家视角，探索机器创造力的本质。">
-  <meta name="twitter:image" content="https://vulcaart.art/exhibitions/negative-space-of-the-tide/assets/og-image.jpg">
+  <meta name="twitter:title" content="潮汐的负形 | vulcaart.art">
+  <meta name="twitter:description" content="沉浸式艺术展览平台">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="alternate icon" href="/assets/favicon.ico">
 
-  <!-- Shared Stylesheets -->
-  <link rel="stylesheet" href="/shared/styles/components/dialogue-player.css">
-  <link rel="stylesheet" href="/shared/styles/components/thought-chain.css">
-  <link rel="stylesheet" href="/shared/styles/components/reference-badge.css">
-  <link rel="stylesheet" href="/shared/styles/components/reference-list.css">
-  <link rel="stylesheet" href="/shared/styles/components/unified-navigation.css">
+  <!-- ==================== STYLESHEETS ==================== -->
+  <link rel="stylesheet" href="/styles/main.css?v=5">
+  <link rel="stylesheet" href="/styles/components/unified-navigation.css?v=2">
 
-  <!-- Exhibition-specific styles (optional) -->
-  <!-- <link rel="stylesheet" href="./styles/custom.css"> -->
+  <!-- Dialogue System Stylesheets -->
+  <link rel="stylesheet" href="/styles/components/dialogue-player.css?v=1">
+  <link rel="stylesheet" href="/styles/components/reference-badge.css?v=1">
+  <link rel="stylesheet" href="/styles/components/reference-list.css?v=1">
+
+  <!-- ==================== CHART LIBRARY ==================== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- ==================== PARTICLE EFFECTS LIBRARY ==================== -->
+  <script src="https://cdn.jsdelivr.net/npm/sparticles/dist/sparticles.min.js"></script>
+
+  <!-- ==================== PRECONNECT ==================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- ==================== GOOGLE FONTS ==================== -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap">
+
+  <!-- ==================== TITLE ==================== -->
+  <title>潮汐的负形 | vulcaart.art</title>
+
+  <!-- ==================== LANGUAGE SUPPORT ==================== -->
+  <script src="/js/navigation-i18n.js"></script>
+  <script src="/js/meta-i18n.js"></script>
+  <script src="/js/lang-manager.js"></script>
 </head>
+
 <body>
-  <div id="exhibition-root" data-exhibition-id="negative-space-of-the-tide">
-    <!-- Content will be loaded dynamically by exhibition-loader.js -->
-    <div class="loading-indicator">
-      <p>Loading exhibition...</p>
+  <!-- ==================== SKIP LINK ==================== -->
+  <a href="#main-content" class="skip-to-main">
+    <span lang="zh">跳转到主要内容</span>
+    <span lang="en">Skip to main content</span>
+  </a>
+
+  <!-- ==================== MINIMAL HEADER ==================== -->
+  <header class="header-minimal">
+    <div class="header-controls">
+      <!-- Hamburger Menu Button -->
+      <button class="hamburger" id="menu-toggle" aria-label="打开菜单 Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Language Toggle -->
+      <button class="lang-toggle" id="lang-toggle" aria-label="切换语言 Toggle Language">
+        <span class="lang-text">EN/中</span>
+      </button>
     </div>
-  </div>
 
-  <!-- Shared JavaScript (New Template System) -->
-  <script type="module">
-    import { initExhibitionPage } from '/shared/js/exhibition-loader.js';
-    import { renderExhibition } from '/shared/js/exhibition-renderer.js';
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-progress" id="scroll-progress"></div>
+    </div>
+  </header>
 
-    // Initialize exhibition page when DOM is ready
-    document.addEventListener('DOMContentLoaded', async () => {
-      const root = document.getElementById('exhibition-root');
+  <!-- ==================== MENU OVERLAY ==================== -->
+  <div class="menu-overlay" id="menu-overlay"></div>
 
-      try {
-        // Auto-detect exhibition ID and load data
-        await initExhibitionPage((exhibition) => {
-          // Render exhibition using renderer
-          return renderExhibition(root, exhibition);
+  <!-- ==================== FLOATING MENU ==================== -->
+  <nav class="floating-menu" id="floating-menu" aria-label="导航菜单 Navigation menu" hidden>
+    <div class="menu-content">
+      <a href="/" class="menu-item menu-home" aria-label="返回主画廊 Return to main gallery">
+        <span>🏠</span>
+        <span class="menu-label">主画廊</span>
+      </a>
+      <a href="/pages/critics.html" class="menu-item menu-critics" aria-label="查看评论家 View critics">
+        <span>👥</span>
+        <span class="menu-label">评论家</span>
+      </a>
+      <a href="/pages/about.html" class="menu-item menu-about" aria-label="了解VULCA Learn about VULCA">
+        <span>ℹ️</span>
+        <span class="menu-label">关于</span>
+      </a>
+      <a href="/pages/process.html" class="menu-item menu-process" aria-label="查看创作过程 See creation process">
+        <span>🎨</span>
+        <span class="menu-label">过程</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main id="main-content">
+    <!-- GALLERY HERO SECTION - Active Artwork Display -->
+    <section class="gallery-hero" id="gallery-hero">
+      <!-- Artwork display container -->
+      <div class="artwork-display">
+        <div id="unified-navigation-container" class="unified-navigation-container">
+          <!-- UnifiedNavigation component will be mounted here -->
+        </div>
+        <div class="critiques-panel" id="critiques-panel">
+          <!-- Critic reviews will be rendered here by gallery-hero.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION HINT INDICATOR -->
+    <div class="nav-hint" aria-hidden="true"></div>
+
+    <!-- DATA VISUALIZATION SECTION -->
+    <section class="visualization-section" id="visualization-section">
+      <div class="container">
+        <header class="viz-header">
+          <h2>
+            <span lang="zh">数据洞察</span>
+            <span lang="en">Data Insights</span>
+          </h2>
+          <p>
+            <span lang="zh">探索评论家视角与作品之间的多维关系</span>
+            <span lang="en">Explore multi-dimensional relationships between critics and artworks</span>
+          </p>
+        </header>
+
+        <!-- Persona Selector -->
+        <div class="persona-selector-wrapper">
+          <div class="persona-badges" id="persona-badges-container" role="group" aria-label="选择评论家进行对比分析 Select critics for comparative analysis">
+            <!-- Badges generated dynamically by persona-selector.js -->
+          </div>
+          <p class="help-text">
+            <span lang="zh">单击选择评论家，双击取消选择 · 可选择任意数量</span>
+            <span lang="en">Click to select critics, double-click to deselect · Select any number</span>
+          </p>
+          <div id="persona-count" class="sr-only" aria-live="polite" aria-atomic="true">
+            <span lang="zh">已选择 3 位评论家</span>
+            <span lang="en">3 critics selected</span>
+          </div>
+        </div>
+
+        <div class="viz-grid">
+          <!-- Panel 1: RPAIT Radar -->
+          <div class="viz-panel" id="rpait-radar-panel">
+            <h3>
+              <span lang="zh">评论家维度分布</span>
+              <span lang="en">Critic Dimension Distribution</span>
+            </h3>
+            <canvas id="rpait-radar-chart" role="img" aria-label="RPAIT 雷达图 RPAIT radar chart" tabindex="0"></canvas>
+          </div>
+
+          <!-- Panel 2: Persona Comparison -->
+          <div class="viz-panel" id="persona-matrix-panel">
+            <h3>
+              <span lang="zh">评论家对比矩阵</span>
+              <span lang="en">Critic Comparison Matrix</span>
+            </h3>
+            <canvas id="persona-matrix-chart" role="img" aria-label="评论家对比矩阵 Critic comparison matrix" tabindex="0"></canvas>
+            <div class="viz-controls">
+              <select id="dimension-selector" aria-label="选择RPAIT维度 Select RPAIT dimension">
+                <option value="all" data-zh="全部维度" data-en="All Dimensions">全部维度 / All Dimensions</option>
+                <option value="R" data-zh="代表性" data-en="Representation">代表性 / Representation</option>
+                <option value="P" data-zh="哲学性" data-en="Philosophicality">哲学性 / Philosophicality</option>
+                <option value="A" data-zh="美学性" data-en="Aesthetics">美学性 / Aesthetics</option>
+                <option value="I" data-zh="诠释性" data-en="Interpretability">诠释性 / Interpretability</option>
+                <option value="T" data-zh="技巧性" data-en="Technicality">技巧性 / Technicality</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FULL GALLERY (hidden, for detail pages) -->
+    <!-- CRITICAL: display: none !important prevents CSS or JS from overriding on homepage -->
+    <section class="gallery" id="gallery" style="display: none !important;">
+      <!-- Artwork sections will be dynamically loaded here -->
+      <!-- Structure:
+           <article class="artwork-section" data-artwork-id="artwork-1">
+             <header class="artwork-header">...</header>
+             <section class="critiques-container">...</section>
+             <section class="visualization-container">...</section>
+           </article>
+      -->
+    </section>
+
+    <!-- ABOUT SECTION (OPTIONAL, hidden by default) -->
+    <section id="about-section" class="about-section" style="display: none;">
+      <div class="container">
+        <h2>
+          <span lang="zh">关于这个项目</span>
+          <span lang="en">About This Project</span>
+        </h2>
+        <div class="about-content">
+          <p>
+            <span lang="zh">vulcaart.art 是 VULCA（视觉理解与语言的文化自适应）项目的数字展览平台。这个项目探索AI系统如何理解和评价艺术作品，特别是从多元文化视角出发。</span>
+            <span lang="en">vulcaart.art is the digital exhibition platform for the VULCA (Visual Understanding and Language Cultural Adaptation) project. This project explores how AI systems understand and critique artworks, particularly from multicultural perspectives.</span>
+          </p>
+          <p>
+            <strong>
+              <span lang="zh">"潮汐的负形"</span>
+              <span lang="en">"Negative Space of the Tide"</span>
+            </strong>
+            <span lang="zh">作为主题，强调：</span>
+            <span lang="en"> as the theme emphasizes:</span>
+          </p>
+          <ul>
+            <li>
+              <strong>
+                <span lang="zh">潮汐性</span>
+                <span lang="en">Tidal Nature</span>
+              </strong>
+              <span lang="zh"> — 艺术评论随着不同视角的切换而变化，如同潮汐的涨落</span>
+              <span lang="en"> — Art critiques shift with different perspectives, like the ebb and flow of tides</span>
+            </li>
+            <li>
+              <strong>
+                <span lang="zh">负形</span>
+                <span lang="en">Negative Space</span>
+              </strong>
+              <span lang="zh"> — 关注过程、草稿和迭代，而不仅是最终成果</span>
+              <span lang="en"> — Focus on process, drafts, and iteration, not just final outcomes</span>
+            </li>
+            <li>
+              <strong>
+                <span lang="zh">多维性</span>
+                <span lang="en">Multidimensionality</span>
+              </strong>
+              <span lang="zh"> — 同一件作品在不同评论家眼中有完全不同的意义</span>
+              <span lang="en"> — The same artwork holds entirely different meanings for different critics</span>
+            </li>
+          </ul>
+          <p>
+            <em>
+              <span lang="zh">通过AI、艺术和文化的交集，探索我们如何看待和理解彼此的创意表达。</span>
+              <span lang="en">Through the intersection of AI, art, and culture, we explore how we perceive and understand each other's creative expressions.</span>
+            </em>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== MINIMAL FOOTER ==================== -->
+  <footer class="footer-minimal">
+    <div class="footer-content">
+      <p class="footer-text">
+        <span lang="zh">© 2025 VULCA. 保留所有权利。</span>
+        <span lang="en">© 2025 VULCA. All rights reserved.</span>
+      </p>
+      <p class="paper-link">
+        <span lang="zh">📄 研究论文：</span><span lang="en">📄 Research Paper: </span>
+        <a href="https://aclanthology.org/2025.findings-emnlp.103/" target="_blank" rel="noopener">
+          EMNLP 2025 Findings
+        </a>
+      </p>
+      <p class="footer-contact">
+        <a href="mailto:yuhaorui48@gmail.com">yuhaorui48@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <!-- Disable Immersive Mode to Enable Scrolling -->
+  <script>
+    window.IMMERSIVE_MODE = false;
+    // CRITICAL: Ensure gallery is hidden on homepage (immersive mode)
+    // Use MutationObserver to continuously enforce display:none
+    function enforceGalleryHidden() {
+      const gallery = document.getElementById('gallery');
+      if (gallery && window.getComputedStyle(gallery).display !== 'none') {
+        gallery.style.display = 'none !important';
+        gallery.setAttribute('aria-hidden', 'true');
+        console.log('✓ Gallery force-hidden (display enforced)');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      enforceGalleryHidden();
+
+      // Watch for style changes to gallery and re-enforce display:none
+      const gallery = document.getElementById('gallery');
+      if (gallery) {
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+              enforceGalleryHidden();
+            }
+          });
         });
-      } catch (error) {
-        console.error('[Exhibition] Initialization failed:', error);
-        // Error state is handled by initExhibitionPage
+
+        observer.observe(gallery, {
+          attributes: true,
+          attributeFilter: ['style'],
+          attributeOldValue: true
+        });
+
+        console.log('✓ MutationObserver attached to enforce gallery display:none');
       }
     });
   </script>
 
-  <!-- Loading/Error State Styles -->
-  <style>
-    .exhibition-loading,
-    .exhibition-error {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 2rem;
-      text-align: center;
+  <!-- Multi-Image System Utilities (Phase 2-3: implement-multi-image-artwork-series) -->
+  <!-- CRITICAL: Load BEFORE data.js so auto-extraction works -->
+  <script src="/js/utils/image-compat.js?v=1.0"></script>
+  <script src="/js/utils/critique-parser.js?v=1.0"></script>
+  <script src="/js/components/artwork-carousel.js?v=1.1"></script>
+
+  <!-- Unified Navigation Component (Phase 2: unify-navigation-to-image-area) -->
+  <script src="/js/components/unified-navigation.js?v=1.9"></script>
+
+  <!-- Core Data & Configuration -->
+  <script src="/js/data.js?v=3" charset="utf-8"></script>
+  <script src="/js/plan.js?v=2" charset="utf-8"></script>
+  <script src="/js/dataIndexes.js?v=1" charset="utf-8"></script>
+
+  <!-- Dialogue System Data & Component -->
+  <script type="module" src="/js/data/dialogues/index.js?v=1"></script>
+  <script src="/js/components/dialogue-player.js?v=1"></script>
+
+  <!-- Scroll Prevention (Immersive Anti-Scroll Feature) -->
+  <script src="/js/scroll-prevention.js?v=1"></script>
+
+  <!-- Scroll Reveal Animations (Progressive Content Display) -->
+  <script src="/js/scroll-reveal.js?v=1"></script>
+
+  <!-- Gallery Initialization (Phase 1) -->
+  <script src="/js/gallery-init.js?v=3"></script>
+
+  <!-- Carousel Controller (NEW - Click-based Navigation) -->
+  <script src="/js/carousel.js?v=1"></script>
+
+  <!-- Gallery Hero Renderer (NEW - Homepage Display) -->
+  <script src="/js/gallery-hero.js?v=8"></script>
+
+  <!-- Auto-Play Immersive Experience (DISABLED - Replaced by click-based carousel) -->
+  <!-- <script src="/js/autoplay.js?v=1"></script> -->
+
+  <!-- Utilities -->
+  <script src="/js/performanceMonitor.js?v=1"></script>
+  <script src="/js/testFramework.js?v=1"></script>
+  <script src="/js/templates.js?v=1"></script>
+
+  <!-- Core Systems -->
+  <script src="/js/eventDelegation.js?v=1"></script>
+  <script src="/js/particles-config.js?v=1"></script>
+
+  <!-- New Gallery System Modules (to be created in Phase 2) -->
+  <!-- <script src="/js/gallery.js?v=1"></script> -->
+  <!-- <script src="/js/critique.js?v=1"></script> -->
+  <!-- <script src="/js/language.js?v=1"></script> -->
+
+  <!-- Data Analysis Module -->
+  <script src="/js/analysis.js?v=1"></script>
+
+  <!-- D3.js for Network Graph (minimal modules) -->
+  <script src="https://cdn.jsdelivr.net/npm/d3-force@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-selection@3"></script>
+
+  <!-- Global Persona Selection State Manager (must load before visualizations) -->
+  <script src="/js/persona-selector.js?v=1"></script>
+
+  <!-- Visualization Components -->
+  <script src="/js/visualizations/rpait-radar.js?v=2"></script>
+  <script src="/js/visualizations/persona-matrix.js?v=2"></script>
+
+  <!-- Navigation Auto-Hide Module -->
+  <script src="/js/navigation-autohide.js?v=1"></script>
+
+  <!-- Main App (deferred for async loading) -->
+  <script src="/js/app.js?v=6" defer></script>
+
+  <!-- Inline Scripts for Immediate Interactivity -->
+  <script>
+    // Gallery navigation button handlers
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = window.carousel;
+      const navPrev = document.getElementById('nav-prev');
+      const navNext = document.getElementById('nav-next');
+
+      if (carousel && navPrev && navNext) {
+        navPrev.addEventListener('click', (e) => {
+          e.preventDefault();
+          carousel.prev();
+        });
+
+        navNext.addEventListener('click', (e) => {
+          e.preventDefault();
+          carousel.next();
+        });
+
+        console.log('✓ Gallery navigation handlers initialized');
+      }
+    });
+
+    // Menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const floatingMenu = document.getElementById('floating-menu');
+
+    if (menuToggle && floatingMenu) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = !floatingMenu.hasAttribute('hidden');
+        if (isOpen) {
+          floatingMenu.setAttribute('hidden', '');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          floatingMenu.removeAttribute('hidden');
+          menuToggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!floatingMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+          floatingMenu.setAttribute('hidden', '');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
     }
 
-    .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #B85C3C;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-bottom: 1rem;
+    // Language toggle
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', () => {
+        const currentLang = document.documentElement.getAttribute('data-lang');
+        const newLang = currentLang === 'zh' ? 'en' : 'zh';
+
+        if (window.langManager) {
+          window.langManager.setLanguage(newLang, true); // true = update localStorage
+        }
+      });
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .exhibition-error h2 {
-      color: #c41e3a;
-      margin-bottom: 1rem;
-    }
-
-    .exhibition-error button {
-      padding: 0.75rem 1.5rem;
-      background: #B85C3C;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-
-    .exhibition-error button:hover {
-      background: #a04d2f;
-    }
-  </style>
+    // Scroll progress indicator
+    window.addEventListener('scroll', () => {
+      const scrollProgress = document.getElementById('scroll-progress');
+      if (scrollProgress) {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        scrollProgress.style.width = scrollPercent + '%';
+      }
+    });
+  </script>
 </body>
+
 </html>
