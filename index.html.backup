@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VULCA - 艺术评论展览平台</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="VULCA：一个探索人工智能与艺术评论的沉浸式展览平台，通过跨文化对话重新思考机器创造力的本质。">
+  <meta name="keywords" content="VULCA, AI艺术, 艺术评论, 人工智能, 机器创造力, 文化对话, 展览平台">
+  <meta name="author" content="VULCA">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="VULCA - 艺术评论展览平台">
+  <meta property="og:description" content="探索人工智能与艺术评论的沉浸式展览平台">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vulcaart.art/">
+  <meta property="og:image" content="https://vulcaart.art/assets/og-image.jpg">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VULCA - 艺术评论展览平台">
+  <meta name="twitter:description" content="探索人工智能与艺术评论的沉浸式展览平台">
+  <meta name="twitter:image" content="https://vulcaart.art/assets/og-image.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Design Tokens (First!) -->
+  <link rel="stylesheet" href="/styles/design-tokens.css">
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="/shared/styles/global-navigation.css">
+
+  <!-- Homepage Styles -->
+  <link rel="stylesheet" href="/styles/portfolio-homepage.css">
+</head>
+<body>
+  <!-- Global Navigation (injected by JS) -->
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1 class="brand-title">
+        <span class="brand-name">VULCA</span>
+        <span class="brand-subtitle">艺术评论展览平台</span>
+      </h1>
+      <p class="tagline">
+        <span lang="zh">探索人工智能与艺术评论的沉浸式展览，通过跨文化对话重新思考机器创造力的本质</span>
+        <span lang="en">Immersive exhibitions exploring AI and art criticism through cross-cultural dialogue, reimagining the nature of machine creativity</span>
+      </p>
+    </div>
+  </header>
+
+  <!-- Exhibitions Section -->
+  <main class="exhibitions-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span lang="zh">展览</span>
+        <span lang="en">Exhibitions</span>
+      </h2>
+    </div>
+
+    <div id="exhibitions-grid" class="exhibitions-grid">
+      <!-- Exhibition cards will be loaded here -->
+      <div class="loading-indicator">
+        <div class="loading-spinner"></div>
+        <p>Loading exhibitions...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">
+      <span lang="zh">© 2025 VULCA. 基于 EMNLP 2025 研究构建。</span>
+      <span lang="en">© 2025 VULCA. Built on EMNLP 2025 research.</span>
+    </p>
+    <nav class="footer-nav">
+      <a href="https://github.com/yha9806/VULCA-EMNLP2025" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:yuhaorui48@gmail.com">Contact</a>
+    </nav>
+  </footer>
+
+  <!-- Homepage JavaScript -->
+  <script type="module">
+    // Fetch and render exhibitions
+    async function loadExhibitions() {
+      const grid = document.getElementById('exhibitions-grid');
+
+      try {
+        const response = await fetch('/api/exhibitions.json');
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log(`[Homepage] Loaded ${data.exhibitions.length} exhibition(s)`);
+
+        // Clear loading indicator
+        grid.innerHTML = '';
+
+        // Render exhibition cards
+        data.exhibitions.forEach(exhibition => {
+          const card = createExhibitionCard(exhibition);
+          grid.appendChild(card);
+        });
+
+        // Add placeholder card if fewer than 3 exhibitions
+        if (data.exhibitions.length < 3) {
+          const placeholder = createPlaceholderCard();
+          grid.appendChild(placeholder);
+        }
+
+      } catch (error) {
+        console.error('[Homepage] Failed to load exhibitions:', error);
+        grid.innerHTML = `
+          <div class="error-message">
+            <p>⚠️ 无法加载展览列表</p>
+            <p>Failed to load exhibitions</p>
+            <button onclick="window.location.reload()">Retry</button>
+          </div>
+        `;
+      }
+    }
+
+    // Create exhibition card element
+    function createExhibitionCard(exhibition) {
+      const card = document.createElement('a');
+      card.className = 'exhibition-card';
+      card.href = exhibition.url;
+      card.setAttribute('data-status', exhibition.status);
+
+      // Status badge
+      const statusBadges = {
+        live: { labelZh: '展出中', labelEn: 'LIVE NOW', class: 'status-live' },
+        upcoming: { labelZh: '即将开展', labelEn: 'UPCOMING', class: 'status-upcoming' },
+        archived: { labelZh: '已归档', labelEn: 'ARCHIVED', class: 'status-archived' }
+      };
+      const badge = statusBadges[exhibition.status] || statusBadges.archived;
+
+      card.innerHTML = `
+        <div class="card-image-wrapper">
+          <img
+            class="card-image"
+            src="${exhibition.coverImage}"
+            alt="${exhibition.titleZh}"
+            loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          >
+          <div class="card-image-placeholder" style="display:none;">
+            <span class="placeholder-icon">🖼️</span>
+          </div>
+          <span class="status-badge ${badge.class}">
+            <span lang="zh">${badge.labelZh}</span>
+            <span lang="en">${badge.labelEn}</span>
+          </span>
+        </div>
+
+        <div class="card-content">
+          <h3 class="card-title">
+            <span lang="zh">${exhibition.titleZh}</span>
+            <span lang="en">${exhibition.titleEn}</span>
+          </h3>
+
+          <p class="card-description">
+            <span lang="zh">${exhibition.descriptionZh || ''}</span>
+            <span lang="en">${exhibition.descriptionEn || ''}</span>
+          </p>
+
+          <div class="card-stats">
+            <span class="stat">
+              <span class="stat-value">${exhibition.stats.artworks}</span>
+              <span class="stat-label" lang="zh">作品</span>
+              <span class="stat-label" lang="en">Artworks</span>
+            </span>
+            <span class="stat">
+              <span class="stat-value">${exhibition.stats.personas}</span>
+              <span class="stat-label" lang="zh">评论家</span>
+              <span class="stat-label" lang="en">Critics</span>
+            </span>
+            <span class="stat">
+              <span class="stat-value">${exhibition.stats.messages}</span>
+              <span class="stat-label" lang="zh">对话</span>
+              <span class="stat-label" lang="en">Messages</span>
+            </span>
+          </div>
+
+          <div class="card-footer">
+            <span class="card-year">${exhibition.year}</span>
+            <span class="card-cta">
+              <span lang="zh">进入展览 →</span>
+              <span lang="en">Enter →</span>
+            </span>
+          </div>
+        </div>
+      `;
+
+      return card;
+    }
+
+    // Create placeholder card
+    function createPlaceholderCard() {
+      const card = document.createElement('div');
+      card.className = 'exhibition-card placeholder-card';
+
+      card.innerHTML = `
+        <div class="card-image-wrapper">
+          <div class="card-image-placeholder">
+            <span class="placeholder-icon">+</span>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <h3 class="card-title">
+            <span lang="zh">更多展览即将到来</span>
+            <span lang="en">More Exhibitions Coming Soon</span>
+          </h3>
+
+          <p class="card-description">
+            <span lang="zh">我们正在策划更多精彩的艺术评论展览</span>
+            <span lang="en">We're curating more exciting art criticism exhibitions</span>
+          </p>
+        </div>
+      `;
+
+      return card;
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadExhibitions();
+    });
+  </script>
+
+  <!-- Global Navigation -->
+  <script type="module" src="/shared/js/global-navigation.js?v=2"></script>
+</body>
+</html>
