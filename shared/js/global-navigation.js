@@ -1,5 +1,13 @@
 /**
- * Global Navigation System
+ * DEPRECATED: This component is no longer used as of 2025-11-11.
+ * Homepage now uses the same hamburger menu pattern as exhibition pages.
+ * See: /exhibitions/negative-space-of-the-tide/index.html for reference.
+ *
+ * This file can be safely deleted if no other pages reference it.
+ *
+ * ---
+ *
+ * Global Navigation System (OLD)
  *
  * Provides consistent navigation across all pages (homepage, exhibitions, archive, about)
  * Includes language toggle and responsive hamburger menu

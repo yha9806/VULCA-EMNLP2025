@@ -1,5 +1,13 @@
 /**
- * Global Navigation Styles
+ * DEPRECATED: This stylesheet is no longer used as of 2025-11-11.
+ * Homepage now uses the same hamburger menu pattern as exhibition pages.
+ * See: /styles/main.css for the new navigation styles (.header-minimal, .floating-menu)
+ *
+ * This file can be safely deleted if no other pages reference it.
+ *
+ * ---
+ *
+ * Global Navigation Styles (OLD)
  * Consistent navigation across all pages
  */
 
