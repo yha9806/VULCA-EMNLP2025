@@ -477,3 +477,20 @@ html[lang="en"] [lang="en"] {
     gap: var(--spacing-sm);
   }
 }
+
+/* ==================== HAMBURGER MENU FIX ==================== */
+/* Ensure hamburger menu is visible on homepage */
+.hamburger {
+  display: flex !important;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hamburger span {
+  display: block !important;
+  width: 20px !important;
+  height: 2px !important;
+  min-height: 2px !important;
+  background-color: var(--color-dark) !important;
+  border-radius: 1px;
+}
