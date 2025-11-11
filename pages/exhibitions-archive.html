@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>展览归档 | VULCA</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="浏览VULCA的所有艺术评论展览，包括当前展出、即将开展和已归档的展览。">
+  <meta name="keywords" content="VULCA, 展览归档, AI艺术, 艺术评论">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="展览归档 | VULCA">
+  <meta property="og:description" content="浏览VULCA的所有艺术评论展览">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Design Tokens (First!) -->
+  <link rel="stylesheet" href="/styles/design-tokens.css">
+
+  <!-- Global Navigation Styles -->
+  <link rel="stylesheet" href="/shared/styles/global-navigation.css">
+
+  <!-- Homepage Styles (reuse for archive page) -->
+  <link rel="stylesheet" href="/styles/portfolio-homepage.css">
+
+  <style>
+    /* Archive-specific styles */
+    .archive-header {
+      padding: 6rem 2rem 4rem;
+      background: linear-gradient(135deg, #B85C3C 0%, #D4A574 100%);
+      color: #fff;
+      text-align: center;
+    }
+
+    .archive-header h1 {
+      margin: 0 0 1rem 0;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+    }
+
+    .archive-header p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .archive-controls {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .archive-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      background: var(--color-white);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-dark);
+      transition: var(--transition-base);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 400px;
+      min-width: 250px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.6rem 2.5rem 0.6rem 1rem;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-base);
+      transition: var(--transition-base);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+    }
+
+    .exhibitions-count {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #666;
+    }
+
+    .no-results h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .archive-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Navigation (injected by JS) -->
+
+  <!-- Archive Header -->
+  <header class="archive-header">
+    <h1>
+      <span lang="zh">展览归档</span>
+      <span lang="en">Exhibition Archive</span>
+    </h1>
+    <p>
+      <span lang="zh">探索VULCA所有的艺术评论展览</span>
+      <span lang="en">Explore all VULCA art criticism exhibitions</span>
+    </p>
+  </header>
+
+  <!-- Archive Controls -->
+  <div class="archive-controls">
+    <div class="archive-filters">
+      <button class="filter-btn active" data-filter="all">
+        <span lang="zh">全部</span>
+        <span lang="en">All</span>
+      </button>
+      <button class="filter-btn" data-filter="live">
+        <span lang="zh">展出中</span>
+        <span lang="en">Live</span>
+      </button>
+      <button class="filter-btn" data-filter="upcoming">
+        <span lang="zh">即将开展</span>
+        <span lang="en">Upcoming</span>
+      </button>
+      <button class="filter-btn" data-filter="archived">
+        <span lang="zh">已归档</span>
+        <span lang="en">Archived</span>
+      </button>
+    </div>
+
+    <div class="search-box">
+      <input
+        type="text"
+        class="search-input"
+        id="search-input"
+        placeholder="Search exhibitions..."
+        aria-label="Search exhibitions"
+      >
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <!-- Exhibitions Count -->
+  <div class="exhibitions-count" id="exhibitions-count">
+    <span lang="zh">显示 0 个展览</span>
+    <span lang="en">Showing 0 exhibitions</span>
+  </div>
+
+  <!-- Exhibitions Grid -->
+  <main class="exhibitions-section">
+    <div id="exhibitions-grid" class="exhibitions-grid">
+      <!-- Exhibition cards will be loaded here -->
+      <div class="loading-indicator">
+        <div class="loading-spinner"></div>
+        <p>Loading exhibitions...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">
+      <span lang="zh">© 2025 VULCA. 基于 EMNLP 2025 研究构建。</span>
+      <span lang="en">© 2025 VULCA. Built on EMNLP 2025 research.</span>
+    </p>
+    <nav class="footer-nav">
+      <a href="https://github.com/yha9806/VULCA-EMNLP2025" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:yuhaorui48@gmail.com">Contact</a>
+    </nav>
+  </footer>
+
+  <!-- Archive Page JavaScript -->
+  <script type="module">
+    let allExhibitions = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    // Fetch and render exhibitions
+    async function loadExhibitions() {
+      const grid = document.getElementById('exhibitions-grid');
+
+      try {
+        const response = await fetch('/api/exhibitions.json');
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        allExhibitions = data.exhibitions;
+        console.log(`[Archive] Loaded ${allExhibitions.length} exhibition(s)`);
+
+        // Initial render
+        renderExhibitions();
+
+        // Setup event listeners
+        setupFilters();
+        setupSearch();
+
+      } catch (error) {
+        console.error('[Archive] Failed to load exhibitions:', error);
+        grid.innerHTML = `
+          <div class="error-message">
+            <p>⚠️ 无法加载展览列表</p>
+            <p>Failed to load exhibitions</p>
+            <button onclick="window.location.reload()">Retry</button>
+          </div>
+        `;
+      }
+    }
+
+    // Render exhibitions based on filters
+    function renderExhibitions() {
+      const grid = document.getElementById('exhibitions-grid');
+
+      // Filter exhibitions
+      let filteredExhibitions = allExhibitions.filter(ex => {
+        // Status filter
+        const statusMatch = currentFilter === 'all' || ex.status === currentFilter;
+
+        // Search filter
+        const searchMatch = searchQuery === '' ||
+          ex.titleZh.toLowerCase().includes(searchQuery) ||
+          ex.titleEn.toLowerCase().includes(searchQuery) ||
+          (ex.descriptionZh && ex.descriptionZh.toLowerCase().includes(searchQuery)) ||
+          (ex.descriptionEn && ex.descriptionEn.toLowerCase().includes(searchQuery));
+
+        return statusMatch && searchMatch;
+      });
+
+      // Update count
+      updateCount(filteredExhibitions.length);
+
+      // Clear grid
+      grid.innerHTML = '';
+
+      // Render cards
+      if (filteredExhibitions.length === 0) {
+        grid.innerHTML = `
+          <div class="no-results">
+            <h3>
+              <span lang="zh">未找到展览</span>
+              <span lang="en">No exhibitions found</span>
+            </h3>
+            <p>
+              <span lang="zh">尝试调整筛选条件或搜索关键词</span>
+              <span lang="en">Try adjusting your filters or search terms</span>
+            </p>
+          </div>
+        `;
+      } else {
+        filteredExhibitions.forEach(exhibition => {
+          const card = createExhibitionCard(exhibition);
+          grid.appendChild(card);
+        });
+      }
+    }
+
+    // Create exhibition card element
+    function createExhibitionCard(exhibition) {
+      const card = document.createElement('a');
+      card.className = 'exhibition-card';
+      card.href = exhibition.url;
+      card.setAttribute('data-status', exhibition.status);
+
+      // Status badge
+      const statusBadges = {
+        live: { labelZh: '展出中', labelEn: 'LIVE NOW', class: 'status-live' },
+        upcoming: { labelZh: '即将开展', labelEn: 'UPCOMING', class: 'status-upcoming' },
+        archived: { labelZh: '已归档', labelEn: 'ARCHIVED', class: 'status-archived' }
+      };
+      const badge = statusBadges[exhibition.status] || statusBadges.archived;
+
+      card.innerHTML = `
+        <div class="card-image-wrapper">
+          <img
+            class="card-image"
+            src="${exhibition.coverImage}"
+            alt="${exhibition.titleZh}"
+            loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          >
+          <div class="card-image-placeholder" style="display:none;">
+            <span class="placeholder-icon">🖼️</span>
+          </div>
+          <span class="status-badge ${badge.class}">
+            <span lang="zh">${badge.labelZh}</span>
+            <span lang="en">${badge.labelEn}</span>
+          </span>
+        </div>
+
+        <div class="card-content">
+          <h3 class="card-title">
+            <span lang="zh">${exhibition.titleZh}</span>
+            <span lang="en">${exhibition.titleEn}</span>
+          </h3>
+
+          <p class="card-description">
+            <span lang="zh">${exhibition.descriptionZh || ''}</span>
+            <span lang="en">${exhibition.descriptionEn || ''}</span>
+          </p>
+
+          <div class="card-stats">
+            <span class="stat">
+              <span class="stat-value">${exhibition.stats.artworks}</span>
+              <span class="stat-label" lang="zh">作品</span>
+              <span class="stat-label" lang="en">Artworks</span>
+            </span>
+            <span class="stat">
+              <span class="stat-value">${exhibition.stats.personas}</span>
+              <span class="stat-label" lang="zh">评论家</span>
+              <span class="stat-label" lang="en">Critics</span>
+            </span>
+            <span class="stat">
+              <span class="stat-value">${exhibition.stats.messages}</span>
+              <span class="stat-label" lang="zh">对话</span>
+              <span class="stat-label" lang="en">Messages</span>
+            </span>
+          </div>
+
+          <div class="card-footer">
+            <span class="card-year">${exhibition.year}</span>
+            <span class="card-cta">
+              <span lang="zh">进入展览 →</span>
+              <span lang="en">Enter →</span>
+            </span>
+          </div>
+        </div>
+      `;
+
+      return card;
+    }
+
+    // Update count display
+    function updateCount(count) {
+      const countEl = document.getElementById('exhibitions-count');
+      countEl.innerHTML = `
+        <span lang="zh">显示 ${count} 个展览</span>
+        <span lang="en">Showing ${count} exhibition${count !== 1 ? 's' : ''}</span>
+      `;
+    }
+
+    // Setup filter buttons
+    function setupFilters() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active state
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          // Update filter
+          currentFilter = btn.dataset.filter;
+          console.log(`[Archive] Filter changed to: ${currentFilter}`);
+
+          // Re-render
+          renderExhibitions();
+        });
+      });
+    }
+
+    // Setup search input
+    function setupSearch() {
+      const searchInput = document.getElementById('search-input');
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        console.log(`[Archive] Search query: ${searchQuery}`);
+        renderExhibitions();
+      });
+
+      // Update placeholder based on language
+      function updateSearchPlaceholder() {
+        const currentLang = document.documentElement.lang;
+        searchInput.placeholder = currentLang === 'en' ?
+          'Search exhibitions...' :
+          '搜索展览...';
+      }
+
+      // Update on language change
+      window.addEventListener('langchange', updateSearchPlaceholder);
+      updateSearchPlaceholder();
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadExhibitions();
+    });
+  </script>
+
+  <!-- Global Navigation -->
+  <script type="module" src="/shared/js/global-navigation.js?v=2"></script>
+</body>
+</html>

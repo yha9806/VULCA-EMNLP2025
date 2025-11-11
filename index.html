@@ -27,10 +27,17 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 
+  <!-- Design Tokens (First!) -->
+  <link rel="stylesheet" href="/styles/design-tokens.css">
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="/shared/styles/global-navigation.css">
+
   <!-- Homepage Styles -->
   <link rel="stylesheet" href="/styles/portfolio-homepage.css">
 </head>
 <body>
+  <!-- Global Navigation (injected by JS) -->
   <!-- Hero Section -->
   <header class="hero">
     <div class="hero-content">
@@ -225,5 +232,8 @@
       loadExhibitions();
     });
   </script>
+
+  <!-- Global Navigation -->
+  <script type="module" src="/shared/js/global-navigation.js?v=2"></script>
 </body>
 </html>

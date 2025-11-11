@@ -1,0 +1,246 @@
+/**
+ * VULCA Design Tokens
+ *
+ * Single source of truth for design values across the platform.
+ * Use these CSS variables instead of hardcoded values for consistency.
+ *
+ * @version 1.0.0
+ * @created 2025-11-11
+ * @usage Import this file before other stylesheets
+ */
+
+:root {
+  /* ============================================================================
+     Brand Colors
+     ========================================================================== */
+
+  /* Primary palette - Warm terracotta and gold */
+  --color-primary: #B85C3C;       /* Terracotta */
+  --color-primary-dark: #a04d2f;  /* Darker terracotta (hover states) */
+  --color-accent: #D4A574;        /* Gold */
+  --color-accent-light: #e8c9a0;  /* Lighter gold */
+
+  /* Neutral colors */
+  --color-dark: #2d2d2d;          /* Text color */
+  --color-gray: #666666;          /* Secondary text */
+  --color-gray-light: #999999;    /* Tertiary text */
+  --color-light: #f9f9f9;         /* Background alt */
+  --color-white: #ffffff;         /* Background primary */
+
+  /* Semantic colors */
+  --color-live: #2ecc71;          /* Live exhibition status */
+  --color-upcoming: #3498db;      /* Upcoming exhibition status */
+  --color-archived: #95a5a6;      /* Archived exhibition status */
+  --color-error: #c41e3a;         /* Error messages */
+
+  /* Border colors */
+  --color-border: #e0e0e0;        /* Default borders */
+  --color-border-light: #f0f0f0;  /* Subtle borders */
+
+  /* ============================================================================
+     Shadows
+     ========================================================================== */
+
+  /* Four-tier shadow system for visual hierarchy */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);    /* Subtle elements (badges, tags) */
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);   /* Cards, panels (default) */
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);   /* Hover states, dropdowns */
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.15);  /* Modals, floating elements */
+
+  /* Navigation shadow */
+  --shadow-nav: 0 2px 4px rgba(0, 0, 0, 0.05);   /* Sticky navigation bar */
+
+  /* ============================================================================
+     Border Radius
+     ========================================================================== */
+
+  --radius-sm: 4px;               /* Buttons, small elements */
+  --radius-md: 12px;              /* Cards, panels (standard) */
+  --radius-lg: 16px;              /* Large containers */
+  --radius-full: 9999px;          /* Pills, circular elements */
+
+  /* ============================================================================
+     Typography Scale
+     ========================================================================== */
+
+  /* Font sizes - Modular scale with ratio 1.25 (Major Third) */
+  --font-size-xs: 0.75rem;        /* 12px - Captions, small labels */
+  --font-size-sm: 0.875rem;       /* 14px - Small text, metadata */
+  --font-size-base: 1rem;         /* 16px - Body text (default) */
+  --font-size-lg: 1.125rem;       /* 18px - Large body text */
+  --font-size-xl: 1.25rem;        /* 20px - Subheadings */
+  --font-size-2xl: 1.5rem;        /* 24px - Section headings */
+  --font-size-3xl: 1.875rem;      /* 30px - Large headings */
+  --font-size-4xl: 2.25rem;       /* 36px - Page titles */
+  --font-size-5xl: 3rem;          /* 48px - Hero titles */
+  --font-size-6xl: 4rem;          /* 64px - Display titles */
+
+  /* Line heights */
+  --leading-tight: 1.2;           /* Headings, display text */
+  --leading-snug: 1.4;            /* Subheadings, short text */
+  --leading-normal: 1.6;          /* Body text (optimal readability) */
+  --leading-relaxed: 1.8;         /* Long-form content */
+
+  /* Letter spacing */
+  --tracking-tight: -0.02em;      /* Display text */
+  --tracking-normal: 0;           /* Default */
+  --tracking-wide: 0.05em;        /* Headings, emphasis */
+  --tracking-wider: 0.1em;        /* All caps, labels */
+
+  /* Font weights */
+  --font-weight-light: 300;       /* Light text */
+  --font-weight-normal: 400;      /* Body text */
+  --font-weight-medium: 500;      /* Emphasis */
+  --font-weight-semibold: 600;    /* Subheadings */
+  --font-weight-bold: 700;        /* Headings */
+  --font-weight-black: 900;       /* Display titles */
+
+  /* ============================================================================
+     Spacing Scale
+     ========================================================================== */
+
+  /* 8px-based vertical rhythm for consistent spacing */
+  --spacing-xs: 0.5rem;           /* 8px - Minimal spacing */
+  --spacing-sm: 1rem;             /* 16px - Small spacing */
+  --spacing-md: 2rem;             /* 32px - Medium spacing */
+  --spacing-lg: 4rem;             /* 64px - Large spacing */
+  --spacing-xl: 6rem;             /* 96px - Extra large spacing */
+  --spacing-2xl: 8rem;            /* 128px - Section spacing */
+
+  /* Component-specific spacing */
+  --spacing-card-padding: 2rem;   /* Default card internal padding */
+  --spacing-section-padding: 4rem; /* Section vertical padding */
+
+  /* ============================================================================
+     Layout
+     ========================================================================== */
+
+  /* Max widths */
+  --max-width-sm: 640px;          /* Narrow content (prose) */
+  --max-width-md: 800px;          /* Medium content */
+  --max-width-lg: 1024px;         /* Wide content */
+  --max-width-xl: 1280px;         /* Container max width */
+  --max-width-2xl: 1400px;        /* Full layout max width */
+
+  /* Card widths */
+  --card-width-sm: 300px;         /* Mobile cards */
+  --card-width-md: 380px;         /* Default exhibition cards */
+  --card-width-lg: 480px;         /* Large cards */
+
+  /* ============================================================================
+     Z-Index Scale
+     ========================================================================== */
+
+  --z-base: 1;                    /* Default content */
+  --z-dropdown: 100;              /* Dropdowns, tooltips */
+  --z-sticky: 500;                /* Sticky headers */
+  --z-nav: 1000;                  /* Navigation bar */
+  --z-modal-backdrop: 1100;       /* Modal background overlay */
+  --z-modal: 1200;                /* Modal content */
+  --z-toast: 1300;                /* Notifications, toasts */
+
+  /* ============================================================================
+     Transitions
+     ========================================================================== */
+
+  /* Duration */
+  --duration-fast: 150ms;         /* Quick interactions */
+  --duration-base: 200ms;         /* Default transitions */
+  --duration-slow: 300ms;         /* Smooth animations */
+  --duration-slower: 500ms;       /* Page transitions */
+
+  /* Easing functions */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Common transition declarations */
+  --transition-base: all var(--duration-base) var(--ease-in-out);
+  --transition-fast: all var(--duration-fast) var(--ease-out);
+  --transition-slow: all var(--duration-slow) var(--ease-in-out);
+
+  /* ============================================================================
+     Responsive Breakpoints
+     ========================================================================== */
+
+  /* Note: Use these in media queries as literal values (CSS variables don't work in @media) */
+
+  /* Mobile: 375px - 767px (default styles) */
+  --breakpoint-sm: 480px;         /* Small mobile */
+
+  /* Tablet: 768px - 1023px */
+  --breakpoint-md: 768px;         /* Tablet portrait */
+
+  /* Desktop: 1024px - 1439px */
+  --breakpoint-lg: 1024px;        /* Tablet landscape / Small desktop */
+
+  /* Large Desktop: 1440px+ */
+  --breakpoint-xl: 1440px;        /* Desktop */
+  --breakpoint-2xl: 1920px;       /* Large desktop */
+
+  /* ============================================================================
+     Gradients
+     ========================================================================== */
+
+  /* Brand gradient - Used in hero sections */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+
+  /* Subtle gradients */
+  --gradient-light: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+
+  /* Overlay gradients */
+  --gradient-overlay-dark: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+  --gradient-overlay-light: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+/* ============================================================================
+   Dark Mode Variables (Future Enhancement)
+   ========================================================================== */
+
+/* Uncomment when implementing dark mode */
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-dark: #f5f5f5;
+    --color-light: #1a1a1a;
+    --color-white: #0d0d0d;
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+*/
+
+/* ============================================================================
+   Usage Examples
+   ========================================================================== */
+
+/*
+Example 1: Card with shadow
+.my-card {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-md);
+}
+
+Example 2: Responsive heading
+h1 {
+  font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-6xl));
+  line-height: var(--leading-tight);
+  font-weight: var(--font-weight-bold);
+}
+
+Example 3: Smooth transition
+.button {
+  transition: var(--transition-base);
+}
+.button:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+Example 4: Section spacing
+.section {
+  padding: var(--spacing-xl) var(--spacing-md);
+  max-width: var(--max-width-2xl);
+  margin: 0 auto;
+}
+*/

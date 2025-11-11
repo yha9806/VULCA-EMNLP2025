@@ -25,7 +25,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # CLAUDE.md - Claude Code 工作指南
 
-**最后更新**: 2025-11-06
+**最后更新**: 2025-11-11
 **项目**: VULCA - 艺术评论展览平台（沉浸式艺术评论展览）
 **网址**: https://vulcaart.art
 **GitHub**: https://github.com/yha9806/VULCA-EMNLP2025
@@ -771,6 +771,58 @@ Closes #42
 ---
 
 ## 🎉 最新更新
+
+### ✅ 设计系统优化 + 导航恢复 (2025-11-11)
+
+**解决的问题**:
+1. ❌ 之前: 视觉风格不统一（圆角8px vs 12px、阴影深度不一致）
+2. ❌ 之前: 导航缺少"评论家"和"过程"页面链接
+3. ✅ 现在: 统一设计系统，完整的5个导航项
+
+**实施内容**:
+
+**1. 设计 Tokens 系统** (`styles/design-tokens.css` 新建, 350+行)
+   - **颜色系统**: 80+ CSS 变量（primary, accent, neutral, semantic）
+   - **阴影系统**: 三层 `--shadow-sm/md/lg` (柔和阴影，提升层次感)
+   - **圆角标准**: `--radius-md: 12px` (之前8px，现在统一12px)
+   - **排版尺度**: 10级字号 (xs到6xl，基于1.25比例)
+   - **间距系统**: 8px网格 (`--spacing-xs` 到 `--spacing-2xl`)
+   - **过渡动画**: `--transition-base/slow` (cubic-bezier缓动)
+
+**2. 组件更新** (所有页面应用设计tokens)
+   - `index.html` - Portfolio 主页
+   - `pages/exhibitions-archive.html` - 展览归档页面
+   - `pages/about.html` - 关于页面
+   - `styles/portfolio-homepage.css` - 展览卡片、按钮、加载动画
+   - `shared/styles/global-navigation.css` - 导航栏、语言切换按钮
+
+**3. 导航系统恢复** (`shared/js/global-navigation.js`)
+   - **5个导航项**: 🏠 主页、📚 展览归档、👥 评论家（新）、ℹ️ 关于、🎨 过程（新）
+   - **响应式支持**:
+     - 桌面端 (>768px): 横向导航栏
+     - 移动端 (≤768px): 汉堡菜单 (☰) + 侧边栏
+   - **页面高亮**: 自动检测当前页面并高亮对应链接
+   - **版本控制**: 所有引用更新为 `?v=2` 强制刷新缓存
+
+**4. 测试验证**
+   - ✅ 响应式测试: 375px/768px/1024px/1440px 全部通过
+   - ✅ 链接测试: 主页、归档、评论家、关于、过程、展览页面全部正常
+   - ✅ 导航测试: 汉堡菜单、页面跳转、高亮功能全部正常
+
+**视觉改进**:
+- 🎨 **更柔和的阴影**: 从 `rgba(0,0,0,0.1)` 改为 `rgba(0,0,0,0.08)`
+- 🔲 **统一圆角**: 所有卡片从 8px 改为 12px
+- ⚡ **流畅动画**: 所有过渡使用 cubic-bezier(0.4, 0, 0.2, 1)
+- 📐 **一致间距**: 所有页面使用 8px 基准网格
+
+**开发者体验提升**:
+- 🔧 **单一来源**: 所有设计值集中在 `design-tokens.css`
+- 🎯 **易于维护**: 修改一个变量，全站同步更新
+- 📦 **模块化**: 设计tokens独立文件，优先加载
+
+**相关文档**: 参见 `openspec/changes/enhance-visual-design-system/`
+
+---
 
 ### ✅ Hero 标题双语支持 (2025-11-04)
 
