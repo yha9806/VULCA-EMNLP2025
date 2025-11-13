@@ -12,13 +12,13 @@
 window.GalleryInit = (function() {
   'use strict';
 
-  // Reference to data
-  const data = window.VULCA_DATA;
-
   /**
    * Initialize the entire gallery
    */
   function init() {
+    // Get data reference at init time (not at load time)
+    const data = window.VULCA_DATA;
+
     if (!data || !data.artworks || !data.personas || !data.critiques) {
       console.error('VULCA_DATA not found or incomplete');
       return;
@@ -130,6 +130,10 @@ window.GalleryInit = (function() {
     const container = document.createElement('section');
     container.className = 'critiques-container';
     container.setAttribute('aria-label', 'Critique perspectives');
+
+    // Get data reference
+    const data = window.VULCA_DATA;
+    if (!data) return container;
 
     // Filter critiques for this artwork
     const critiquesForArtwork = data.critiques.filter(
@@ -363,6 +367,9 @@ window.GalleryInit = (function() {
    * @returns {String} HTML table rows
    */
   function generateFallbackTableRows(artworkId) {
+    const data = window.VULCA_DATA;
+    if (!data) return '';
+
     const critiques = data.critiques.filter((c) => c.artworkId === artworkId);
 
     return critiques
@@ -388,7 +395,7 @@ window.GalleryInit = (function() {
    * @returns {Object} Artwork data
    */
   function getArtwork(artworkId) {
-    return data.artworks.find((a) => a.id === artworkId);
+    return window.VULCA_DATA?.artworks.find((a) => a.id === artworkId);
   }
 
   /**
@@ -397,7 +404,7 @@ window.GalleryInit = (function() {
    * @returns {Object} Persona data
    */
   function getPersona(personaId) {
-    return data.personas.find((p) => p.id === personaId);
+    return window.VULCA_DATA?.personas.find((p) => p.id === personaId);
   }
 
   /**
@@ -406,7 +413,7 @@ window.GalleryInit = (function() {
    * @returns {Array} Critique data array
    */
   function getCritiquesForArtwork(artworkId) {
-    return data.critiques.filter((c) => c.artworkId === artworkId);
+    return window.VULCA_DATA?.critiques.filter((c) => c.artworkId === artworkId);
   }
 
   /**
@@ -414,7 +421,7 @@ window.GalleryInit = (function() {
    * @returns {Object} Complete VULCA data
    */
   function getData() {
-    return data;
+    return window.VULCA_DATA;
   }
 
   // Public API
@@ -427,12 +434,22 @@ window.GalleryInit = (function() {
   };
 })();
 
-// Initialize gallery when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
+// Initialize gallery when both DOM and VULCA_DATA are ready
+function attemptInit() {
+  if (window.VULCA_DATA_READY) {
+    // Data is ready, initialize now
     window.GalleryInit.init();
-  });
+  } else {
+    // Data not ready yet, wait for event
+    document.addEventListener('vulca-data-ready', () => {
+      window.GalleryInit.init();
+    }, { once: true });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', attemptInit);
 } else {
   // DOM already loaded
-  window.GalleryInit.init();
+  attemptInit();
 }

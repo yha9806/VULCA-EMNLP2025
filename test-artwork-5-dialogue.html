@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artwork-5 Dialogue Test - 《数息生长》</title>
+  <link rel="stylesheet" href="styles/components/dialogue-player.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: #F9F8F6;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      color: #2d2d2d;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    .test-info {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .test-info h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: #374151;
+    }
+    .test-info ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    .test-info li {
+      margin: 8px 0;
+      color: #4b5563;
+    }
+    .test-info code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.9rem;
+    }
+    .stats {
+      background: #f0f9ff;
+      border-left: 4px solid #3b82f6;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+    .stats h3 {
+      margin-top: 0;
+      color: #1e40af;
+      font-size: 1rem;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stat-label {
+      color: #374151;
+      font-size: 0.9rem;
+    }
+    .stat-value {
+      color: #1e40af;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    #dialogue-container {
+      margin-top: 30px;
+    }
+    .btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>Phase 3.1: Artwork-5 Dialogue Conversion Test</h1>
+    <div class="subtitle">《数息生长》 Digital Breath Growth - Cheng Jiayu</div>
+
+    <div class="test-info">
+      <h2>🧪 测试说明 Test Instructions</h2>
+
+      <div class="stats">
+        <h3>📊 Dialogue Statistics</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-label">Messages:</span>
+            <span class="stat-value" id="msg-count">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Participants:</span>
+            <span class="stat-value" id="participant-count">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Duration:</span>
+            <span class="stat-value" id="duration">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Reply Chains:</span>
+            <span class="stat-value" id="reply-count">-</span>
+          </div>
+        </div>
+      </div>
+
+      <p><strong>验证要点 Validation Checklist:</strong></p>
+      <ul>
+        <li>✅ 对话自动播放 (Auto-play starts)</li>
+        <li>✅ 回复链正确 (Reply chains show <code>↩ 回复 [名字]</code>)</li>
+        <li>✅ 引文可点击 (Quoted text clickable)</li>
+        <li>✅ 知识库引用显示 (References displayed)</li>
+        <li>✅ 交互类型标签显示 (Interaction type labels visible)</li>
+        <li>✅ 时间间隔自然 (4-7 second intervals)</li>
+      </ul>
+
+      <p><strong>交互测试 Interaction Tests:</strong></p>
+      <ul>
+        <li><strong>桌面端:</strong> 鼠标悬停引用 → 显示白色工具提示</li>
+        <li><strong>移动端:</strong> 点击引用 → 打开全屏模态框</li>
+        <li><strong>语言切换:</strong> <button id="lang-toggle" class="btn">Switch to English</button></li>
+      </ul>
+    </div>
+
+    <!-- Dialogue Player Container -->
+    <div id="dialogue-container"></div>
+  </div>
+
+  <!-- Load Dependencies -->
+  <script>
+    // Load real VULCA_DATA with all 6 personas
+    window.VULCA_DATA = {
+      personas: [
+        {
+          id: "su-shi",
+          nameZh: "苏轼",
+          nameEn: "Su Shi",
+          color: "#B85C3C",
+          period: "北宋 (1037-1101)"
+        },
+        {
+          id: "guo-xi",
+          nameZh: "郭熙",
+          nameEn: "Guo Xi",
+          color: "#2D5F4F",
+          period: "北宋 (1020-1090)"
+        },
+        {
+          id: "john-ruskin",
+          nameZh: "约翰·罗斯金",
+          nameEn: "John Ruskin",
+          color: "#8B4513",
+          period: "维多利亚时代 (1819-1900)"
+        },
+        {
+          id: "mama-zola",
+          nameZh: "佐拉嬷嬷",
+          nameEn: "Mama Zola",
+          color: "#D97706",
+          period: "西非 Griot 传统"
+        },
+        {
+          id: "professor-petrova",
+          nameZh: "彼得洛娃教授",
+          nameEn: "Professor Petrova",
+          color: "#7C3AED",
+          period: "俄国形式主义 (1910s-1930s)"
+        },
+        {
+          id: "ai-ethics-reviewer",
+          nameZh: "AI伦理审查员",
+          nameEn: "AI Ethics Reviewer",
+          color: "#059669",
+          period: "当代 (2020s)"
+        }
+      ]
+    };
+  </script>
+  <script src="js/components/dialogue-player.js"></script>
+  <script type="module">
+    // Import artwork-5 dialogue
+    import { artwork5Dialogue } from './js/data/dialogues/artwork-5.js';
+
+    console.log('✅ Artwork-5 dialogue loaded:', artwork5Dialogue);
+
+    // Update statistics
+    document.getElementById('msg-count').textContent = artwork5Dialogue.messages.length;
+    document.getElementById('participant-count').textContent = artwork5Dialogue.participants.length;
+
+    const lastTimestamp = artwork5Dialogue.messages[artwork5Dialogue.messages.length - 1].timestamp;
+    const durationSec = Math.round(lastTimestamp / 1000);
+    document.getElementById('duration').textContent = `${durationSec}s (${(durationSec / 60).toFixed(1)}m)`;
+
+    const replyCount = artwork5Dialogue.messages.filter(m => m.replyTo).length;
+    document.getElementById('reply-count').textContent = replyCount;
+
+    // Initialize DialoguePlayer
+    const container = document.getElementById('dialogue-container');
+    const player = new DialoguePlayer(artwork5Dialogue, container, {
+      autoPlay: true,
+      lang: 'zh'
+    });
+
+    console.log('✅ DialoguePlayer initialized');
+
+    // Language toggle
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+      const html = document.documentElement;
+      const currentLang = html.getAttribute('data-lang');
+      const newLang = currentLang === 'zh' ? 'en' : 'zh';
+      html.setAttribute('data-lang', newLang);
+
+      // Update button text
+      const btn = document.getElementById('lang-toggle');
+      btn.textContent = newLang === 'zh' ? 'Switch to English' : '切换到中文';
+
+      // Trigger langchange event
+      window.dispatchEvent(new Event('langchange'));
+
+      console.log(`Language switched to: ${newLang}`);
+    });
+  </script>
+</body>
+</html>

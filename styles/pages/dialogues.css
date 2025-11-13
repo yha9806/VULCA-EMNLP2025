@@ -1,0 +1,236 @@
+/**
+ * Dialogues Page Styles
+ *
+ * Specific styles for the dialogues display page:
+ * - Artwork selector
+ * - Reference legend
+ * - Page layout
+ *
+ * @version 1.0.0
+ * @created 2025-11-06
+ */
+
+/* ============================================================================
+   Page Layout
+   ========================================================================== */
+
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.page-intro {
+  margin-bottom: 40px;
+  text-align: center;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.page-intro p {
+  max-width: 800px;
+  margin: 0 auto 16px;
+}
+
+/* ============================================================================
+   Artwork Selector
+   ========================================================================== */
+
+.artwork-selector {
+  margin-bottom: 40px;
+}
+
+.artwork-selector__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.artwork-selector__buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Artwork Button */
+.artwork-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.artwork-btn:hover {
+  border-color: #B85C3C;
+  box-shadow: 0 4px 12px rgba(184, 92, 60, 0.15);
+  transform: translateY(-2px);
+}
+
+.artwork-btn:focus {
+  outline: 2px solid #B85C3C;
+  outline-offset: 2px;
+}
+
+.artwork-btn.active {
+  border-color: #B85C3C;
+  background: linear-gradient(135deg, rgba(184, 92, 60, 0.05), rgba(212, 165, 116, 0.05));
+  box-shadow: 0 4px 16px rgba(184, 92, 60, 0.2);
+}
+
+.artwork-btn.active::before {
+  content: '✓';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  background: #B85C3C;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.artwork-btn__number {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #B85C3C, #D4A574);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.artwork-btn__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.artwork-btn__meta {
+  font-size: 0.875rem;
+  color: #6b7280;
+  display: block;
+}
+
+/* ============================================================================
+   Dialogue Section
+   ========================================================================== */
+
+.dialogue-section {
+  margin-bottom: 60px;
+}
+
+.dialogue-container {
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.dialogue-loading {
+  padding: 60px 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+
+.dialogue-error {
+  padding: 40px 20px;
+  text-align: center;
+  color: #dc2626;
+  background: #fee2e2;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================================================================
+   Reference Legend
+   ========================================================================== */
+
+.reference-legend {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  padding: 24px;
+  background: #f9fafb;
+  border-left: 4px solid #B85C3C;
+  border-radius: 8px;
+}
+
+.reference-legend__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-bottom: 12px;
+}
+
+.reference-legend p {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.reference-legend p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 24px 16px;
+  }
+
+  .artwork-selector__buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .artwork-btn {
+    padding: 16px;
+  }
+
+  .artwork-btn__title {
+    font-size: 1rem;
+  }
+
+  .dialogue-container {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .artwork-selector__title {
+    font-size: 1.25rem;
+  }
+
+  .reference-legend {
+    padding: 16px;
+  }
+
+  .reference-legend__title {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,352 @@
+[
+  {
+    "artwork": "artwork-10",
+    "ppt": [
+      13,
+      14
+    ],
+    "artworkTitle": "陈筱薇《源游》",
+    "pptImageCount": 3,
+    "actualFiles": [],
+    "actualFileCount": 0
+  },
+  {
+    "artwork": "artwork-12",
+    "ppt": [
+      17,
+      18
+    ],
+    "artworkTitle": "张引《格竹》",
+    "pptImageCount": 3,
+    "actualFiles": [
+      "01.jpg",
+      "02.jpg"
+    ],
+    "actualFileCount": 2
+  },
+  {
+    "artwork": "artwork-13",
+    "ppt": [
+      19,
+      20
+    ],
+    "artworkTitle": "王博《逐日计划》",
+    "pptImageCount": 5,
+    "actualFiles": [
+      "01.png",
+      "02.png",
+      "03.png",
+      "04.png"
+    ],
+    "actualFileCount": 4
+  },
+  {
+    "artwork": "artwork-14",
+    "ppt": [
+      22,
+      23
+    ],
+    "artworkTitle": "魏云佳《X博物馆》",
+    "pptImageCount": 6,
+    "actualFiles": [
+      "01.png",
+      "02.png",
+      "03.png",
+      "04.png",
+      "05.png"
+    ],
+    "actualFileCount": 5,
+    "note": "Image too small, needs resize"
+  },
+  {
+    "artwork": "artwork-15",
+    "ppt": [
+      24,
+      25
+    ],
+    "artworkTitle": "修楚贺，张萌萌《404词窟》",
+    "pptImageCount": 3,
+    "actualFiles": [
+      "01.jpg",
+      "02.png"
+    ],
+    "actualFileCount": 2
+  },
+  {
+    "artwork": "artwork-16",
+    "ppt": [
+      26,
+      27
+    ],
+    "artworkTitle": "李芷暄、许佩霖 《风从何处来·二》",
+    "pptImageCount": 3,
+    "actualFiles": [
+      "01.jpg",
+      "02.jpg"
+    ],
+    "actualFileCount": 2
+  },
+  {
+    "artwork": "artwork-17",
+    "ppt": [
+      29,
+      30
+    ],
+    "artworkTitle": "李鹏飞 《不稳定轮廓》",
+    "pptImageCount": 2,
+    "actualFiles": [
+      "01.png"
+    ],
+    "actualFileCount": 1
+  },
+  {
+    "artwork": "artwork-18",
+    "ppt": [
+      31,
+      32
+    ],
+    "artworkTitle": "张瑞航《无序共识》",
+    "pptImageCount": 5,
+    "actualFiles": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.png"
+    ],
+    "actualFileCount": 4
+  },
+  {
+    "artwork": "artwork-20",
+    "ppt": [
+      36,
+      37
+    ],
+    "artworkTitle": "杨锋《环形虚无》",
+    "pptImageCount": 5,
+    "actualFiles": [
+      "01.png",
+      "02.png",
+      "03.png",
+      "04.png"
+    ],
+    "actualFileCount": 4
+  },
+  {
+    "artwork": "artwork-21",
+    "ppt": [
+      38,
+      39
+    ],
+    "artworkTitle": "李索、张恺麟《Upload》",
+    "pptImageCount": 3,
+    "actualFiles": [
+      "01.jpg",
+      "02.jpg"
+    ],
+    "actualFileCount": 2
+  },
+  {
+    "artwork": "artwork-22",
+    "ppt": [
+      41,
+      42
+    ],
+    "artworkTitle": "洪泽榕《岭南道中》",
+    "pptImageCount": 2,
+    "actualFiles": [
+      "01.png"
+    ],
+    "actualFileCount": 1
+  },
+  {
+    "artwork": "artwork-24",
+    "ppt": [
+      45,
+      46
+    ],
+    "artworkTitle": "",
+    "pptImageCount": 1,
+    "actualFiles": [
+      "01.png",
+      "02.png",
+      "03.png",
+      "04.png"
+    ],
+    "actualFileCount": 4
+  },
+  {
+    "artwork": "artwork-25",
+    "ppt": [
+      47,
+      48
+    ],
+    "artworkTitle": "刘铁源《归原.共生》",
+    "pptImageCount": 5,
+    "actualFiles": [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ],
+    "actualFileCount": 4
+  },
+  {
+    "artwork": "artwork-26",
+    "ppt": [
+      49,
+      50
+    ],
+    "artworkTitle": "郭雨欣《溯元1号》",
+    "pptImageCount": 5,
+    "actualFiles": [
+      "01.jpg",
+      "01.png",
+      "02.jpg",
+      "02.png",
+      "03.jpg",
+      "03.png",
+      "04.png",
+      "05.png"
+    ],
+    "actualFileCount": 8,
+    "note": "Duplicate with artwork-27"
+  },
+  {
+    "artwork": "artwork-27",
+    "ppt": [
+      51,
+      52
+    ],
+    "artworkTitle": "吴振华《辩白书》",
+    "pptImageCount": 4,
+    "actualFiles": [],
+    "actualFileCount": 0
+  },
+  {
+    "artwork": "artwork-28",
+    "ppt": [
+      53,
+      54
+    ],
+    "artworkTitle": "张苑婷《辩白书》",
+    "pptImageCount": 6,
+    "actualFiles": [
+      "01.png",
+      "02.png"
+    ],
+    "actualFileCount": 2
+  },
+  {
+    "artwork": "artwork-29",
+    "ppt": [
+      56,
+      57
+    ],
+    "artworkTitle": "",
+    "pptImageCount": 1,
+    "actualFiles": [
+      "01.png",
+      "02.png",
+      "03.png",
+      "04.png"
+    ],
+    "actualFileCount": 4
+  },
+  {
+    "artwork": "artwork-30",
+    "ppt": [
+      61,
+      62
+    ],
+    "artworkTitle": "",
+    "pptImageCount": 1,
+    "actualFiles": [
+      "01.png"
+    ],
+    "actualFileCount": 1
+  },
+  {
+    "artwork": "artwork-31",
+    "ppt": [
+      66,
+      67
+    ],
+    "artworkTitle": "",
+    "pptImageCount": 1,
+    "actualFiles": [
+      "01.png",
+      "02.png"
+    ],
+    "actualFileCount": 2
+  },
+  {
+    "artwork": "artwork-32",
+    "ppt": [
+      68,
+      69
+    ],
+    "artworkTitle": "林書旭《黑色1號》",
+    "pptImageCount": 4,
+    "actualFiles": [
+      "01.png",
+      "02.png",
+      "03.png"
+    ],
+    "actualFileCount": 3
+  },
+  {
+    "artwork": "artwork-33",
+    "ppt": [
+      70,
+      71
+    ],
+    "artworkTitle": "鄭曉瓊《密碼》",
+    "pptImageCount": 4,
+    "actualFiles": [
+      "01.png"
+    ],
+    "actualFileCount": 1
+  },
+  {
+    "artwork": "artwork-34",
+    "ppt": [
+      73,
+      74
+    ],
+    "artworkTitle": "",
+    "pptImageCount": 1,
+    "actualFiles": [
+      "01.png"
+    ],
+    "actualFileCount": 1,
+    "note": "Also mapped to 76-77"
+  },
+  {
+    "artwork": "artwork-34",
+    "ppt": [
+      76,
+      77
+    ],
+    "artworkTitle": "",
+    "pptImageCount": 1,
+    "actualFiles": [
+      "01.png"
+    ],
+    "actualFileCount": 1,
+    "note": "Duplicate mapping"
+  },
+  {
+    "artwork": "artwork-37",
+    "ppt": [
+      86,
+      87
+    ],
+    "artworkTitle": "L.A.Suzie《Lauren Lee McCarthy and David Leonard》",
+    "pptImageCount": 4,
+    "actualFiles": [
+      "01.png",
+      "02.png"
+    ],
+    "actualFileCount": 2
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "id": "congsheng-2025",
+  "slug": "congsheng-2025",
+  "titleZh": ""丛生"两岸教育双年展——沉思之胃",
+  "titleEn": "Congsheng: Cross-Strait Education Biennial - Stomach of Contemplation",
+  "year": 2025,
+  "status": "upcoming",
+  "descriptionZh": "汇集两岸38件当代艺术作品的双年展，探索教育、技术与当代艺术创作的交汇。展览聚焦AI艺术、新媒体装置、以及传统与数字媒介的对话，呈现新一代艺术家对技术、身份与社会的深刻思考。",
+  "descriptionEn": "A biennial exhibition featuring 38 contemporary artworks from across the Taiwan Strait, exploring the intersection of education, technology, and contemporary art creation. The exhibition focuses on AI art, new media installations, and the dialogue between traditional and digital media, presenting the new generation of artists' profound reflections on technology, identity, and society.",
+  "stats": {
+    "artworks": 5,
+    "personas": 6,
+    "messages": 0,
+    "dialogues": 0
+  },
+  "features": [
+    "image-carousel",
+    "artwork-grid",
+    "institution-filter"
+  ],
+  "theme": {
+    "primaryColor": "#2D5F4F",
+    "accentColor": "#8FAE9F"
+  },
+  "curator": {
+    "nameZh": "于浩睿",
+    "nameEn": "Yu Haorui",
+    "role": "策展人"
+  },
+  "institutions": [
+    "中央美术学院",
+    "天津美术学院",
+    "鲁迅美术学院",
+    "四川美术学院",
+    "广州美术学院",
+    "西安美术学院",
+    "湖北美术学院",
+    "台湾艺术大学",
+    "台南艺术大学",
+    "台湾师范大学"
+  ],
+  "assets": {
+    "cover": "./assets/cover.jpg",
+    "ogImage": "./assets/og-image.jpg"
+  }
+}

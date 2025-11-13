@@ -1,0 +1,331 @@
+{
+  "exhibition_title": "“丛生”两岸教育双年展———沉思之胃",
+  "total_artworks": 38,
+  "institutions": {
+    "中央美术学院": [
+      {
+        "artists": [
+          "张凯飞"
+        ],
+        "title": "记忆潮汐--地平线系列",
+        "slide_number": 5,
+        "image_count": 1
+      },
+      {
+        "artists": [
+          "宋佳益"
+        ],
+        "title": "我永远在你的背后",
+        "slide_number": 7,
+        "image_count": 4
+      },
+      {
+        "artists": [
+          "李凯文、赵冠杰、陈号"
+        ],
+        "title": "烂柯人",
+        "slide_number": 9,
+        "image_count": 3
+      },
+      {
+        "artists": [
+          "叶君豪"
+        ],
+        "title": "源游",
+        "slide_number": 11,
+        "image_count": 1
+      },
+      {
+        "artists": [
+          "陈筱薇"
+        ],
+        "title": "源游",
+        "slide_number": 13,
+        "image_count": 2
+      },
+      {
+        "artists": [
+          "陈玉萍"
+        ],
+        "title": "时间的房子：被演算的族谱记忆",
+        "slide_number": 15,
+        "image_count": 1
+      },
+      {
+        "artists": [
+          "张引"
+        ],
+        "title": "格竹",
+        "slide_number": 17,
+        "image_count": 2
+      },
+      {
+        "artists": [
+          "王博"
+        ],
+        "title": "逐日计划",
+        "slide_number": 19,
+        "image_count": 4
+      }
+    ],
+    "天津美术学院": [
+      {
+        "artists": [
+          "魏云佳"
+        ],
+        "title": "X博物馆",
+        "slide_number": 22,
+        "image_count": 5
+      },
+      {
+        "artists": [
+          "修楚贺，张萌萌"
+        ],
+        "title": "404词窟",
+        "slide_number": 24,
+        "image_count": 2
+      },
+      {
+        "artists": [
+          "李芷暄、许佩霖"
+        ],
+        "title": "风从何处来·二",
+        "slide_number": 26,
+        "image_count": 2
+      }
+    ],
+    "鲁迅美术学院": [
+      {
+        "artists": [
+          "李鹏飞"
+        ],
+        "title": "不稳定轮廓",
+        "slide_number": 29,
+        "image_count": 1
+      },
+      {
+        "artists": [
+          "张瑞航"
+        ],
+        "title": "无序共识",
+        "slide_number": 31,
+        "image_count": 4
+      },
+      {
+        "artists": [
+          "王梓潘"
+        ],
+        "title": "非池中",
+        "slide_number": 33,
+        "image_count": 1
+      }
+    ],
+    "四川美术学院": [
+      {
+        "artists": [
+          "杨锋"
+        ],
+        "title": "环形虚无",
+        "slide_number": 36,
+        "image_count": 4
+      },
+      {
+        "artists": [
+          "李索、张恺麟"
+        ],
+        "title": "Upload",
+        "slide_number": 38,
+        "image_count": 2
+      }
+    ],
+    "西安美术学院": [
+      {
+        "artists": [
+          "刘铁源"
+        ],
+        "title": "归原.共生",
+        "slide_number": 47,
+        "image_count": 4
+      },
+      {
+        "artists": [
+          "郭雨欣"
+        ],
+        "title": "溯元1号",
+        "slide_number": 49,
+        "image_count": 4
+      },
+      {
+        "artists": [
+          "吴振华"
+        ],
+        "title": "辩白书",
+        "slide_number": 51,
+        "image_count": 3
+      },
+      {
+        "artists": [
+          "张苑婷"
+        ],
+        "title": "辩白书",
+        "slide_number": 53,
+        "image_count": 5
+      },
+      {
+        "artists": [
+          "刘坤"
+        ],
+        "title": "举步维艰",
+        "slide_number": 55,
+        "image_count": 2
+      }
+    ],
+    "湖北美术学院": [
+      {
+        "artists": [
+          "向诗雨 陈晨 王思莹"
+        ],
+        "title": "双生界",
+        "slide_number": 58,
+        "image_count": 4
+      },
+      {
+        "artists": [
+          "程佳瑜"
+        ],
+        "title": "数息生长",
+        "slide_number": 60,
+        "image_count": 4
+      }
+    ],
+    "台湾艺术大学": [
+      {
+        "artists": [
+          "龍暐翔"
+        ],
+        "title": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ",
+        "slide_number": 63,
+        "image_count": 1
+      },
+      {
+        "artists": [
+          "李國嘉"
+        ],
+        "title": "黃仁勳，這就是你想要的世界嗎？",
+        "slide_number": 65,
+        "image_count": 3
+      }
+    ],
+    "台南艺术大学": [
+      {
+        "artists": [
+          "林書旭"
+        ],
+        "title": "黑色1號",
+        "slide_number": 68,
+        "image_count": 2
+      },
+      {
+        "artists": [
+          "鄭曉瓊"
+        ],
+        "title": "密碼",
+        "slide_number": 70,
+        "image_count": 3
+      },
+      {
+        "artists": [
+          "謝綺文"
+        ],
+        "title": "身體重構系列-鼻",
+        "slide_number": 72,
+        "image_count": 1
+      }
+    ],
+    "台湾师范大学": [
+      {
+        "artists": [
+          "郭姸瑩"
+        ],
+        "title": "方城市",
+        "slide_number": 75,
+        "image_count": 1
+      },
+      {
+        "artists": [
+          "陈之涵"
+        ],
+        "title": "传统复原色纸行草册页镜框《容斋随笔摘抄",
+        "slide_number": 78,
+        "image_count": 3
+      },
+      {
+        "artists": [
+          "王歆童、黄恩琦"
+        ],
+        "title": "苹果坏了",
+        "slide_number": 80,
+        "image_count": 5
+      },
+      {
+        "artists": [
+          "电子果酱"
+        ],
+        "title": "干gàn",
+        "slide_number": 82,
+        "image_count": 3
+      },
+      {
+        "artists": [
+          "于浩睿"
+        ],
+        "title": "VULCA艺术评论展览平台",
+        "slide_number": 84,
+        "image_count": 2
+      },
+      {
+        "artists": [
+          "L.A.Suzie"
+        ],
+        "title": "Lauren Lee McCarthy and David Leonard",
+        "slide_number": 86,
+        "image_count": 2
+      },
+      {
+        "artists": [
+          "刘海天"
+        ],
+        "title": "3 x 70 x 365 = 76650",
+        "slide_number": 88,
+        "image_count": 2
+      },
+      {
+        "artists": [
+          "刘海天"
+        ],
+        "title": "3 x 70 x 365 = 76650",
+        "slide_number": 90,
+        "image_count": 2
+      }
+    ],
+    "广州美术学院": [
+      {
+        "artists": [
+          "洪泽榕"
+        ],
+        "title": "岭南道中",
+        "slide_number": 41,
+        "image_count": 1
+      },
+      {
+        "artists": [
+          "洪泽榕"
+        ],
+        "title": "岭南道中",
+        "slide_number": 44,
+        "image_count": 1
+      }
+    ]
+  },
+  "independent_artworks": []
+}

@@ -1,0 +1,287 @@
+{
+  "artworks": [
+    {
+      "id": "artwork-84",
+      "titleZh": "VULCA艺术评论展览平台",
+      "titleEn": "VULCA: AI Art Critique Exhibition Platform",
+      "year": 2025,
+      "imageUrl": "./assets/artworks/artwork-84-于浩睿/01.jpg",
+      "artist": "于浩睿 (Yu Haorui)",
+      "artistEn": "Yu Haorui",
+      "institution": "台湾师范大学",
+      "institutionEn": "National Taiwan Normal University",
+      "medium": "Interactive Web Platform",
+      "mediumZh": "互动网站平台",
+      "context": "An immersive digital platform exploring AI-generated art criticism through simulated dialogues between six historical art critics and AI artworks. VULCA uses knowledge bases and dialogue systems to create deep, multi-perspective conversations about contemporary AI art",
+      "contextZh": "一个沉浸式数字平台，通过模拟六位历史艺术评论家与AI艺术作品的对话，探索AI生成的艺术评论。VULCA使用知识库和对话系统创建关于当代AI艺术的深入、多视角对话。",
+      "url": "https://vulcaart.art",
+      "primaryImageId": "img-84-1",
+      "images": [
+        {
+          "id": "img-84-1",
+          "url": "./assets/artworks/artwork-84-于浩睿/01.jpg",
+          "sequence": 1,
+          "titleZh": "VULCA平台界面",
+          "titleEn": "VULCA Platform Interface"
+        },
+        {
+          "id": "img-84-2",
+          "url": "./assets/artworks/artwork-84-于浩睿/02.jpg",
+          "sequence": 2,
+          "titleZh": "评论家对话系统",
+          "titleEn": "Critic Dialogue System"
+        }
+      ]
+    },
+    {
+      "id": "artwork-80",
+      "titleZh": "苹果坏了",
+      "titleEn": "The Apple Is Broken",
+      "year": 2024,
+      "imageUrl": "./assets/artworks/artwork-80-王歆童黄恩琦/01.png",
+      "artist": "王歆童、黄恩琦 (Wang Xintong, Huang Enqi)",
+      "artistEn": "Wang Xintong, Huang Enqi",
+      "institution": "台湾师范大学",
+      "institutionEn": "National Taiwan Normal University",
+      "medium": "AI-driven kinetic installation with mechanical arm",
+      "mediumZh": "AI驱动的机械装置艺术",
+      "context": "An installation using AI and computer vision to simulate the temporal decay of an apple. The work explores surveillance, entropy, and the relationship between observation and change.",
+      "contextZh": "使用AI和计算机视觉模拟苹果腐烂过程的装置作品。作品探索监视、熵与观察和变化之间的关系。当观众离开时，人工智能会根据未来的变化不断更新，但只有过去的图像数据可以与观众互动，展示了数字化对时间和存在的重新定义。",
+      "primaryImageId": "img-80-1",
+      "images": [
+        {
+          "id": "img-80-1",
+          "url": "./assets/artworks/artwork-80-王歆童黄恩琦/01.png",
+          "sequence": 1,
+          "titleZh": "装置全景",
+          "titleEn": "Installation Overview"
+        },
+        {
+          "id": "img-80-2",
+          "url": "./assets/artworks/artwork-80-王歆童黄恩琦/02.png",
+          "sequence": 2,
+          "titleZh": "机械装置细节",
+          "titleEn": "Mechanical Detail"
+        },
+        {
+          "id": "img-80-3",
+          "url": "./assets/artworks/artwork-80-王歆童黄恩琦/03.png",
+          "sequence": 3,
+          "titleZh": "AI视觉系统",
+          "titleEn": "AI Vision System"
+        },
+        {
+          "id": "img-80-4",
+          "url": "./assets/artworks/artwork-80-王歆童黄恩琦/04.png",
+          "sequence": 4,
+          "titleZh": "腐烂过程记录",
+          "titleEn": "Decay Process Documentation"
+        },
+        {
+          "id": "img-80-5",
+          "url": "./assets/artworks/artwork-80-王歆童黄恩琦/05.png",
+          "sequence": 5,
+          "titleZh": "观众互动场景",
+          "titleEn": "Audience Interaction"
+        }
+      ]
+    },
+    {
+      "id": "artwork-82",
+      "titleZh": "干gàn",
+      "titleEn": "Gàn (The Game)",
+      "year": 2024,
+      "imageUrl": "./assets/artworks/artwork-82-电子果酱/01.png",
+      "artist": "电子果酱 (Electronic Jam)",
+      "artistEn": "Electronic Jam",
+      "institution": "台湾师范大学",
+      "institutionEn": "National Taiwan Normal University",
+      "medium": "AI-powered interactive game installation",
+      "mediumZh": "AI驱动的交互游戏装置",
+      "context": "Using adversarial AI (GAN) to create an interactive rock-paper-scissors game where the machine arm plays against humans. The work explores the absurdity of games dominated by AI and the transformation of playfulness into mechanical repetition.",
+      "contextZh": "使用对抗性AI（GAN）创建一个互动的剪刀石头布游戏，机械臂与人类对战。通过摄像头识别和OpenCV+Google Mediapipe手势识别，程序将玩家和机械臂的动作转换为游戏指令。作品探讨执着于必胜的AI如何让游戏失去乐趣，机械地重复变成荒诞的对抗循环，反思人工智能在游戏化社会中改变人类行为的方式。",
+      "primaryImageId": "img-82-1",
+      "images": [
+        {
+          "id": "img-82-1",
+          "url": "./assets/artworks/artwork-82-电子果酱/01.png",
+          "sequence": 1,
+          "titleZh": "游戏装置全景",
+          "titleEn": "Game Installation Overview"
+        },
+        {
+          "id": "img-82-2",
+          "url": "./assets/artworks/artwork-82-电子果酱/02.jpg",
+          "sequence": 2,
+          "titleZh": "机械臂对战系统",
+          "titleEn": "Robotic Arm Combat System"
+        },
+        {
+          "id": "img-82-3",
+          "url": "./assets/artworks/artwork-82-电子果酱/03.png",
+          "sequence": 3,
+          "titleZh": "手势识别界面",
+          "titleEn": "Gesture Recognition Interface"
+        }
+      ]
+    },
+    {
+      "id": "artwork-65",
+      "titleZh": "黄仁勋，这就是你想要的世界吗？",
+      "titleEn": "Jensen Huang, Is This the World You Want?",
+      "year": 2024,
+      "imageUrl": "./assets/artworks/artwork-65-李國嘉/01.png",
+      "artist": "李國嘉 (Lee Kuo-Chia)",
+      "artistEn": "Lee Kuo-Chia",
+      "institution": "台湾艺术大学",
+      "institutionEn": "National Taiwan University of Arts",
+      "medium": "Video installation",
+      "mediumZh": "影像装置",
+      "context": "A critical video work questioning NVIDIA CEO Jensen Huang and the AI-driven future. The work examines power structures, technological determinism, and the societal impact of AI development.",
+      "contextZh": "一件批判性影像作品，质疑英伟达CEO黄仁勋和AI驱动的未来。作品审视权力结构、技术决定论以及AI发展对社会的影响。包含两部分影像资料，深入探讨AI产业巨头塑造的世界愿景。",
+      "videoUrls": [
+        "https://www.youtube.com/watch?v=wS6iByDk8Z4",
+        "https://www.youtube.com/watch?v=eJeF2KaM7Dc"
+      ],
+      "primaryImageId": "img-65-1",
+      "images": [
+        {
+          "id": "img-65-1",
+          "url": "./assets/artworks/artwork-65-李國嘉/01.png",
+          "sequence": 1,
+          "titleZh": "影像装置场景一",
+          "titleEn": "Video Installation Scene 1"
+        },
+        {
+          "id": "img-65-2",
+          "url": "./assets/artworks/artwork-65-李國嘉/02.png",
+          "sequence": 2,
+          "titleZh": "影像装置场景二",
+          "titleEn": "Video Installation Scene 2"
+        },
+        {
+          "id": "img-65-3",
+          "url": "./assets/artworks/artwork-65-李國嘉/03.png",
+          "sequence": 3,
+          "titleZh": "影像装置场景三",
+          "titleEn": "Video Installation Scene 3"
+        }
+      ]
+    },
+    {
+      "id": "artwork-60",
+      "titleZh": "数息生长",
+      "titleEn": "Digital Breath Growth",
+      "year": 2024,
+      "imageUrl": "./assets/artworks/artwork-60-程佳瑜/01.png",
+      "artist": "程佳瑜 (Cheng Jiayu)",
+      "artistEn": "Cheng Jiayu",
+      "institution": "湖北美术学院",
+      "institutionEn": "Hubei Institute of Fine Arts",
+      "medium": "Algorithmic generative art",
+      "mediumZh": "算法生成艺术",
+      "context": "Generative artwork exploring algorithmic growth patterns and the relationship between digital systems and organic life. The work uses computational processes to create evolving visual forms that mimic natural growth.",
+      "contextZh": "探索算法生长模式以及数字系统与有机生命关系的生成艺术作品。作品使用计算过程创建模拟自然生长的演化视觉形式。",
+      "primaryImageId": "img-60-1",
+      "images": [
+        {
+          "id": "img-60-1",
+          "url": "./assets/artworks/artwork-60-程佳瑜/01.png",
+          "sequence": 1,
+          "titleZh": "算法生成图像一",
+          "titleEn": "Algorithmic Generation 1"
+        },
+        {
+          "id": "img-60-2",
+          "url": "./assets/artworks/artwork-60-程佳瑜/02.png",
+          "sequence": 2,
+          "titleZh": "算法生成图像二",
+          "titleEn": "Algorithmic Generation 2"
+        },
+        {
+          "id": "img-60-3",
+          "url": "./assets/artworks/artwork-60-程佳瑜/03.png",
+          "sequence": 3,
+          "titleZh": "算法生成图像三",
+          "titleEn": "Algorithmic Generation 3"
+        },
+        {
+          "id": "img-60-4",
+          "url": "./assets/artworks/artwork-60-程佳瑜/04.png",
+          "sequence": 4,
+          "titleZh": "算法生成图像四",
+          "titleEn": "Algorithmic Generation 4"
+        }
+      ]
+    }
+  ],
+  "personas": [
+    {
+      "id": "su-shi",
+      "nameZh": "苏轼",
+      "nameEn": "Su Shi",
+      "period": "北宋文人 (1037-1101)",
+      "era": "Northern Song Dynasty",
+      "bio": "Northern Song literati master who championed 'literati painting' and elevated personal expression above technical virtuosity. Su Shi's philosophy held that art's highest purpose lay in conveying spiritual depth rather than visual replication.",
+      "bioZh": "北宋文人画理论的奠基者，倡导\"文人画\"理念，强调个人表达和内在意境超越技术精湛性。提出\"诗中有画，画中有诗\"的著名论断。",
+      "color": "#B85C3C",
+      "bias": "Aesthetic idealism, philosophical depth"
+    },
+    {
+      "id": "guo-xi",
+      "nameZh": "郭熙",
+      "nameEn": "Guo Xi",
+      "period": "北宋山水画家 (1020-1100)",
+      "era": "Northern Song Dynasty",
+      "bio": "Northern Song landscape master who systematized landscape painting principles. His 'Three Distances' theory demonstrated how compositional structure creates spatial illusion and philosophical meaning.",
+      "bioZh": "北宋山水画大师，将山水画原则系统化。他的\"三远法\"理论展示了构图结构如何创造空间幻觉和哲学意义。",
+      "color": "#2D5F4F",
+      "bias": "Formal composition, technical mastery"
+    },
+    {
+      "id": "john-ruskin",
+      "nameZh": "约翰·罗斯金",
+      "nameEn": "John Ruskin",
+      "period": "维多利亚时期评论家 (1819-1900)",
+      "era": "Victorian England",
+      "bio": "Victorian art critic who insisted that art's value was inseparable from moral and social truth. His advocacy for honesty in art and social justice shaped generations of aesthetic discourse.",
+      "bioZh": "维多利亚时期艺术评论家，坚持艺术价值与道德和社会真理不可分割。他对艺术诚实和社会正义的倡导塑造了几代人的美学话语。",
+      "color": "#8B4513",
+      "bias": "Moral truth, social responsibility"
+    },
+    {
+      "id": "mama-zola",
+      "nameZh": "佐拉妈妈",
+      "nameEn": "Mama Zola",
+      "period": "西非Griot传统 (2000+ years)",
+      "era": "West African Griot Tradition",
+      "bio": "West African griot (storyteller-historian) representing communal aesthetics and participatory art. Mama Zola's philosophy centers on Ubuntu (\"I am because we are\") and call-and-response traditions.",
+      "bioZh": "西非格里奥（说书人-历史学家），代表社区美学和参与式艺术。佐拉妈妈的哲学以乌班图（\"我在故我们在\"）和呼应传统为中心。",
+      "color": "#D4A574",
+      "bias": "Community, oral tradition, decolonial perspective"
+    },
+    {
+      "id": "professor-petrova",
+      "nameZh": "彼得罗娃教授",
+      "nameEn": "Professor Petrova",
+      "period": "俄国形式主义 (1910s-1930s)",
+      "era": "Russian Formalism",
+      "bio": "Russian Formalist critic focusing on 'defamiliarization' (остранение) and structural analysis. Professor Petrova examines how art makes the familiar strange through formal devices.",
+      "bioZh": "俄国形式主义评论家，专注于\"陌生化\"和结构分析。彼得罗娃教授研究艺术如何通过形式设备使熟悉的事物变得陌生。",
+      "color": "#696969",
+      "bias": "Formalism, structural analysis, technique"
+    },
+    {
+      "id": "ai-ethics-reviewer",
+      "nameZh": "AI伦理审查员",
+      "nameEn": "AI Ethics Reviewer",
+      "period": "当代科技伦理 (2018-present)",
+      "era": "Contemporary AI Ethics",
+      "bio": "Contemporary AI ethics scholar examining power, bias, and justice in algorithmic systems. The AI Ethics Reviewer analyzes how AI art intersects with surveillance capitalism and social control.",
+      "bioZh": "当代AI伦理学者，研究算法系统中的权力、偏见和正义。AI伦理审查员分析AI艺术如何与监视资本主义和社会控制交织。",
+      "color": "#4A90E2",
+      "bias": "Algorithmic justice, power critique, systemic analysis"
+    }
+  ],
+  "critiques": []
+}

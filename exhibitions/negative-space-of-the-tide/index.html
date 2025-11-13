@@ -329,7 +329,30 @@
   <script src="/js/components/unified-navigation.js?v=2.0"></script>
 
   <!-- Core Data & Configuration -->
-  <script src="/js/data.js?v=9" charset="utf-8"></script>
+  <!-- NEW: Load exhibition data from data.json (Multi-Exhibition Platform) -->
+  <script src="./js/data-loader.js?v=1" charset="utf-8"></script>
+
+  <!-- Wait for data to be ready before initializing other modules -->
+  <script>
+    // Ensure all initialization code waits for data to be loaded
+    window.VULCA_DATA_READY = false;
+    document.addEventListener('vulca-data-ready', function(e) {
+      console.log('[Init] VULCA_DATA ready, initializing modules...');
+      window.VULCA_DATA_READY = true;
+
+      // Initialize all modules that depend on VULCA_DATA
+      if (window.GalleryInit && typeof window.GalleryInit.init === 'function') {
+        window.GalleryInit.init();
+      }
+      if (window.carousel && typeof window.carousel.init === 'function') {
+        window.carousel.init();
+      }
+      if (window.renderGalleryHero && typeof window.renderGalleryHero === 'function') {
+        window.renderGalleryHero();
+      }
+    });
+  </script>
+
   <script src="/js/plan.js?v=2" charset="utf-8"></script>
   <script src="/js/dataIndexes.js?v=1" charset="utf-8"></script>
 
@@ -344,13 +367,13 @@
   <script src="/js/scroll-reveal.js?v=1"></script>
 
   <!-- Gallery Initialization (Phase 1) -->
-  <script src="/js/gallery-init.js?v=3"></script>
+  <script src="/js/gallery-init.js?v=5"></script>
 
   <!-- Carousel Controller (NEW - Click-based Navigation) -->
-  <script src="/js/carousel.js?v=2"></script>
+  <script src="/js/carousel.js?v=3"></script>
 
   <!-- Gallery Hero Renderer (NEW - Homepage Display) -->
-  <script src="/js/gallery-hero.js?v=10"></script>
+  <script src="/js/gallery-hero.js?v=11"></script>
 
   <!-- Auto-Play Immersive Experience (DISABLED - Replaced by click-based carousel) -->
   <!-- <script src="/js/autoplay.js?v=1"></script> -->

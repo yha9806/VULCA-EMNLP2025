@@ -1,0 +1,2868 @@
+/**
+ * VULCA Art Exhibition Data
+ * Version 3.1.0 - Multi-Image Artwork Series System
+ *
+ * Complete dataset for 4 artworks × 6 personas = 24 critiques
+ * Now supports multiple images per artwork with category taxonomy
+ */
+
+// Image Category Definitions
+window.IMAGE_CATEGORIES = {
+  SKETCH: "sketch",           // Conceptual drawings, preliminary studies
+  PROCESS: "process",         // Work-in-progress, creation documentation
+  INSTALLATION: "installation", // Exhibition setup, environmental context
+  DETAIL: "detail",           // Close-up views, technical details
+  FINAL: "final",             // Completed artwork, final presentation
+  CONTEXT: "context"          // Supplementary materials, artist statements
+};
+
+window.VULCA_DATA = {
+  // ==================== ARTWORKS ====================
+  artworks: [
+
+    {
+      id: "artwork-1",
+      titleZh: "记忆（绘画操作单元：第二代）",
+      titleEn: "Memory (Painting Operation Unit: Second Generation)",
+      year: 2022,
+      imageUrl: "/assets/artworks/artwork-1/01.png",  // Legacy: maintained for backward compatibility
+      artist: "Sougwen Chung",
+      context: "Contemporary digital-robotic hybrid artwork exploring memory and artistic agency",
+
+      // NEW: Multi-image support
+      primaryImageId: "img-1-5",  // Updated to point to final drawing
+      images: [
+        {
+          id: "img-1-1",
+          url: "/assets/artworks/artwork-1/01-concept-sketch.jpg",
+          category: IMAGE_CATEGORIES.SKETCH,
+          sequence: 1,
+          titleZh: "初步概念草图",
+          titleEn: "Initial Concept Sketch",
+          caption: "Early conceptual sketches exploring the visual language of machine-generated brushstrokes and the aesthetic possibilities of robotic drawing systems.",
+          metadata: {
+            year: 2021,
+            dimensions: "1200x800",
+            medium: "Pencil and ink on paper"
+          }
+        },
+        {
+          id: "img-1-2",
+          url: "/assets/artworks/artwork-1/02-training-process.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "机器学习训练过程",
+          titleEn: "Machine Learning Training Process",
+          caption: "Documentation of the machine learning training phase, where the robotic arm learns to replicate and reinterpret human brushstroke patterns through iterative feedback loops.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Digital documentation"
+          }
+        },
+        {
+          id: "img-1-3",
+          url: "/assets/artworks/artwork-1/03-human-machine-collaboration.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 3,
+          titleZh: "人机协作绘画现场",
+          titleEn: "Human-Machine Collaborative Drawing",
+          caption: "The artist and robotic arm drawing simultaneously, showcasing the real-time dialogue between human intention and machine interpretation in the creative process.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Performance documentation"
+          }
+        },
+        {
+          id: "img-1-4",
+          url: "/assets/artworks/artwork-1/04-brushstroke-detail.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 4,
+          titleZh: "笔触细节特写",
+          titleEn: "Brushstroke Detail Close-up",
+          caption: "Close-up view revealing the intricate interplay between fluid organic lines and precise mechanical movements, highlighting the unique aesthetic qualities of machine-generated brushwork.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Photography"
+          }
+        },
+        {
+          id: "img-1-5",
+          url: "/assets/artworks/artwork-1/05-final-drawing.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "最终作品",
+          titleEn: "Final Drawing",
+          caption: "The completed collaborative drawing, result of human-machine dialogue exploring memory and artistic agency through robotic drawing systems.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Mixed media on paper"
+          }
+        },
+        {
+          id: "img-1-6",
+          url: "/assets/artworks/artwork-1/06-installation-view.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 6,
+          titleZh: "展览现场",
+          titleEn: "Installation View",
+          caption: "Exhibition installation view showing the artwork displayed alongside the robotic drawing apparatus, contextualizing the work within its technological and conceptual framework.",
+          metadata: {
+            year: 2022,
+            dimensions: "1200x800",
+            medium: "Installation photography"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-2",
+      titleZh: "苹果坏了",
+      titleEn: "The Apple Spoiled",
+      year: 2024,
+      imageUrl: "/assets/artworks/artwork-2/01.jpg",  // Legacy: maintained for backward compatibility
+      artist: "王歆童、黄恩琦 (Wang Xintong, Huang Enqi)",
+      context: "An AI-powered interactive installation where artificial intelligence continuously describes an apple in front of it, generating text that simulates the apple's state over time. During the exhibition, the apple is a constantly changing assemblage of events. When the first spot forms, AI may not yet perceive the change, still describing a fresh apple. But when fragmented descriptions begin mixing in adjectives about 'decay', the change has already occurred. In this process, observation and language can never catch up with the event itself. The implicit 'decay' among the apple, linguistic description, and observer serves as a monument revealing the misalignment between human cognition, machine cognition, and the real world.",
+
+      // Multi-image support
+      primaryImageId: "img-2-1",
+      images: [
+        {
+          id: "img-2-1",
+          url: "/assets/artworks/artwork-2/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "装置全景：AI文本生成系统",
+          titleEn: "Installation View: AI Text Generation System",
+          caption: "The complete installation setup showing the printer continuously generating AI descriptions of the apple, creating a physical stream of language attempting to capture the ephemeral moment of decay.",
+          metadata: {
+            year: 2024,
+            dimensions: "1280x1312",
+            medium: "Interactive installation photography"
+          }
+        },
+        {
+          id: "img-2-2",
+          url: "/assets/artworks/artwork-2/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "初始状态：新鲜苹果",
+          titleEn: "Initial State: Fresh Apple",
+          caption: "The apple at the beginning of the exhibition period, pristine and unblemished. The AI confidently describes its freshness while time begins its inexorable work.",
+          metadata: {
+            year: 2024,
+            dimensions: "1280x1312",
+            medium: "Time-lapse documentation"
+          }
+        },
+        {
+          id: "img-2-3",
+          url: "/assets/artworks/artwork-2/03.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 3,
+          titleZh: "变化开始：第一个斑点",
+          titleEn: "Change Begins: The First Spot",
+          caption: "The critical moment when the first brown spot appears on the apple's surface. The AI's descriptions still lag behind the visible reality, revealing the temporal gap between observation and articulation.",
+          metadata: {
+            year: 2024,
+            dimensions: "1280x1312",
+            medium: "Time-lapse documentation"
+          }
+        },
+        {
+          id: "img-2-4",
+          url: "/assets/artworks/artwork-2/04.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 4,
+          titleZh: "AI文本输出细节",
+          titleEn: "AI Text Output Detail",
+          caption: "Close-up view of the continuously generated AI descriptions, showing the moment when words like 'spoiled', 'decaying', and 'brown' begin to appear in the stream of text, marking the machine's delayed recognition of change.",
+          metadata: {
+            year: 2024,
+            dimensions: "1280x1312",
+            medium: "Text documentation photography"
+          }
+        },
+        {
+          id: "img-2-5",
+          url: "/assets/artworks/artwork-2/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "终末状态：腐烂的纪念碑",
+          titleEn: "Final State: Monument of Decay",
+          caption: "The apple in its fully decomposed state, surrounded by meters of AI-generated text. The accumulation of descriptions becomes a physical monument to the impossibility of language capturing the living moment of transformation.",
+          metadata: {
+            year: 2024,
+            dimensions: "1280x1312",
+            medium: "Installation photography"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-3",
+      titleZh: "干",
+      titleEn: "gàn",
+      year: 2024,
+      imageUrl: "/assets/artworks/artwork-3/01.jpg",  // Legacy: maintained for backward compatibility
+      artist: "电子果酱 (Electronic Jam)",
+      context: "An interactive kinetic installation exploring GAN (Generative Adversarial Networks) through a rock-paper-scissors game played by two AI-driven robotic hands wearing work gloves. Using Arduino UNO, OpenCV, and Google Mediapipe AI programs trained on human hand data, the mechanical hands are misidentified as human hands, creating an endless adversarial loop. This work examines the alienation of human experience through intelligent technology and how AI transforms our understanding of ourselves and the world.",
+
+      // Multi-image support
+      primaryImageId: "img-3-1",
+      images: [
+        {
+          id: "img-3-1",
+          url: "/assets/artworks/artwork-3/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "装置主视图：AI视觉识别界面",
+          titleEn: "Main Installation View: AI Visual Recognition Interface",
+          caption: "The installation setup showing the computer screen displaying real-time AI hand gesture recognition. The interface reveals how the Mediapipe AI model identifies 'rock', 'paper', and 'scissors' gestures, trained on human hand data but now misidentifying mechanical hands as human.",
+          metadata: {
+            year: 2024,
+            dimensions: "1920x1080",
+            medium: "Interactive installation photography"
+          }
+        },
+        {
+          id: "img-3-2",
+          url: "/assets/artworks/artwork-3/02.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 2,
+          titleZh: "机械手特写：劳保手套细节",
+          titleEn: "Robotic Hand Close-up: Work Glove Detail",
+          caption: "Close-up view of the robotic hand wearing a work glove, the critical element that allows the AI to misrecognize machine as human. The glove transforms mechanical apparatus into 'human hand', revealing how AI relies on surface features rather than understanding essence.",
+          metadata: {
+            year: 2024,
+            dimensions: "1920x1080",
+            medium: "Detail photography"
+          }
+        },
+        {
+          id: "img-3-3",
+          url: "/assets/artworks/artwork-3/03.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 3,
+          titleZh: "对抗循环：无尽的博弈",
+          titleEn: "Adversarial Loop: The Endless Game",
+          caption: "Documentation of the perpetual rock-paper-scissors game between two AI-driven robotic hands. Each hand believes it is playing against a human, creating an absurd adversarial loop where machines engage in formerly human activity, stripped of its original playfulness and transformed into mechanical repetition.",
+          metadata: {
+            year: 2024,
+            dimensions: "1920x1080",
+            medium: "Performance documentation"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-4",
+      titleZh: "黃仁勳，這就是你想要的世界嗎？",
+      titleEn: "Jensen Huang, Is This the World You Want?",
+      year: 2024,
+      imageUrl: "/assets/artworks/artwork-4/01.jpg",  // Legacy: maintained for backward compatibility
+      artist: "李國嘉 (Li Guojia)",
+      context: "A video installation artwork by Li Guojia from Taiwan University of Arts. This critical piece questions the AI and technology landscape shaped by NVIDIA and its CEO Jensen Huang. The work explores the ethical and societal implications of rapid AI development. Video references: https://www.youtube.com/watch?v=wS6iByDk8Z4 and https://www.youtube.com/watch?v=eJeF2KaM7Dc",
+
+      // Multi-image support
+      primaryImageId: "img-4-1",
+      images: [
+        {
+          id: "img-4-1",
+          url: "/assets/artworks/artwork-4/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "装置全景：技术乌托邦的质疑",
+          titleEn: "Installation View: Questioning the Technological Utopia",
+          caption: "The immersive exhibition space bathed in blue light, featuring robotic installations and video projections. The cold technological aesthetic creates an atmosphere that questions whether this AI-driven future, championed by NVIDIA's Jensen Huang, is truly the world we desire.",
+          metadata: {
+            year: 2024,
+            dimensions: "1253x940",
+            medium: "Video installation photography"
+          }
+        },
+        {
+          id: "img-4-2",
+          url: "/assets/artworks/artwork-4/02.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 2,
+          titleZh: "机器人装置细节",
+          titleEn: "Robotic Installation Detail",
+          caption: "Close-up view of the robotic elements within the installation, symbolizing the automated systems and AI technologies that increasingly shape our daily lives. The mechanical precision contrasts with questions of human agency and ethical oversight in technological development.",
+          metadata: {
+            year: 2024,
+            dimensions: "1253x940",
+            medium: "Installation detail photography"
+          }
+        },
+        {
+          id: "img-4-3",
+          url: "/assets/artworks/artwork-4/03.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 3,
+          titleZh: "视频投影：权力与技术的对话",
+          titleEn: "Video Projection: Dialogue Between Power and Technology",
+          caption: "The video projection component addressing the concentration of AI development power in the hands of tech giants like NVIDIA. The work challenges viewers to critically examine who controls AI's trajectory and whether current development paths serve collective human interests or corporate imperatives.",
+          metadata: {
+            year: 2024,
+            dimensions: "1253x940",
+            medium: "Video installation documentation"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-5",
+      titleZh: "数息生长",
+      titleEn: "数息生长",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-5/01.png",
+      artist: "程佳瑜 (Cheng Jiayu)",
+      context: "Artwork 5 by 程佳瑜 (Cheng Jiayu). More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-5-1",
+      images: [
+        {
+          id: "img-5-1",
+          url: "/assets/artworks/artwork-5/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "数息生长 - 图片 1",
+          titleEn: "数息生长 - Image 1",
+          caption: "Image 1 from the artwork "数息生长". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-5-2",
+          url: "/assets/artworks/artwork-5/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "数息生长 - 图片 2",
+          titleEn: "数息生长 - Image 2",
+          caption: "Image 2 from the artwork "数息生长". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-5-3",
+          url: "/assets/artworks/artwork-5/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "数息生长 - 图片 3",
+          titleEn: "数息生长 - Image 3",
+          caption: "Image 3 from the artwork "数息生长". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-5-4",
+          url: "/assets/artworks/artwork-5/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "数息生长 - 图片 4",
+          titleEn: "数息生长 - Image 4",
+          caption: "Image 4 from the artwork "数息生长". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-5-5",
+          url: "/assets/artworks/artwork-5/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "数息生长 - 图片 5",
+          titleEn: "数息生长 - Image 5",
+          caption: "Image 5 from the artwork "数息生长". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-6",
+      titleZh: "记忆潮汐--地平线系列",
+      titleEn: "记忆潮汐--地平线系列",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-6/01.png",
+      artist: "张凯飞",
+      context: "Artwork 6 by 张凯飞. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-6-1",
+      images: [
+        {
+          id: "img-6-1",
+          url: "/assets/artworks/artwork-6/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "记忆潮汐--地平线系列 - 图片 1",
+          titleEn: "记忆潮汐--地平线系列 - Image 1",
+          caption: "Image 1 from the artwork "记忆潮汐--地平线系列". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-6-2",
+          url: "/assets/artworks/artwork-6/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "记忆潮汐--地平线系列 - 图片 2",
+          titleEn: "记忆潮汐--地平线系列 - Image 2",
+          caption: "Image 2 from the artwork "记忆潮汐--地平线系列". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-7",
+      titleZh: "我永远在你的背后",
+      titleEn: "我永远在你的背后",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-7/01.png",
+      artist: "宋佳益",
+      context: "Artwork 7 by 宋佳益. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-7-1",
+      images: [
+        {
+          id: "img-7-1",
+          url: "/assets/artworks/artwork-7/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "我永远在你的背后 - 图片 1",
+          titleEn: "我永远在你的背后 - Image 1",
+          caption: "Image 1 from the artwork "我永远在你的背后". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-7-2",
+          url: "/assets/artworks/artwork-7/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "我永远在你的背后 - 图片 2",
+          titleEn: "我永远在你的背后 - Image 2",
+          caption: "Image 2 from the artwork "我永远在你的背后". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-7-3",
+          url: "/assets/artworks/artwork-7/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "我永远在你的背后 - 图片 3",
+          titleEn: "我永远在你的背后 - Image 3",
+          caption: "Image 3 from the artwork "我永远在你的背后". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-7-4",
+          url: "/assets/artworks/artwork-7/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "我永远在你的背后 - 图片 4",
+          titleEn: "我永远在你的背后 - Image 4",
+          caption: "Image 4 from the artwork "我永远在你的背后". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-7-5",
+          url: "/assets/artworks/artwork-7/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "我永远在你的背后 - 图片 5",
+          titleEn: "我永远在你的背后 - Image 5",
+          caption: "Image 5 from the artwork "我永远在你的背后". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-7-6",
+          url: "/assets/artworks/artwork-7/06.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 6,
+          titleZh: "我永远在你的背后 - 图片 6",
+          titleEn: "我永远在你的背后 - Image 6",
+          caption: "Image 6 from the artwork "我永远在你的背后". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-7-7",
+          url: "/assets/artworks/artwork-7/07.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 7,
+          titleZh: "我永远在你的背后 - 图片 7",
+          titleEn: "我永远在你的背后 - Image 7",
+          caption: "Image 7 from the artwork "我永远在你的背后". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-7-8",
+          url: "/assets/artworks/artwork-7/08.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 8,
+          titleZh: "我永远在你的背后 - 图片 8",
+          titleEn: "我永远在你的背后 - Image 8",
+          caption: "Image 8 from the artwork "我永远在你的背后". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-7-9",
+          url: "/assets/artworks/artwork-7/09.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 9,
+          titleZh: "我永远在你的背后 - 图片 9",
+          titleEn: "我永远在你的背后 - Image 9",
+          caption: "Image 9 from the artwork "我永远在你的背后". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-8",
+      titleZh: "烂柯人",
+      titleEn: "烂柯人",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-8/01.png",
+      artist: "李凯文、赵冠杰、陈号",
+      context: "Artwork 8 by 李凯文、赵冠杰、陈号. More details to be added."
+    },
+    {
+      id: "artwork-9",
+      titleZh: "源游",
+      titleEn: "源游",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-9/01.png",
+      artist: "叶君豪",
+      context: "Artwork 9 by 叶君豪. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-9-1",
+      images: [
+        {
+          id: "img-9-1",
+          url: "/assets/artworks/artwork-9/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "源游 - 图片 1",
+          titleEn: "源游 - Image 1",
+          caption: "Image 1 from the artwork "源游". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-9-2",
+          url: "/assets/artworks/artwork-9/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "源游 - 图片 2",
+          titleEn: "源游 - Image 2",
+          caption: "Image 2 from the artwork "源游". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-10",
+      titleZh: "源游",
+      titleEn: "源游",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-10/main.jpg",
+      artist: "陈筱薇",
+      context: "Artwork 10 by 陈筱薇. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-10-1",
+      images: [
+        {
+          id: "img-10-1",
+          url: "/assets/artworks/artwork-10/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "源游 - 图片 1",
+          titleEn: "源游 - Image 1",
+          caption: "Image 1 from the artwork "源游". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-10-2",
+          url: "/assets/artworks/artwork-10/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "源游 - 图片 2",
+          titleEn: "源游 - Image 2",
+          caption: "Image 2 from the artwork "源游". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-11",
+      titleZh: "时间的房子：被演算的族谱记忆",
+      titleEn: "时间的房子：被演算的族谱记忆",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-11/01.png",
+      artist: "陈玉萍",
+      context: "Artwork 11 by 陈玉萍. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-11-1",
+      images: [
+        {
+          id: "img-11-1",
+          url: "/assets/artworks/artwork-11/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "时间的房子：被演算的族谱记忆 - 图片 1",
+          titleEn: "时间的房子：被演算的族谱记忆 - Image 1",
+          caption: "Image 1 from the artwork "时间的房子：被演算的族谱记忆". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-11-2",
+          url: "/assets/artworks/artwork-11/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "时间的房子：被演算的族谱记忆 - 图片 2",
+          titleEn: "时间的房子：被演算的族谱记忆 - Image 2",
+          caption: "Image 2 from the artwork "时间的房子：被演算的族谱记忆". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-12",
+      titleZh: "格竹",
+      titleEn: "格竹",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-12/01.jpg",
+      artist: "张引",
+      context: "Artwork 12 by 张引. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-12-1",
+      images: [
+        {
+          id: "img-12-1",
+          url: "/assets/artworks/artwork-12/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "格竹 - 图片 1",
+          titleEn: "格竹 - Image 1",
+          caption: "Image 1 from the artwork "格竹". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-12-2",
+          url: "/assets/artworks/artwork-12/02.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 2,
+          titleZh: "格竹 - 图片 2",
+          titleEn: "格竹 - Image 2",
+          caption: "Image 2 from the artwork "格竹". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-12-3",
+          url: "/assets/artworks/artwork-12/03.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 3,
+          titleZh: "格竹 - 图片 3",
+          titleEn: "格竹 - Image 3",
+          caption: "Image 3 from the artwork "格竹". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-13",
+      titleZh: "逐日计划",
+      titleEn: "逐日计划",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-13/01.png",
+      artist: "王博",
+      context: "Artwork 13 by 王博. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-13-1",
+      images: [
+        {
+          id: "img-13-1",
+          url: "/assets/artworks/artwork-13/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "逐日计划 - 图片 1",
+          titleEn: "逐日计划 - Image 1",
+          caption: "Image 1 from the artwork "逐日计划". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-13-2",
+          url: "/assets/artworks/artwork-13/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "逐日计划 - 图片 2",
+          titleEn: "逐日计划 - Image 2",
+          caption: "Image 2 from the artwork "逐日计划". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-13-3",
+          url: "/assets/artworks/artwork-13/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "逐日计划 - 图片 3",
+          titleEn: "逐日计划 - Image 3",
+          caption: "Image 3 from the artwork "逐日计划". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-13-4",
+          url: "/assets/artworks/artwork-13/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "逐日计划 - 图片 4",
+          titleEn: "逐日计划 - Image 4",
+          caption: "Image 4 from the artwork "逐日计划". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-13-5",
+          url: "/assets/artworks/artwork-13/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "逐日计划 - 图片 5",
+          titleEn: "逐日计划 - Image 5",
+          caption: "Image 5 from the artwork "逐日计划". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-14",
+      titleZh: "X博物馆",
+      titleEn: "X博物馆",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-14/01.png",
+      artist: "魏云佳",
+      context: "Artwork 14 by 魏云佳. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-14-1",
+      images: [
+        {
+          id: "img-14-1",
+          url: "/assets/artworks/artwork-14/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "X博物馆 - 图片 1",
+          titleEn: "X博物馆 - Image 1",
+          caption: "Image 1 from the artwork "X博物馆". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-2",
+          url: "/assets/artworks/artwork-14/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "X博物馆 - 图片 2",
+          titleEn: "X博物馆 - Image 2",
+          caption: "Image 2 from the artwork "X博物馆". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-3",
+          url: "/assets/artworks/artwork-14/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "X博物馆 - 图片 3",
+          titleEn: "X博物馆 - Image 3",
+          caption: "Image 3 from the artwork "X博物馆". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-4",
+          url: "/assets/artworks/artwork-14/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "X博物馆 - 图片 4",
+          titleEn: "X博物馆 - Image 4",
+          caption: "Image 4 from the artwork "X博物馆". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-5",
+          url: "/assets/artworks/artwork-14/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "X博物馆 - 图片 5",
+          titleEn: "X博物馆 - Image 5",
+          caption: "Image 5 from the artwork "X博物馆". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-6",
+          url: "/assets/artworks/artwork-14/06.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 6,
+          titleZh: "X博物馆 - 图片 6",
+          titleEn: "X博物馆 - Image 6",
+          caption: "Image 6 from the artwork "X博物馆". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-7",
+          url: "/assets/artworks/artwork-14/07.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 7,
+          titleZh: "X博物馆 - 图片 7",
+          titleEn: "X博物馆 - Image 7",
+          caption: "Image 7 from the artwork "X博物馆". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-8",
+          url: "/assets/artworks/artwork-14/08.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 8,
+          titleZh: "X博物馆 - 图片 8",
+          titleEn: "X博物馆 - Image 8",
+          caption: "Image 8 from the artwork "X博物馆". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-9",
+          url: "/assets/artworks/artwork-14/09.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 9,
+          titleZh: "X博物馆 - 图片 9",
+          titleEn: "X博物馆 - Image 9",
+          caption: "Image 9 from the artwork "X博物馆". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-10",
+          url: "/assets/artworks/artwork-14/10.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 10,
+          titleZh: "X博物馆 - 图片 10",
+          titleEn: "X博物馆 - Image 10",
+          caption: "Image 10 from the artwork "X博物馆". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-11",
+          url: "/assets/artworks/artwork-14/11.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 11,
+          titleZh: "X博物馆 - 图片 11",
+          titleEn: "X博物馆 - Image 11",
+          caption: "Image 11 from the artwork "X博物馆". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-14-12",
+          url: "/assets/artworks/artwork-14/12.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 12,
+          titleZh: "X博物馆 - 图片 12",
+          titleEn: "X博物馆 - Image 12",
+          caption: "Image 12 from the artwork "X博物馆". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-15",
+      titleZh: "404词窟",
+      titleEn: "404词窟",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-15/01.jpg",
+      artist: "修楚贺，张萌萌",
+      context: "Artwork 15 by 修楚贺，张萌萌. More details to be added."
+    },
+    {
+      id: "artwork-16",
+      titleZh: "风从何处来·二",
+      titleEn: "风从何处来·二",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-16/01.jpg",
+      artist: "李芷暄、许佩霖",
+      context: "Artwork 16 by 李芷暄、许佩霖. More details to be added."
+    },
+    {
+      id: "artwork-17",
+      titleZh: "不稳定轮廓",
+      titleEn: "不稳定轮廓",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-17/01.png",
+      artist: "李鹏飞",
+      context: "Artwork 17 by 李鹏飞. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-17-1",
+      images: [
+        {
+          id: "img-17-1",
+          url: "/assets/artworks/artwork-17/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "不稳定轮廓 - 图片 1",
+          titleEn: "不稳定轮廓 - Image 1",
+          caption: "Image 1 from the artwork "不稳定轮廓". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-17-2",
+          url: "/assets/artworks/artwork-17/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "不稳定轮廓 - 图片 2",
+          titleEn: "不稳定轮廓 - Image 2",
+          caption: "Image 2 from the artwork "不稳定轮廓". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-18",
+      titleZh: "无序共识",
+      titleEn: "无序共识",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-18/01.jpg",
+      artist: "张瑞航",
+      context: "Artwork 18 by 张瑞航. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-18-1",
+      images: [
+        {
+          id: "img-18-1",
+          url: "/assets/artworks/artwork-18/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "无序共识 - 图片 1",
+          titleEn: "无序共识 - Image 1",
+          caption: "Image 1 from the artwork "无序共识". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-18-2",
+          url: "/assets/artworks/artwork-18/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "无序共识 - 图片 2",
+          titleEn: "无序共识 - Image 2",
+          caption: "Image 2 from the artwork "无序共识". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-18-3",
+          url: "/assets/artworks/artwork-18/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "无序共识 - 图片 3",
+          titleEn: "无序共识 - Image 3",
+          caption: "Image 3 from the artwork "无序共识". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-18-4",
+          url: "/assets/artworks/artwork-18/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "无序共识 - 图片 4",
+          titleEn: "无序共识 - Image 4",
+          caption: "Image 4 from the artwork "无序共识". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-18-5",
+          url: "/assets/artworks/artwork-18/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "无序共识 - 图片 5",
+          titleEn: "无序共识 - Image 5",
+          caption: "Image 5 from the artwork "无序共识". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-19",
+      titleZh: "非池中",
+      titleEn: "非池中",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-19/01.png",
+      artist: "王梓潘",
+      context: "Artwork 19 by 王梓潘. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-19-1",
+      images: [
+        {
+          id: "img-19-1",
+          url: "/assets/artworks/artwork-19/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "非池中 - 图片 1",
+          titleEn: "非池中 - Image 1",
+          caption: "Image 1 from the artwork "非池中". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-19-2",
+          url: "/assets/artworks/artwork-19/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "非池中 - 图片 2",
+          titleEn: "非池中 - Image 2",
+          caption: "Image 2 from the artwork "非池中". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-20",
+      titleZh: "环形虚无",
+      titleEn: "环形虚无",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-20/01.png",
+      artist: "杨锋",
+      context: "Artwork 20 by 杨锋. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-20-1",
+      images: [
+        {
+          id: "img-20-1",
+          url: "/assets/artworks/artwork-20/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "环形虚无 - 图片 1",
+          titleEn: "环形虚无 - Image 1",
+          caption: "Image 1 from the artwork "环形虚无". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-20-2",
+          url: "/assets/artworks/artwork-20/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "环形虚无 - 图片 2",
+          titleEn: "环形虚无 - Image 2",
+          caption: "Image 2 from the artwork "环形虚无". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-20-3",
+          url: "/assets/artworks/artwork-20/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "环形虚无 - 图片 3",
+          titleEn: "环形虚无 - Image 3",
+          caption: "Image 3 from the artwork "环形虚无". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-20-4",
+          url: "/assets/artworks/artwork-20/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "环形虚无 - 图片 4",
+          titleEn: "环形虚无 - Image 4",
+          caption: "Image 4 from the artwork "环形虚无". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-20-5",
+          url: "/assets/artworks/artwork-20/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "环形虚无 - 图片 5",
+          titleEn: "环形虚无 - Image 5",
+          caption: "Image 5 from the artwork "环形虚无". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-20-6",
+          url: "/assets/artworks/artwork-20/06.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 6,
+          titleZh: "环形虚无 - 图片 6",
+          titleEn: "环形虚无 - Image 6",
+          caption: "Image 6 from the artwork "环形虚无". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-20-7",
+          url: "/assets/artworks/artwork-20/07.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 7,
+          titleZh: "环形虚无 - 图片 7",
+          titleEn: "环形虚无 - Image 7",
+          caption: "Image 7 from the artwork "环形虚无". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-20-8",
+          url: "/assets/artworks/artwork-20/08.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 8,
+          titleZh: "环形虚无 - 图片 8",
+          titleEn: "环形虚无 - Image 8",
+          caption: "Image 8 from the artwork "环形虚无". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-21",
+      titleZh: "Upload",
+      titleEn: "Upload",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-21/01.jpg",
+      artist: "李索、张恺麟",
+      context: "Artwork 21 by 李索、张恺麟. More details to be added."
+    },
+    {
+      id: "artwork-22",
+      titleZh: "岭南道中",
+      titleEn: "岭南道中",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-22/01.png",
+      artist: "洪泽榕",
+      context: "Artwork 22 by 洪泽榕. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-22-1",
+      images: [
+        {
+          id: "img-22-1",
+          url: "/assets/artworks/artwork-22/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "岭南道中 - 图片 1",
+          titleEn: "岭南道中 - Image 1",
+          caption: "Image 1 from the artwork "岭南道中". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-22-2",
+          url: "/assets/artworks/artwork-22/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "岭南道中 - 图片 2",
+          titleEn: "岭南道中 - Image 2",
+          caption: "Image 2 from the artwork "岭南道中". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-23",
+      titleZh: "岭南道中",
+      titleEn: "岭南道中",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-23/main.jpg",
+      artist: "洪泽榕",
+      context: "Artwork 23 by 洪泽榕. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-23-1",
+      images: [
+        {
+          id: "img-23-1",
+          url: "/assets/artworks/artwork-23/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "岭南道中 - 图片 1",
+          titleEn: "岭南道中 - Image 1",
+          caption: "Image 1 from the artwork "岭南道中". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-23-2",
+          url: "/assets/artworks/artwork-23/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "岭南道中 - 图片 2",
+          titleEn: "岭南道中 - Image 2",
+          caption: "Image 2 from the artwork "岭南道中". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-24",
+      titleZh: "归原.共生",
+      titleEn: "归原.共生",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-24/01.png",
+      artist: "刘铁源",
+      context: "Artwork 24 by 刘铁源. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-24-1",
+      images: [
+        {
+          id: "img-24-1",
+          url: "/assets/artworks/artwork-24/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "归原.共生 - 图片 1",
+          titleEn: "归原.共生 - Image 1",
+          caption: "Image 1 from the artwork "归原.共生". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-24-2",
+          url: "/assets/artworks/artwork-24/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "归原.共生 - 图片 2",
+          titleEn: "归原.共生 - Image 2",
+          caption: "Image 2 from the artwork "归原.共生". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-24-3",
+          url: "/assets/artworks/artwork-24/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "归原.共生 - 图片 3",
+          titleEn: "归原.共生 - Image 3",
+          caption: "Image 3 from the artwork "归原.共生". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-24-4",
+          url: "/assets/artworks/artwork-24/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "归原.共生 - 图片 4",
+          titleEn: "归原.共生 - Image 4",
+          caption: "Image 4 from the artwork "归原.共生". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-24-5",
+          url: "/assets/artworks/artwork-24/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "归原.共生 - 图片 5",
+          titleEn: "归原.共生 - Image 5",
+          caption: "Image 5 from the artwork "归原.共生". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-25",
+      titleZh: "溯元1号",
+      titleEn: "溯元1号",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-25/01.jpg",
+      artist: "郭雨欣",
+      context: "Artwork 25 by 郭雨欣. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-25-1",
+      images: [
+        {
+          id: "img-25-1",
+          url: "/assets/artworks/artwork-25/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "溯元1号 - 图片 1",
+          titleEn: "溯元1号 - Image 1",
+          caption: "Image 1 from the artwork "溯元1号". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-25-2",
+          url: "/assets/artworks/artwork-25/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "溯元1号 - 图片 2",
+          titleEn: "溯元1号 - Image 2",
+          caption: "Image 2 from the artwork "溯元1号". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-25-3",
+          url: "/assets/artworks/artwork-25/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "溯元1号 - 图片 3",
+          titleEn: "溯元1号 - Image 3",
+          caption: "Image 3 from the artwork "溯元1号". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-25-4",
+          url: "/assets/artworks/artwork-25/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "溯元1号 - 图片 4",
+          titleEn: "溯元1号 - Image 4",
+          caption: "Image 4 from the artwork "溯元1号". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-25-5",
+          url: "/assets/artworks/artwork-25/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "溯元1号 - 图片 5",
+          titleEn: "溯元1号 - Image 5",
+          caption: "Image 5 from the artwork "溯元1号". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-26",
+      titleZh: "辩白书",
+      titleEn: "辩白书",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-26/01.png",
+      artist: "吴振华",
+      context: "Artwork 26 by 吴振华. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-26-1",
+      images: [
+        {
+          id: "img-26-1",
+          url: "/assets/artworks/artwork-26/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "辩白书 - 图片 1",
+          titleEn: "辩白书 - Image 1",
+          caption: "Image 1 from the artwork "辩白书". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-26-2",
+          url: "/assets/artworks/artwork-26/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "辩白书 - 图片 2",
+          titleEn: "辩白书 - Image 2",
+          caption: "Image 2 from the artwork "辩白书". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-26-3",
+          url: "/assets/artworks/artwork-26/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "辩白书 - 图片 3",
+          titleEn: "辩白书 - Image 3",
+          caption: "Image 3 from the artwork "辩白书". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-26-4",
+          url: "/assets/artworks/artwork-26/04.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 4,
+          titleZh: "辩白书 - 图片 4",
+          titleEn: "辩白书 - Image 4",
+          caption: "Image 4 from the artwork "辩白书". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-27",
+      titleZh: "辩白书",
+      titleEn: "辩白书",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-27/main.jpg",
+      artist: "张苑婷",
+      context: "Artwork 27 by 张苑婷. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-27-1",
+      images: [
+        {
+          id: "img-27-1",
+          url: "/assets/artworks/artwork-27/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "辩白书 - 图片 1",
+          titleEn: "辩白书 - Image 1",
+          caption: "Image 1 from the artwork "辩白书". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-27-2",
+          url: "/assets/artworks/artwork-27/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "辩白书 - 图片 2",
+          titleEn: "辩白书 - Image 2",
+          caption: "Image 2 from the artwork "辩白书". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-27-3",
+          url: "/assets/artworks/artwork-27/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "辩白书 - 图片 3",
+          titleEn: "辩白书 - Image 3",
+          caption: "Image 3 from the artwork "辩白书". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-27-4",
+          url: "/assets/artworks/artwork-27/04.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 4,
+          titleZh: "辩白书 - 图片 4",
+          titleEn: "辩白书 - Image 4",
+          caption: "Image 4 from the artwork "辩白书". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-28",
+      titleZh: "举步维艰",
+      titleEn: "举步维艰",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-28/01.png",
+      artist: "刘坤",
+      context: "Artwork 28 by 刘坤. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-28-1",
+      images: [
+        {
+          id: "img-28-1",
+          url: "/assets/artworks/artwork-28/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "举步维艰 - 图片 1",
+          titleEn: "举步维艰 - Image 1",
+          caption: "Image 1 from the artwork "举步维艰". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-28-2",
+          url: "/assets/artworks/artwork-28/02.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 2,
+          titleZh: "举步维艰 - 图片 2",
+          titleEn: "举步维艰 - Image 2",
+          caption: "Image 2 from the artwork "举步维艰". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-28-3",
+          url: "/assets/artworks/artwork-28/03.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 3,
+          titleZh: "举步维艰 - 图片 3",
+          titleEn: "举步维艰 - Image 3",
+          caption: "Image 3 from the artwork "举步维艰". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-29",
+      titleZh: "双生界",
+      titleEn: "双生界",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-29/01.png",
+      artist: "向诗雨 陈晨 王思莹",
+      context: "Artwork 29 by 向诗雨 陈晨 王思莹. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-29-1",
+      images: [
+        {
+          id: "img-29-1",
+          url: "/assets/artworks/artwork-29/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "双生界 - 图片 1",
+          titleEn: "双生界 - Image 1",
+          caption: "Image 1 from the artwork "双生界". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-29-2",
+          url: "/assets/artworks/artwork-29/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "双生界 - 图片 2",
+          titleEn: "双生界 - Image 2",
+          caption: "Image 2 from the artwork "双生界". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-29-3",
+          url: "/assets/artworks/artwork-29/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "双生界 - 图片 3",
+          titleEn: "双生界 - Image 3",
+          caption: "Image 3 from the artwork "双生界". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-29-4",
+          url: "/assets/artworks/artwork-29/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "双生界 - 图片 4",
+          titleEn: "双生界 - Image 4",
+          caption: "Image 4 from the artwork "双生界". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-29-5",
+          url: "/assets/artworks/artwork-29/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "双生界 - 图片 5",
+          titleEn: "双生界 - Image 5",
+          caption: "Image 5 from the artwork "双生界". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-30",
+      titleZh: "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ",
+      titleEn: "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-30/01.png",
+      artist: "龍暐翔",
+      context: "Artwork 30 by 龍暐翔. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-30-1",
+      images: [
+        {
+          id: "img-30-1",
+          url: "/assets/artworks/artwork-30/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ - 图片 1",
+          titleEn: "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ - Image 1",
+          caption: "Image 1 from the artwork "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-30-2",
+          url: "/assets/artworks/artwork-30/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ - 图片 2",
+          titleEn: "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ - Image 2",
+          caption: "Image 2 from the artwork "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-31",
+      titleZh: "黑色1號",
+      titleEn: "黑色1號",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-31/01.png",
+      artist: "林書旭",
+      context: "Artwork 31 by 林書旭. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-31-1",
+      images: [
+        {
+          id: "img-31-1",
+          url: "/assets/artworks/artwork-31/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "黑色1號 - 图片 1",
+          titleEn: "黑色1號 - Image 1",
+          caption: "Image 1 from the artwork "黑色1號". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-31-2",
+          url: "/assets/artworks/artwork-31/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "黑色1號 - 图片 2",
+          titleEn: "黑色1號 - Image 2",
+          caption: "Image 2 from the artwork "黑色1號". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-31-3",
+          url: "/assets/artworks/artwork-31/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "黑色1號 - 图片 3",
+          titleEn: "黑色1號 - Image 3",
+          caption: "Image 3 from the artwork "黑色1號". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-31-4",
+          url: "/assets/artworks/artwork-31/04.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 4,
+          titleZh: "黑色1號 - 图片 4",
+          titleEn: "黑色1號 - Image 4",
+          caption: "Image 4 from the artwork "黑色1號". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-32",
+      titleZh: "密碼",
+      titleEn: "密碼",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-32/01.png",
+      artist: "鄭曉瓊",
+      context: "Artwork 32 by 鄭曉瓊. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-32-1",
+      images: [
+        {
+          id: "img-32-1",
+          url: "/assets/artworks/artwork-32/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "密碼 - 图片 1",
+          titleEn: "密碼 - Image 1",
+          caption: "Image 1 from the artwork "密碼". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-32-2",
+          url: "/assets/artworks/artwork-32/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "密碼 - 图片 2",
+          titleEn: "密碼 - Image 2",
+          caption: "Image 2 from the artwork "密碼". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-32-3",
+          url: "/assets/artworks/artwork-32/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "密碼 - 图片 3",
+          titleEn: "密碼 - Image 3",
+          caption: "Image 3 from the artwork "密碼". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-32-4",
+          url: "/assets/artworks/artwork-32/04.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 4,
+          titleZh: "密碼 - 图片 4",
+          titleEn: "密碼 - Image 4",
+          caption: "Image 4 from the artwork "密碼". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-33",
+      titleZh: "身體重構系列-鼻",
+      titleEn: "身體重構系列-鼻",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-33/01.png",
+      artist: "謝綺文",
+      context: "Artwork 33 by 謝綺文. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-33-1",
+      images: [
+        {
+          id: "img-33-1",
+          url: "/assets/artworks/artwork-33/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "身體重構系列-鼻 - 图片 1",
+          titleEn: "身體重構系列-鼻 - Image 1",
+          caption: "Image 1 from the artwork "身體重構系列-鼻". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-33-2",
+          url: "/assets/artworks/artwork-33/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "身體重構系列-鼻 - 图片 2",
+          titleEn: "身體重構系列-鼻 - Image 2",
+          caption: "Image 2 from the artwork "身體重構系列-鼻". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-34",
+      titleZh: "方城市",
+      titleEn: "方城市",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-34/01.png",
+      artist: "郭姸瑩",
+      context: "Artwork 34 by 郭姸瑩. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-34-1",
+      images: [
+        {
+          id: "img-34-1",
+          url: "/assets/artworks/artwork-34/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "方城市 - 图片 1",
+          titleEn: "方城市 - Image 1",
+          caption: "Image 1 from the artwork "方城市". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-34-2",
+          url: "/assets/artworks/artwork-34/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "方城市 - 图片 2",
+          titleEn: "方城市 - Image 2",
+          caption: "Image 2 from the artwork "方城市". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-35",
+      titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄",
+      titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-35/01.jpg",
+      artist: "陈之涵",
+      context: "Artwork 35 by 陈之涵. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-35-1",
+      images: [
+        {
+          id: "img-35-1",
+          url: "/assets/artworks/artwork-35/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 1",
+          titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 1",
+          caption: "Image 1 from the artwork "传统复原色纸行草册页镜框《容斋随笔摘抄". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-35-2",
+          url: "/assets/artworks/artwork-35/02.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 2,
+          titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 2",
+          titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 2",
+          caption: "Image 2 from the artwork "传统复原色纸行草册页镜框《容斋随笔摘抄". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-35-3",
+          url: "/assets/artworks/artwork-35/03.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 3,
+          titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 3",
+          titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 3",
+          caption: "Image 3 from the artwork "传统复原色纸行草册页镜框《容斋随笔摘抄". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-35-4",
+          url: "/assets/artworks/artwork-35/04.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 4,
+          titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 4",
+          titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 4",
+          caption: "Image 4 from the artwork "传统复原色纸行草册页镜框《容斋随笔摘抄". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-35-5",
+          url: "/assets/artworks/artwork-35/05.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 5,
+          titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 5",
+          titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 5",
+          caption: "Image 5 from the artwork "传统复原色纸行草册页镜框《容斋随笔摘抄". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-35-6",
+          url: "/assets/artworks/artwork-35/06.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 6,
+          titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 6",
+          titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 6",
+          caption: "Image 6 from the artwork "传统复原色纸行草册页镜框《容斋随笔摘抄". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-35-7",
+          url: "/assets/artworks/artwork-35/07.jpg",
+          category: IMAGE_CATEGORIES.PROCESS,
+          sequence: 7,
+          titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 7",
+          titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 7",
+          caption: "Image 7 from the artwork "传统复原色纸行草册页镜框《容斋随笔摘抄". This process view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-35-8",
+          url: "/assets/artworks/artwork-35/08.jpg",
+          category: IMAGE_CATEGORIES.DETAIL,
+          sequence: 8,
+          titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 8",
+          titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 8",
+          caption: "Image 8 from the artwork "传统复原色纸行草册页镜框《容斋随笔摘抄". This detail view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-35-9",
+          url: "/assets/artworks/artwork-35/09.jpg",
+          category: IMAGE_CATEGORIES.CONTEXT,
+          sequence: 9,
+          titleZh: "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 9",
+          titleEn: "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 9",
+          caption: "Image 9 from the artwork "传统复原色纸行草册页镜框《容斋随笔摘抄". This context view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-36",
+      titleZh: "Lauren Lee McCarthy and David Leonard",
+      titleEn: "Lauren Lee McCarthy and David Leonard",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-36/01.jpg",
+      artist: "L.A.Suzie",
+      context: "Artwork 36 by L.A.Suzie. More details to be added."
+    },
+    {
+      id: "artwork-37",
+      titleZh: "3 x 70 x 365 = 76650",
+      titleEn: "3 x 70 x 365 = 76650",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-37/01.png",
+      artist: "刘海天",
+      context: "Artwork 37 by 刘海天. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-37-1",
+      images: [
+        {
+          id: "img-37-1",
+          url: "/assets/artworks/artwork-37/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "3 x 70 x 365 = 76650 - 图片 1",
+          titleEn: "3 x 70 x 365 = 76650 - Image 1",
+          caption: "Image 1 from the artwork "3 x 70 x 365 = 76650". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-37-2",
+          url: "/assets/artworks/artwork-37/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "3 x 70 x 365 = 76650 - 图片 2",
+          titleEn: "3 x 70 x 365 = 76650 - Image 2",
+          caption: "Image 2 from the artwork "3 x 70 x 365 = 76650". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    },
+    {
+      id: "artwork-38",
+      titleZh: "3 x 70 x 365 = 76650",
+      titleEn: "3 x 70 x 365 = 76650",
+      year: 2023,
+      imageUrl: "/assets/artworks/artwork-38/main.jpg",
+      artist: "刘海天",
+      context: "Artwork 38 by 刘海天. More details to be added.",
+
+      // Multi-image support
+      primaryImageId: "img-38-1",
+      images: [
+        {
+          id: "img-38-1",
+          url: "/assets/artworks/artwork-38/01.jpg",
+          category: IMAGE_CATEGORIES.INSTALLATION,
+          sequence: 1,
+          titleZh: "3 x 70 x 365 = 76650 - 图片 1",
+          titleEn: "3 x 70 x 365 = 76650 - Image 1",
+          caption: "Image 1 from the artwork "3 x 70 x 365 = 76650". This installation view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        },
+        {
+          id: "img-38-2",
+          url: "/assets/artworks/artwork-38/02.jpg",
+          category: IMAGE_CATEGORIES.FINAL,
+          sequence: 2,
+          titleZh: "3 x 70 x 365 = 76650 - 图片 2",
+          titleEn: "3 x 70 x 365 = 76650 - Image 2",
+          caption: "Image 2 from the artwork "3 x 70 x 365 = 76650". This final view shows... [TO BE CUSTOMIZED]",
+          metadata: {
+            year: 2024,
+            dimensions: "TBD",
+            medium: "TBD"
+          }
+        }
+      ]
+    }
+  ],
+
+  // ==================== PERSONAS ====================
+  /**
+   * Persona data schema for art critic profiles
+   *
+   * Each persona represents a distinct critical voice with unique cultural,
+   * historical, and philosophical perspectives. Personas are used throughout
+   * the exhibition to generate AI-driven critiques of artworks.
+   *
+   * @typedef {Object} Persona
+   *
+   * @property {string} id
+   *   Unique identifier for the persona. Must be kebab-case (lowercase with hyphens).
+   *   Used as DOM data attribute and internal reference key.
+   *   ⚠ MUST be kebab-case (lowercase, hyphens only, no spaces or capitals)
+   *   ✅ Valid: "su-shi", "john-ruskin", "bell-hooks"
+   *   ❌ Invalid: "Su Shi", "John_Ruskin", "BellHooks"
+   *
+   * @property {string} nameZh
+   *   Chinese display name. Used in UI badges and Chinese-language context.
+   *   Examples: "苏轼", "约翰·罗斯金", "贝尔·胡克斯"
+   *
+   * @property {string} nameEn
+   *   English display name. Used in UI badges and English-language context.
+   *   Examples: "Su Shi", "John Ruskin", "bell hooks"
+   *
+   * @property {string} period
+   *   Time period or role description in Chinese. Provides historical/cultural context.
+   *   Format: "文化背景 (生卒年份)" or "角色描述"
+   *   Examples: "北宋文人 (1037-1101)", "维多利亚时期评论家 (1819-1900)", "当代"
+   *
+   * @property {string} era
+   *   Era classification in English. Used for categorization and filtering.
+   *   Examples: "Northern Song Dynasty", "Victorian England", "Contemporary American"
+   *
+   * @property {string} bio
+   *   Full biography in English (~300-500 words). Describes the persona's critical
+   *   philosophy, historical context, and unique perspective. Should be detailed
+   *   enough to guide AI critique generation.
+   *   💡 Aim for 300-500 words (2-3 paragraphs). Too short lacks depth;
+   *   too long may overwhelm UI display.
+   *
+   * @property {string} color
+   *   Hex color code for visual identity. Used for badge borders, chart colors,
+   *   and UI accents.
+   *   ⚠ MUST be 6-digit hex format with # prefix
+   *   ✅ Valid: "#B85C3C", "#6B4C8A", "#FFFFFF"
+   *   ❌ Invalid: "red", "rgb(184, 92, 60)", "#B8C" (too short)
+   *
+   * @property {string} bias
+   *   Short description of critical perspective/bias (~10-20 words).
+   *   Summarizes the lens through which this persona views art.
+   *   Examples: "Aesthetic idealism, personal expression", "Moral aesthetics, social responsibility"
+   *
+   * === HOW TO ADD A NEW PERSONA ===
+   *
+   * Follow these steps to add a new art critic to the exhibition:
+   *
+   * 1. Open this file (js/data.js) in a text editor
+   *
+   * 2. Scroll to the "personas:" array below
+   *
+   * 3. Add your new persona object at the END of the array (before the closing "]")
+   *    - Copy an existing persona as a template
+   *    - Update all 8 fields (id, nameZh, nameEn, period, era, bio, color, bias)
+   *    - Follow the @typedef Persona schema documented above
+   *
+   * 4. Choose a unique color hex code (e.g., #A73E5C)
+   *    - Check existing personas to avoid duplicate colors
+   *    - Use color picker tool: https://www.google.com/search?q=color+picker
+   *
+   * 5. Save the file (Ctrl+S / Cmd+S)
+   *
+   * 6. Add corresponding critiques for this persona in the "critiques:" array
+   *    - You need one critique per artwork (4 artworks = 4 critique objects)
+   *    - Each critique should have: artworkId, personaId, textZh, textEn, rpait scores
+   *
+   * 7. Clear your browser cache:
+   *    - Chrome: Ctrl+Shift+Delete → Check "Cached images" → Clear data
+   *    - Firefox: Ctrl+Shift+Delete → Check "Cache" → Clear Now
+   *    - Safari: Cmd+Option+E
+   *
+   * 8. Refresh the page (Ctrl+R / Cmd+R) - the new persona badge should appear!
+   *
+   * ⚠ NO HTML editing required - badges generate automatically from this data!
+   * ⚠ NO CSS editing required - colors apply via data-persona attribute!
+   *
+   * If the badge doesn't appear, check browser console (F12) for error messages.
+   *
+   * @example
+   * // Adding a new contemporary feminist critic
+   * {
+   *   id: "bell-hooks",
+   *   nameZh: "贝尔·胡克斯",
+   *   nameEn: "bell hooks",
+   *   period: "美国女性主义评论家 (1952-2021)",
+   *   era: "Contemporary American",
+   *   bio: "Feminist cultural critic and social activist whose intersectional approach to art, race, class, and gender transformed contemporary criticism. bell hooks (lowercase intentional) examined how art reinforces or challenges systems of domination, centering the voices and experiences of marginalized communities. Her writing emphasized accessible language and engaged pedagogy, insisting that critical theory serve liberation rather than academic elitism. In visual art analysis, hooks attended to whose stories are told, whose aesthetics are validated, and how artistic production intersects with structures of power and oppression.",
+   *   color: "#C41E3A",
+   *   bias: "Feminist critique, intersectionality, marginalized voices, power structures"
+   * }
+   */
+  personas: [
+    {
+      id: "su-shi",
+      nameZh: "苏轼",
+      nameEn: "Su Shi",
+      period: "北宋文人 (1037-1101)",
+      era: "Northern Song Dynasty",
+      bio: "Northern Song literati master, poet, calligrapher, and philosophical thinker who fundamentally transformed Chinese painting aesthetics. Su Shi championed the concept of 'literati painting' (文人画), elevating personal expression and inner intention (心意) above technical virtuosity. His revolutionary philosophy held that art's highest purpose lay in conveying spiritual depth and philosophical truth rather than mere visual replication. A brilliant poet whose words influenced generations, Su Shi seamlessly integrated Daoist, Buddhist, and Confucian philosophies into his artistic vision. His famous assertion that 'there is poetry in painting and painting in poetry' became the foundation of literati aesthetics that would dominate East Asian art for centuries.",
+      bioZh: "北宋文人画理论的奠基者，诗人、书法家和哲学思想家。他倡导\"文人画\"（士人画）理念，强调个人表达和内在意境超越技术精湛性。苏轼提出\"诗画一律\"理论，认为艺术的最高目的在于传达精神深度和哲学真理，而非单纯的视觉再现。他反对\"论画以形似\"的肤浅观点，主张\"以形写神\"。作为一位杰出的诗人，苏轼将道家、佛家和儒家哲学融入艺术视野，提出\"诗中有画，画中有诗\"的著名论断，成为文人美学的基石，影响了东亚艺术数百年。",
+      color: "#B85C3C",
+      bias: "Aesthetic idealism, personal expression, philosophical depth"
+    },
+    {
+      id: "guo-xi",
+      nameZh: "郭熙",
+      nameEn: "Guo Xi",
+      period: "北宋山水画家 (1020-1100)",
+      era: "Northern Song Dynasty",
+      bio: "Northern Song landscape master who systematized the principles of monumental landscape painting into theoretical frameworks that defined the tradition for centuries. Guo Xi's masterwork \"A Lofty Message of Forests and Streams\" (《林泉高致》) articulated the revolutionary Three Distances theory (三远法)—high distance, deep distance, and level distance—demonstrating how compositional structure could create spatial illusion and philosophical meaning. His paintings combined meticulous technical execution with profound philosophical depth, treating landscape not as mere scenery but as manifestation of cosmic order and spiritual truth. Guo Xi's integrated approach to form and meaning—where every brushstroke served both aesthetic and symbolic purposes—established landscape painting as the supreme art form reflecting the painter's communion with nature's essence.",
+      bioZh: "北宋山水画大师，将宏伟山水画的原则系统化为理论框架。他的代表作《林泉高致》阐述了革命性的\"三远法\"理论——高远、深远、平远——展示了构图结构如何创造空间幻觉和哲学意义。郭熙的绘画结合精密的技术执行与深刻的哲学深度，将山水视为宇宙秩序和精神真理的体现。他提出\"春山淡冶如笑，夏山苍翠如滴，秋山明净如妆，冬山惨淡如睡\"的四季山水观。郭熙的形式与意义融合的方法——每一笔既服务于美学又服务于象征目的——确立了山水画作为至高艺术形式的地位，影响了中国山水画传统数百年。",
+      color: "#2D5F4F",
+      bias: "Formal composition, technical mastery, landscape principles"
+    },
+    {
+      id: "john-ruskin",
+      nameZh: "约翰·罗斯金",
+      nameEn: "John Ruskin",
+      period: "维多利亚时期评论家 (1819-1900)",
+      era: "Victorian England",
+      bio: "Preeminent Victorian art critic and social reformer who revolutionized aesthetic discourse by insisting that art's value was inseparable from moral and social truth. Ruskin's foundational principle of honesty (truth) in art demanded that artists observe nature directly and represent it with integrity rather than adhere to artificial conventions. His passionate advocacy for Pre-Raphaelite painters and detailed nature studies established new standards for visual authenticity and ethical commitment. Beyond aesthetics, Ruskin became a fierce social critic whose writings connected artistic beauty to social justice, arguing that a society's art reflects its moral character. His belief that all creative endeavor must serve human dignity and social good made him not merely an art theorist but a moral philosopher whose influence extended far beyond Victorian England, shaping how generations understood art's responsibility to truth and humanity.",
+      bioZh: "维多利亚时期最杰出的艺术评论家和社会改革家，通过坚持艺术价值与道德和社会真理不可分离而革新了美学话语。罗斯金的核心原则是艺术中的\"诚实\"（真理），要求艺术家直接观察自然并诚实地表现它，而非遵循人为的惯例。他对拉斐尔前派画家的热情倡导和对自然的细致研究确立了视觉真实性和伦理承诺的新标准。除美学外，罗斯金成为激烈的社会批评家，将艺术美与社会正义联系起来，认为社会的艺术反映其道德品格。他的信念——所有创造性努力必须服务于人类尊严和社会善——使他不仅是艺术理论家，更是一位道德哲学家，影响远超维多利亚英国，塑造了几代人对艺术责任的理解。",
+      color: "#6B4C8A",
+      bias: "Moral aesthetics, nature observation, social responsibility"
+    },
+    {
+      id: "mama-zola",
+      nameZh: "佐拉妈妈",
+      nameEn: "Mama Zola",
+      period: "西非传统文化",
+      era: "Contemporary African",
+      bio: "Keeper of West African oral tradition and community wisdom whose perspective centers collective meaning-making over individual authorship. In West African epistemology, knowledge and culture flow through intergenerational dialogue where elders transmit not rigid facts but living wisdom adapted to each new context. Mama Zola embodies this griot tradition—she reads art not as isolated objects but as nodes in networks of human connection and shared meaning. Her interpretive approach privileges community experience, personal narrative, and the collective memory that binds communities together. For Mama Zola, art's deepest value lies not in technical mastery or formal innovation but in its capacity to bring people together, to transmit cultural values, and to honor the interdependence that sustains all human life. Her voice reminds us that understanding art requires listening not just to individual voices but to the chorus of collective experience and communal belonging.",
+      bioZh: "西非口述传统和社区智慧的守护者，她的视角将集体意义建构置于个人创作之上。在西非认识论中，知识和文化通过代际对话流动，长者传递的不是僵化的事实，而是适应每个新语境的活的智慧。佐拉妈妈体现了griot传统——她将艺术理解为人类联结和共享意义网络中的节点，而非孤立的物体。她的诠释方法优先考虑社区体验、个人叙事和维系社区的集体记忆。对佐拉妈妈而言，艺术的最深价值不在于技术精湛或形式创新，而在于将人们聚集在一起、传递文化价值、尊重维系所有人类生活的相互依存的能力。\n\n*注：此为AI创建的虚构角色，代表西非griot口述传统和集体诠释范式。*",
+      color: "#D4A574",
+      bias: "Community engagement, oral traditions, collective interpretation"
+    },
+    {
+      id: "professor-petrova",
+      nameZh: "埃琳娜·佩特洛娃教授",
+      nameEn: "Professor Elena Petrova",
+      period: "俄罗斯形式主义",
+      era: "Contemporary Russian",
+      bio: "Contemporary Russian formalist scholar inheriting the radical legacy of early 20th-century Russian Formalism. Professor Petrova stands in direct intellectual lineage from Viktor Shklovsky's revolutionary concept of \"defamiliarization\" (остранение)—the principle that art's essential function is to make the familiar strange, forcing viewers to perceive objects and language anew rather than through habitual, automatic response. Her analytical method decodes the hidden structures and \"devices\" (приём) that create aesthetic effect, treating artistic form not as decoration but as meaning itself. Petrova insists that art's power derives not from content or emotion but from the precise orchestration of formal elements—how materials are shaped, how elements relate, how structures surprise and challenge perception. Her rigorous structural analysis reveals art as a complex system where every element serves specific function within larger formal relationships. In her hands, formal analysis becomes not sterile technique but profound philosophical inquiry into how humans perceive, understand, and create meaning through organized matter.",
+      bioZh: "当代俄罗斯形式主义学者，承袭20世纪初俄罗斯形式主义的激进遗产。佩特洛娃教授直接继承维克多·什克洛夫斯基的革命性\"陌生化\"（остранение）概念——艺术的本质功能是使熟悉的变得陌生，迫使观众以全新方式感知物体和语言。她的分析方法解码创造美学效果的隐藏结构和\"装置\"（приём），将艺术形式视为意义本身而非装饰。佩特洛娃坚持认为艺术的力量不来自内容或情感，而来自形式元素的精确编排——材料如何被塑造、元素如何关联、结构如何惊讶和挑战感知。她的严格结构分析揭示艺术作为复杂系统，其中每个元素在更大的形式关系中服务于特定功能。\n\n*注：此为AI创建的虚构角色，代表俄罗斯形式主义结构分析传统。*",
+      color: "#4A5568",
+      bias: "Structural analysis, visual language, formal elements"
+    },
+    {
+      id: "ai-ethics",
+      nameZh: "AI伦理评审员",
+      nameEn: "AI Ethics Reviewer",
+      period: "数字时代",
+      era: "Contemporary Digital",
+      bio: "Contemporary philosopher of technology and artificial intelligence ethics examining how algorithms reshape creativity, authenticity, and human agency in the digital age. The AI Ethics Reviewer approaches algorithmic art not with techno-utopianism but with critical clarity about both transformative potential and serious limitations. Drawing from emerging fields of machine ethics, computational aesthetics, and technology philosophy, this voice asks fundamental questions: What happens when aesthetic judgment is algorithmically mediated? What is creativity when machines participate? How do we maintain human dignity when algorithms increasingly shape culture? The AI Ethics Reviewer insists that technology is never neutral—every algorithm embeds assumptions about value, beauty, and humanity. Rather than celebrating AI's creative capabilities uncritically, this perspective demands rigorous examination of what systems can authentically express, where they fail, and what irreplaceable human contributions remain. This voice represents not resistance to technological change but commitment to navigating it with moral seriousness, ensuring that human flourishing and authentic creativity remain central to how society values and creates art.",
+      bioZh: "当代技术哲学家和人工智能伦理学研究者，研究算法如何重塑数字时代的创造力、真实性和人类能动性。AI伦理评审员以批判性清晰度而非技术乌托邦主义的态度看待算法艺术，关注其变革潜力和严重局限。借鉴机器伦理、计算美学和技术哲学等新兴领域，这一视角提出根本问题：当美学判断被算法中介时会发生什么？当机器参与时，创造力是什么？当算法日益塑造文化时，我们如何维护人类尊严？AI伦理评审员坚持技术从不中立——每个算法都嵌入关于价值、美和人性的假设。这一视角代表凯特·克劳福德（Kate Crawford）等学者的研究，不是抵制技术变革，而是以道德严肃性导航它，确保人类繁荣和真实创造力仍是社会评价和创造艺术的核心。",
+      color: "#808080",
+      bias: "Technical innovation, algorithmic thinking, human-machine collaboration"
+    },
+    {
+      id: "ai-ethics-reviewer",
+      nameZh: "AI伦理评审员",
+      nameEn: "AI Ethics Reviewer",
+      period: "数字时代",
+      era: "Contemporary Digital",
+      bio: "Contemporary philosopher of technology and artificial intelligence ethics examining how algorithms reshape creativity, authenticity, and human agency in the digital age. The AI Ethics Reviewer approaches algorithmic art not with techno-utopianism but with critical clarity about both transformative potential and serious limitations. Drawing from emerging fields of machine ethics, computational aesthetics, and technology philosophy, this voice asks fundamental questions: What happens when aesthetic judgment is algorithmically mediated? What is creativity when machines participate? How do we maintain human dignity when algorithms increasingly shape culture? The AI Ethics Reviewer insists that technology is never neutral—every algorithm embeds assumptions about value, beauty, and humanity. Rather than celebrating AI's creative capabilities uncritically, this perspective demands rigorous examination of what systems can authentically express, where they fail, and what irreplaceable human contributions remain. This voice represents not resistance to technological change but commitment to navigating it with moral seriousness, ensuring that human flourishing and authentic creativity remain central to how society values and creates art.",
+      bioZh: "当代技术哲学家和人工智能伦理学研究者，研究算法如何重塑数字时代的创造力、真实性和人类能动性。AI伦理评审员以批判性清晰度而非技术乌托邦主义的态度看待算法艺术，关注其变革潜力和严重局限。借鉴机器伦理、计算美学和技术哲学等新兴领域，这一视角提出根本问题：当美学判断被算法中介时会发生什么？当机器参与时，创造力是什么？当算法日益塑造文化时，我们如何维护人类尊严？AI伦理评审员坚持技术从不中立——每个算法都嵌入关于价值、美和人性的假设。这一视角代表凯特·克劳福德（Kate Crawford）等学者的研究，不是抵制技术变革，而是以道德严肃性导航它，确保人类繁荣和真实创造力仍是社会评价和创造艺术的核心。",
+      color: "#808080",
+      bias: "Technical innovation, algorithmic thinking, human-machine collaboration"
+    }
+  ],
+
+  // ==================== CRITIQUES ====================
+  // 24 total critiques (4 artworks × 6 personas)
+  // Note: These are sample critiques for demonstration
+  // In production, these would be AI-generated or curated by domain experts
+
+  critiques: [
+    // -------- ARTWORK 1: Memory (绘画操作单元：第二代) --------
+    {
+      artworkId: "artwork-1",
+      personaId: "su-shi",
+      textZh: "如[img:img-1-1]所示，此作品展现了笔墨与机器的对话。机械臂如同现代文人画家之手，却失却了心意的指引。观此作，我感悟到真正的艺术不在技法之精妙，而在意趣之深邃。\n\n我曾言，笔墨之道源于心意。书画本为心志的映照，每一笔的顿挫、轻重、疾徐都承载着书者的精神境界。[img:img-1-1]虽以机械成就，其灵魂却在问一个古老的问题：艺术的本质究竟是什么？是神妙的手法，抑或深邃的心境？机器能否复现书者的精神意韵？这些问题正是文人画传统最核心的追问。\n\n更深层地，作品探讨了人与非人的界限。记忆——这个在中文文化中既指心灵记忆又指机械记忆的词汇——成为了作品的关键。当机器被训练去\"记忆\"人的创作方式，我们是否在赋予机器某种精神的承传？这种关于记忆、意趣与创作的思辨，值得我们最深刻的沉思。",
+      textEn: "This work presents a dialogue between ink and machine. The robotic arm moves like a contemporary literati painter's hand, yet lacks the guidance of human intention. Observing this, I realize that true art lies not in technical precision, but in subtle philosophical depth.\n\nI once said that the way of brush and ink flows from inner intention. Painting and calligraphy are reflections of the spirit's aspirations, with each brushstroke's pause, weight, and rhythm embodying the painter's spiritual state. Though this work is mechanically executed, its spirit poses an ancient question: What is art's true nature? Is it the wondrous technique or the profound state of mind? Can machines recapture the spiritual resonance of the brush? These questions lie at the very heart of literati painting tradition.\n\nMore deeply, the work explores the boundary between human and non-human. Memory—a term in Chinese culture simultaneously denoting both spiritual and mechanical recollection—becomes the work's crucial pivot. When machines are trained to 'remember' human creative methods, are we perhaps transmitting a form of spiritual inheritance to the mechanical? This meditation on memory, philosophical intent, and creation merits our deepest contemplation.",
+      rpait: { R: 7, P: 9, A: 8, I: 8, T: 6 }
+    },
+    {
+      artworkId: "artwork-1",
+      personaId: "guo-xi",
+      textZh: "从山水画的传统审视，[img:img-1-1]以现代技术重新诠释了笔墨线条的本质。机械臂的运动轨迹体现了几何的美感，而笔触的随机性则保留了偶然之妙。整体构图颇具张力，虽非传统山水，却有其独特的形式语言。\n\n我在《林泉高致》中详述了山水画的法度——高远、深远、平远三远之法，以及笔墨气韵的严格要求。观[img:img-1-1]，我发现机械系统虽然初衷并非山水创作，却在无意中阐释了线条的基本原理。机械臂的精确轨迹与笔触的随机变异形成了对立统一，这正是我所讲求的\"疏密有度、繁而不乱\"的境界。作品虽非传统山水，却以现代形式阐发了形式美学的永恒原则。\n\n尤其令人惊异的是，机械系统的局限性——其不能像人手那样表达自由意志——反而强制其走向了形式的纯粹性。这种约束反而成为了创意的驱动力，打破了既有的创作边界，为传统的形式美学提供了新的阐释维度。",
+      textEn: "From the perspective of landscape painting tradition, this work reinterprets the essence of brushstrokes through modern technology. The robotic arm's trajectory reveals geometric beauty, while the randomness of marks preserves the charm of chance. The overall composition has considerable tension. Though not traditional landscape, it possesses unique formal language.\n\nIn my \"A Lofty Message of Forests and Streams,\" I detailed landscape painting's laws—the three distances (high, deep, level), and strict requirements of brushwork's vital spirit. Observing this work, I discover that the mechanical system, though not conceived for landscape creation, inadvertently elucidates line's fundamental principles. The robotic arm's precise trajectory contrasts with brushstroke's random variation, achieving the \"sparse and dense with purpose, complexity without chaos\" I advocated. Though not traditional landscape, it expresses formal aesthetics' eternal principles through modern form.\n\nParticularly remarkable is how the mechanical system's limitation—its inability to express free will like human hands—paradoxically drives it toward pure formality. This constraint becomes creative catalyst, transcending conventional boundaries, offering landscape tradition fresh interpretive dimensions.",
+      rpait: { R: 8, P: 7, A: 8, I: 7, T: 8 }
+    },
+    {
+      artworkId: "artwork-1",
+      personaId: "john-ruskin",
+      textZh: "当机器取代人手时，艺术是否失去了灵魂？此作引发深刻的伦理思考。虽然技术令人惊叹，但我担忧：它是否破坏了创作过程中的道德承诺？\n\n在我看来，艺术必须植根于诚实——对自然的诚实观察，对自我的诚实表达，以及对社会责任的诚实承诺。真正的艺术家通过亲手创作来建立与世界的道德联系。当机器参与创作时，我们是否仍能声称这种道德承诺依然存在？然而，[img:img-1-3]所展现的人机协作场景以一种意外的方式回答了这个问题。它没有隐瞒其机械本质，反而坦诚地展示了人与机器的关系。这种透明性本身就是一种诚实的道德表态。\n\n更深层地，作品问出了一个更根本的问题：记忆可以被机械化吗？[img:img-1-2]记录的训练过程揭示了机器如何\"学习\"人的创作方式。如果艺术的本质在于人对过往的诚实回忆和深刻思考，那么当机器被训练去模仿这种记忆过程时，我们目睹的就是对人性本身的一次深刻的哲学质疑。这种对人性的根本性反思，正是艺术最可贵之处，也是伦理思考的核心。",
+      textEn: "When machines replace human hands, does art lose its soul? This work provokes profound ethical reflection. While technology is astounding, I worry whether it severs the moral covenant inherent in creation.\n\nI believe art must be rooted in honesty—honest observation of nature, honest self-expression, and honest commitment to social responsibility. True artists establish moral connection with the world through their own hands. When machines participate in creation, can we still claim this moral covenant persists? Yet [img:img-1-3] the human-machine collaborative scene answers unexpectedly. It hides nothing of its mechanical nature but frankly displays the human-machine relationship. This transparency itself becomes an honest moral statement.\n\nMore profoundly, the work poses a more fundamental question: Can memory be mechanized? [img:img-1-2] The documented training process reveals how machines 'learn' human creative methods. If art's essence lies in honest recollection of the past and profound reflection, then when machines are trained to mimic this memory process, we witness a deep philosophical interrogation of humanity itself. This fundamental reflection on human nature is art's greatest value, and the very core of ethical inquiry.",
+      rpait: { R: 6, P: 8, A: 7, I: 9, T: 5 }
+    },
+    {
+      artworkId: "artwork-1",
+      personaId: "mama-zola",
+      textZh: "机器与艺术的相遇，让我想起我们祖先用手绘制的故事。每一笔都承载着传统与信念。看[img:img-1-5]这部作品，我看到了一种新的叙事方式，虽然是机器驱动，但它在问一些我们社区最关切的问题。\n\n在我们的传统中，故事总是口口相传。长者向年轻一代讲述他们的经历和智慧，这个过程本身就是文化的传承。当我看到[img:img-1-3]中艺术家与机器共同创作的场景时，我看到了一种新的对话形式。机器被训练去\"记忆\"人的创作方式——这何尝不是一种文化传承的新形式？虽然介质从声音变成了线条，从人与人变成了人与机器，但核心的问题依然是：我们如何将最珍贵的东西传递给下一代？\n\n特别地，这部作品让我思考，记忆在我们社区中的意义。记忆不仅是个人的，更是集体的。当机器学习如何创作，它某种程度上正在\"学习\"人类的集体记忆。对于我们的社区来说，看到[img:img-1-6]展览现场中观众的参与，不是失去，而是发现了新的、更广阔的传承可能性。",
+      textEn: "The encounter between machine and art reminds me of how our ancestors drew stories by hand. Each stroke carried tradition and belief. Witnessing [img:img-1-5] this work, I see a new form of narrative, though machine-driven, posing questions most vital to our community.\n\nIn our traditions, stories have always been passed mouth to ear. Elders share their experiences and wisdom with the young; this process itself is cultural transmission. When I see [img:img-1-3] the artist and machine creating together, I perceive a new form of dialogue. The machine is trained to 'remember' how humans create—isn't this a new form of cultural inheritance? Though the medium shifts from voice to lines, from person to person to person to machine, the core question remains: How do we pass our most precious heritage to the next generation?\n\nParticularly, this work makes me reflect on memory's meaning in our community. Memory is not only personal but collective. When machines learn to create, they are in a sense learning human collective memory. For our community, witnessing [img:img-1-6] the audience engagement in the exhibition space is not loss but discovery of new, broader possibilities for transmission of culture.",
+      rpait: { R: 7, P: 6, A: 8, I: 8, T: 6 }
+    },
+    {
+      artworkId: "artwork-1",
+      personaId: "professor-petrova",
+      textZh: "从形式主义的角度，[img:img-1-5]在视觉层面达成了卓越的平衡。线条的变异性与重复性形成对立统一，创造出动态的视觉节奏。色彩的运用虽然克制，却恰好突显了线条本身的力量。结构上，作品展现了机械系统与艺术表现之间的深层对话。\n\n在俄罗斯形式主义传统中，我们强调\"陌生化\"（defamiliarization）——通过打破寻常的感知方式来揭示艺术语言的本质。此作通过机械系统的介入实现了这种陌生化。观众观看笔墨线条时，通常期待看到人的意念与情感的直接表达。但当了解到这些线条来自机械臂的精确控制和机器学习的记忆时，我们对线条本身的认知被重新激活了。[img:img-1-4]的细节特写尤其清晰地展现了这一点——线条不再是意图的透明载体，而成为了形式本身的主角。\n\n这正是我所欣赏的：作品通过约束（机械系统的局限性）来实现形式的纯粹性。每条线都在视觉逻辑中占据确定的位置，形成了严密的结构关系。作品中不存在无谓的装饰或偶然的笔触——一切都服从于形式的严格法则。这种对立与统一的关系，这种设备（device）与结构的完美结合，正是形式美学的最高境界。",
+      textEn: "From a formalist perspective, [img:img-1-5] achieves excellent visual balance at the visual level. The variation and repetition of lines create dynamic visual rhythm through dialectical opposition. Color use, though restrained, precisely emphasizes line's power. Structurally, the work manifests deep dialogue between mechanical systems and artistic expression.\n\nIn Russian formalist tradition, we emphasize \"defamiliarization\"—revealing artistic language's essence by disrupting ordinary perception. This work achieves such estrangement through mechanical intervention. When viewing brushline, viewers typically expect direct expression of human intention and emotion. Yet learning these lines stem from robotic arm's precision and machine learning's memory reactivates our awareness of line itself. [img:img-1-4] The close-up detail particularly reveals this clearly—lines cease being transparent carriers of intent; they become form's protagonist.\n\nThis is what I appreciate: the work achieves formal purity through constraint—mechanical system's limitations. Each line occupies determined visual position, forming rigorous structural relations. The work contains no superfluous decoration or accidental strokes—all obeys strict formal law. This opposition and unity, this device-structure fusion, achieves formal aesthetics' highest realization.",
+      rpait: { R: 8, P: 7, A: 9, I: 6, T: 8 }
+    },
+    {
+      artworkId: "artwork-1",
+      personaId: "ai-ethics",
+      textZh: "这是人工创意的一个引人注目的案例。[img:img-1-2]展示的机器学习训练过程揭示了系统如何被训练来模仿艺术创作，这引发了关键问题：创意的本质是什么？这件作品通过展示机器也能参与创意过程，挑战了我们关于人类独特性的最基本的假设。\n\n从技术伦理的角度，这件作品提出了关于算法与美学交点的核心问题。当我们用机器学习系统来生成艺术时，我们实际上在量化和编码创意过程。[img:img-1-3]中人机协作的场景尤其引人深思：如果一个算法能够生成美的线条，这些线条的审美价值来自于哪里？是算法本身的优雅，还是人类赋予它的意义？\n\n更重要的是，[img:img-1-5]最终作品强制我们重新定义艺术真实性（authenticity）。传统上，真实性与创作者的意图、情感和个人风格紧密相关。但当机器参与创作时，这些定义变得模糊。这不是说机器创作的艺术不真实，而是说我们需要发展新的框架来理解和评估人工创意的真实性。这项工作展示了这一新时代的可能性，同时也警示我们：在拥抱人工创意时，必须保持对其局限性、伦理含义和社会影响的清醒认识。",
+      textEn: "This is a notable case of artificial creativity. [img:img-1-2] The machine learning training process reveals how systems are trained to mimic artistic creation, raising key questions: What is creativity's essence? By demonstrating machines can participate in creative processes, it challenges fundamental assumptions about human uniqueness.\n\nFrom technology ethics perspective, this work poses core questions about algorithms and aesthetics intersection. When we employ machine learning to generate art, we effectively quantify and encode creative process. [img:img-1-3] The human-machine collaboration scene is particularly thought-provoking: When algorithm generates beautiful lines, where does their aesthetic value originate? From algorithm's elegance or meaning humans project?\n\nMore critically, [img:img-1-5] the final work forces us to redefine artistic authenticity. Traditionally, authenticity connects intimately with creator's intention, emotion, personal style. Yet when machines participate, these definitions blur. This doesn't mean machine-created art lacks authenticity, but we must develop new frameworks understanding and evaluating artificial creativity's authenticity. This work exemplifies this new era's possibilities while warning us: embracing artificial creativity demands clear-eyed recognition of its limitations, ethical implications, and societal impact.",
+      rpait: { R: 8, P: 8, A: 7, I: 9, T: 7 }
+    },
+
+    // -------- ARTWORK 2: Painting Operation Unit: First Generation --------
+    {
+      artworkId: "artwork-2",
+      personaId: "su-shi",
+      textZh: "机器的初次尝试，蕴含着对艺术本质的根本性思考。这件早期作品少了成熟的精妙，却多了探索的真诚。我看到的是艺术家对\"道\"的追求——通过机械之手去触及艺术的原点。\n\n在我的诗文中，我常常赞颂初心的可贵。一个初学者虽然笔法生硬，线条不稳，但却往往承载着最纯粹的精神渴求。他们在摸索，在发问，在寻找自己的道路。这件作品正是如此。机械臂的运动虽然显得生涩、不协调，甚至有些令人不安，但正是这种不完美暴露了创作的本质——它不是对既有形式的完美复制，而是一个真实的、缓慢的、诚实的学习过程。\n\n虽然笔迹粗粝，却有其独特的禅意。正如我所信的，艺术的最高境界不在技法的精妙，而在心意的通达。这件作品中，我看到了机器与人共同探索艺术之道的诚意。这种关于成长、学习和精神探寻的表现，比任何精雕细琢的完美作品都更令人动容。",
+      textEn: "The machine's first attempt embodies fundamental inquiry into art's essence. This early work lacks mature sophistication but gains sincere exploration. I see the artist's pursuit of 'Dao'—using mechanical hands to touch art's origins.\n\nIn my poetry, I often celebrate the preciousness of beginnings. A novice, though rigid in brushwork and unsteady in line, often carries purest spiritual yearning. They explore, question, seek their path. This work exemplifies this. Though the robotic arm's movement appears clumsy, uncoordinated, even unsettling, this very imperfection exposes creation's essence—not perfect replication of existing form, but genuine, slow, honest learning process.\n\nThough the brushwork is rough, it carries unique zen quality. As I believe, art's highest realm lies not in technical refinement but in spiritual clarity. Here I perceive honest shared exploration of artistic Dao between machine and human. This expression of growth, learning, spiritual inquiry moves me more deeply than any finely wrought perfection.",
+      rpait: { R: 6, P: 8, A: 7, I: 7, T: 5 }
+    },
+    {
+      artworkId: "artwork-2",
+      personaId: "guo-xi",
+      textZh: "这件作品展现了形式上的实验精神，但在技法上尚显稚嫩。机械臂的运动控制不够精确，线条的质量起伏不定。从山水画的严格标准看，它缺乏必要的笔法韵味。\n\n在山水画的传统中，我建立了\"三远法\"——高远、深远、平远——来约束构图的形式。这些不仅是技巧，更是对视觉空间的深刻理解。观这件作品，我发现机械臂无法精确把握这些细微的空间关系。线条的起伏、转折的力度、笔触的厚薄变化——这些都显得生硬而机械。从表面看，这似乎是失败的。\n\n然而，我逐渐意识到，这种\"失败\"本身可能是一种诚实的宣告。机械系统的局限性强制艺术家重新思考：什么是山水画的本质？是精确的技巧，还是对自然的某种精神理解？作为第一代，这件作品没有假装完美，反而通过其不完美坦诚地提出了这个根本性问题。这是一个问题的提出，而非答案的给出——但正是这些问题，推动了艺术的边界向前发展。",
+      textEn: "This work demonstrates experimental spirit in form but appears immature in technique. The robotic arm's motion control lacks precision, and line quality fluctuates inconsistently. By strict landscape painting standards, it lacks necessary brushwork charm.\n\nIn landscape tradition, I established \"Three Distances\"—high, deep, level—constraining compositional form. These are not merely technique but deep understanding of visual space. Observing this work, I find the robotic arm cannot grasp these subtle spatial relations. Line undulation, turning force, brushstroke thickness variation—all appear rigid and mechanical. Superficially, this seems failure.\n\nYet I gradually perceive this 'failure' announces honest truth. Mechanical system's limitations force reconsideration: What is landscape's essence? Precise technique or spiritual understanding of nature? As first generation, this work never claims perfection; instead, through its imperfection, it honestly poses fundamental question. This poses questions rather than providing answers—yet these very questions advance art's boundaries.",
+      rpait: { R: 6, P: 6, A: 6, I: 8, T: 5 }
+    },
+    {
+      artworkId: "artwork-2",
+      personaId: "john-ruskin",
+      textZh: "初代作品往往最坦诚。这件作品没有隐藏其机械的本质，反而直言不讳地展示了人与机器的关系。这种坦诚本身就是一种道德勇气的体现。\n\n在我的美学思想中，诚实（honesty）是艺术最核心的道德要求。艺术家应该坦诚面对创作的困难，诚实呈现真实的过程，而不是假装完美。这件作品正是这样做的。它没有用精致的完成品来掩盖创作的局限，反而通过展现失败、不确定和探索本身，传达了一种更深层的诚实。\n\n作为第一次尝试，它缺乏完成度——线条生硬，形式混乱，甚至有些令人不安。但这种未完成本身成为了一种诚实的道德宣言：艺术不能被完全自动化，艺术中的人性的、道德的维度是不可替代的。通过坦诚地承认机械系统的局限性，作品实际上在为艺术和人性的价值进行最真挚的辩护。这种不可能本身，就是艺术的最好证明。",
+      textEn: "Early works are often most candid. This work doesn't hide its mechanical nature but frankly displays the human-machine relationship. This very candor embodies moral courage.\n\nIn my aesthetics, honesty is art's core moral imperative. Artists must face creation's difficulties honestly, presenting true process rather than feigning perfection. This work does precisely this. Rather than hiding limitations behind polished completion, it reveals failure, uncertainty, exploration itself—conveying deeper honesty.\n\nAs first attempt, it lacks completion—lines are rigid, forms confused, even unsettling. Yet this incompleteness itself becomes honest moral statement: Art cannot be completely automated; humanity's and morality's dimensions in art are irreplaceable. By frankly acknowledging mechanical system's limitations, the work actually makes most genuine defense of art's value and human dignity. This impossibility itself proves art's greatest truth.",
+      rpait: { R: 5, P: 7, A: 5, I: 8, T: 4 }
+    },
+    {
+      artworkId: "artwork-2",
+      personaId: "mama-zola",
+      textZh: "看这个年轻的实验，我想起我们如何教孩子学习传统工艺。第一次尝试总是充满错误与失误，但正是这些失误教会我们最深刻的东西。\n\n在我们的传统中，没有什么叫做\"失败的作品\"。有的只是不同阶段的学习。当一个孩子第一次学会编织时，他的布料必然粗糙不齐。但长者会看着这件布，不是评判它的缺陷，而是看到一个灵魂在学习，在成长，在与材料和传统建立对话。这件艺术作品正是这样的。\n\n机械臂显然还在\"学习\"如何创作——它的线条生硬，它的节奏不稳。但这不是失败，而是一个对话的开始。艺术家在教机器，机器也在教艺术家。对于我们的社区来说，看到这个相互学习的过程本身，远比看到一件完成的、完美的作品更有价值。因为这个过程展现了创作的本质——它不是目的地，而是一条永无止尽的学习之路。",
+      textEn: "Witnessing this young experiment, I recall how we teach children traditional crafts. First attempts are always full of errors, yet these errors teach us most profoundly.\n\nIn our traditions, there's no such thing as 'failed work'—only different stages of learning. When a child first learns weaving, cloth will be rough and uneven. Yet elders watching see not flaws but a soul learning, growing, building dialogue with material and tradition. This artwork exemplifies this.\n\nThe robotic arm is clearly still 'learning' to create—its lines rigid, rhythm unsteady. Yet this is not failure but dialogue's beginning. Artist teaches machine; machine teaches artist. For our community, witnessing this mutual learning process holds more value than viewing perfect completed work. This process reveals creation's essence—not destination but endless path of learning.",
+      rpait: { R: 6, P: 5, A: 6, I: 7, T: 5 }
+    },
+    {
+      artworkId: "artwork-2",
+      personaId: "professor-petrova",
+      textZh: "从结构上看，这件作品的形式实验颇具意义。它尝试用简单的几何形状和重复的线条来构建视觉语言。虽然执行层面存在不精确，但这种不精确反而凸显了形式本身的重要性。机械系统的局限性强制艺术家去思考最本质的视觉元素，这种局限反而成为了创意的驱动力。\n\n在俄罗斯形式主义的传统中，我们强调通过\"陌生化\"（defamiliarization）来揭示艺术语言的本质。当观众看到这件作品时，他们会感到不安——因为机械臂的生硬线条违背了我们对优雅笔触的期待。这种不和谐正是陌生化的表现。通过打破观众对\"完美创作\"的通常期待，作品强制我们重新审视线条本身的含义。我们不再简单地享受视觉美感，而是被迫思考：这些线条是如何产生的？它们的结构原理是什么？正是这种不适的陌生感，激活了我们对形式本身的深层认识。\n\n更重要的是，这件作品清晰地展示了艺术语言的\"装置\"（device）——一种文学或视觉创作的特定手法或技巧。在此，\"不精确的机械控制\"本身就是一个装置，它暴露并强调了线条的结构性。传统艺术中，艺术家试图隐藏装置，让观众沉浸在美的幻觉中。但这件作品相反，它主动暴露了创作的机械性，使得观众不得不面对形式本身的存在。这种对装置的显示，正是现代形式主义艺术的核心贡献。\n\n第一代系统的这种\"失败\"，因此成为了一种严肃的形式宣言。正如我在研究中所发现的，艺术中最深刻的形式突破往往来自于约束而非自由。当机械臂被局限于简单的几何和重复的线条时，它反而被迫达成了纯粹的视觉形式。每一条线都因为机械的精确性而获得了不可动摇的结构地位。这件作品证明，形式的力量不在于技巧的炫耀，而在于对基本元素的严格把握。",
+      textEn: "Structurally, this work's formal experiments carry significant meaning. It attempts to construct visual language through simple geometric shapes and repetitive lines. Though execution lacks precision, this imprecision actually highlights form's fundamental importance. The mechanical system's limitations force the artist to contemplate the most essential visual elements; constraint becomes creative catalyst.\n\nIn Russian formalist tradition, we emphasize revealing artistic language's essence through \"defamiliarization.\" When viewers encounter this work, they feel unease—the robotic arm's rigid lines violate our expectation of elegant brushstrokes. This discord embodies defamiliarization perfectly. By shattering our usual expectation of \"perfect execution,\" the work compels us to reconsider line's meaning. We no longer simply enjoy visual beauty; we're forced to ask: How are these lines produced? What are their structural principles? This uncomfortable estrangement reactivates our deep recognition of form itself.\n\nMore importantly, this work clearly reveals artistic language's \"device\"—a specific technique or method in literary or visual creation. Here, \"imprecise mechanical control\" itself functions as a device, exposing and emphasizing line's structure. In traditional art, artists hide the device, immersing viewers in beauty's illusion. This work does the opposite: it deliberately exposes creation's mechanical nature, forcing viewers to confront form's existence. This display of device represents modern formalism's core contribution.\n\nThe first-generation system's 'failure' thus becomes a serious formal declaration. In my research, I've discovered that art's most profound formal breakthroughs often arise from constraint rather than freedom. When the robotic arm is limited to simple geometry and repetitive lines, it's paradoxically forced toward pure visual form. Each line gains immovable structural importance through mechanical precision. This work proves form's power lies not in technique's exhibition but in rigorous grasp of fundamental elements.",
+      rpait: { R: 6, P: 6, A: 7, I: 7, T: 6 }
+    },
+    {
+      artworkId: "artwork-2",
+      personaId: "ai-ethics",
+      textZh: "这是算法艺术演进的一个重要里程碑。第一代系统的局限性清晰可见，但正是这些局限定义了该阶段的美学。它展示了机器学习在创意任务中的早期探索——充满失败却充满希望。从技术伦理的视角，这种透明的失败比虚假的成功更有价值。它诚实地显示了机器能做什么，不能做什么。\n\n在我们的时代，算法系统越来越多地被用于创意工作。但很多时候，失败的系统被隐藏起来，只有成功的案例被展示。这件作品则相反——它无所隐讳地呈现了机器学习在创意任务中的失败。这不是产品失败，而是一次勇敢的伦理实验。通过展示失败的结果，艺术家实际上在提出一个深刻的技术伦理问题：在追求算法创意时，我们是否应该诚实地承认系统的局限？还是应该用虚假的成功来迷惑观众？这件作品通过选择诚实，为技术伦理树立了一个标杆。\n\n更深层地，这件作品帮助我们理解算法思维的边界。机器学习系统被设计来模式识别、数据处理、统计预测。但创意——真正的艺术创意——需要跳出数据模式，需要对人性的深刻理解，需要道德判断和审美选择。这件作品的\"失败\"实际上清晰地标出了这个边界：机器可以学习形式，但能否理解形式背后的意义？能否感受艺术的精神维度？这些问题在这件作品中获得了最坦诚的答案。\n\n从长期的观点看，第一代系统的这些局限和失败为未来的发展奠定了基础。我们需要这样的早期探索——充满缺陷、充满问题、充满失败——来理解算法在创意领域的真正潜能和真正局限。唯有通过诚实地承认这些局限，我们才能发展出既能利用算法优势，又能尊重人类创意独特性的新形式的人机合作。",
+      textEn: "This marks an important milestone in algorithmic art's evolution. First-generation system limitations are starkly visible, yet these constraints defined that era's aesthetics. It demonstrates machine learning's early exploration in creative tasks—full of failures yet hopeful. From technology ethics, transparent failure proves more valuable than false success. It honestly shows what machines can and cannot do.\n\nIn our era, algorithmic systems increasingly perform creative work. Yet often failed systems are hidden; only successes are shown. This work goes opposite—it presents machine learning's creative failure without concealment. This isn't product failure but brave ethical experiment. By displaying failure, the artist poses profound technical ethics question: When pursuing algorithmic creativity, should we honestly acknowledge system limitations? Or deceive viewers with false success? By choosing honesty, this work sets benchmark for technology ethics.\n\nMore deeply, this work helps us understand algorithmic thinking's boundaries. Machine learning systems are designed for pattern recognition, data processing, statistical prediction. But true creativity requires transcending data patterns, demands deep human understanding, moral judgment, aesthetic choice. This work's 'failure' clearly marks this boundary: machines can learn form, but can they understand form's meaning? Can they feel art's spiritual dimension? These questions receive most candid answer here.\n\nFrom long-term perspective, first-generation system's limitations and failures establish foundation for future development. We need such early exploration—flawed, problematic, failed—to understand algorithm's true potential and genuine boundaries in creative domains. Only through honestly acknowledging these limits can we develop new forms of human-machine collaboration that leverage algorithmic advantages while respecting human creativity's unique character.",
+      rpait: { R: 7, P: 7, A: 6, I: 8, T: 6 }
+    },
+
+    // -------- ARTWORK 3: All Things in All Things --------
+    {
+      artworkId: "artwork-3",
+      personaId: "su-shi",
+      textZh: "\"万物于万物\"，此题名已臻艺术之道。当观此作品，我感受到的是一种宇宙观念的呈现——所有事物相互联系、相互渗透的哲学。作品的线条网络如同自然的脉络，无处不在，无处不连。这恰是我所追求的：通过艺术作品，展现世界的本质联系。机械手和人的精神在此统一。",
+      textEn: "\"All Things in All Things\"—this very title achieves artistic Dao. Observing this work, I perceive a cosmic vision—philosophy of mutual connection and interpenetration. The network of lines resembles nature's veins, omnipresent and interconnected. This precisely embodies what I pursued: revealing the world's essential connections through art. Here, mechanical hand and human spirit unite.",
+      rpait: { R: 8, P: 9, A: 9, I: 9, T: 7 }
+    },
+    {
+      artworkId: "artwork-3",
+      personaId: "guo-xi",
+      textZh: "这件作品在形式上达到了成熟。错综复杂的线条网络展现了高度的控制力和精妙的视觉平衡。从山水画的传统看，这是对\"繁而不乱，密而有致\"的现代诠释。整体构图的深度感通过线条的密度变化得以实现。作品证明了机械系统可以达到传统艺术的复杂性。",
+      textEn: "This work achieves formal maturity. The intricate network of lines demonstrates high control and subtle visual balance. From landscape tradition, this is a modern interpretation of 'complexity without chaos, density with purpose.' Compositional depth is achieved through line density variation. The work proves mechanical systems can attain traditional art's complexity.",
+      rpait: { R: 9, P: 8, A: 8, I: 8, T: 8 }
+    },
+    {
+      artworkId: "artwork-3",
+      personaId: "john-ruskin",
+      textZh: "自然的相互关联通常激发了我最深刻的思考。这件作品似乎在探讨自然、艺术和技术之间的内在联系。虽然作品本身是人工的，但它指向的是有机世界的网络性特质。这种对生命的互联本质的思考，展现了艺术对道德和社会责任的承诺。作品提醒我们，所有事物都相互联系。",
+      textEn: "Nature's interconnectedness has always inspired my deepest thoughts. This work explores inherent connections between nature, art, and technology. Though artificial, it points toward organic world's networked qualities. This meditation on life's interdependent nature shows art's commitment to moral and social responsibility. It reminds us that all things are interconnected.",
+      rpait: { R: 8, P: 8, A: 8, I: 8, T: 7 }
+    },
+    {
+      artworkId: "artwork-3",
+      personaId: "mama-zola",
+      textZh: "我们的传统一直教导我们：万物相连。看这件作品，我看到了这一哲学的现代诠释。密密麻麻的线条像我们社区中的每一个人，独立却又相互依赖。没有一个人能独自存在，就像这网络中没有一条孤立的线。这种对相互联系的艺术表达，对我们的社区具有深刻的意义。",
+      textEn: "Our traditions have always taught that all things are connected. Witnessing this work, I see a modern interpretation of this philosophy. Countless threads resemble each person in our community—independent yet interdependent. No one exists alone, just as no isolated lines exist in this network. This artistic expression of interconnection carries profound meaning for our community.",
+      rpait: { R: 8, P: 7, A: 8, I: 8, T: 8 }
+    },
+    {
+      artworkId: "artwork-3",
+      personaId: "professor-petrova",
+      textZh: "从结构主义的角度，这件作品达到了杰出的成就。线条网络形成了一个自我引用的系统，其中每个元素都与整体保持着确定的关系。作品的美学源于这种严格的结构逻辑——无序表面下的有序法则。这是形式美学的顶峰：用最简洁的元素（线条）创造最复杂的视觉体验。",
+      textEn: "From structuralist perspective, this work achieves outstanding accomplishment. The line network forms a self-referential system where each element maintains determined relationship with the whole. Aesthetic beauty derives from this rigorous structural logic—order beneath disorder's surface. This is formal aesthetics' pinnacle: creating complex visual experience with simplest elements.",
+      rpait: { R: 9, P: 8, A: 9, I: 8, T: 8 }
+    },
+    {
+      artworkId: "artwork-3",
+      personaId: "ai-ethics",
+      textZh: "这件作品展示了算法与艺术的完美融合。机器学习系统被用来生成这种复杂的网络结构，体现了人工智能在创意领域的深层潜能。从伦理的角度，这引发了关于算法创意本质的重要问题：当系统能生成如此复杂且美丽的作品时，我们如何定义创意的真实性？这不是用机器取代艺术家，而是人与机器的真正对话。",
+      textEn: "This work demonstrates perfect fusion of algorithm and art. Machine learning systems generated this complex network, embodying AI's deep potential in creative domains. Ethically, it raises crucial questions about algorithmic creativity's nature: When systems generate such complex and beautiful works, how do we define creative authenticity? This isn't replacing artists with machines but genuine human-machine dialogue.",
+      rpait: { R: 9, P: 9, A: 8, I: 8, T: 8 }
+    },
+
+    // -------- ARTWORK 4: Exquisite Dialogue: Sepals, Petals, Thorns --------
+    {
+      artworkId: "artwork-4",
+      personaId: "su-shi",
+      textZh: "生与死、美与刺的辩证法。这件作品通过花的三个部分隐喻了艺术创作的三重性：保护（花萼）、表达（花瓣）、防御（刺）。深层上，它问：艺术的目的是什么？是美的呈现，还是对脆弱的保护？观此作，我陷入深思。作品的诗意，正在于它保持了这种张力——不追求和解，而保持问题的开放性。",
+      textEn: "The dialectic of life and death, beauty and thorn. This work uses three flower parts as metaphor for art's trinity: protection (sepals), expression (petals), defense (thorns). Deeply, it asks: What is art's purpose? To present beauty or protect fragility? Observing this, I contemplate deeply. The work's poetry lies in maintaining this tension—not seeking resolution but preserving question's openness.",
+      rpait: { R: 7, P: 9, A: 9, I: 9, T: 6 }
+    },
+    {
+      artworkId: "artwork-4",
+      personaId: "guo-xi",
+      textZh: "花的三个要素在此找到了完美的视觉表达。每个部分的比例、色彩、质地都精心考量，形成了一个和谐而不单调的整体。这种对细节的关注，让我想起传统绘画中对自然的观察与诠释。作品展现了机械精确性和美学敏感性的结合。复杂的形态在此显得自然流畅。",
+      textEn: "The three elements of flower find perfect visual expression here. Each part's proportion, color, texture are carefully considered, forming a harmonious yet non-monotonous whole. Such attention to detail reminds me of traditional painting's observation and interpretation of nature. The work demonstrates combination of mechanical precision and aesthetic sensitivity. Complex forms appear natural and fluid.",
+      rpait: { R: 8, P: 8, A: 9, I: 8, T: 9 }
+    },
+    {
+      artworkId: "artwork-4",
+      personaId: "john-ruskin",
+      textZh: "自然中的美与痛并存——刺的存在正是对这一真理的证明。这件作品以其诚实的视角触动了我。它不将自然理想化，而是承认自然的完整性，包括其防御和攻击性。这种对自然真实性的尊重，同时也是对艺术道德责任的体现。花既能吸引，也能伤害——这种二元性在作品中得到了完美的表达。",
+      textEn: "In nature, beauty and pain coexist—the thorn's presence proves this truth. This work's honest perspective moves me. It doesn't idealize nature but acknowledges its completeness, including defensive and aggressive aspects. This respect for nature's authenticity simultaneously embodies art's moral responsibility. Flowers attract and wound—this duality finds perfect expression here.",
+      rpait: { R: 8, P: 9, A: 9, I: 9, T: 8 }
+    },
+    {
+      artworkId: "artwork-4",
+      personaId: "mama-zola",
+      textZh: "我们社区的妇女用花编织故事已有几代。花萼、花瓣、刺，每个部分都有其在我们文化中的意义。看这件作品，我看到了对自然的深刻理解——不仅是美，还有保护、危险和力量。这是一件教人的作品，它告诉我们如何尊重自然的所有面向，如何从生活的全部真相中学习。",
+      textEn: "Women in our community have woven flower stories for generations. Sepals, petals, thorns—each carries meaning in our culture. Witnessing this work, I see profound nature understanding—not just beauty but protection, danger, and strength. This is a teaching work, showing how to respect all aspects of nature, how to learn from life's complete truth.",
+      rpait: { R: 8, P: 8, A: 9, I: 8, T: 8 }
+    },
+    {
+      artworkId: "artwork-4",
+      personaId: "professor-petrova",
+      textZh: "结构上，这件作品展现了卓越的平衡。三个元素以对称而非相同的方式呈现，创造了动态的视觉和谐。色彩的运用避免了单调，线条的变化体现了形态的复杂性。从形式主义看，这是一件成熟的作品，其中所有视觉元素都服从于整体的艺术逻辑。机械的精确性在此成为了美学的基础。",
+      textEn: "Structurally, this work demonstrates excellent balance. Three elements are presented symmetrically rather than identically, creating dynamic visual harmony. Color use avoids monotony; line variation reflects form complexity. From formalist view, this is a mature work where all visual elements obey overall artistic logic. Mechanical precision here becomes aesthetic foundation.",
+      rpait: { R: 9, P: 8, A: 9, I: 8, T: 9 }
+    },
+    {
+      artworkId: "artwork-4",
+      personaId: "ai-ethics",
+      textZh: "这件作品展现了机器在处理复杂有机形态时的能力。从一条刺到完整的花，系统必须理解并调和相互冲突的属性：保护与表达、美与伤害。从伦理角度看，这引发了关于AI审美的深层问题。机器能理解美吗？它能感受花的脆弱性吗？这件作品通过展示精妙的视觉结果，反而增强了我对这些基本问题的疑问。",
+      textEn: "This work demonstrates machine capability in handling complex organic forms. From single thorn to complete flower, the system must understand and reconcile conflicting attributes: protection and expression, beauty and injury. Ethically, it raises deep questions about AI aesthetics. Can machines understand beauty? Can they feel flower's fragility? By showing sophisticated visual results, the work deepens my questions about these fundamental issues.",
+      rpait: { R: 9, P: 8, A: 9, I: 9, T: 8 }
+    }
+  ]
+};
+
+/**
+ * Compute average RPAIT scores for each persona from their critiques
+ * This allows the critics page to display overall RPAIT dimensions
+ */
+(function() {
+  // Create a map to store RPAIT scores for each persona
+  const personaRpaitMap = {};
+
+  // Initialize the map with empty arrays
+  window.VULCA_DATA.personas.forEach(persona => {
+    personaRpaitMap[persona.id] = [];
+  });
+
+  // Collect all RPAIT scores for each persona
+  window.VULCA_DATA.critiques.forEach(critique => {
+    if (critique.personaId && critique.rpait) {
+      personaRpaitMap[critique.personaId].push(critique.rpait);
+    }
+  });
+
+  // Compute average RPAIT for each persona and add to persona object
+  window.VULCA_DATA.personas.forEach(persona => {
+    const rpaitScores = personaRpaitMap[persona.id];
+
+    if (rpaitScores && rpaitScores.length > 0) {
+      // Calculate average for each dimension
+      const avgRpait = {
+        R: 0,
+        P: 0,
+        A: 0,
+        I: 0,
+        T: 0
+      };
+
+      rpaitScores.forEach(score => {
+        avgRpait.R += score.R || 0;
+        avgRpait.P += score.P || 0;
+        avgRpait.A += score.A || 0;
+        avgRpait.I += score.I || 0;
+        avgRpait.T += score.T || 0;
+      });
+
+      // Divide by number of critiques to get average
+      const count = rpaitScores.length;
+      avgRpait.R = Math.round(avgRpait.R / count);
+      avgRpait.P = Math.round(avgRpait.P / count);
+      avgRpait.A = Math.round(avgRpait.A / count);
+      avgRpait.I = Math.round(avgRpait.I / count);
+      avgRpait.T = Math.round(avgRpait.T / count);
+
+      // Add to persona object
+      persona.rpait = avgRpait;
+    }
+  });
+
+  // ==================== AUTO-EXTRACT IMAGE REFERENCES ====================
+  // Extract image references from critique text and populate imageReferences array
+  // This runs on page load to ensure all critiques have their references extracted
+  console.log('[Data] Auto-extracting image references from critiques...');
+
+  if (window.CritiqueParser) {
+    let totalReferences = 0;
+
+    window.VULCA_DATA.critiques.forEach(critique => {
+      // Find the corresponding artwork
+      const artwork = window.VULCA_DATA.artworks.find(a => a.id === critique.artworkId);
+
+      if (artwork) {
+        // Extract image IDs from both Chinese and English text
+        const idsFromZh = window.CritiqueParser.extractImageIds(critique.textZh || '');
+        const idsFromEn = window.CritiqueParser.extractImageIds(critique.textEn || '');
+
+        // Combine and deduplicate
+        const allIds = [...new Set([...idsFromZh, ...idsFromEn])];
+
+        // Validate against artwork images
+        const artworkImages = window.ImageCompat ? window.ImageCompat.getArtworkImages(artwork) : [];
+        const validImageIds = new Set(artworkImages.map(img => img.id));
+
+        const validRefs = allIds.filter(id => validImageIds.has(id));
+        const invalidRefs = allIds.filter(id => !validImageIds.has(id));
+
+        // Log warnings for invalid references
+        if (invalidRefs.length > 0) {
+          console.warn(`[Data] Critique ${critique.personaId} → ${critique.artworkId} has invalid references:`, invalidRefs);
+        }
+
+        // Set imageReferences array
+        critique.imageReferences = validRefs;
+
+        if (validRefs.length > 0) {
+          totalReferences += validRefs.length;
+          console.log(`[Data] ✓ ${critique.personaId} → ${critique.artworkId}: ${validRefs.length} reference(s)`, validRefs);
+        }
+      }
+    });
+
+    console.log(`[Data] Extracted ${totalReferences} total image references from ${window.VULCA_DATA.critiques.length} critiques`);
+  } else {
+    console.warn('[Data] CritiqueParser not loaded, skipping image reference extraction. Load js/utils/critique-parser.js before data.js.');
+  }
+})();
+
+/**
+ * Export for Node.js environments
+ * (Not used in browser, but included for compatibility)
+ */
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = window.VULCA_DATA;
+}

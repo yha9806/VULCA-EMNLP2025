@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="探索6位艺术评论家对AI生成艺术的深度对话 - VULCA艺术展览平台">
+  <meta name="keywords" content="艺术评论,AI艺术,跨文化对话,艺术哲学">
+
+  <!-- SEO & Social -->
+  <meta property="og:title" content="对话展示 | Dialogue Display - VULCA">
+  <meta property="og:description" content="6位跨文化评论家的深度对话">
+  <meta property="og:url" content="https://vulcaart.art/pages/dialogues.html">
+  <meta property="og:type" content="website">
+
+  <title>对话展示 | Dialogue Display - VULCA</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/components/dialogue-player.css">
+  <link rel="stylesheet" href="/styles/components/reference-badge.css">
+  <link rel="stylesheet" href="/styles/components/reference-list.css">
+  <link rel="stylesheet" href="/styles/pages/dialogues.css">
+</head>
+<body>
+  <!-- Navigation Menu -->
+  <nav id="nav-menu" class="nav-menu" hidden>
+    <div class="nav-menu__header">
+      <h2 class="nav-menu__title">
+        <span lang="zh">导航菜单</span>
+        <span lang="en">Navigation</span>
+      </h2>
+      <button id="menu-close" class="nav-menu__close" aria-label="Close menu">✕</button>
+    </div>
+    <ul class="nav-menu__links">
+      <li><a href="/index.html" lang="zh">主画廊</a><a href="/index.html" lang="en">Main Gallery</a></li>
+      <li><a href="/pages/critics.html" lang="zh">评论家</a><a href="/pages/critics.html" lang="en">Critics</a></li>
+      <li><a href="/pages/dialogues.html" class="active" lang="zh">对话</a><a href="/pages/dialogues.html" class="active" lang="en">Dialogues</a></li>
+      <li><a href="/pages/about.html" lang="zh">关于</a><a href="/pages/about.html" lang="en">About</a></li>
+      <li><a href="/pages/process.html" lang="zh">过程</a><a href="/pages/process.html" lang="en">Process</a></li>
+    </ul>
+    <div class="nav-menu__actions">
+      <button id="lang-switch" class="nav-menu__lang-btn">
+        <span lang="zh">English</span>
+        <span lang="en">中文</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="page-header">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <a href="/index.html" class="back-link" aria-label="Back to gallery">
+      <span aria-hidden="true">←</span>
+      <span lang="zh">返回画廊</span>
+      <span lang="en">Back to Gallery</span>
+    </a>
+    <h1 class="page-title">
+      <span lang="zh">对话展示</span>
+      <span lang="en">Dialogue Display</span>
+    </h1>
+  </header>
+
+  <!-- Main Content -->
+  <main class="page-content">
+    <!-- Page Description -->
+    <section class="page-intro">
+      <p lang="zh">
+        探索6位来自不同文化背景的艺术评论家，围绕AI生成艺术作品展开的深度对话。
+        每条评论都基于评论家的真实理论著作，点击📚图标查看知识库引用来源。
+      </p>
+      <p lang="en">
+        Explore in-depth dialogues among 6 art critics from diverse cultural backgrounds,
+        discussing AI-generated artworks. Each critique is grounded in the critic's actual
+        theoretical works—click the 📚 icon to view knowledge base references.
+      </p>
+    </section>
+
+    <!-- Artwork Selector -->
+    <section class="artwork-selector">
+      <h2 class="artwork-selector__title">
+        <span lang="zh">选择作品</span>
+        <span lang="en">Select Artwork</span>
+      </h2>
+      <div class="artwork-selector__buttons">
+        <button class="artwork-btn active" data-artwork="artwork-1">
+          <span class="artwork-btn__number">1</span>
+          <span class="artwork-btn__title">
+            <span lang="zh">记忆</span>
+            <span lang="en">Memory</span>
+          </span>
+          <span class="artwork-btn__meta">Sougwen Chung, 2022</span>
+        </button>
+        <button class="artwork-btn" data-artwork="artwork-2">
+          <span class="artwork-btn__number">2</span>
+          <span class="artwork-btn__title">
+            <span lang="zh">绘画操作单元</span>
+            <span lang="en">Drawing Unit</span>
+          </span>
+          <span class="artwork-btn__meta">Sougwen Chung, 2015</span>
+        </button>
+        <button class="artwork-btn" data-artwork="artwork-3">
+          <span class="artwork-btn__number">3</span>
+          <span class="artwork-btn__title">
+            <span lang="zh">无题（AI生成）</span>
+            <span lang="en">Untitled (AI)</span>
+          </span>
+          <span class="artwork-btn__meta">Mario Klingemann, 2018</span>
+        </button>
+        <button class="artwork-btn" data-artwork="artwork-4">
+          <span class="artwork-btn__number">4</span>
+          <span class="artwork-btn__title">
+            <span lang="zh">机器幻觉</span>
+            <span lang="en">Machine Hallucinations</span>
+          </span>
+          <span class="artwork-btn__meta">Refik Anadol, 2019</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Dialogue Container -->
+    <section class="dialogue-section">
+      <div id="dialogue-container" class="dialogue-container">
+        <!-- DialoguePlayer will be rendered here -->
+        <div class="dialogue-loading">
+          <span lang="zh">加载对话中...</span>
+          <span lang="en">Loading dialogue...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reference Legend -->
+    <section class="reference-legend">
+      <h3 class="reference-legend__title">
+        <span lang="zh">📚 关于知识库引用</span>
+        <span lang="en">📚 About Knowledge Base References</span>
+      </h3>
+      <p lang="zh">
+        每条评论都链接到评论家的真实学术文献。点击消息下方的"📚 X个引用"徽章查看完整引用列表，
+        包括来源文档、引用文本和具体章节位置。
+      </p>
+      <p lang="en">
+        Each critique is linked to the critic's actual academic works. Click the "📚 X references"
+        badge below messages to view the full reference list, including source documents, quoted text,
+        and specific section locations.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <p>
+      <span lang="zh">© 2025 VULCA - 艺术评论展览平台</span>
+      <span lang="en">© 2025 VULCA - Art Critique Exhibition Platform</span>
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Disable immersive mode for this page (allow scrolling)
+    window.IMMERSIVE_MODE = false;
+  </script>
+
+  <!-- Data Dependencies -->
+  <script src="/js/data.js"></script>
+  <script type="module" src="/js/data/dialogues/index.js"></script>
+
+  <!-- Components -->
+  <script src="/js/navigation.js"></script>
+  <script src="/js/components/dialogue-player.js"></script>
+
+  <!-- Page Controller -->
+  <script type="module" src="/js/pages/dialogues-page.js"></script>
+</body>
+</html>

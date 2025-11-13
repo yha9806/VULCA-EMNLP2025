@@ -9,7 +9,7 @@
 window.ArtworkCarousel = (function() {
   'use strict';
 
-  const data = window.VULCA_DATA;
+  // Data will be accessed at init time, not load time
 
   class Carousel {
     constructor(artworks, critiques, personas) {
@@ -146,6 +146,8 @@ window.ArtworkCarousel = (function() {
 
   // Create and initialize carousel instance
   function init() {
+    const data = window.VULCA_DATA;
+
     if (!data || !data.artworks || !data.critiques || !data.personas) {
       console.error('❌ VULCA_DATA not found or incomplete');
       return null;
@@ -154,14 +156,25 @@ window.ArtworkCarousel = (function() {
     const carousel = new Carousel(data.artworks, data.critiques, data.personas);
     window.carousel = carousel; // Make globally accessible
 
+    console.log(`✓ Carousel initialized with ${data.artworks.length} artworks`);
     return carousel;
   }
 
-  // Initialize on load
+  // Initialize on load (wait for VULCA_DATA if needed)
+  function attemptInit() {
+    if (window.VULCA_DATA_READY) {
+      // Data is ready, initialize now
+      init();
+    } else {
+      // Data not ready yet, wait for event
+      document.addEventListener('vulca-data-ready', init, { once: true });
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', attemptInit);
   } else {
-    init();
+    attemptInit();
   }
 
   return Carousel;

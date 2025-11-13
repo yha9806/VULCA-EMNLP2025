@@ -1,0 +1,389 @@
+✓ Extracted: artwork-1 - Memory (Painting Operation Unit: Second Generation) by Sougwen Chung (2022)
+✓ Extracted: artwork-2 - Painting Operation Unit: First Generation (Imitation) by Sougwen Chung (2015)
+✓ Extracted: artwork-3 - All Things in All Things by Sougwen Chung (2018)
+✓ Extracted: artwork-4 - Exquisite Dialogue: Sepals, Petals, Thorns by Sougwen Chung (2020)
+✓ Extracted: artwork-5 - 数息生长 by 程佳瑜 (Cheng Jiayu) (2023)
+✓ Extracted: artwork-6 - 记忆潮汐--地平线系列 by 张凯飞 (2023)
+✓ Extracted: artwork-7 - 我永远在你的背后 by 宋佳益 (2023)
+✓ Extracted: artwork-8 - 烂柯人 by 李凯文、赵冠杰、陈号 (2023)
+✓ Extracted: artwork-9 - 源游 by 叶君豪 (2023)
+✓ Extracted: artwork-10 - 源游 by 陈筱薇 (2023)
+✓ Extracted: artwork-11 - 时间的房子：被演算的族谱记忆 by 陈玉萍 (2023)
+✓ Extracted: artwork-12 - 格竹 by 张引 (2023)
+✓ Extracted: artwork-13 - 逐日计划 by 王博 (2023)
+✓ Extracted: artwork-14 - X博物馆 by 魏云佳 (2023)
+✓ Extracted: artwork-15 - 404词窟 by 修楚贺，张萌萌 (2023)
+✓ Extracted: artwork-16 - 风从何处来·二 by 李芷暄、许佩霖 (2023)
+✓ Extracted: artwork-17 - 不稳定轮廓 by 李鹏飞 (2023)
+✓ Extracted: artwork-18 - 无序共识 by 张瑞航 (2023)
+✓ Extracted: artwork-19 - 非池中 by 王梓潘 (2023)
+✓ Extracted: artwork-20 - 环形虚无 by 杨锋 (2023)
+✓ Extracted: artwork-21 - Upload by 李索、张恺麟 (2023)
+✓ Extracted: artwork-22 - 岭南道中 by 洪泽榕 (2023)
+✓ Extracted: artwork-23 - 岭南道中 by 洪泽榕 (2023)
+✓ Extracted: artwork-24 - 归原.共生 by 刘铁源 (2023)
+✓ Extracted: artwork-25 - 溯元1号 by 郭雨欣 (2023)
+✓ Extracted: artwork-26 - 辩白书 by 吴振华 (2023)
+✓ Extracted: artwork-27 - 辩白书 by 张苑婷 (2023)
+✓ Extracted: artwork-28 - 举步维艰 by 刘坤 (2023)
+✓ Extracted: artwork-29 - 双生界 by 向诗雨 陈晨 王思莹 (2023)
+✓ Extracted: artwork-30 - ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ by 龍暐翔 (2023)
+✓ Extracted: artwork-31 - 黑色1號 by 林書旭 (2023)
+✓ Extracted: artwork-32 - 密碼 by 鄭曉瓊 (2023)
+✓ Extracted: artwork-33 - 身體重構系列-鼻 by 謝綺文 (2023)
+✓ Extracted: artwork-34 - 方城市 by 郭姸瑩 (2023)
+✓ Extracted: artwork-35 - 传统复原色纸行草册页镜框《容斋随笔摘抄 by 陈之涵 (2023)
+✓ Extracted: artwork-36 - Lauren Lee McCarthy and David Leonard by L.A.Suzie (2023)
+✓ Extracted: artwork-37 - 3 x 70 x 365 = 76650 by 刘海天 (2023)
+✓ Extracted: artwork-38 - 3 x 70 x 365 = 76650 by 刘海天 (2023)
+
+✓ Total artworks extracted: 38
+
+// Copy this to js/data.js artworks array:
+
+const artworks = [
+  {
+    "id": "artwork-1",
+    "titleZh": "Memory (Painting Operation Unit: Second Generation)",
+    "titleEn": "Memory (Painting Operation Unit: Second Generation)",
+    "artist": "Sougwen Chung",
+    "year": 2022,
+    "imageUrl": "/assets/artworks/artwork-1/main.jpg",
+    "context": "Artwork 1 by Sougwen Chung. More details to be added."
+  },
+  {
+    "id": "artwork-2",
+    "titleZh": "Painting Operation Unit: First Generation (Imitation)",
+    "titleEn": "Painting Operation Unit: First Generation (Imitation)",
+    "artist": "Sougwen Chung",
+    "year": 2015,
+    "imageUrl": "/assets/artworks/artwork-2/main.jpg",
+    "context": "Artwork 2 by Sougwen Chung. More details to be added."
+  },
+  {
+    "id": "artwork-3",
+    "titleZh": "All Things in All Things",
+    "titleEn": "All Things in All Things",
+    "artist": "Sougwen Chung",
+    "year": 2018,
+    "imageUrl": "/assets/artworks/artwork-3/main.jpg",
+    "context": "Artwork 3 by Sougwen Chung. More details to be added."
+  },
+  {
+    "id": "artwork-4",
+    "titleZh": "Exquisite Dialogue: Sepals, Petals, Thorns",
+    "titleEn": "Exquisite Dialogue: Sepals, Petals, Thorns",
+    "artist": "Sougwen Chung",
+    "year": 2020,
+    "imageUrl": "/assets/artworks/artwork-4/main.jpg",
+    "context": "Artwork 4 by Sougwen Chung. More details to be added."
+  },
+  {
+    "id": "artwork-5",
+    "titleZh": "数息生长",
+    "titleEn": "数息生长",
+    "artist": "程佳瑜 (Cheng Jiayu)",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-5/main.jpg",
+    "context": "Artwork 5 by 程佳瑜 (Cheng Jiayu). More details to be added."
+  },
+  {
+    "id": "artwork-6",
+    "titleZh": "记忆潮汐--地平线系列",
+    "titleEn": "记忆潮汐--地平线系列",
+    "artist": "张凯飞",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-6/main.jpg",
+    "context": "Artwork 6 by 张凯飞. More details to be added."
+  },
+  {
+    "id": "artwork-7",
+    "titleZh": "我永远在你的背后",
+    "titleEn": "我永远在你的背后",
+    "artist": "宋佳益",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-7/main.jpg",
+    "context": "Artwork 7 by 宋佳益. More details to be added."
+  },
+  {
+    "id": "artwork-8",
+    "titleZh": "烂柯人",
+    "titleEn": "烂柯人",
+    "artist": "李凯文、赵冠杰、陈号",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-8/main.jpg",
+    "context": "Artwork 8 by 李凯文、赵冠杰、陈号. More details to be added."
+  },
+  {
+    "id": "artwork-9",
+    "titleZh": "源游",
+    "titleEn": "源游",
+    "artist": "叶君豪",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-9/main.jpg",
+    "context": "Artwork 9 by 叶君豪. More details to be added."
+  },
+  {
+    "id": "artwork-10",
+    "titleZh": "源游",
+    "titleEn": "源游",
+    "artist": "陈筱薇",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-10/main.jpg",
+    "context": "Artwork 10 by 陈筱薇. More details to be added."
+  },
+  {
+    "id": "artwork-11",
+    "titleZh": "时间的房子：被演算的族谱记忆",
+    "titleEn": "时间的房子：被演算的族谱记忆",
+    "artist": "陈玉萍",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-11/main.jpg",
+    "context": "Artwork 11 by 陈玉萍. More details to be added."
+  },
+  {
+    "id": "artwork-12",
+    "titleZh": "格竹",
+    "titleEn": "格竹",
+    "artist": "张引",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-12/main.jpg",
+    "context": "Artwork 12 by 张引. More details to be added."
+  },
+  {
+    "id": "artwork-13",
+    "titleZh": "逐日计划",
+    "titleEn": "逐日计划",
+    "artist": "王博",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-13/main.jpg",
+    "context": "Artwork 13 by 王博. More details to be added."
+  },
+  {
+    "id": "artwork-14",
+    "titleZh": "X博物馆",
+    "titleEn": "X博物馆",
+    "artist": "魏云佳",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-14/main.jpg",
+    "context": "Artwork 14 by 魏云佳. More details to be added."
+  },
+  {
+    "id": "artwork-15",
+    "titleZh": "404词窟",
+    "titleEn": "404词窟",
+    "artist": "修楚贺，张萌萌",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-15/main.jpg",
+    "context": "Artwork 15 by 修楚贺，张萌萌. More details to be added."
+  },
+  {
+    "id": "artwork-16",
+    "titleZh": "风从何处来·二",
+    "titleEn": "风从何处来·二",
+    "artist": "李芷暄、许佩霖",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-16/main.jpg",
+    "context": "Artwork 16 by 李芷暄、许佩霖. More details to be added."
+  },
+  {
+    "id": "artwork-17",
+    "titleZh": "不稳定轮廓",
+    "titleEn": "不稳定轮廓",
+    "artist": "李鹏飞",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-17/main.jpg",
+    "context": "Artwork 17 by 李鹏飞. More details to be added."
+  },
+  {
+    "id": "artwork-18",
+    "titleZh": "无序共识",
+    "titleEn": "无序共识",
+    "artist": "张瑞航",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-18/main.jpg",
+    "context": "Artwork 18 by 张瑞航. More details to be added."
+  },
+  {
+    "id": "artwork-19",
+    "titleZh": "非池中",
+    "titleEn": "非池中",
+    "artist": "王梓潘",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-19/main.jpg",
+    "context": "Artwork 19 by 王梓潘. More details to be added."
+  },
+  {
+    "id": "artwork-20",
+    "titleZh": "环形虚无",
+    "titleEn": "环形虚无",
+    "artist": "杨锋",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-20/main.jpg",
+    "context": "Artwork 20 by 杨锋. More details to be added."
+  },
+  {
+    "id": "artwork-21",
+    "titleZh": "Upload",
+    "titleEn": "Upload",
+    "artist": "李索、张恺麟",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-21/main.jpg",
+    "context": "Artwork 21 by 李索、张恺麟. More details to be added."
+  },
+  {
+    "id": "artwork-22",
+    "titleZh": "岭南道中",
+    "titleEn": "岭南道中",
+    "artist": "洪泽榕",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-22/main.jpg",
+    "context": "Artwork 22 by 洪泽榕. More details to be added."
+  },
+  {
+    "id": "artwork-23",
+    "titleZh": "岭南道中",
+    "titleEn": "岭南道中",
+    "artist": "洪泽榕",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-23/main.jpg",
+    "context": "Artwork 23 by 洪泽榕. More details to be added."
+  },
+  {
+    "id": "artwork-24",
+    "titleZh": "归原.共生",
+    "titleEn": "归原.共生",
+    "artist": "刘铁源",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-24/main.jpg",
+    "context": "Artwork 24 by 刘铁源. More details to be added."
+  },
+  {
+    "id": "artwork-25",
+    "titleZh": "溯元1号",
+    "titleEn": "溯元1号",
+    "artist": "郭雨欣",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-25/main.jpg",
+    "context": "Artwork 25 by 郭雨欣. More details to be added."
+  },
+  {
+    "id": "artwork-26",
+    "titleZh": "辩白书",
+    "titleEn": "辩白书",
+    "artist": "吴振华",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-26/main.jpg",
+    "context": "Artwork 26 by 吴振华. More details to be added."
+  },
+  {
+    "id": "artwork-27",
+    "titleZh": "辩白书",
+    "titleEn": "辩白书",
+    "artist": "张苑婷",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-27/main.jpg",
+    "context": "Artwork 27 by 张苑婷. More details to be added."
+  },
+  {
+    "id": "artwork-28",
+    "titleZh": "举步维艰",
+    "titleEn": "举步维艰",
+    "artist": "刘坤",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-28/main.jpg",
+    "context": "Artwork 28 by 刘坤. More details to be added."
+  },
+  {
+    "id": "artwork-29",
+    "titleZh": "双生界",
+    "titleEn": "双生界",
+    "artist": "向诗雨 陈晨 王思莹",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-29/main.jpg",
+    "context": "Artwork 29 by 向诗雨 陈晨 王思莹. More details to be added."
+  },
+  {
+    "id": "artwork-30",
+    "titleZh": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ",
+    "titleEn": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ",
+    "artist": "龍暐翔",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-30/main.jpg",
+    "context": "Artwork 30 by 龍暐翔. More details to be added."
+  },
+  {
+    "id": "artwork-31",
+    "titleZh": "黑色1號",
+    "titleEn": "黑色1號",
+    "artist": "林書旭",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-31/main.jpg",
+    "context": "Artwork 31 by 林書旭. More details to be added."
+  },
+  {
+    "id": "artwork-32",
+    "titleZh": "密碼",
+    "titleEn": "密碼",
+    "artist": "鄭曉瓊",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-32/main.jpg",
+    "context": "Artwork 32 by 鄭曉瓊. More details to be added."
+  },
+  {
+    "id": "artwork-33",
+    "titleZh": "身體重構系列-鼻",
+    "titleEn": "身體重構系列-鼻",
+    "artist": "謝綺文",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-33/main.jpg",
+    "context": "Artwork 33 by 謝綺文. More details to be added."
+  },
+  {
+    "id": "artwork-34",
+    "titleZh": "方城市",
+    "titleEn": "方城市",
+    "artist": "郭姸瑩",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-34/main.jpg",
+    "context": "Artwork 34 by 郭姸瑩. More details to be added."
+  },
+  {
+    "id": "artwork-35",
+    "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄",
+    "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄",
+    "artist": "陈之涵",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-35/main.jpg",
+    "context": "Artwork 35 by 陈之涵. More details to be added."
+  },
+  {
+    "id": "artwork-36",
+    "titleZh": "Lauren Lee McCarthy and David Leonard",
+    "titleEn": "Lauren Lee McCarthy and David Leonard",
+    "artist": "L.A.Suzie",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-36/main.jpg",
+    "context": "Artwork 36 by L.A.Suzie. More details to be added."
+  },
+  {
+    "id": "artwork-37",
+    "titleZh": "3 x 70 x 365 = 76650",
+    "titleEn": "3 x 70 x 365 = 76650",
+    "artist": "刘海天",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-37/main.jpg",
+    "context": "Artwork 37 by 刘海天. More details to be added."
+  },
+  {
+    "id": "artwork-38",
+    "titleZh": "3 x 70 x 365 = 76650",
+    "titleEn": "3 x 70 x 365 = 76650",
+    "artist": "刘海天",
+    "year": 2023,
+    "imageUrl": "/assets/artworks/artwork-38/main.jpg",
+    "context": "Artwork 38 by 刘海天. More details to be added."
+  }
+];
+
+✓ Saved to: I:\VULCA-EMNLP2025\scripts\extracted-artworks.json

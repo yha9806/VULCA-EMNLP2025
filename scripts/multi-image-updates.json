@@ -1,0 +1,1829 @@
+[
+  {
+    "artworkId": "artwork-5",
+    "titleZh": "数息生长",
+    "imageCount": 5,
+    "images": [
+      {
+        "id": "img-5-1",
+        "url": "/assets/artworks/artwork-5/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "数息生长 - 图片 1",
+        "titleEn": "数息生长 - Image 1",
+        "caption": "Image 1 from the artwork \"数息生长\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-5-2",
+        "url": "/assets/artworks/artwork-5/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "数息生长 - 图片 2",
+        "titleEn": "数息生长 - Image 2",
+        "caption": "Image 2 from the artwork \"数息生长\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-5-3",
+        "url": "/assets/artworks/artwork-5/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "数息生长 - 图片 3",
+        "titleEn": "数息生长 - Image 3",
+        "caption": "Image 3 from the artwork \"数息生长\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-5-4",
+        "url": "/assets/artworks/artwork-5/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "数息生长 - 图片 4",
+        "titleEn": "数息生长 - Image 4",
+        "caption": "Image 4 from the artwork \"数息生长\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-5-5",
+        "url": "/assets/artworks/artwork-5/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "数息生长 - 图片 5",
+        "titleEn": "数息生长 - Image 5",
+        "caption": "Image 5 from the artwork \"数息生长\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-6",
+    "titleZh": "记忆潮汐--地平线系列",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-6-1",
+        "url": "/assets/artworks/artwork-6/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "记忆潮汐--地平线系列 - 图片 1",
+        "titleEn": "记忆潮汐--地平线系列 - Image 1",
+        "caption": "Image 1 from the artwork \"记忆潮汐--地平线系列\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-6-2",
+        "url": "/assets/artworks/artwork-6/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "记忆潮汐--地平线系列 - 图片 2",
+        "titleEn": "记忆潮汐--地平线系列 - Image 2",
+        "caption": "Image 2 from the artwork \"记忆潮汐--地平线系列\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-7",
+    "titleZh": "我永远在你的背后",
+    "imageCount": 9,
+    "images": [
+      {
+        "id": "img-7-1",
+        "url": "/assets/artworks/artwork-7/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "我永远在你的背后 - 图片 1",
+        "titleEn": "我永远在你的背后 - Image 1",
+        "caption": "Image 1 from the artwork \"我永远在你的背后\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-7-2",
+        "url": "/assets/artworks/artwork-7/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "我永远在你的背后 - 图片 2",
+        "titleEn": "我永远在你的背后 - Image 2",
+        "caption": "Image 2 from the artwork \"我永远在你的背后\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-7-3",
+        "url": "/assets/artworks/artwork-7/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "我永远在你的背后 - 图片 3",
+        "titleEn": "我永远在你的背后 - Image 3",
+        "caption": "Image 3 from the artwork \"我永远在你的背后\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-7-4",
+        "url": "/assets/artworks/artwork-7/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "我永远在你的背后 - 图片 4",
+        "titleEn": "我永远在你的背后 - Image 4",
+        "caption": "Image 4 from the artwork \"我永远在你的背后\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-7-5",
+        "url": "/assets/artworks/artwork-7/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "我永远在你的背后 - 图片 5",
+        "titleEn": "我永远在你的背后 - Image 5",
+        "caption": "Image 5 from the artwork \"我永远在你的背后\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-7-6",
+        "url": "/assets/artworks/artwork-7/06.jpg",
+        "category": "installation",
+        "sequence": 6,
+        "titleZh": "我永远在你的背后 - 图片 6",
+        "titleEn": "我永远在你的背后 - Image 6",
+        "caption": "Image 6 from the artwork \"我永远在你的背后\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-7-7",
+        "url": "/assets/artworks/artwork-7/07.jpg",
+        "category": "process",
+        "sequence": 7,
+        "titleZh": "我永远在你的背后 - 图片 7",
+        "titleEn": "我永远在你的背后 - Image 7",
+        "caption": "Image 7 from the artwork \"我永远在你的背后\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-7-8",
+        "url": "/assets/artworks/artwork-7/08.jpg",
+        "category": "detail",
+        "sequence": 8,
+        "titleZh": "我永远在你的背后 - 图片 8",
+        "titleEn": "我永远在你的背后 - Image 8",
+        "caption": "Image 8 from the artwork \"我永远在你的背后\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-7-9",
+        "url": "/assets/artworks/artwork-7/09.jpg",
+        "category": "context",
+        "sequence": 9,
+        "titleZh": "我永远在你的背后 - 图片 9",
+        "titleEn": "我永远在你的背后 - Image 9",
+        "caption": "Image 9 from the artwork \"我永远在你的背后\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-9",
+    "titleZh": "源游",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-9-1",
+        "url": "/assets/artworks/artwork-9/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "源游 - 图片 1",
+        "titleEn": "源游 - Image 1",
+        "caption": "Image 1 from the artwork \"源游\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-9-2",
+        "url": "/assets/artworks/artwork-9/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "源游 - 图片 2",
+        "titleEn": "源游 - Image 2",
+        "caption": "Image 2 from the artwork \"源游\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-10",
+    "titleZh": "源游",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-10-1",
+        "url": "/assets/artworks/artwork-10/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "源游 - 图片 1",
+        "titleEn": "源游 - Image 1",
+        "caption": "Image 1 from the artwork \"源游\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-10-2",
+        "url": "/assets/artworks/artwork-10/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "源游 - 图片 2",
+        "titleEn": "源游 - Image 2",
+        "caption": "Image 2 from the artwork \"源游\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-11",
+    "titleZh": "时间的房子：被演算的族谱记忆",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-11-1",
+        "url": "/assets/artworks/artwork-11/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "时间的房子：被演算的族谱记忆 - 图片 1",
+        "titleEn": "时间的房子：被演算的族谱记忆 - Image 1",
+        "caption": "Image 1 from the artwork \"时间的房子：被演算的族谱记忆\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-11-2",
+        "url": "/assets/artworks/artwork-11/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "时间的房子：被演算的族谱记忆 - 图片 2",
+        "titleEn": "时间的房子：被演算的族谱记忆 - Image 2",
+        "caption": "Image 2 from the artwork \"时间的房子：被演算的族谱记忆\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-12",
+    "titleZh": "格竹",
+    "imageCount": 3,
+    "images": [
+      {
+        "id": "img-12-1",
+        "url": "/assets/artworks/artwork-12/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "格竹 - 图片 1",
+        "titleEn": "格竹 - Image 1",
+        "caption": "Image 1 from the artwork \"格竹\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-12-2",
+        "url": "/assets/artworks/artwork-12/02.jpg",
+        "category": "detail",
+        "sequence": 2,
+        "titleZh": "格竹 - 图片 2",
+        "titleEn": "格竹 - Image 2",
+        "caption": "Image 2 from the artwork \"格竹\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-12-3",
+        "url": "/assets/artworks/artwork-12/03.jpg",
+        "category": "final",
+        "sequence": 3,
+        "titleZh": "格竹 - 图片 3",
+        "titleEn": "格竹 - Image 3",
+        "caption": "Image 3 from the artwork \"格竹\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-13",
+    "titleZh": "逐日计划",
+    "imageCount": 5,
+    "images": [
+      {
+        "id": "img-13-1",
+        "url": "/assets/artworks/artwork-13/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "逐日计划 - 图片 1",
+        "titleEn": "逐日计划 - Image 1",
+        "caption": "Image 1 from the artwork \"逐日计划\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-13-2",
+        "url": "/assets/artworks/artwork-13/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "逐日计划 - 图片 2",
+        "titleEn": "逐日计划 - Image 2",
+        "caption": "Image 2 from the artwork \"逐日计划\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-13-3",
+        "url": "/assets/artworks/artwork-13/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "逐日计划 - 图片 3",
+        "titleEn": "逐日计划 - Image 3",
+        "caption": "Image 3 from the artwork \"逐日计划\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-13-4",
+        "url": "/assets/artworks/artwork-13/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "逐日计划 - 图片 4",
+        "titleEn": "逐日计划 - Image 4",
+        "caption": "Image 4 from the artwork \"逐日计划\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-13-5",
+        "url": "/assets/artworks/artwork-13/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "逐日计划 - 图片 5",
+        "titleEn": "逐日计划 - Image 5",
+        "caption": "Image 5 from the artwork \"逐日计划\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-14",
+    "titleZh": "X博物馆",
+    "imageCount": 12,
+    "images": [
+      {
+        "id": "img-14-1",
+        "url": "/assets/artworks/artwork-14/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "X博物馆 - 图片 1",
+        "titleEn": "X博物馆 - Image 1",
+        "caption": "Image 1 from the artwork \"X博物馆\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-2",
+        "url": "/assets/artworks/artwork-14/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "X博物馆 - 图片 2",
+        "titleEn": "X博物馆 - Image 2",
+        "caption": "Image 2 from the artwork \"X博物馆\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-3",
+        "url": "/assets/artworks/artwork-14/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "X博物馆 - 图片 3",
+        "titleEn": "X博物馆 - Image 3",
+        "caption": "Image 3 from the artwork \"X博物馆\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-4",
+        "url": "/assets/artworks/artwork-14/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "X博物馆 - 图片 4",
+        "titleEn": "X博物馆 - Image 4",
+        "caption": "Image 4 from the artwork \"X博物馆\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-5",
+        "url": "/assets/artworks/artwork-14/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "X博物馆 - 图片 5",
+        "titleEn": "X博物馆 - Image 5",
+        "caption": "Image 5 from the artwork \"X博物馆\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-6",
+        "url": "/assets/artworks/artwork-14/06.jpg",
+        "category": "installation",
+        "sequence": 6,
+        "titleZh": "X博物馆 - 图片 6",
+        "titleEn": "X博物馆 - Image 6",
+        "caption": "Image 6 from the artwork \"X博物馆\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-7",
+        "url": "/assets/artworks/artwork-14/07.jpg",
+        "category": "process",
+        "sequence": 7,
+        "titleZh": "X博物馆 - 图片 7",
+        "titleEn": "X博物馆 - Image 7",
+        "caption": "Image 7 from the artwork \"X博物馆\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-8",
+        "url": "/assets/artworks/artwork-14/08.jpg",
+        "category": "detail",
+        "sequence": 8,
+        "titleZh": "X博物馆 - 图片 8",
+        "titleEn": "X博物馆 - Image 8",
+        "caption": "Image 8 from the artwork \"X博物馆\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-9",
+        "url": "/assets/artworks/artwork-14/09.jpg",
+        "category": "context",
+        "sequence": 9,
+        "titleZh": "X博物馆 - 图片 9",
+        "titleEn": "X博物馆 - Image 9",
+        "caption": "Image 9 from the artwork \"X博物馆\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-10",
+        "url": "/assets/artworks/artwork-14/10.jpg",
+        "category": "final",
+        "sequence": 10,
+        "titleZh": "X博物馆 - 图片 10",
+        "titleEn": "X博物馆 - Image 10",
+        "caption": "Image 10 from the artwork \"X博物馆\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-11",
+        "url": "/assets/artworks/artwork-14/11.jpg",
+        "category": "installation",
+        "sequence": 11,
+        "titleZh": "X博物馆 - 图片 11",
+        "titleEn": "X博物馆 - Image 11",
+        "caption": "Image 11 from the artwork \"X博物馆\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-14-12",
+        "url": "/assets/artworks/artwork-14/12.jpg",
+        "category": "process",
+        "sequence": 12,
+        "titleZh": "X博物馆 - 图片 12",
+        "titleEn": "X博物馆 - Image 12",
+        "caption": "Image 12 from the artwork \"X博物馆\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-17",
+    "titleZh": "不稳定轮廓",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-17-1",
+        "url": "/assets/artworks/artwork-17/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "不稳定轮廓 - 图片 1",
+        "titleEn": "不稳定轮廓 - Image 1",
+        "caption": "Image 1 from the artwork \"不稳定轮廓\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-17-2",
+        "url": "/assets/artworks/artwork-17/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "不稳定轮廓 - 图片 2",
+        "titleEn": "不稳定轮廓 - Image 2",
+        "caption": "Image 2 from the artwork \"不稳定轮廓\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-18",
+    "titleZh": "无序共识",
+    "imageCount": 5,
+    "images": [
+      {
+        "id": "img-18-1",
+        "url": "/assets/artworks/artwork-18/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "无序共识 - 图片 1",
+        "titleEn": "无序共识 - Image 1",
+        "caption": "Image 1 from the artwork \"无序共识\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-18-2",
+        "url": "/assets/artworks/artwork-18/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "无序共识 - 图片 2",
+        "titleEn": "无序共识 - Image 2",
+        "caption": "Image 2 from the artwork \"无序共识\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-18-3",
+        "url": "/assets/artworks/artwork-18/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "无序共识 - 图片 3",
+        "titleEn": "无序共识 - Image 3",
+        "caption": "Image 3 from the artwork \"无序共识\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-18-4",
+        "url": "/assets/artworks/artwork-18/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "无序共识 - 图片 4",
+        "titleEn": "无序共识 - Image 4",
+        "caption": "Image 4 from the artwork \"无序共识\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-18-5",
+        "url": "/assets/artworks/artwork-18/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "无序共识 - 图片 5",
+        "titleEn": "无序共识 - Image 5",
+        "caption": "Image 5 from the artwork \"无序共识\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-19",
+    "titleZh": "非池中",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-19-1",
+        "url": "/assets/artworks/artwork-19/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "非池中 - 图片 1",
+        "titleEn": "非池中 - Image 1",
+        "caption": "Image 1 from the artwork \"非池中\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-19-2",
+        "url": "/assets/artworks/artwork-19/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "非池中 - 图片 2",
+        "titleEn": "非池中 - Image 2",
+        "caption": "Image 2 from the artwork \"非池中\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-20",
+    "titleZh": "环形虚无",
+    "imageCount": 8,
+    "images": [
+      {
+        "id": "img-20-1",
+        "url": "/assets/artworks/artwork-20/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "环形虚无 - 图片 1",
+        "titleEn": "环形虚无 - Image 1",
+        "caption": "Image 1 from the artwork \"环形虚无\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-20-2",
+        "url": "/assets/artworks/artwork-20/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "环形虚无 - 图片 2",
+        "titleEn": "环形虚无 - Image 2",
+        "caption": "Image 2 from the artwork \"环形虚无\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-20-3",
+        "url": "/assets/artworks/artwork-20/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "环形虚无 - 图片 3",
+        "titleEn": "环形虚无 - Image 3",
+        "caption": "Image 3 from the artwork \"环形虚无\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-20-4",
+        "url": "/assets/artworks/artwork-20/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "环形虚无 - 图片 4",
+        "titleEn": "环形虚无 - Image 4",
+        "caption": "Image 4 from the artwork \"环形虚无\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-20-5",
+        "url": "/assets/artworks/artwork-20/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "环形虚无 - 图片 5",
+        "titleEn": "环形虚无 - Image 5",
+        "caption": "Image 5 from the artwork \"环形虚无\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-20-6",
+        "url": "/assets/artworks/artwork-20/06.jpg",
+        "category": "installation",
+        "sequence": 6,
+        "titleZh": "环形虚无 - 图片 6",
+        "titleEn": "环形虚无 - Image 6",
+        "caption": "Image 6 from the artwork \"环形虚无\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-20-7",
+        "url": "/assets/artworks/artwork-20/07.jpg",
+        "category": "process",
+        "sequence": 7,
+        "titleZh": "环形虚无 - 图片 7",
+        "titleEn": "环形虚无 - Image 7",
+        "caption": "Image 7 from the artwork \"环形虚无\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-20-8",
+        "url": "/assets/artworks/artwork-20/08.jpg",
+        "category": "detail",
+        "sequence": 8,
+        "titleZh": "环形虚无 - 图片 8",
+        "titleEn": "环形虚无 - Image 8",
+        "caption": "Image 8 from the artwork \"环形虚无\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-22",
+    "titleZh": "岭南道中",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-22-1",
+        "url": "/assets/artworks/artwork-22/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "岭南道中 - 图片 1",
+        "titleEn": "岭南道中 - Image 1",
+        "caption": "Image 1 from the artwork \"岭南道中\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-22-2",
+        "url": "/assets/artworks/artwork-22/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "岭南道中 - 图片 2",
+        "titleEn": "岭南道中 - Image 2",
+        "caption": "Image 2 from the artwork \"岭南道中\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-23",
+    "titleZh": "岭南道中",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-23-1",
+        "url": "/assets/artworks/artwork-23/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "岭南道中 - 图片 1",
+        "titleEn": "岭南道中 - Image 1",
+        "caption": "Image 1 from the artwork \"岭南道中\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-23-2",
+        "url": "/assets/artworks/artwork-23/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "岭南道中 - 图片 2",
+        "titleEn": "岭南道中 - Image 2",
+        "caption": "Image 2 from the artwork \"岭南道中\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-24",
+    "titleZh": "归原.共生",
+    "imageCount": 5,
+    "images": [
+      {
+        "id": "img-24-1",
+        "url": "/assets/artworks/artwork-24/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "归原.共生 - 图片 1",
+        "titleEn": "归原.共生 - Image 1",
+        "caption": "Image 1 from the artwork \"归原.共生\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-24-2",
+        "url": "/assets/artworks/artwork-24/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "归原.共生 - 图片 2",
+        "titleEn": "归原.共生 - Image 2",
+        "caption": "Image 2 from the artwork \"归原.共生\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-24-3",
+        "url": "/assets/artworks/artwork-24/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "归原.共生 - 图片 3",
+        "titleEn": "归原.共生 - Image 3",
+        "caption": "Image 3 from the artwork \"归原.共生\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-24-4",
+        "url": "/assets/artworks/artwork-24/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "归原.共生 - 图片 4",
+        "titleEn": "归原.共生 - Image 4",
+        "caption": "Image 4 from the artwork \"归原.共生\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-24-5",
+        "url": "/assets/artworks/artwork-24/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "归原.共生 - 图片 5",
+        "titleEn": "归原.共生 - Image 5",
+        "caption": "Image 5 from the artwork \"归原.共生\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-25",
+    "titleZh": "溯元1号",
+    "imageCount": 5,
+    "images": [
+      {
+        "id": "img-25-1",
+        "url": "/assets/artworks/artwork-25/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "溯元1号 - 图片 1",
+        "titleEn": "溯元1号 - Image 1",
+        "caption": "Image 1 from the artwork \"溯元1号\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-25-2",
+        "url": "/assets/artworks/artwork-25/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "溯元1号 - 图片 2",
+        "titleEn": "溯元1号 - Image 2",
+        "caption": "Image 2 from the artwork \"溯元1号\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-25-3",
+        "url": "/assets/artworks/artwork-25/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "溯元1号 - 图片 3",
+        "titleEn": "溯元1号 - Image 3",
+        "caption": "Image 3 from the artwork \"溯元1号\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-25-4",
+        "url": "/assets/artworks/artwork-25/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "溯元1号 - 图片 4",
+        "titleEn": "溯元1号 - Image 4",
+        "caption": "Image 4 from the artwork \"溯元1号\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-25-5",
+        "url": "/assets/artworks/artwork-25/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "溯元1号 - 图片 5",
+        "titleEn": "溯元1号 - Image 5",
+        "caption": "Image 5 from the artwork \"溯元1号\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-26",
+    "titleZh": "辩白书",
+    "imageCount": 4,
+    "images": [
+      {
+        "id": "img-26-1",
+        "url": "/assets/artworks/artwork-26/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "辩白书 - 图片 1",
+        "titleEn": "辩白书 - Image 1",
+        "caption": "Image 1 from the artwork \"辩白书\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-26-2",
+        "url": "/assets/artworks/artwork-26/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "辩白书 - 图片 2",
+        "titleEn": "辩白书 - Image 2",
+        "caption": "Image 2 from the artwork \"辩白书\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-26-3",
+        "url": "/assets/artworks/artwork-26/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "辩白书 - 图片 3",
+        "titleEn": "辩白书 - Image 3",
+        "caption": "Image 3 from the artwork \"辩白书\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-26-4",
+        "url": "/assets/artworks/artwork-26/04.jpg",
+        "category": "final",
+        "sequence": 4,
+        "titleZh": "辩白书 - 图片 4",
+        "titleEn": "辩白书 - Image 4",
+        "caption": "Image 4 from the artwork \"辩白书\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-27",
+    "titleZh": "辩白书",
+    "imageCount": 4,
+    "images": [
+      {
+        "id": "img-27-1",
+        "url": "/assets/artworks/artwork-27/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "辩白书 - 图片 1",
+        "titleEn": "辩白书 - Image 1",
+        "caption": "Image 1 from the artwork \"辩白书\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-27-2",
+        "url": "/assets/artworks/artwork-27/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "辩白书 - 图片 2",
+        "titleEn": "辩白书 - Image 2",
+        "caption": "Image 2 from the artwork \"辩白书\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-27-3",
+        "url": "/assets/artworks/artwork-27/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "辩白书 - 图片 3",
+        "titleEn": "辩白书 - Image 3",
+        "caption": "Image 3 from the artwork \"辩白书\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-27-4",
+        "url": "/assets/artworks/artwork-27/04.jpg",
+        "category": "final",
+        "sequence": 4,
+        "titleZh": "辩白书 - 图片 4",
+        "titleEn": "辩白书 - Image 4",
+        "caption": "Image 4 from the artwork \"辩白书\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-28",
+    "titleZh": "举步维艰",
+    "imageCount": 3,
+    "images": [
+      {
+        "id": "img-28-1",
+        "url": "/assets/artworks/artwork-28/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "举步维艰 - 图片 1",
+        "titleEn": "举步维艰 - Image 1",
+        "caption": "Image 1 from the artwork \"举步维艰\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-28-2",
+        "url": "/assets/artworks/artwork-28/02.jpg",
+        "category": "detail",
+        "sequence": 2,
+        "titleZh": "举步维艰 - 图片 2",
+        "titleEn": "举步维艰 - Image 2",
+        "caption": "Image 2 from the artwork \"举步维艰\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-28-3",
+        "url": "/assets/artworks/artwork-28/03.jpg",
+        "category": "final",
+        "sequence": 3,
+        "titleZh": "举步维艰 - 图片 3",
+        "titleEn": "举步维艰 - Image 3",
+        "caption": "Image 3 from the artwork \"举步维艰\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-29",
+    "titleZh": "双生界",
+    "imageCount": 5,
+    "images": [
+      {
+        "id": "img-29-1",
+        "url": "/assets/artworks/artwork-29/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "双生界 - 图片 1",
+        "titleEn": "双生界 - Image 1",
+        "caption": "Image 1 from the artwork \"双生界\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-29-2",
+        "url": "/assets/artworks/artwork-29/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "双生界 - 图片 2",
+        "titleEn": "双生界 - Image 2",
+        "caption": "Image 2 from the artwork \"双生界\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-29-3",
+        "url": "/assets/artworks/artwork-29/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "双生界 - 图片 3",
+        "titleEn": "双生界 - Image 3",
+        "caption": "Image 3 from the artwork \"双生界\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-29-4",
+        "url": "/assets/artworks/artwork-29/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "双生界 - 图片 4",
+        "titleEn": "双生界 - Image 4",
+        "caption": "Image 4 from the artwork \"双生界\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-29-5",
+        "url": "/assets/artworks/artwork-29/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "双生界 - 图片 5",
+        "titleEn": "双生界 - Image 5",
+        "caption": "Image 5 from the artwork \"双生界\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-30",
+    "titleZh": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-30-1",
+        "url": "/assets/artworks/artwork-30/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ - 图片 1",
+        "titleEn": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ - Image 1",
+        "caption": "Image 1 from the artwork \"ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-30-2",
+        "url": "/assets/artworks/artwork-30/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ - 图片 2",
+        "titleEn": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ - Image 2",
+        "caption": "Image 2 from the artwork \"ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-31",
+    "titleZh": "黑色1號",
+    "imageCount": 4,
+    "images": [
+      {
+        "id": "img-31-1",
+        "url": "/assets/artworks/artwork-31/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "黑色1號 - 图片 1",
+        "titleEn": "黑色1號 - Image 1",
+        "caption": "Image 1 from the artwork \"黑色1號\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-31-2",
+        "url": "/assets/artworks/artwork-31/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "黑色1號 - 图片 2",
+        "titleEn": "黑色1號 - Image 2",
+        "caption": "Image 2 from the artwork \"黑色1號\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-31-3",
+        "url": "/assets/artworks/artwork-31/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "黑色1號 - 图片 3",
+        "titleEn": "黑色1號 - Image 3",
+        "caption": "Image 3 from the artwork \"黑色1號\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-31-4",
+        "url": "/assets/artworks/artwork-31/04.jpg",
+        "category": "final",
+        "sequence": 4,
+        "titleZh": "黑色1號 - 图片 4",
+        "titleEn": "黑色1號 - Image 4",
+        "caption": "Image 4 from the artwork \"黑色1號\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-32",
+    "titleZh": "密碼",
+    "imageCount": 4,
+    "images": [
+      {
+        "id": "img-32-1",
+        "url": "/assets/artworks/artwork-32/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "密碼 - 图片 1",
+        "titleEn": "密碼 - Image 1",
+        "caption": "Image 1 from the artwork \"密碼\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-32-2",
+        "url": "/assets/artworks/artwork-32/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "密碼 - 图片 2",
+        "titleEn": "密碼 - Image 2",
+        "caption": "Image 2 from the artwork \"密碼\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-32-3",
+        "url": "/assets/artworks/artwork-32/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "密碼 - 图片 3",
+        "titleEn": "密碼 - Image 3",
+        "caption": "Image 3 from the artwork \"密碼\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-32-4",
+        "url": "/assets/artworks/artwork-32/04.jpg",
+        "category": "final",
+        "sequence": 4,
+        "titleZh": "密碼 - 图片 4",
+        "titleEn": "密碼 - Image 4",
+        "caption": "Image 4 from the artwork \"密碼\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-33",
+    "titleZh": "身體重構系列-鼻",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-33-1",
+        "url": "/assets/artworks/artwork-33/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "身體重構系列-鼻 - 图片 1",
+        "titleEn": "身體重構系列-鼻 - Image 1",
+        "caption": "Image 1 from the artwork \"身體重構系列-鼻\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-33-2",
+        "url": "/assets/artworks/artwork-33/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "身體重構系列-鼻 - 图片 2",
+        "titleEn": "身體重構系列-鼻 - Image 2",
+        "caption": "Image 2 from the artwork \"身體重構系列-鼻\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-34",
+    "titleZh": "方城市",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-34-1",
+        "url": "/assets/artworks/artwork-34/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "方城市 - 图片 1",
+        "titleEn": "方城市 - Image 1",
+        "caption": "Image 1 from the artwork \"方城市\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-34-2",
+        "url": "/assets/artworks/artwork-34/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "方城市 - 图片 2",
+        "titleEn": "方城市 - Image 2",
+        "caption": "Image 2 from the artwork \"方城市\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-35",
+    "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄",
+    "imageCount": 9,
+    "images": [
+      {
+        "id": "img-35-1",
+        "url": "/assets/artworks/artwork-35/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 1",
+        "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 1",
+        "caption": "Image 1 from the artwork \"传统复原色纸行草册页镜框《容斋随笔摘抄\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-35-2",
+        "url": "/assets/artworks/artwork-35/02.jpg",
+        "category": "process",
+        "sequence": 2,
+        "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 2",
+        "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 2",
+        "caption": "Image 2 from the artwork \"传统复原色纸行草册页镜框《容斋随笔摘抄\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-35-3",
+        "url": "/assets/artworks/artwork-35/03.jpg",
+        "category": "detail",
+        "sequence": 3,
+        "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 3",
+        "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 3",
+        "caption": "Image 3 from the artwork \"传统复原色纸行草册页镜框《容斋随笔摘抄\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-35-4",
+        "url": "/assets/artworks/artwork-35/04.jpg",
+        "category": "context",
+        "sequence": 4,
+        "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 4",
+        "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 4",
+        "caption": "Image 4 from the artwork \"传统复原色纸行草册页镜框《容斋随笔摘抄\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-35-5",
+        "url": "/assets/artworks/artwork-35/05.jpg",
+        "category": "final",
+        "sequence": 5,
+        "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 5",
+        "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 5",
+        "caption": "Image 5 from the artwork \"传统复原色纸行草册页镜框《容斋随笔摘抄\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-35-6",
+        "url": "/assets/artworks/artwork-35/06.jpg",
+        "category": "installation",
+        "sequence": 6,
+        "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 6",
+        "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 6",
+        "caption": "Image 6 from the artwork \"传统复原色纸行草册页镜框《容斋随笔摘抄\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-35-7",
+        "url": "/assets/artworks/artwork-35/07.jpg",
+        "category": "process",
+        "sequence": 7,
+        "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 7",
+        "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 7",
+        "caption": "Image 7 from the artwork \"传统复原色纸行草册页镜框《容斋随笔摘抄\". This process view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-35-8",
+        "url": "/assets/artworks/artwork-35/08.jpg",
+        "category": "detail",
+        "sequence": 8,
+        "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 8",
+        "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 8",
+        "caption": "Image 8 from the artwork \"传统复原色纸行草册页镜框《容斋随笔摘抄\". This detail view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-35-9",
+        "url": "/assets/artworks/artwork-35/09.jpg",
+        "category": "context",
+        "sequence": 9,
+        "titleZh": "传统复原色纸行草册页镜框《容斋随笔摘抄 - 图片 9",
+        "titleEn": "传统复原色纸行草册页镜框《容斋随笔摘抄 - Image 9",
+        "caption": "Image 9 from the artwork \"传统复原色纸行草册页镜框《容斋随笔摘抄\". This context view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-37",
+    "titleZh": "3 x 70 x 365 = 76650",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-37-1",
+        "url": "/assets/artworks/artwork-37/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "3 x 70 x 365 = 76650 - 图片 1",
+        "titleEn": "3 x 70 x 365 = 76650 - Image 1",
+        "caption": "Image 1 from the artwork \"3 x 70 x 365 = 76650\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-37-2",
+        "url": "/assets/artworks/artwork-37/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "3 x 70 x 365 = 76650 - 图片 2",
+        "titleEn": "3 x 70 x 365 = 76650 - Image 2",
+        "caption": "Image 2 from the artwork \"3 x 70 x 365 = 76650\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  },
+  {
+    "artworkId": "artwork-38",
+    "titleZh": "3 x 70 x 365 = 76650",
+    "imageCount": 2,
+    "images": [
+      {
+        "id": "img-38-1",
+        "url": "/assets/artworks/artwork-38/01.jpg",
+        "category": "installation",
+        "sequence": 1,
+        "titleZh": "3 x 70 x 365 = 76650 - 图片 1",
+        "titleEn": "3 x 70 x 365 = 76650 - Image 1",
+        "caption": "Image 1 from the artwork \"3 x 70 x 365 = 76650\". This installation view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      },
+      {
+        "id": "img-38-2",
+        "url": "/assets/artworks/artwork-38/02.jpg",
+        "category": "final",
+        "sequence": 2,
+        "titleZh": "3 x 70 x 365 = 76650 - 图片 2",
+        "titleEn": "3 x 70 x 365 = 76650 - Image 2",
+        "caption": "Image 2 from the artwork \"3 x 70 x 365 = 76650\". This final view shows... [TO BE CUSTOMIZED]",
+        "metadata": {
+          "year": 2024,
+          "dimensions": "TBD",
+          "medium": "TBD"
+        }
+      }
+    ]
+  }
+]

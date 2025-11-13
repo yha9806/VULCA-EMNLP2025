@@ -887,11 +887,21 @@ window.GalleryHeroRenderer = (function() {
     container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  // Initialize when DOM is ready
+  // Initialize when both DOM and VULCA_DATA are ready
+  function attemptInit() {
+    if (window.VULCA_DATA_READY) {
+      // Data is ready, initialize now
+      init();
+    } else {
+      // Data not ready yet, wait for event
+      document.addEventListener('vulca-data-ready', init, { once: true });
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', attemptInit);
   } else {
-    init();
+    attemptInit();
   }
 
   return {

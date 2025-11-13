@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography Test - 标题排版测试</title>
+  <link rel="stylesheet" href="styles/components/dialogue-player.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #F9F8F6;
+      font-family: 'Inter', sans-serif;
+    }
+    .test-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    @media (min-width: 1024px) {
+      .test-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .test-case {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .test-case h2 {
+      margin: 0 0 15px 0;
+      font-size: 1rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .viewport-label {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-grid">
+    <!-- Test 1: Short Title -->
+    <div class="test-case">
+      <h2>✅ 短标题 Short Title</h2>
+      <div class="dialogue-player" style="max-width: 800px;">
+        <div class="dialogue-player__header">
+          <div class="dialogue-player__topic">
+            <span class="dialogue-player__topic-zh" lang="zh">机械笔触中的自然韵律</span>
+            <span class="dialogue-player__topic-en" lang="en">Natural Rhythm in Mechanical Brushstrokes</span>
+          </div>
+          <div class="dialogue-player__participants">
+            <div class="dialogue-player__participant">苏轼 Su Shi</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 10px; font-size: 0.85rem; color: #6b7280;">
+        ✓ 应该完整显示，无省略号
+      </p>
+    </div>
+
+    <!-- Test 2: Long Title (should clamp to 2 lines) -->
+    <div class="test-case">
+      <h2>✅ 长标题（应该2行+省略号）</h2>
+      <div class="dialogue-player" style="max-width: 800px;">
+        <div class="dialogue-player__header">
+          <div class="dialogue-player__topic">
+            <span class="dialogue-player__topic-zh" lang="zh">机械笔触中的自然韵律：探索人工智能在艺术创作中的边界与可能性与传统美学的对话空间与未来展望</span>
+            <span class="dialogue-player__topic-en" lang="en">Natural Rhythm in Mechanical Brushstrokes: Exploring the Boundaries and Possibilities of AI in Art Creation and the Dialogue Space with Traditional Aesthetics</span>
+          </div>
+          <div class="dialogue-player__participants">
+            <div class="dialogue-player__participant">苏轼 Su Shi</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 10px; font-size: 0.85rem; color: #6b7280;">
+        ✓ 中文最多2行，超出部分显示"..."<br>
+        ✓ 英文完整显示（如果超出会自动换行）
+      </p>
+    </div>
+
+    <!-- Test 3: Mobile Width (375px) -->
+    <div class="test-case">
+      <h2>📱 移动端宽度 (375px)</h2>
+      <div class="dialogue-player" style="max-width: 375px;">
+        <div class="dialogue-player__header">
+          <div class="dialogue-player__topic">
+            <span class="dialogue-player__topic-zh" lang="zh">机械笔触中的自然韵律：探索人工智能边界</span>
+            <span class="dialogue-player__topic-en" lang="en">Natural Rhythm in Mechanical Brushstrokes</span>
+          </div>
+          <div class="dialogue-player__participants">
+            <div class="dialogue-player__participant">苏轼</div>
+            <div class="dialogue-player__participant">王阳明</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 10px; font-size: 0.85rem; color: #6b7280;">
+        ✓ 字体缩小到 1rem (16px)<br>
+        ✓ 无水平溢出
+      </p>
+    </div>
+
+    <!-- Test 4: Desktop Width (1200px) -->
+    <div class="test-case">
+      <h2>🖥️ 桌面端宽度 (800px)</h2>
+      <div class="dialogue-player" style="max-width: 800px;">
+        <div class="dialogue-player__header">
+          <div class="dialogue-player__topic">
+            <span class="dialogue-player__topic-zh" lang="zh">机械笔触中的自然韵律：探索人工智能边界</span>
+            <span class="dialogue-player__topic-en" lang="en">Natural Rhythm in Mechanical Brushstrokes</span>
+          </div>
+          <div class="dialogue-player__participants">
+            <div class="dialogue-player__participant">苏轼 Su Shi</div>
+            <div class="dialogue-player__participant">王阳明 Wang Yangming</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 10px; font-size: 0.85rem; color: #6b7280;">
+        ✓ 字体放大到 1.2rem (19.2px)<br>
+        ✓ 更好的可读性
+      </p>
+    </div>
+
+    <!-- Test 5: Typography Hierarchy -->
+    <div class="test-case">
+      <h2>📏 排版层次测试</h2>
+      <div class="dialogue-player" style="max-width: 800px;">
+        <div class="dialogue-player__header">
+          <div class="dialogue-player__topic">
+            <span class="dialogue-player__topic-zh" lang="zh">机械笔触中的自然韵律</span>
+            <span class="dialogue-player__topic-en" lang="en">Natural Rhythm in Mechanical Brushstrokes</span>
+          </div>
+          <div class="dialogue-player__participants">
+            <div class="dialogue-player__participant">苏轼 Su Shi</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 10px; padding: 10px; background: #f3f4f6; border-radius: 6px;">
+        <p style="margin: 5px 0; font-size: 0.85rem; color: #374151;">
+          <strong>检查点：</strong><br>
+          ✓ 中文标题更大更突出（主标题）<br>
+          ✓ 英文副标题稍小且半透明（次要）<br>
+          ✓ 参与者标签更小（辅助信息）<br>
+          ✓ 视觉层次清晰
+        </p>
+      </div>
+    </div>
+
+    <!-- Test 6: Responsive Font Scaling -->
+    <div class="test-case">
+      <h2>🔄 响应式缩放测试</h2>
+      <div id="responsive-test" style="width: 100%; resize: horizontal; overflow: auto; border: 2px dashed #d1d5db; padding: 10px;">
+        <div class="dialogue-player">
+          <div class="dialogue-player__header">
+            <div class="dialogue-player__topic">
+              <span class="dialogue-player__topic-zh" lang="zh" id="test-zh">机械笔触中的自然韵律</span>
+              <span class="dialogue-player__topic-en" lang="en" id="test-en">Natural Rhythm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="size-display" style="margin-top: 10px; padding: 10px; background: #f3f4f6; border-radius: 6px; font-size: 0.85rem; font-family: monospace;">
+        <strong>实时字号：</strong><br>
+        <span id="zh-size">中文: --</span><br>
+        <span id="en-size">英文: --</span>
+      </div>
+      <p style="margin-top: 10px; font-size: 0.85rem; color: #6b7280;">
+        💡 提示：拖动边框调整宽度，观察字体大小变化
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Real-time font size display
+    function updateFontSizes() {
+      const zhEl = document.getElementById('test-zh');
+      const enEl = document.getElementById('test-en');
+
+      if (zhEl && enEl) {
+        const zhSize = window.getComputedStyle(zhEl).fontSize;
+        const enSize = window.getComputedStyle(enEl).fontSize;
+
+        document.getElementById('zh-size').textContent = `中文: ${zhSize} (${(parseFloat(zhSize) / 16).toFixed(2)}rem)`;
+        document.getElementById('en-size').textContent = `英文: ${enSize} (${(parseFloat(enSize) / 16).toFixed(2)}rem)`;
+      }
+    }
+
+    // Update on load and resize
+    window.addEventListener('load', updateFontSizes);
+    window.addEventListener('resize', updateFontSizes);
+
+    // Update every 500ms for manual resize
+    setInterval(updateFontSizes, 500);
+  </script>
+</body>
+</html>

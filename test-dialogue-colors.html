@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dialogue Player - Color System Test</title>
+  <link rel="stylesheet" href="styles/components/dialogue-player.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: #F9F8F6;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      color: #2d2d2d;
+      margin-bottom: 40px;
+    }
+    .color-test-section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .color-test-section h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>对话系统颜色测试 Dialogue Player Color Test</h1>
+
+    <!-- Color Palette Reference -->
+    <div class="color-test-section">
+      <h2>🎨 新颜色系统 New Color System</h2>
+      <p>
+        <strong>主色调 Primary:</strong> #B85C3C (Terracotta 赤陶色) → #D4A574 (Gold 金色)<br>
+        <strong>悬停态 Hover:</strong> #A04B2F (Dark Terracotta 深赤陶色)<br>
+        <strong>旧颜色 Old:</strong> <del>#667eea (Purple) → #764ba2 (Dark Purple)</del>
+      </p>
+    </div>
+
+    <!-- Dialogue Player Demo -->
+    <div class="dialogue-player">
+      <!-- Header with new gradient -->
+      <div class="dialogue-player__header">
+        <div class="dialogue-player__topic">
+          <span class="dialogue-player__topic-zh" lang="zh">机械笔触中的自然韵律</span>
+          <span class="dialogue-player__topic-en" lang="en">Natural Rhythm in Mechanical Brushstrokes</span>
+        </div>
+        <div class="dialogue-player__participants">
+          <div class="dialogue-player__participant">苏轼 Su Shi</div>
+          <div class="dialogue-player__participant">王阳明 Wang Yangming</div>
+        </div>
+      </div>
+
+      <!-- Messages Container -->
+      <div class="dialogue-player__messages">
+        <div class="dialogue-message">
+          <div class="message-header">
+            <span class="message-author" style="color: #B85C3C;">苏轼 Su Shi</span>
+            <span class="interaction-badge initial">Initial</span>
+          </div>
+          <div class="message-content">
+            <p>机械与自然的对话，恰似书法中的收放自如。这些由算法驱动的笔触，虽出自程序之手，却流露出一种超越技术的灵性。</p>
+          </div>
+        </div>
+
+        <div class="dialogue-message">
+          <div class="message-header">
+            <span class="message-author" style="color: #2D5F4F;">王阳明 Wang Yangming</span>
+            <span class="interaction-badge agree-extend">Agree & Extend</span>
+          </div>
+          <div class="message-content">
+            <p>苏轼所言极是。这种"灵性"正是心之本体的显现。机械虽无心，但创造者的心意却能通过算法流淌其中。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls Section -->
+      <div class="dialogue-player__controls">
+        <!-- Mode Toggle -->
+        <div class="mode-toggle-container">
+          <div class="mode-toggle-label">Display Mode</div>
+          <div class="mode-toggle-buttons">
+            <button class="mode-toggle-btn">📜 Static View</button>
+            <button class="mode-toggle-btn active">▶️ Animated Dialogue</button>
+          </div>
+        </div>
+
+        <!-- Playback Controls -->
+        <div class="playback-controls">
+          <div class="controls-row">
+            <button class="control-button">
+              ▶️ Play
+            </button>
+            <select class="speed-selector">
+              <option value="0.5">0.5×</option>
+              <option value="1" selected>1×</option>
+              <option value="1.5">1.5×</option>
+              <option value="2">2×</option>
+            </select>
+          </div>
+
+          <!-- Timeline -->
+          <div class="timeline-container">
+            <input type="range" class="timeline-scrubber" min="0" max="100" value="30">
+            <div class="time-display">
+              <span>0:00</span>
+              <span>0:30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Test Info -->
+    <div class="color-test-section">
+      <h2>✅ 测试检查项 Test Checklist</h2>
+      <ul>
+        <li>✅ 顶部 Header 渐变：赤陶色 → 金色 (Terracotta → Gold)</li>
+        <li>✅ 标题文字有阴影 Text shadow for readability</li>
+        <li>✅ 激活的模式按钮使用暖色渐变 Active mode button uses warm gradient</li>
+        <li>✅ 播放按钮使用赤陶色 Play button uses terracotta</li>
+        <li>✅ 速度选择器 focus 时显示赤陶色边框 Speed selector shows terracotta border on focus</li>
+        <li>✅ 时间轴滑块使用赤陶色 Timeline scrubber uses terracotta</li>
+        <li>❌ 没有紫色 No purple colors visible</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Simple interactivity for testing
+    document.querySelectorAll('.mode-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-toggle-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    const controlBtn = document.querySelector('.control-button');
+    let isPlaying = false;
+    controlBtn.addEventListener('click', function() {
+      isPlaying = !isPlaying;
+      this.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+    });
+  </script>
+</body>
+</html>
