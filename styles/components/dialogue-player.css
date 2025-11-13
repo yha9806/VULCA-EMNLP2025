@@ -50,28 +50,24 @@
 }
 
 .dialogue-player__topic-zh {
-  display: -webkit-box; /* Required for line-clamp */
-  -webkit-line-clamp: 2; /* Phase 3.3 optimized: Reduced to 2 lines */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word; /* Phase 3.3: Better word wrapping */
-  font-size: clamp(0.95rem, 2.8vw, 1.1rem); /* Phase 3.3 optimized: Slightly smaller */
+  display: block; /* Changed from -webkit-box to show full title */
+  overflow: visible; /* Changed from hidden to show full title */
+  text-overflow: clip; /* Changed from ellipsis */
+  word-break: break-word; /* Keep for better word wrapping */
+  font-size: clamp(0.95rem, 2.8vw, 1.1rem);
   font-weight: 600;
-  line-height: 1.2;        /* Phase 3.3 optimized: Tighter line height */
+  line-height: 1.3; /* Slightly increased for better readability */
 }
 
 .dialogue-player__topic-en {
-  display: -webkit-box; /* Phase 3.3: Add line-clamp for consistency */
-  -webkit-line-clamp: 2; /* Phase 3.3 optimized: Reduced to 2 lines */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word; /* Phase 3.3: Better word wrapping */
-  font-size: clamp(0.8rem, 2.3vw, 0.9rem); /* Phase 3.3 optimized: Slightly smaller */
+  display: block; /* Changed from -webkit-box to show full title */
+  overflow: visible; /* Changed from hidden to show full title */
+  text-overflow: clip; /* Changed from ellipsis */
+  word-break: break-word; /* Keep for better word wrapping */
+  font-size: clamp(0.8rem, 2.3vw, 0.9rem);
   opacity: 0.9;
-  margin-top: 2px;         /* Phase 3.3 optimized: Reduced margin */
-  line-height: 1.3;        /* Phase 3.3 optimized: Tighter line height */
+  margin-top: 4px; /* Slightly increased for better spacing */
+  line-height: 1.4; /* Slightly increased for better readability */
 }
 
 .dialogue-player__participants {
@@ -189,18 +185,20 @@
   transform: scale(1.02); /* Subtle emphasis */
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   box-shadow: 0 4px 16px rgba(184, 92, 60, 0.2); /* Warm glow matching color system */
+  animation: fadeInMessage 0.5s ease-out; /* Fade-in animation when message revealed */
 }
 
-/* Future messages (dimmed, pending) */
+/* Future messages (show thought chain, hide content) */
 .dialogue-message.future {
-  opacity: 0.4;
-  transition: opacity 0.3s ease-out;
+  display: block; /* Changed from none to show thought chain and "生成中..." label */
   position: relative; /* For ::after badge */
+  opacity: 0.6; /* Dimmed to indicate future state */
+  transition: opacity 0.3s ease-out;
 }
 
 /* Hide actual content in future messages - show thought chain instead */
 .dialogue-message.future .message-content {
-  display: none !important;
+  display: none !important; /* Hide real content */
 }
 
 /* Hide interaction badge for future messages - it should appear AFTER content is revealed */
@@ -232,6 +230,18 @@
 @keyframes pulse {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
+}
+
+/* Fade-in animation for message reveal */
+@keyframes fadeInMessage {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
 }
 
 /* Thought chain (thinking process display) */
