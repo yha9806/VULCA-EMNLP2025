@@ -351,6 +351,38 @@
       }
     },
     {
+      "id": "artwork-10",
+      "titleZh": "源游",
+      "titleEn": "Origin Wandering",
+      "year": 2024,
+      "artist": "陈筱薇",
+      "imageUrl": "/assets/artworks/artwork-10/01.jpg",
+      "primaryImageId": "img-10-1",
+      "context": "Exploring themes of displacement and belonging through mixed media. This work examines how personal and cultural histories shape identity and artistic expression.",
+      "images": [
+        {
+          "id": "img-10-1",
+          "url": "/assets/artworks/artwork-10/01.jpg",
+          "sequence": 1,
+          "titleZh": "作品图片 1",
+          "titleEn": "Artwork Image 1"
+        },
+        {
+          "id": "img-10-2",
+          "url": "/assets/artworks/artwork-10/02.jpg",
+          "sequence": 2,
+          "titleZh": "作品图片 2",
+          "titleEn": "Artwork Image 2"
+        }
+      ],
+      "metadata": {
+        "source": "ppt-slide-13",
+        "artistZh": "陈筱薇",
+        "titleZh": "源游",
+        "imageCount": 2
+      }
+    },
+    {
       "id": "artwork-11",
       "titleZh": "时间的房子：被演算的族谱记忆",
       "titleEn": "The House of Time: Calculated Genealogical Memory",
@@ -568,6 +600,31 @@
         "artistZh": "李芷暄、许佩霖",
         "titleZh": "风从何处来·二",
         "imageCount": 2
+      }
+    },
+    {
+      "id": "artwork-17",
+      "titleZh": "不稳定轮廓",
+      "titleEn": "Unstable Contours",
+      "year": 2024,
+      "artist": "李鹏飞",
+      "imageUrl": "/assets/artworks/artwork-17/01.png",
+      "primaryImageId": "img-17-1",
+      "context": "An exploration of form in flux, where boundaries dissolve and reshape. The work challenges fixed perceptions through shifting visual elements that resist stable definition.",
+      "images": [
+        {
+          "id": "img-17-1",
+          "url": "/assets/artworks/artwork-17/01.png",
+          "sequence": 1,
+          "titleZh": "作品图片 1",
+          "titleEn": "Artwork Image 1"
+        }
+      ],
+      "metadata": {
+        "source": "ppt-slide-29",
+        "artistZh": "李鹏飞",
+        "titleZh": "不稳定轮廓",
+        "imageCount": 1
       }
     },
     {
@@ -1026,6 +1083,32 @@
       }
     },
     {
+      "id": "artwork-30",
+      "titleZh": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ",
+      "titleEn": "Xiu~Xiu~Xiu~Beng (Sound Onomatopoeia)",
+      "year": 2024,
+      "artist": "龍暐翔",
+      "imageUrl": "/assets/artworks/artwork-30/01.png",
+      "primaryImageId": "img-30-1",
+      "context": "A sound-based artwork using Chinese phonetic symbols (Bopomofo/Zhuyin) to represent onomatopoeia. The work playfully explores the relationship between written symbols, sound, and meaning in linguistic systems.",
+      "images": [
+        {
+          "id": "img-30-1",
+          "url": "/assets/artworks/artwork-30/01.png",
+          "sequence": 1,
+          "titleZh": "作品图片 1",
+          "titleEn": "Artwork Image 1"
+        }
+      ],
+      "metadata": {
+        "source": "ppt-slide-63",
+        "artistZh": "龍暐翔",
+        "titleZh": "ㄒㄧㄡ~ㄒㄧㄡ~ㄒㄧㄡ~ㄅㄥ",
+        "descriptionZh": "李國嘉《黃仁勳，這就是你想要的世界嗎？》\n1.錄像裝置動態影像參考一:\n https://www.youtube.com/watch?v=wS6iByDk8Z4\n\n2.錄像裝置動態影像參考二:\nhttps://www.youtube.com/watch?v=eJeF2KaM7Dc",
+        "imageCount": 1
+      }
+    },
+    {
       "id": "artwork-31",
       "titleZh": "黑色1號",
       "titleEn": "Black No. 1",
@@ -1257,222 +1340,6 @@
           "titleEn": "Artwork Image 2"
         }
       ]
-    },
-    {
-      "id": "artwork-39",
-      "titleZh": "渴望说出难以忘怀的事物 III",
-      "titleEn": "Longing to Speak of Unforgettable Things III",
-      "year": 2024,
-      "artist": "凌筱薇 (Ling Xiaowei)",
-      "imageUrl": "/assets/artworks/artwork-39/01.jpg",
-      "primaryImageId": "img-39-1",
-      "context": "An exploration of memory and expression through contemporary art practices",
-      "status": "confirmed",
-      "images": [
-        {
-          "id": "img-39-1",
-          "url": "/assets/artworks/artwork-39/01.jpg",
-          "sequence": 1,
-          "titleZh": "主作品图",
-          "titleEn": "Main Artwork Image"
-        }
-      ],
-      "metadata": {
-        "source": "ppt-slide-13",
-        "artistZh": "凌筱薇",
-        "school": "中央美术学院",
-        "confirmationDate": "2025-11-14",
-        "imageCount": 1
-      }
-    },
-    {
-      "id": "artwork-40",
-      "titleZh": "作品待定",
-      "titleEn": "Artwork TBD",
-      "year": 2025,
-      "artist": "金钛锆 (Jin Taigao)",
-      "imageUrl": "/assets/placeholders/pending-artwork-40.svg",
-      "primaryImageId": "img-40-placeholder",
-      "context": "Artwork details to be confirmed",
-      "status": "pending",
-      "images": [
-        {
-          "id": "img-40-placeholder",
-          "url": "/assets/placeholders/pending-artwork-40.svg",
-          "sequence": 1,
-          "titleZh": "即将推出",
-          "titleEn": "Coming Soon"
-        }
-      ],
-      "metadata": {
-        "source": "ppt-slide-98",
-        "artistZh": "金钛锆",
-        "school": "待确认",
-        "expectedDate": "2025-12-01",
-        "imageCount": 1
-      }
-    },
-    {
-      "id": "artwork-41",
-      "titleZh": "郭缤禧作品",
-      "titleEn": "Guo Binxi's Artwork",
-      "year": 2024,
-      "artist": "郭缤禧 (Guo Binxi)",
-      "imageUrl": "/assets/artworks/artwork-41/01.jpg",
-      "primaryImageId": "img-41-1",
-      "context": "Contemporary art exploration",
-      "status": "confirmed",
-      "images": [
-        {
-          "id": "img-41-1",
-          "url": "/assets/artworks/artwork-41/01.jpg",
-          "sequence": 1,
-          "titleZh": "主作品图",
-          "titleEn": "Main Artwork Image"
-        }
-      ],
-      "metadata": {
-        "source": "ppt-final-version",
-        "artistZh": "郭缤禧",
-        "school": "四川美术学院",
-        "confirmationDate": "2025-11-14",
-        "imageCount": 1
-      }
-    },
-    {
-      "id": "artwork-42",
-      "titleZh": "文献展示",
-      "titleEn": "Documentary Exhibition",
-      "year": 2024,
-      "artist": "一名奇怪的鸟类观察员 (A Strange Bird Observer)",
-      "imageUrl": "/assets/placeholders/pending-artwork-42.svg",
-      "primaryImageId": "img-42-placeholder",
-      "context": "Literature and documentary display, in progress",
-      "status": "pending",
-      "images": [
-        {
-          "id": "img-42-placeholder",
-          "url": "/assets/placeholders/pending-artwork-42.svg",
-          "sequence": 1,
-          "titleZh": "文献准备中",
-          "titleEn": "Documents in Preparation"
-        }
-      ],
-      "metadata": {
-        "source": "ppt-slide-99",
-        "artistZh": "一名奇怪的鸟类观察员",
-        "school": "独立艺术家",
-        "expectedDate": "2025-11-30",
-        "imageCount": 1
-      }
-    },
-    {
-      "id": "artwork-43",
-      "titleZh": "林杨彬作品",
-      "titleEn": "Lin Yangbin's Artwork",
-      "year": 2024,
-      "artist": "林杨彬 (Lin Yangbin)",
-      "imageUrl": "/assets/artworks/artwork-43/01.jpg",
-      "primaryImageId": "img-43-1",
-      "context": "Contemporary art creation",
-      "status": "confirmed",
-      "images": [
-        {
-          "id": "img-43-1",
-          "url": "/assets/artworks/artwork-43/01.jpg",
-          "sequence": 1,
-          "titleZh": "主作品图",
-          "titleEn": "Main Artwork Image"
-        }
-      ],
-      "metadata": {
-        "source": "ppt-final-version",
-        "artistZh": "林杨彬",
-        "school": "广东美术学院",
-        "confirmationDate": "2025-11-14",
-        "imageCount": 1
-      }
-    },
-    {
-      "id": "artwork-44",
-      "titleZh": "AI影像作品",
-      "titleEn": "AI Video Work",
-      "year": 2025,
-      "artist": "罗薇 (Luo Wei)",
-      "imageUrl": "/assets/placeholders/pending-artwork-44.svg",
-      "primaryImageId": "img-44-placeholder",
-      "context": "AI-generated video artwork, currently in production",
-      "status": "pending",
-      "images": [
-        {
-          "id": "img-44-placeholder",
-          "url": "/assets/placeholders/pending-artwork-44.svg",
-          "sequence": 1,
-          "titleZh": "制作中",
-          "titleEn": "In Production"
-        }
-      ],
-      "metadata": {
-        "source": "ppt-slide-100",
-        "artistZh": "罗薇",
-        "school": "待确认",
-        "expectedDate": "2025-12-15",
-        "imageCount": 1
-      }
-    },
-    {
-      "id": "artwork-45",
-      "titleZh": "邢辰力德作品",
-      "titleEn": "Xing Chenlide's Artwork",
-      "year": 2024,
-      "artist": "邢辰力德 (Xing Chenlide)",
-      "imageUrl": "/assets/artworks/artwork-45/01.jpg",
-      "primaryImageId": "img-45-1",
-      "context": "Contemporary art practice",
-      "status": "confirmed",
-      "images": [
-        {
-          "id": "img-45-1",
-          "url": "/assets/artworks/artwork-45/01.jpg",
-          "sequence": 1,
-          "titleZh": "主作品图",
-          "titleEn": "Main Artwork Image"
-        }
-      ],
-      "metadata": {
-        "source": "ppt-final-version",
-        "artistZh": "邢辰力德",
-        "school": "湖北美术学院",
-        "confirmationDate": "2025-11-14",
-        "imageCount": 1
-      }
-    },
-    {
-      "id": "artwork-46",
-      "titleZh": "周妤蓉作品",
-      "titleEn": "Zhou Yurong's Artwork",
-      "year": 2024,
-      "artist": "周妤蓉 (Zhou Yurong)",
-      "imageUrl": "/assets/artworks/artwork-46/01.jpg",
-      "primaryImageId": "img-46-1",
-      "context": "Contemporary art work",
-      "status": "confirmed",
-      "images": [
-        {
-          "id": "img-46-1",
-          "url": "/assets/artworks/artwork-46/01.jpg",
-          "sequence": 1,
-          "titleZh": "主作品图",
-          "titleEn": "Main Artwork Image"
-        }
-      ],
-      "metadata": {
-        "source": "ppt-final-version",
-        "artistZh": "周妤蓉",
-        "school": "台湾师范大学",
-        "confirmationDate": "2025-11-14",
-        "imageCount": 1
-      }
     }
   ],
   "personas": [
@@ -4507,402 +4374,6 @@
         "T": 5
       },
       "textEn": "**3 × 70 × 365 = 76650** (continuation) compels me to consider the ethics of \"algorithmic life optimization.\" If AI can calculate the \"optimal\" dietary regimen—what to eat each meal, when to eat, how much to consume—to extend lifespan or improve health, should we comply? This represents the \"algorithmization of life\"—reducing complex bio-social-cultural phenomena into optimizable variables. We already have AI nutritionists, AI fitness coaches, AI sleep advisors providing \"best\" recommendations based on big data analysis. Yet \"best\" for whom? Optimization for statistical averages, or for specific individuals? Optimization for longevity, or for quality of life? The deeper question: what is life's purpose? Living longest (maximizing the number 76650)? Or living best (maximizing meaningful experiences)? These often conflict—extending lifespan may require abandoning many pleasures (fine food, adventure); living vibrantly may shorten life (mountaineers, explorers). AI optimization typically presupposes singular objective functions (like maximizing expected lifespan), but human values are pluralistic, sometimes contradictory. If 刘海天's continuation could explore this tension—the trade-off between \"quantity\" (76650) and \"quality\" (meaningful meals)—it would be remarkably timely. I suggest a possible implementation: create two contrasting versions—\"AI-optimized 76650 meals\" (precisely calculating nutrition, timing, cost) versus \"human-chosen 76650 meals\" (based on desire, culture, sociality). Let viewers reflect: which life do we want? Additionally, \"accumulation\" evokes \"data residue\"—each online food order, each health app entry leaves data traces. These accumulate into our \"digital twins,\" used for prediction, marketing, control. 76650 meals represent not just biological fact, but 76650 instances of data production."
-    },
-    {
-      "artworkId": "artwork-39",
-      "personaId": "su-shi",
-      "textZh": "观凌筱薇 (Ling Xiaowei)之作《渴望说出难以忘怀的事物 III》，从苏轼（哲学-诗意）的视角出发，此作品值得深入探讨其艺术的精神内涵与人生哲理。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Longing to Speak of Unforgettable Things III\" by 凌筱薇 (Ling Xiaowei), from Su Shi's (哲学-诗意) perspective, this artwork deserves in-depth exploration of its spiritual essence and life philosophy in art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 7,
-        "P": 9,
-        "A": 9,
-        "I": 9,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-39",
-      "personaId": "guo-xi",
-      "textZh": "观凌筱薇 (Ling Xiaowei)之作《渴望说出难以忘怀的事物 III》，从郭熙（技术-系统）的视角出发，此作品值得深入探讨其构图法度与山水气象。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Longing to Speak of Unforgettable Things III\" by 凌筱薇 (Ling Xiaowei), from Guo Xi's (技术-系统) perspective, this artwork deserves in-depth exploration of its compositional principles and landscape atmosphere. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 9,
-        "P": 8,
-        "A": 9,
-        "I": 8,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-39",
-      "personaId": "john-ruskin",
-      "textZh": "观凌筱薇 (Ling Xiaowei)之作《渴望说出难以忘怀的事物 III》，从约翰·罗斯金（道德-政治）的视角出发，此作品值得深入探讨其艺术的社会责任与道德价值。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Longing to Speak of Unforgettable Things III\" by 凌筱薇 (Ling Xiaowei), from John Ruskin's (道德-政治) perspective, this artwork deserves in-depth exploration of its social responsibility and moral value of art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 9,
-        "P": 8,
-        "A": 8,
-        "I": 8,
-        "T": 7
-      }
-    },
-    {
-      "artworkId": "artwork-39",
-      "personaId": "mama-zola",
-      "textZh": "观凌筱薇 (Ling Xiaowei)之作《渴望说出难以忘怀的事物 III》，从Mama Zola（社区-去殖民）的视角出发，此作品值得深入探讨其集体记忆与文化传承。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Longing to Speak of Unforgettable Things III\" by 凌筱薇 (Ling Xiaowei), from Mama Zola's (社区-去殖民) perspective, this artwork deserves in-depth exploration of its collective memory and cultural transmission. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 7,
-        "P": 7,
-        "A": 8,
-        "I": 10,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-39",
-      "personaId": "professor-petrova",
-      "textZh": "观凌筱薇 (Ling Xiaowei)之作《渴望说出难以忘怀的事物 III》，从Professor Petrova（形式-结构）的视角出发，此作品值得深入探讨其艺术形式的陌生化与设备。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Longing to Speak of Unforgettable Things III\" by 凌筱薇 (Ling Xiaowei), from Professor Petrova's (形式-结构) perspective, this artwork deserves in-depth exploration of its defamiliarization and device in art forms. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 10,
-        "P": 7,
-        "A": 9,
-        "I": 5,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-39",
-      "personaId": "ai-ethics-reviewer",
-      "textZh": "观凌筱薇 (Ling Xiaowei)之作《渴望说出难以忘怀的事物 III》，从AI Ethics Reviewer（权力-系统）的视角出发，此作品值得深入探讨其AI艺术的伦理与权力结构。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Longing to Speak of Unforgettable Things III\" by 凌筱薇 (Ling Xiaowei), from AI Ethics Reviewer's (权力-系统) perspective, this artwork deserves in-depth exploration of its ethics and power structures in AI art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 8,
-        "P": 9,
-        "A": 5,
-        "I": 8,
-        "T": 4
-      }
-    },
-    {
-      "artworkId": "artwork-41",
-      "personaId": "su-shi",
-      "textZh": "观郭缤禧 (Guo Binxi)之作《郭缤禧作品》，从苏轼（哲学-诗意）的视角出发，此作品值得深入探讨其艺术的精神内涵与人生哲理。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Guo Binxi's Artwork\" by 郭缤禧 (Guo Binxi), from Su Shi's (哲学-诗意) perspective, this artwork deserves in-depth exploration of its spiritual essence and life philosophy in art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 6,
-        "P": 8,
-        "A": 9,
-        "I": 9,
-        "T": 7
-      }
-    },
-    {
-      "artworkId": "artwork-41",
-      "personaId": "guo-xi",
-      "textZh": "观郭缤禧 (Guo Binxi)之作《郭缤禧作品》，从郭熙（技术-系统）的视角出发，此作品值得深入探讨其构图法度与山水气象。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Guo Binxi's Artwork\" by 郭缤禧 (Guo Binxi), from Guo Xi's (技术-系统) perspective, this artwork deserves in-depth exploration of its compositional principles and landscape atmosphere. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 8,
-        "P": 7,
-        "A": 8,
-        "I": 6,
-        "T": 9
-      }
-    },
-    {
-      "artworkId": "artwork-41",
-      "personaId": "john-ruskin",
-      "textZh": "观郭缤禧 (Guo Binxi)之作《郭缤禧作品》，从约翰·罗斯金（道德-政治）的视角出发，此作品值得深入探讨其艺术的社会责任与道德价值。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Guo Binxi's Artwork\" by 郭缤禧 (Guo Binxi), from John Ruskin's (道德-政治) perspective, this artwork deserves in-depth exploration of its social responsibility and moral value of art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 9,
-        "P": 8,
-        "A": 8,
-        "I": 8,
-        "T": 5
-      }
-    },
-    {
-      "artworkId": "artwork-41",
-      "personaId": "mama-zola",
-      "textZh": "观郭缤禧 (Guo Binxi)之作《郭缤禧作品》，从Mama Zola（社区-去殖民）的视角出发，此作品值得深入探讨其集体记忆与文化传承。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Guo Binxi's Artwork\" by 郭缤禧 (Guo Binxi), from Mama Zola's (社区-去殖民) perspective, this artwork deserves in-depth exploration of its collective memory and cultural transmission. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 6,
-        "P": 6,
-        "A": 7,
-        "I": 10,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-41",
-      "personaId": "professor-petrova",
-      "textZh": "观郭缤禧 (Guo Binxi)之作《郭缤禧作品》，从Professor Petrova（形式-结构）的视角出发，此作品值得深入探讨其艺术形式的陌生化与设备。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Guo Binxi's Artwork\" by 郭缤禧 (Guo Binxi), from Professor Petrova's (形式-结构) perspective, this artwork deserves in-depth exploration of its defamiliarization and device in art forms. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 10,
-        "P": 7,
-        "A": 10,
-        "I": 4,
-        "T": 7
-      }
-    },
-    {
-      "artworkId": "artwork-41",
-      "personaId": "ai-ethics-reviewer",
-      "textZh": "观郭缤禧 (Guo Binxi)之作《郭缤禧作品》，从AI Ethics Reviewer（权力-系统）的视角出发，此作品值得深入探讨其AI艺术的伦理与权力结构。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Guo Binxi's Artwork\" by 郭缤禧 (Guo Binxi), from AI Ethics Reviewer's (权力-系统) perspective, this artwork deserves in-depth exploration of its ethics and power structures in AI art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 6,
-        "P": 10,
-        "A": 7,
-        "I": 7,
-        "T": 4
-      }
-    },
-    {
-      "artworkId": "artwork-43",
-      "personaId": "su-shi",
-      "textZh": "观林杨彬 (Lin Yangbin)之作《林杨彬作品》，从苏轼（哲学-诗意）的视角出发，此作品值得深入探讨其艺术的精神内涵与人生哲理。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Lin Yangbin's Artwork\" by 林杨彬 (Lin Yangbin), from Su Shi's (哲学-诗意) perspective, this artwork deserves in-depth exploration of its spiritual essence and life philosophy in art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 6,
-        "P": 8,
-        "A": 8,
-        "I": 7,
-        "T": 6
-      }
-    },
-    {
-      "artworkId": "artwork-43",
-      "personaId": "guo-xi",
-      "textZh": "观林杨彬 (Lin Yangbin)之作《林杨彬作品》，从郭熙（技术-系统）的视角出发，此作品值得深入探讨其构图法度与山水气象。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Lin Yangbin's Artwork\" by 林杨彬 (Lin Yangbin), from Guo Xi's (技术-系统) perspective, this artwork deserves in-depth exploration of its compositional principles and landscape atmosphere. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 9,
-        "P": 7,
-        "A": 9,
-        "I": 6,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-43",
-      "personaId": "john-ruskin",
-      "textZh": "观林杨彬 (Lin Yangbin)之作《林杨彬作品》，从约翰·罗斯金（道德-政治）的视角出发，此作品值得深入探讨其艺术的社会责任与道德价值。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Lin Yangbin's Artwork\" by 林杨彬 (Lin Yangbin), from John Ruskin's (道德-政治) perspective, this artwork deserves in-depth exploration of its social responsibility and moral value of art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 7,
-        "P": 7,
-        "A": 7,
-        "I": 10,
-        "T": 7
-      }
-    },
-    {
-      "artworkId": "artwork-43",
-      "personaId": "mama-zola",
-      "textZh": "观林杨彬 (Lin Yangbin)之作《林杨彬作品》，从Mama Zola（社区-去殖民）的视角出发，此作品值得深入探讨其集体记忆与文化传承。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Lin Yangbin's Artwork\" by 林杨彬 (Lin Yangbin), from Mama Zola's (社区-去殖民) perspective, this artwork deserves in-depth exploration of its collective memory and cultural transmission. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 6,
-        "P": 8,
-        "A": 9,
-        "I": 10,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-43",
-      "personaId": "professor-petrova",
-      "textZh": "观林杨彬 (Lin Yangbin)之作《林杨彬作品》，从Professor Petrova（形式-结构）的视角出发，此作品值得深入探讨其艺术形式的陌生化与设备。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Lin Yangbin's Artwork\" by 林杨彬 (Lin Yangbin), from Professor Petrova's (形式-结构) perspective, this artwork deserves in-depth exploration of its defamiliarization and device in art forms. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 8,
-        "P": 5,
-        "A": 10,
-        "I": 5,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-43",
-      "personaId": "ai-ethics-reviewer",
-      "textZh": "观林杨彬 (Lin Yangbin)之作《林杨彬作品》，从AI Ethics Reviewer（权力-系统）的视角出发，此作品值得深入探讨其AI艺术的伦理与权力结构。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Lin Yangbin's Artwork\" by 林杨彬 (Lin Yangbin), from AI Ethics Reviewer's (权力-系统) perspective, this artwork deserves in-depth exploration of its ethics and power structures in AI art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 7,
-        "P": 9,
-        "A": 5,
-        "I": 9,
-        "T": 6
-      }
-    },
-    {
-      "artworkId": "artwork-45",
-      "personaId": "su-shi",
-      "textZh": "观邢辰力德 (Xing Chenlide)之作《邢辰力德作品》，从苏轼（哲学-诗意）的视角出发，此作品值得深入探讨其艺术的精神内涵与人生哲理。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Xing Chenlide's Artwork\" by 邢辰力德 (Xing Chenlide), from Su Shi's (哲学-诗意) perspective, this artwork deserves in-depth exploration of its spiritual essence and life philosophy in art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 8,
-        "P": 9,
-        "A": 8,
-        "I": 7,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-45",
-      "personaId": "guo-xi",
-      "textZh": "观邢辰力德 (Xing Chenlide)之作《邢辰力德作品》，从郭熙（技术-系统）的视角出发，此作品值得深入探讨其构图法度与山水气象。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Xing Chenlide's Artwork\" by 邢辰力德 (Xing Chenlide), from Guo Xi's (技术-系统) perspective, this artwork deserves in-depth exploration of its compositional principles and landscape atmosphere. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 9,
-        "P": 8,
-        "A": 9,
-        "I": 6,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-45",
-      "personaId": "john-ruskin",
-      "textZh": "观邢辰力德 (Xing Chenlide)之作《邢辰力德作品》，从约翰·罗斯金（道德-政治）的视角出发，此作品值得深入探讨其艺术的社会责任与道德价值。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Xing Chenlide's Artwork\" by 邢辰力德 (Xing Chenlide), from John Ruskin's (道德-政治) perspective, this artwork deserves in-depth exploration of its social responsibility and moral value of art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 7,
-        "P": 7,
-        "A": 6,
-        "I": 9,
-        "T": 7
-      }
-    },
-    {
-      "artworkId": "artwork-45",
-      "personaId": "mama-zola",
-      "textZh": "观邢辰力德 (Xing Chenlide)之作《邢辰力德作品》，从Mama Zola（社区-去殖民）的视角出发，此作品值得深入探讨其集体记忆与文化传承。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Xing Chenlide's Artwork\" by 邢辰力德 (Xing Chenlide), from Mama Zola's (社区-去殖民) perspective, this artwork deserves in-depth exploration of its collective memory and cultural transmission. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 5,
-        "P": 7,
-        "A": 7,
-        "I": 10,
-        "T": 9
-      }
-    },
-    {
-      "artworkId": "artwork-45",
-      "personaId": "professor-petrova",
-      "textZh": "观邢辰力德 (Xing Chenlide)之作《邢辰力德作品》，从Professor Petrova（形式-结构）的视角出发，此作品值得深入探讨其艺术形式的陌生化与设备。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Xing Chenlide's Artwork\" by 邢辰力德 (Xing Chenlide), from Professor Petrova's (形式-结构) perspective, this artwork deserves in-depth exploration of its defamiliarization and device in art forms. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 8,
-        "P": 5,
-        "A": 10,
-        "I": 6,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-45",
-      "personaId": "ai-ethics-reviewer",
-      "textZh": "观邢辰力德 (Xing Chenlide)之作《邢辰力德作品》，从AI Ethics Reviewer（权力-系统）的视角出发，此作品值得深入探讨其AI艺术的伦理与权力结构。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Xing Chenlide's Artwork\" by 邢辰力德 (Xing Chenlide), from AI Ethics Reviewer's (权力-系统) perspective, this artwork deserves in-depth exploration of its ethics and power structures in AI art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 8,
-        "P": 9,
-        "A": 6,
-        "I": 9,
-        "T": 4
-      }
-    },
-    {
-      "artworkId": "artwork-46",
-      "personaId": "su-shi",
-      "textZh": "观周妤蓉 (Zhou Yurong)之作《周妤蓉作品》，从苏轼（哲学-诗意）的视角出发，此作品值得深入探讨其艺术的精神内涵与人生哲理。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Zhou Yurong's Artwork\" by 周妤蓉 (Zhou Yurong), from Su Shi's (哲学-诗意) perspective, this artwork deserves in-depth exploration of its spiritual essence and life philosophy in art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 6,
-        "P": 9,
-        "A": 8,
-        "I": 7,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-46",
-      "personaId": "guo-xi",
-      "textZh": "观周妤蓉 (Zhou Yurong)之作《周妤蓉作品》，从郭熙（技术-系统）的视角出发，此作品值得深入探讨其构图法度与山水气象。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Zhou Yurong's Artwork\" by 周妤蓉 (Zhou Yurong), from Guo Xi's (技术-系统) perspective, this artwork deserves in-depth exploration of its compositional principles and landscape atmosphere. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 9,
-        "P": 7,
-        "A": 9,
-        "I": 6,
-        "T": 9
-      }
-    },
-    {
-      "artworkId": "artwork-46",
-      "personaId": "john-ruskin",
-      "textZh": "观周妤蓉 (Zhou Yurong)之作《周妤蓉作品》，从约翰·罗斯金（道德-政治）的视角出发，此作品值得深入探讨其艺术的社会责任与道德价值。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Zhou Yurong's Artwork\" by 周妤蓉 (Zhou Yurong), from John Ruskin's (道德-政治) perspective, this artwork deserves in-depth exploration of its social responsibility and moral value of art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 8,
-        "P": 8,
-        "A": 7,
-        "I": 10,
-        "T": 6
-      }
-    },
-    {
-      "artworkId": "artwork-46",
-      "personaId": "mama-zola",
-      "textZh": "观周妤蓉 (Zhou Yurong)之作《周妤蓉作品》，从Mama Zola（社区-去殖民）的视角出发，此作品值得深入探讨其集体记忆与文化传承。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Zhou Yurong's Artwork\" by 周妤蓉 (Zhou Yurong), from Mama Zola's (社区-去殖民) perspective, this artwork deserves in-depth exploration of its collective memory and cultural transmission. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 7,
-        "P": 8,
-        "A": 7,
-        "I": 10,
-        "T": 8
-      }
-    },
-    {
-      "artworkId": "artwork-46",
-      "personaId": "professor-petrova",
-      "textZh": "观周妤蓉 (Zhou Yurong)之作《周妤蓉作品》，从Professor Petrova（形式-结构）的视角出发，此作品值得深入探讨其艺术形式的陌生化与设备。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Zhou Yurong's Artwork\" by 周妤蓉 (Zhou Yurong), from Professor Petrova's (形式-结构) perspective, this artwork deserves in-depth exploration of its defamiliarization and device in art forms. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 8,
-        "P": 5,
-        "A": 10,
-        "I": 5,
-        "T": 6
-      }
-    },
-    {
-      "artworkId": "artwork-46",
-      "personaId": "ai-ethics-reviewer",
-      "textZh": "观周妤蓉 (Zhou Yurong)之作《周妤蓉作品》，从AI Ethics Reviewer（权力-系统）的视角出发，此作品值得深入探讨其AI艺术的伦理与权力结构。作品展现了当代艺术创作中对传统与现代、技术与人文的深刻思考。[此处需要根据实际作品内容补充详细评论，建议使用知识库生成完整评论]",
-      "textEn": "Observing the work \"Zhou Yurong's Artwork\" by 周妤蓉 (Zhou Yurong), from AI Ethics Reviewer's (权力-系统) perspective, this artwork deserves in-depth exploration of its ethics and power structures in AI art. The work demonstrates profound contemplation on tradition and modernity, technology and humanities in contemporary art creation. [Detailed critique should be supplemented based on actual artwork content, recommend using knowledge base for complete generation]",
-      "rpait": {
-        "R": 7,
-        "P": 8,
-        "A": 7,
-        "I": 9,
-        "T": 5
-      }
     }
-  ],
-  "metadata": {
-    "artworkCount": 43,
-    "lastUpdated": "2025-11-14",
-    "confirmedArtworks": 40,
-    "pendingArtworks": 3
-  }
+  ]
 }

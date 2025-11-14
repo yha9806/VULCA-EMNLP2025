@@ -1,0 +1,25 @@
+/**
+ * Dialogue for artwork-42 (PENDING)
+ * Artwork: "文献展示" by 一名奇怪的鸟类观察员 (A Strange Bird Observer)
+ * Status: Pending - Documentary/Literature display in progress
+ * Generated: 2025-11-14
+ */
+
+export const artwork42Dialogue = {
+  id: 'dialogue-artwork-42',
+  artworkId: 'artwork-42',
+  topic: '文献展示',
+  topicEn: 'Documentary Exhibition',
+  participants: [],
+  messages: [
+    {
+      id: 'msg-42-pending',
+      personaId: 'system',
+      textZh: '文献资料准备中。艺术家"一名奇怪的鸟类观察员"正在整理相关文献与展示材料。',
+      textEn: 'Documentary materials in preparation. Artist "A Strange Bird Observer" is organizing relevant literature and exhibition materials.',
+      timestamp: 0,
+      replyTo: null,
+      interactionType: 'initial'
+    }
+  ]
+};
