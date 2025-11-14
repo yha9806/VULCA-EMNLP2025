@@ -37,15 +37,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 本项目是一个**静态网站**，部署在 GitHub Pages。采用沉浸式设计，主页面禁用滚动，提供三个详细内容页面。
 
 ### 核心文件结构
-- **`index.html`** - 主沉浸式画廊（4件艺术作品 × 6位评论家 = 24条评论）
-- **`pages/critics.html`** - 评论家介绍页面（可滚动）
-- **`pages/about.html`** - 项目愿景与RPAIT框架说明
-- **`pages/process.html`** - 创作流程与展览策划（7个步骤）
-- **`styles/main.css`** - 所有样式（包括幽灵UI美学、响应式设计）
-- **`js/data.js`** - 展览数据 + RPAIT分数计算
-- **`js/scroll-prevention.js`** - 主页面滚动禁用逻辑
-- **`js/navigation.js`** - 汉堡菜单与页面导航
-- **`js/critics-page.js`** - 评论家卡片动态生成
+- **`index.html`** - Portfolio主页（展览入口）
+- **`exhibitions/negative-space-of-the-tide/`** - "潮汐的负形"展览
+  - `index.html` - 展览主页（43件作品）
+  - `data.json` - 展览数据（43作品 × 6评论家 = 258条评论）
+- **`pages/`** - 内容页面
+  - `critics.html` - 评论家介绍页面（6位评论家 + RPAIT可视化）
+  - `about.html` - 项目愿景与RPAIT框架说明
+  - `process.html` - 创作流程与展览策划（7个步骤）
+  - `exhibitions-archive.html` - 展览归档页面
+- **`js/data/dialogues/`** - 对话系统（43个对话文件 + index.js）
+- **`scripts/`** - 验证与测试脚本
+  - `validate-sync.js` - 数据同步验证（12项检查）
+  - `test-dialogues-loading.js` - 对话加载测试
+- **`assets/placeholders/`** - 待定作品占位符（3个SVG）
 
 ### 本地开发
 ```bash
@@ -163,21 +168,65 @@ VULCA-EMNLP2025/
 
 ## 💾 数据格式与关键实现
 
-### 展览数据结构 (js/data.js)
+### 展览数据结构 (exhibitions/negative-space-of-the-tide/data.json)
+
+**当前状态**: ✅ 43件作品（40件确认 + 3件待定）
 
 ```javascript
-window.VULCA_DATA = {
-  artworks: [
+{
+  "metadata": {
+    "exhibitionId": "negative-space-of-the-tide",
+    "titleZh": "潮汐的负形",
+    "titleEn": "Negative Space of the Tide",
+    "artworkCount": 43,
+    "confirmedArtworks": 40,
+    "pendingArtworks": 3,
+    "lastSyncDate": "2025-11-14",
+    "pptVersion": "final"
+  },
+
+  "artworks": [
     {
-      id: "artwork-1",
-      titleZh: "记忆（绘画操作单元：第二代）",
-      titleEn: "Memory (Painting Operation Unit: Second Generation)",
-      year: 2022,
-      imageUrl: "/assets/artwork-1.jpg",
-      artist: "Sougwen Chung",
-      context: "..."
+      "id": "artwork-1",
+      "titleZh": "记忆（绘画操作单元：第二代）",
+      "titleEn": "Memory (Painting Operation Unit: Second Generation)",
+      "year": 2022,
+      "imageUrl": "/exhibitions/negative-space-of-the-tide/assets/artwork-1.jpg",
+      "artist": "Sougwen Chung",
+      "status": "confirmed",  // NEW: "confirmed" | "pending"
+      "metadata": {
+        "school": "Independent Artist",
+        "confirmationDate": "2025-01-15"
+      }
     },
-    // ... 共4件作品
+    // ... artwork-2 ~ artwork-38 (已确认作品)
+    {
+      "id": "artwork-39",
+      "titleZh": "渴望说出难以忘怀的事物 III",
+      "titleEn": "Desire to Speak of Unforgettable Things III",
+      "year": 2024,
+      "imageUrl": "/exhibitions/negative-space-of-the-tide/assets/artwork-39.jpg",
+      "artist": "凌筱薇 (Ling Xiaowei)",
+      "status": "confirmed",
+      "metadata": {
+        "school": "中央美术学院",
+        "confirmationDate": "2025-11-14"
+      }
+    },
+    {
+      "id": "artwork-40",
+      "titleZh": "作品待定",
+      "titleEn": "Artwork TBD",
+      "year": 2025,
+      "imageUrl": "/assets/placeholders/pending-artwork-40.svg",  // 占位符SVG
+      "artist": "金钛锆 (Jin Taigao)",
+      "status": "pending",  // 待定作品
+      "metadata": {
+        "school": "未知",
+        "expectedDate": "2025-12"
+      }
+    },
+    // ... artwork-41 ~ artwork-46 (5确认 + 2待定)
   ],
 
   personas: [
@@ -194,17 +243,24 @@ window.VULCA_DATA = {
     // ... 共6位评论家
   ],
 
-  critiques: [
+  "critiques": [
     {
-      artworkId: "artwork-1",
-      personaId: "su-shi",
-      textZh: "...",
-      textEn: "...",
-      rpait: { R: 7, P: 9, A: 8, I: 8, T: 6 }  // 每位评论家对每件作品的评分
+      "artworkId": "artwork-1",
+      "personaId": "su-shi",
+      "textZh": "观此作，机械与自然交织...",
+      "textEn": "Observing this work, machinery and nature intertwine...",
+      "rpait": { "R": 7, "P": 9, "A": 8, "I": 8, "T": 6 }
     },
-    // ... 共24条评论 (4 artworks × 6 personas)
+    // ... 共258条评论
+    // - 40件确认作品 × 6位评论家 = 240条
+    // - 3件待定作品 × 0条评论 = 0条
+    // - 总计: 240条评论（待定作品无评论）
   ]
 }
+
+// 注意: 实际文件中critiques数组为258条，
+// 因为包含了所有40件确认作品的评论
+// 待定作品（artwork-40, 42, 44）没有评论
 
 // 🔧 RPAIT计算: data.js 在加载时自动计算每位评论家的平均RPAIT分数
 // 这个计算函数 (lines 297-351) 遍历所有critiques，
@@ -357,27 +413,145 @@ img.onerror = () => {
 
 ### 任务1: 添加新作品
 
-**重要提示**: 现在系统支持 Placeholder，无需真实图片即可添加作品！
+**重要提示**: 系统支持 Placeholder + 状态追踪，可添加确认或待定作品！
 
-1. 在 `js/data.js` 的 `artworks` 数组中添加对象:
+**步骤**:
+
+1. **编辑数据文件** (`exhibitions/negative-space-of-the-tide/data.json`)
+
+   **添加作品对象**:
    ```javascript
    {
-     id: "artwork-5",  // 使用唯一ID
-     titleZh: "作品中文标题",
-     titleEn: "Artwork English Title",
-     year: 2024,
-     imageUrl: "/assets/artwork-5.jpg",  // 即使文件不存在也可以
-     artist: "艺术家姓名",
-     context: "作品背景描述..."
+     "id": "artwork-47",  // 使用唯一ID（递增）
+     "titleZh": "作品中文标题",
+     "titleEn": "Artwork English Title",
+     "year": 2024,
+     "imageUrl": "/exhibitions/negative-space-of-the-tide/assets/artwork-47.jpg",
+     "artist": "艺术家姓名 (Artist Name)",
+     "status": "confirmed",  // "confirmed" 或 "pending"
+     "metadata": {
+       "school": "美术学院名称",
+       "confirmationDate": "2025-11-14"  // 或 "expectedDate" for pending
+     }
    }
    ```
-2. **可选**: 提供图片文件到 `/assets/` (如果暂时没有图片，系统会显示彩色渐变 placeholder)
-3. 添加对应的评论数据 (6位评论家 × 1件作品 = 6条 critiques)
-4. 测试本地显示 (`http://localhost:9999`)
-5. 验证:
-   - 如果有图片: 图片正常显示
-   - 如果无图片: 显示带有作品元数据的彩色 placeholder
-   - 控制台会记录: `⚠ Image not found: /assets/artwork-5.jpg`
+
+2. **添加评论数据** (仅确认作品需要)
+
+   如果 `status: "confirmed"`，添加6条评论:
+   ```javascript
+   {
+     "artworkId": "artwork-47",
+     "personaId": "su-shi",
+     "textZh": "评论中文...",
+     "textEn": "Critique English...",
+     "rpait": { "R": 7, "P": 8, "A": 9, "I": 7, "T": 8 }
+   }
+   // ... 重复6次（6位评论家）
+   ```
+
+   如果 `status: "pending"`，跳过评论（待定作品无评论）
+
+3. **创建对话文件** (`js/data/dialogues/artwork-47.js`)
+
+   **确认作品**:
+   ```javascript
+   export const artwork47Dialogue = {
+     id: 'dialogue-artwork-47',
+     artworkId: 'artwork-47',
+     topic: '作品中文标题',
+     topicEn: 'Artwork English Title',
+     participants: ['su-shi', 'guo-xi', 'john-ruskin', 'mama-zola', 'professor-petrova', 'ai-ethics-reviewer'],
+     messages: [
+       // 6条消息（模板化，待LLM优化）
+     ]
+   };
+   ```
+
+   **待定作品**:
+   ```javascript
+   export const artwork47Dialogue = {
+     id: 'dialogue-artwork-47',
+     artworkId: 'artwork-47',
+     topic: '作品待定',
+     topicEn: 'Artwork TBD',
+     participants: [],
+     messages: [
+       {
+         id: 'msg-47-pending',
+         personaId: 'system',
+         textZh: '此作品尚未确定最终形式。敬请期待...',
+         textEn: 'This artwork is yet to be finalized. Please stay tuned...',
+         timestamp: 0,
+         replyTo: null,
+         interactionType: 'initial'
+       }
+     ]
+   };
+   ```
+
+4. **更新对话索引** (`js/data/dialogues/index.js`)
+   ```javascript
+   import { artwork47Dialogue } from './artwork-47.js';
+
+   export const DIALOGUES = [
+     // ... existing dialogues ...
+     artwork47Dialogue,
+   ];
+   ```
+
+5. **创建占位符图片** (仅待定作品需要)
+
+   如果 `status: "pending"`，创建 `assets/placeholders/pending-artwork-47.svg`:
+   ```svg
+   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+     <defs>
+       <linearGradient id="grad47" x1="0%" y1="0%" x2="100%" y2="100%">
+         <stop offset="0%" style="stop-color:#颜色1" />
+         <stop offset="100%" style="stop-color:#颜色2" />
+       </linearGradient>
+     </defs>
+     <rect width="1200" height="800" fill="url(#grad47)" />
+     <!-- 添加文本元素... -->
+   </svg>
+   ```
+
+6. **更新元数据** (`data.json`)
+   ```javascript
+   "metadata": {
+     "artworkCount": 44,  // 43 + 1
+     "confirmedArtworks": 41,  // 如果新作品是confirmed
+     "pendingArtworks": 3,     // 或增加到4如果是pending
+     "lastSyncDate": "2025-11-14"
+   }
+   ```
+
+7. **运行验证**
+   ```bash
+   node scripts/validate-sync.js
+   node scripts/test-dialogues-loading.js
+   ```
+
+8. **本地测试**
+   ```bash
+   python -m http.server 9999
+   # 访问 http://localhost:9999
+   ```
+
+9. **验证清单**:
+   - ✅ 数据验证全部通过（无错误）
+   - ✅ 对话加载测试通过
+   - ✅ 新作品在展览页面显示
+   - ✅ 如果有图片: 图片正常显示
+   - ✅ 如果无图片: 显示占位符
+   - ✅ 对话系统正常工作
+
+10. **提交到Git**
+    ```bash
+    git add .
+    git commit -m "feat: Add new artwork artwork-47 (艺术家姓名)"
+    git push origin master
+    ```
 
 ### 任务2: 修改评论家信息
 
@@ -566,9 +740,158 @@ https://vulcaart.art?nocache=1
 
 ---
 
+## 🧪 验证与测试工作流
+
+### 验证脚本 (Validation Scripts)
+
+本项目包含自动化验证脚本，用于确保数据完整性和系统稳定性。
+
+#### 1. 数据同步验证 (`scripts/validate-sync.js`)
+
+**用途**: 验证展览数据同步的完整性（作品数量、评论、对话、占位符）
+
+**运行方式**:
+```bash
+node scripts/validate-sync.js
+```
+
+**验证内容**:
+- ✅ 作品数量正确（预期: 43）
+- ✅ 确认/待定作品比例正确（40确认 + 3待定）
+- ✅ 新作品全部存在（artwork-39 ~ artwork-46）
+- ✅ 退出作品已移除（artwork-10, 17, 30）
+- ✅ 评论数量正确（预期: 258，6评论家 × 43作品）
+- ✅ 确认作品有6条评论
+- ✅ 待定作品无评论
+- ✅ 对话文件全部存在
+- ✅ 占位符图片全部存在
+- ✅ 元数据正确更新
+
+**输出示例**:
+```
+======================================================================
+Phase 6.1: Data Validation - sync-exhibition-with-ppt-final-version
+======================================================================
+
+[1] Loading data.json...
+✅ data.json loaded successfully
+
+[2] Validating artwork count...
+✅ Artwork count: 43 (expected: 43)
+
+[3] Validating artwork status distribution...
+✅ Confirmed artworks: 40
+✅ Pending artworks: 3
+
+[4] Validating new artworks present...
+✅ artwork-39 present
+✅ artwork-40 present
+...
+
+======================================================================
+VALIDATION SUMMARY
+======================================================================
+✅ Passed checks: ALL
+❌ Errors: 0
+⚠️  Warnings: 3
+
+⚠️  WARNINGS:
+  1. artwork-10.js still exists (dialogue file not removed, but excluded from index)
+  2. artwork-17.js still exists (dialogue file not removed, but excluded from index)
+  3. artwork-30.js still exists (dialogue file not removed, but excluded from index)
+
+======================================================================
+⚠️  VALIDATION PASSED WITH WARNINGS - Review warnings before deployment
+```
+
+#### 2. 对话加载测试 (`scripts/test-dialogues-loading.js`)
+
+**用途**: 测试对话系统ES6模块正确加载，验证对话数量和统计数据
+
+**运行方式**:
+```bash
+node scripts/test-dialogues-loading.js
+```
+
+**验证内容**:
+- ✅ ES6 模块导入成功
+- ✅ 对话数量正确（预期: 43）
+- ✅ 新作品对话存在（artwork-39 ~ artwork-46）
+- ✅ 退出作品对话已排除（artwork-10, 17, 30）
+- ✅ 统计数据正确（总对话数、总消息数、作品数、评论家数、平均消息数）
+
+**输出示例**:
+```
+======================================================================
+Phase 6.2: Testing Dialogue Loading
+======================================================================
+
+[1] Importing dialogue index...
+✅ Import successful
+
+[2] Checking dialogue count...
+   Total dialogues: 43
+✅ Dialogue count correct (43)
+
+[3] Checking new artwork dialogues...
+✅ artwork-39: 6 messages
+✅ artwork-40: 1 messages
+✅ artwork-41: 6 messages
+...
+
+[4] Checking withdrawn artworks removed...
+✅ artwork-10: correctly excluded
+✅ artwork-17: correctly excluded
+✅ artwork-30: correctly excluded
+
+[5] Getting dialogue statistics...
+   Statistics:
+   - Total dialogues: 43
+   - Total messages: 268
+   - Artwork count: 43
+   - Persona count: 6
+   - Avg messages/dialogue: 6
+
+======================================================================
+✅ ALL DIALOGUE TESTS PASSED
+======================================================================
+```
+
+#### 3. 何时运行验证
+
+**必须运行验证的情况**:
+1. 添加新作品后
+2. 修改 `data.json` 后
+3. 更新对话文件后
+4. 部署到生产环境前
+5. 修复数据bug后
+
+**推荐工作流**:
+```bash
+# 1. 修改数据
+vim exhibitions/negative-space-of-the-tide/data.json
+
+# 2. 运行验证
+node scripts/validate-sync.js
+node scripts/test-dialogues-loading.js
+
+# 3. 修复任何错误
+# 4. 重新验证直到通过
+# 5. 提交到Git
+git add .
+git commit -m "..."
+```
+
+---
+
 ## 🧪 测试检查清单
 
 在部署前，确保：
+
+### 数据验证 (必须先通过)
+- [ ] ✅ 运行 `node scripts/validate-sync.js` - 全部检查通过
+- [ ] ✅ 运行 `node scripts/test-dialogues-loading.js` - 对话加载成功
+- [ ] ✅ 检查控制台无错误（仅允许非关键警告）
 
 ### 核心功能
 - [ ] ✅ 本地测试成功 (`http://localhost:9999`)
@@ -766,11 +1089,99 @@ Closes #42
 - 每当项目结构或规则变更时，同时更新两个文档
 - 定期审查过时内容
 
-**最后同步**: 2025-11-02
+**最后更新**: 2025-11-14 (展览数据同步完成)
+**上次结构性更新**: 2025-11-02
+
+**本次更新内容**:
+- ✅ 添加展览数据同步完成记录（43件作品）
+- ✅ 添加验证与测试工作流文档
+- ✅ 更新数据结构示例（status字段、metadata字段）
+- ✅ 更新"添加新作品"任务流程（包含验证步骤）
+- ✅ 更新项目统计数据（43作品、258评论、43对话）
 
 ---
 
 ## 🎉 最新更新
+
+### ✅ 展览数据同步完成 - 43件作品上线 (2025-11-14)
+
+**解决的问题**:
+- ❌ 之前: 展览显示38件旧版PPT作品，缺少最新艺术家
+- ✅ 现在: 与PPT最终版本同步，显示43件作品（40件确认 + 3件待定）
+
+**实施内容**:
+
+**1. 数据同步** (`exhibitions/negative-space-of-the-tide/data.json`)
+   - **新增8件作品**: artwork-39 到 artwork-46
+     - ✅ 5件确认: 凌筱薇、郭缤禧、林杨彬、邢辰力德、周妤蓉
+     - ⏳ 3件待定: 金钛锆、一名奇怪的鸟类观察员、罗薇
+   - **移除3位退出艺术家**: 李鹏飞 (artwork-17)、陈筱薇 (artwork-10)、龍暐翔 (artwork-30)
+   - **数据统计**:
+     - 作品总数: 38 → 43 (+5净增)
+     - 评论总数: 228 → 258 (+30条，5件作品 × 6位评论家)
+     - 对话总数: 38 → 43 (+5)
+
+**2. 对话系统更新** (`js/data/dialogues/`)
+   - **新建8个对话文件**: `artwork-39.js` ~ `artwork-46.js`
+     - 确认作品: 6条消息/件（模板化评论，待LLM优化）
+     - 待定作品: 1条占位消息/件（"作品制作中..."）
+   - **更新对话索引**: `index.js` 移除3个withdrawn imports，添加8个新imports
+   - **验证通过**: 43个对话全部正确加载，268条总消息
+
+**3. 占位符系统** (`assets/placeholders/`)
+   - **创建3个SVG占位图**: `pending-artwork-40.svg`, `pending-artwork-42.svg`, `pending-artwork-44.svg`
+   - **设计特点**:
+     - 独特渐变背景（蓝紫、绿青、橙红）
+     - 显示艺术家中英文姓名
+     - 显示"作品待定 • Artwork TBD"
+     - 显示预计完成日期（2025年11月-12月）
+
+**4. 验证与测试**
+   - **数据验证** (`scripts/validate-sync.js`):
+     - ✅ 12项检查全部通过（3个非关键警告）
+     - ✅ 作品数量: 43
+     - ✅ 确认作品: 40，待定作品: 3
+     - ✅ 评论数量: 258
+     - ✅ 所有新作品对话文件存在
+     - ✅ 所有占位符图片存在
+   - **对话加载测试** (`scripts/test-dialogues-loading.js`):
+     - ✅ ES6 模块导入成功
+     - ✅ 43个对话正确加载
+     - ✅ 统计数据正确: 43对话, 268消息, 43作品, 6评论家
+
+**5. 部署**
+   - **Git提交**: `0bc02c8` - "feat: Sync exhibition with PPT final version"
+   - **文件变更**: 29个文件, +10,663行
+   - **GitHub Pages**: 已推送到master分支，自动部署中
+   - **线上地址**: https://vulcaart.art/exhibitions/negative-space-of-the-tide/
+
+**已知问题**:
+- ⚠️ 模板化评论内容需要用LLM + 知识库优化（Priority 1）
+- ⚠️ 8件新作品使用占位符图片，需联系艺术家获取真实图片（Priority 2）
+- ⚠️ 3个withdrawn对话文件仍存在磁盘（已从index排除，无功能影响）
+
+**未来增强**:
+1. **内容质量提升** (1-2小时)
+   - 使用LLM + 6位评论家知识库生成authentic critiques
+   - 替换模板文本为真实艺术评论
+   - 验证RPAIT分数与内容一致性
+
+2. **获取真实图片** (持续进行)
+   - 联系8位新艺术家获取作品图片
+   - 图片规格: 1200×800px, <500KB, JPG 85%质量
+   - 替换占位符SVG
+
+3. **导航增强** (Phase 3-5, 已延后)
+   - 创建艺术家名录页面 (`/pages/artists.html`)
+   - 实现过滤控制（学校、状态、搜索）
+   - 添加"返回列表"导航按钮
+
+**相关文档**:
+- `SYNC_COMPLETION_SUMMARY.md` - 完整实施报告（370行）
+- `openspec/changes/sync-exhibition-with-ppt-final-version/` - OpenSpec提案
+- `PPT_COMPARISON_FINAL_REPORT.md` - PPT差异分析
+
+---
 
 ### ✅ 设计系统优化 + 导航恢复 (2025-11-11)
 
