@@ -16,8 +16,21 @@ const QRCode = require('qrcode');
 // ===== 配置 =====
 const CONFIG = {
   dataPath: path.join(__dirname, '../exhibitions/negative-space-of-the-tide/data.json'),
-  outputPath: path.join(__dirname, '../qr-codes-labels.pdf'),
+  outputPath: path.join(__dirname, '../qr-codes-labels-new.pdf'),  // 使用新文件名避免文件被锁定
   baseUrl: 'https://vulcaart.art/exhibitions/negative-space-of-the-tide/',
+
+  // 中文字体路径（Windows/macOS/Linux通用）
+  // 注意：pdfkit 不支持 .ttc 格式，需要使用 .ttf 格式
+  fonts: {
+    // Windows: 黑体（SimHei）- .ttf 格式
+    windowsPath: 'C:\\Windows\\Fonts\\simhei.ttf',
+    // macOS: Heiti SC (黑体-简)
+    macPath: '/System/Library/Fonts/STHeiti Medium.ttc',
+    macPathAlt: '/Library/Fonts/Arial Unicode.ttf',
+    // Linux: 文泉驿微米黑（如果已安装）
+    linuxPath: '/usr/share/fonts/truetype/wqy/wqy-microhei.ttc',
+    linuxPathAlt: '/usr/share/fonts/truetype/arphic/uming.ttc'
+  },
 
   // A4 页面尺寸（单位：点，1mm ≈ 2.83点）
   page: {
@@ -35,6 +48,30 @@ const CONFIG = {
     gap: 22.68       // 8mm
   }
 };
+
+// ===== 检测并获取中文字体路径 =====
+function getChineseFontPath() {
+  const platform = process.platform;
+  let fontPath;
+
+  if (platform === 'win32') {
+    fontPath = CONFIG.fonts.windowsPath;
+  } else if (platform === 'darwin') {
+    fontPath = CONFIG.fonts.macPath;
+  } else {
+    fontPath = CONFIG.fonts.linuxPath;
+  }
+
+  // 检查字体文件是否存在
+  if (fs.existsSync(fontPath)) {
+    console.log(`✓ 找到中文字体: ${fontPath}`);
+    return fontPath;
+  } else {
+    console.error(`❌ 未找到中文字体文件: ${fontPath}`);
+    console.error('请安装中文字体或指定正确的字体路径');
+    throw new Error('Chinese font not found');
+  }
+}
 
 // ===== 读取展览数据 =====
 function loadExhibitionData() {
@@ -64,7 +101,7 @@ async function generateQRCodeDataURL(url) {
 }
 
 // ===== 绘制单个标签 =====
-async function drawLabel(doc, artwork, x, y) {
+async function drawLabel(doc, artwork, x, y, chineseFont) {
   const { width, height } = CONFIG.label;
   const url = `${CONFIG.baseUrl}?artwork=${artwork.id}`;
 
@@ -92,10 +129,10 @@ async function drawLabel(doc, artwork, x, y) {
   // 4. 绘制作品信息（居中，距logo下方15点）
   const infoY = y + 55;
 
-  // 中文标题
+  // 中文标题（使用中文字体）
   doc.fontSize(14)
      .fillColor('#333333')
-     .font('Helvetica-Bold')
+     .font(chineseFont)
      .text(artwork.titleZh || 'Untitled', x + 10, infoY, {
        width: width - 20,
        align: 'center',
@@ -113,13 +150,13 @@ async function drawLabel(doc, artwork, x, y) {
        lineGap: 3
      });
 
-  // 艺术家和年份
+  // 艺术家和年份（使用中文字体）
   const enTitleHeight = doc.heightOfString(artwork.titleEn || 'Untitled', { width: width - 20 });
   const metaY = infoY + titleHeight + enTitleHeight + 18;
 
   doc.fontSize(10)
      .fillColor('#555555')
-     .font('Helvetica')
+     .font(chineseFont)
      .text(artwork.artist, x + 10, metaY, {
        width: width - 20,
        align: 'center'
@@ -132,6 +169,7 @@ async function drawLabel(doc, artwork, x, y) {
 
   doc.fontSize(10)
      .fillColor('#999999')
+     .font(chineseFont)
      .text(yearText, x + 10, metaY + artistHeight + 4, {
        width: width - 20,
        align: 'center'
@@ -160,7 +198,7 @@ async function drawLabel(doc, artwork, x, y) {
 
     doc.fontSize(8)
        .fillColor('#ffffff')
-       .font('Helvetica-Bold')
+       .font(chineseFont)
        .text('待定', badgeX, badgeY + 4, {
          width: 40,
          align: 'center'
@@ -177,10 +215,13 @@ async function generatePDF() {
   console.log('\n🎨 VULCA 二维码展签生成器');
   console.log('='.repeat(50));
 
-  // 1. 加载数据
+  // 1. 获取中文字体
+  const chineseFontPath = getChineseFontPath();
+
+  // 2. 加载数据
   const artworks = loadExhibitionData();
 
-  // 2. 创建PDF文档
+  // 3. 创建PDF文档
   console.log('\n📄 创建PDF文档...');
   const doc = new PDFDocument({
     size: [CONFIG.page.width, CONFIG.page.height],
@@ -193,11 +234,14 @@ async function generatePDF() {
     }
   });
 
-  // 3. 输出流
+  // 注册中文字体
+  doc.registerFont('ChineseFont', chineseFontPath);
+
+  // 4. 输出流
   const writeStream = fs.createWriteStream(CONFIG.outputPath);
   doc.pipe(writeStream);
 
-  // 4. 生成标签
+  // 5. 生成标签
   console.log('\n🏷️  生成标签...');
   const { cols, rows, width, height, gap } = CONFIG.label;
   const { margin } = CONFIG.page;
@@ -222,8 +266,8 @@ async function generatePDF() {
     const x = margin + col * (width + gap);
     const y = margin + row * (height + gap);
 
-    // 绘制标签
-    await drawLabel(doc, artwork, x, y);
+    // 绘制标签（传递中文字体名称）
+    await drawLabel(doc, artwork, x, y, 'ChineseFont');
 
     labelCount++;
     console.log(`  ✓ [${labelCount}/${artworks.length}] ${artwork.titleZh} (${artwork.id})`);
