@@ -1,3 +1,9 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+---
+
 <!-- OPENSPEC:START -->
 # OpenSpec Instructions
 
@@ -17,16 +23,11 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 
 <!-- OPENSPEC:END -->
 
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ---
 
-# CLAUDE.md - Claude Code 工作指南
-
-**最后更新**: 2025-11-11
-**项目**: VULCA - 艺术评论展览平台（沉浸式艺术评论展览）
+**最后更新**: 2025-11-15
+**当前稳定版本**: a42f468 (2025-11-14)
+**项目**: VULCA - 潮汐的负形 艺术评论展览平台
 **网址**: https://vulcaart.art
 **GitHub**: https://github.com/yha9806/VULCA-EMNLP2025
 
@@ -34,1713 +35,512 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## ⚡ 快速开始
 
-本项目是一个**静态网站**，部署在 GitHub Pages。采用沉浸式设计，主页面禁用滚动，提供三个详细内容页面。
+### 本地开发服务器
 
-### 核心文件结构
-- **`index.html`** - Portfolio主页（展览入口）
-- **`exhibitions/negative-space-of-the-tide/`** - "潮汐的负形"展览
-  - `index.html` - 展览主页（43件作品）
-  - `data.json` - 展览数据（43作品 × 6评论家 = 258条评论）
-- **`pages/`** - 内容页面
-  - `critics.html` - 评论家介绍页面（6位评论家 + RPAIT可视化）
-  - `about.html` - 项目愿景与RPAIT框架说明
-  - `process.html` - 创作流程与展览策划（7个步骤）
-  - `exhibitions-archive.html` - 展览归档页面
-- **`js/data/dialogues/`** - 对话系统（43个对话文件 + index.js）
-- **`scripts/`** - 验证与测试脚本
-  - `validate-sync.js` - 数据同步验证（12项检查）
-  - `test-dialogues-loading.js` - 对话加载测试
-- **`assets/placeholders/`** - 待定作品占位符（3个SVG）
-
-### 本地开发
 ```bash
-# 在项目根目录运行本地服务器
-python -m http.server 9999
+# 在项目根目录运行
+python -m http.server 8000
 
 # 访问
-http://localhost:9999
+http://localhost:8000
+http://localhost:8000/exhibitions/negative-space-of-the-tide/
+```
+
+### 关键命令
+
+```bash
+# 验证数据同步
+node scripts/validate-sync.js
+
+# 测试对话加载
+node scripts/test-dialogues-loading.js
+
+# Git 提交
+git add .
+git commit -m "type: description"
+git push origin master
+
+# 查看部署状态
+gh api repos/yha9806/VULCA-EMNLP2025/pages/builds --jq '.[0] | "\(.status) | \(.updated_at)"'
 ```
 
 ---
 
-## 📋 项目结构与架构
+## 📋 项目架构
+
+### 核心概念
+
+这是一个**静态网站**，部署在 GitHub Pages，采用**多展览平台架构**：
 
 ```
-VULCA-EMNLP2025/
-├── index.html              # 主沉浸式画廊 (IMMERSIVE_MODE=true, 禁用滚动)
-├── pages/                  # 详细内容页面 (可滚动)
-│   ├── critics.html       # 6位评论家卡片 + RPAIT可视化
-│   ├── about.html         # 项目愿景 & RPAIT框架详解
-│   └── process.html       # 创作流程 (7步骤)
-├── styles/main.css         # 所有样式 (1000+ 行)
-├── js/                     # JavaScript 模块
-│   ├── data.js            # 展览数据 + RPAIT分数计算函数
-│   ├── scroll-prevention.js # 禁用滚动 (仅在IMMERSIVE_MODE=true时)
-│   ├── navigation.js      # 汉堡菜单管理
-│   ├── critics-page.js    # 评论家卡片生成器
-│   ├── app.js             # 主应用逻辑
-│   └── ...
-├── assets/                 # 媒体资源
-│   ├── favicon.svg
-│   ├── favicon.ico
-│   └── og-image.jpg
-├── SPEC.md                 # 项目规范（必读）
-├── CLAUDE.md               # 本文档
-├── openspec/               # OpenSpec规范管理
-│   └── changes/           # 已提案的功能变更
-└── 项目文档/
-    ├── PHASE_5_FINAL_SUMMARY.md
-    ├── FINAL_AUDIT_REPORT.md
-    └── ...
+主页 (index.html)
+  ├─ Portfolio 主页（展览入口）
+  └─ 链接到各个展览
+
+展览页面 (exhibitions/negative-space-of-the-tide/index.html)
+  ├─ Hero 轮播区域（每次显示一件作品）
+  ├─ 数据可视化区域（RPAIT 雷达图 + 对比矩阵）
+  └─ Full Gallery（完整作品列表，默认隐藏）
 ```
 
-### 架构设计原则
+### 关键架构决策
 
-1. **沉浸式/细节分离**
-   - 主页面 (index.html): 完全沉浸，无滚动，自动播放
-   - 详细页面 (pages/): 可滚动，提供背景信息
-   - 用户选择查看深度：留在画廊或探索详细内容
+**1. 展览页面双模式系统**
 
-2. **导航系统**
-   - 汉堡菜单 (☰): 所有页面可访问
-   - 链接: 主画廊 → 评论家 → 关于 → 过程
-   - 返回按钮 (←): 所有详细页面都有
+展览页面包含两个内容展示区域：
 
-3. **数据流**
-   ```
-   js/data.js (VULCA_DATA)
-      ↓
-      ├─ artworks[4]: 艺术作品元数据
-      ├─ personas[6]: 评论家信息
-      └─ critiques[24]: 评论文本 + RPAIT维度评分
-      ↓
-   RPAIT计算 (data.js内置函数)
-      ↓
-   persona.rpait: { R, P, A, I, T } (平均分数)
-      ↓
-   critics-page.js (读取并渲染)
-      ↓
-   HTML卡片 + 维度条形图
-   ```
+```javascript
+// Hero 轮播模式（主要展示方式）
+<section class="gallery-hero" id="gallery-hero">
+  <!-- 由 gallery-hero.js 动态渲染 -->
+  <!-- 每次显示一件作品 + 评论 -->
+</section>
+
+// Full Gallery 列表模式（备用/辅助）
+<section class="gallery" id="gallery" style="display: none !important;">
+  <!-- 显示所有作品的静态列表 -->
+  <!-- 通常被隐藏，仅在需要时显示 -->
+</section>
+```
+
+**为什么有两个区域？**
+- **Hero**: 沉浸式体验，适合艺术作品展示
+- **Gallery**: 完整浏览，适合快速查看所有内容
+- 通过 CSS `display: none` 控制显示哪个区域
+
+**2. 数据加载架构**
+
+```
+data.json (展览数据)
+    ↓
+data-loader.js (异步加载)
+    ↓
+window.VULCA_DATA (全局对象)
+    ↓
+触发 'vulca-data-ready' 事件
+    ↓
+gallery-hero.js / carousel.js / 其他模块初始化
+```
+
+**关键文件**：
+- `exhibitions/negative-space-of-the-tide/js/data-loader.js`: 数据加载器
+- `js/gallery-hero.js`: Hero 区域渲染
+- `js/carousel.js`: 轮播控制
+
+**3. 多图像系统**
+
+每件作品可以有多张图片：
+
+```javascript
+{
+  "id": "artwork-1",
+  "imageUrl": "/assets/artworks/artwork-1/01.png",  // 主图（向后兼容）
+  "primaryImageId": "img-1-1",                      // 主图ID
+  "images": [                                       // 多图数组
+    { "id": "img-1-1", "url": "...", "sequence": 1 },
+    { "id": "img-1-2", "url": "...", "sequence": 2 }
+  ]
+}
+```
+
+**处理逻辑**：
+- `js/utils/image-compat.js`: 向后兼容处理
+- `js/components/artwork-carousel.js`: 多图轮播组件
 
 ---
 
-## 🎯 编辑规则
+## 🗂️ 核心数据结构
 
-### ✅ 允许的操作
-
-1. **修改内容**
-   - 编辑 `index.html` 的文本内容
-   - 修改评论家信息、作品描述
-   - 更新 SEO 元数据
-
-2. **修改样式**
-   - 编辑 `styles/main.css`
-   - 调整颜色、排版、布局
-   - 调整响应式断点
-
-3. **修改数据**
-   - 编辑 `js/data.js`
-   - 添加或删除评论家
-   - 更新作品信息
-
-4. **添加功能**
-   - 在 `js/app.js` 中添加交互
-   - 添加新的 JavaScript 模块
-   - 集成第三方库
-
-### ❌ 禁止的操作
-
-1. **删除关键文件**
-   - ❌ 不要删除 `index.html`
-   - ❌ 不要删除 `styles/main.css`
-   - ❌ 不要删除 `js/data.js`
-
-2. **改变目录结构**
-   - ❌ 不要重组 `js/` 或 `styles/` 目录（除非协调）
-   - ❌ 不要移动文件到不同的路径
-
-3. **破坏部署**
-   - ❌ 不要使用相对路径如 `../` 或 `./`（使用绝对路径 `/`）
-   - ❌ 不要更改 `CNAME` 文件
-
----
-
-## 💾 数据格式与关键实现
-
-### 展览数据结构 (exhibitions/negative-space-of-the-tide/data.json)
-
-**当前状态**: ✅ 43件作品（40件确认 + 3件待定）
+### 展览数据 (data.json)
 
 ```javascript
 {
   "metadata": {
     "exhibitionId": "negative-space-of-the-tide",
-    "titleZh": "潮汐的负形",
-    "titleEn": "Negative Space of the Tide",
     "artworkCount": 43,
     "confirmedArtworks": 40,
-    "pendingArtworks": 3,
-    "lastSyncDate": "2025-11-14",
-    "pptVersion": "final"
+    "pendingArtworks": 3
   },
-
   "artworks": [
     {
       "id": "artwork-1",
-      "titleZh": "记忆（绘画操作单元：第二代）",
-      "titleEn": "Memory (Painting Operation Unit: Second Generation)",
-      "year": 2022,
-      "imageUrl": "/exhibitions/negative-space-of-the-tide/assets/artwork-1.jpg",
-      "artist": "Sougwen Chung",
-      "status": "confirmed",  // NEW: "confirmed" | "pending"
-      "metadata": {
-        "school": "Independent Artist",
-        "confirmationDate": "2025-01-15"
-      }
-    },
-    // ... artwork-2 ~ artwork-38 (已确认作品)
-    {
-      "id": "artwork-39",
-      "titleZh": "渴望说出难以忘怀的事物 III",
-      "titleEn": "Desire to Speak of Unforgettable Things III",
+      "titleZh": "中文标题",
+      "titleEn": "English Title",
       "year": 2024,
-      "imageUrl": "/exhibitions/negative-space-of-the-tide/assets/artwork-39.jpg",
-      "artist": "凌筱薇 (Ling Xiaowei)",
-      "status": "confirmed",
+      "artist": "艺术家 (Artist Name)",
+      "imageUrl": "/assets/artworks/artwork-1/01.png",
+      "status": "confirmed",  // "confirmed" | "pending"
+      "images": [...],        // 多图数组
       "metadata": {
-        "school": "中央美术学院",
-        "confirmationDate": "2025-11-14"
+        "descriptionZh": "中文描述...",
+        "descriptionEn": "English description...",
+        "school": "学校/机构"
       }
-    },
-    {
-      "id": "artwork-40",
-      "titleZh": "作品待定",
-      "titleEn": "Artwork TBD",
-      "year": 2025,
-      "imageUrl": "/assets/placeholders/pending-artwork-40.svg",  // 占位符SVG
-      "artist": "金钛锆 (Jin Taigao)",
-      "status": "pending",  // 待定作品
-      "metadata": {
-        "school": "未知",
-        "expectedDate": "2025-12"
-      }
-    },
-    // ... artwork-41 ~ artwork-46 (5确认 + 2待定)
+    }
   ],
-
-  personas: [
+  "personas": [
     {
-      id: "su-shi",
-      nameZh: "苏轼",
-      nameEn: "Su Shi",
-      period: "北宋文人 (1037-1101)",
-      bio: "...",
-      color: "#B85C3C",
-      // rpait 由下面的计算函数自动填充
-      rpait: { R: 7, P: 9, A: 8, I: 8, T: 7 }
-    },
-    // ... 共6位评论家
+      "id": "su-shi",
+      "nameZh": "苏轼",
+      "nameEn": "Su Shi",
+      "bio": "...",
+      "color": "#B85C3C",
+      "rpait": { "R": 7, "P": 9, "A": 8, "I": 8, "T": 7 }
+    }
   ],
-
   "critiques": [
     {
       "artworkId": "artwork-1",
       "personaId": "su-shi",
-      "textZh": "观此作，机械与自然交织...",
-      "textEn": "Observing this work, machinery and nature intertwine...",
+      "textZh": "评论文本...",
+      "textEn": "Critique text...",
       "rpait": { "R": 7, "P": 9, "A": 8, "I": 8, "T": 6 }
-    },
-    // ... 共258条评论
-    // - 40件确认作品 × 6位评论家 = 240条
-    // - 3件待定作品 × 0条评论 = 0条
-    // - 总计: 240条评论（待定作品无评论）
+    }
   ]
 }
-
-// 注意: 实际文件中critiques数组为258条，
-// 因为包含了所有40件确认作品的评论
-// 待定作品（artwork-40, 42, 44）没有评论
-
-// 🔧 RPAIT计算: data.js 在加载时自动计算每位评论家的平均RPAIT分数
-// 这个计算函数 (lines 297-351) 遍历所有critiques，
-// 为每位persona计算其4条评论的平均分数，
-// 这样critics-page.js 就能用 persona.rpait 来渲染卡片
 ```
 
-### 关键实现细节
+### 对话数据 (js/data/dialogues/)
 
-#### 1. 滚动禁用 (scroll-prevention.js)
 ```javascript
-// 仅在主页面启用滚动禁用
-window.IMMERSIVE_MODE = true  // 在 index.html 设置
-window.IMMERSIVE_MODE = false // 在 pages/*.html 设置
-
-// 多向量滚动禁用:
-// - wheel 事件 (鼠标滚轮)
-// - keydown 事件 (Space, Arrow, Page 按键)
-// - touchmove 事件 (移动设备)
-```
-
-#### 2. 导航系统 (navigation.js)
-- **汉堡菜单**: `<button id="menu-toggle">` 切换菜单可见性
-- **菜单项**: 4个链接 (主画廊、评论家、关于、过程) + 2个按钮 (语言、关闭)
-- **当前页面高亮**: 根据 `window.location.pathname` 自动标记活跃项
-- **自动关闭**: 手机端点击链接后自动关闭菜单
-
-#### 3. RPAIT维度计算 (data.js)
-```javascript
-// 计算平均RPAIT分数 (在data.js末尾自动运行)
-const avgRpait = {
-  R: Math.round(sum / count),  // 对所有评论求平均
-  P: Math.round(sum / count),
-  A: Math.round(sum / count),
-  I: Math.round(sum / count),
-  T: Math.round(sum / count)
-};
-persona.rpait = avgRpait;
-
-// 结果: 每位评论家在R/P/A/I/T五个维度上各有1-10的分数
-```
-
-#### 4. 评论家页面生成 (critics-page.js)
-```javascript
-// 动态生成评论家卡片:
-// 1. 读取 VULCA_DATA.personas
-// 2. 验证 persona.rpait 存在
-// 3. 为每个维度创建进度条 (width = score/10 × 100%)
-// 4. 设置背景色 = persona.color
-// 5. 附加传记文本
-```
-
-#### 5. 艺术作品图片 Placeholder 系统 (gallery-hero.js)
-```javascript
-// 🖼️ 图片占位符系统 (Phase 1: fix-artwork-image-display-system)
-// 当艺术作品图片文件不存在时，自动显示彩色渐变占位符
-//
-// 工作原理:
-// 1. 尝试加载 artwork.imageUrl (例如: /assets/artwork-1.jpg)
-// 2. 如果图片加载失败 (404), img.onerror 触发
-// 3. 生成 placeholder div，显示作品元数据:
-//    - 中文标题 (titleZh)
-//    - 英文标题 (titleEn)
-//    - 艺术家姓名 (artist)
-//    - 创作年份 (year)
-//    - "🖼️ Image Pending Acquisition" 状态消息
-// 4. 每个作品有独特的渐变背景色:
-//    - artwork-1: 蓝紫渐变 (#667eea → #764ba2)
-//    - artwork-2: 绿青渐变 (#11998e → #38ef7d)
-//    - artwork-3: 橙红渐变 (#eb3349 → #f45c43)
-//    - artwork-4: 粉紫渐变 (#d66d75 → #e29587)
-// 5. 控制台记录警告: "⚠ Image not found: /assets/artwork-X.jpg"
-
-// 关键函数:
-function createPlaceholder(artwork) {
-  // 创建带有 ARIA 属性的占位符 DOM
-  // 支持屏幕阅读器，维持 3:2 宽高比
-}
-
-// 错误处理器 (在 renderArtworkImage 函数中):
-img.onerror = () => {
-  console.warn(`⚠ Image not found: ${artwork.imageUrl} (${artwork.id})`);
-  container.innerHTML = '';
-  const placeholder = createPlaceholder(artwork);
-  container.appendChild(placeholder);
-  console.log(`✓ Displaying placeholder for: ${artwork.titleZh}`);
+// artwork-1.js
+export const artwork1Dialogue = {
+  id: 'dialogue-artwork-1',
+  artworkId: 'artwork-1',
+  topic: '对话主题',
+  topicEn: 'Dialogue Topic',
+  participants: ['su-shi', 'guo-xi', 'john-ruskin', ...],
+  messages: [
+    {
+      id: 'msg-1',
+      personaId: 'su-shi',
+      textZh: '中文内容...',
+      textEn: 'English content...',
+      timestamp: 0,           // 显示时间（毫秒）
+      replyTo: null,          // 回复的评论家ID
+      interactionType: 'initial',
+      quotedText: '引用文本'  // 可选
+    }
+  ]
 };
 ```
 
-**重要说明**:
-- ✅ **无需真实图片即可开发**: 现在可以添加新作品到 `js/data.js`，即使没有图片文件，系统也会显示美观的占位符
-- ✅ **响应式设计**: Placeholder 保持 3:2 宽高比，在所有断点 (375/768/1024/1440/1920px) 正常显示
-- ✅ **可访问性**: 包含 `role="img"` 和完整的 `aria-label`，支持屏幕阅读器
-- ⚠️ **未来计划**: Phase 2 将联系艺术家获取真实图片，Phase 3 将添加 lazy loading 和 srcset
+---
 
-**相关文件**:
-- `js/gallery-hero.js` (lines 277-314): Error handler + createPlaceholder 函数
-- `styles/main.css` (lines 1638-1760): Placeholder CSS 样式
-- `openspec/changes/fix-artwork-image-display-system/`: 完整的 OpenSpec 提案
+## 🚨 关键约束和已知问题
+
+### ⚠️ Gallery 隐藏机制
+
+**问题**: 展览页面包含一个强制隐藏 Gallery 的脚本：
+
+```javascript
+// exhibitions/negative-space-of-the-tide/index.html (lines 287-322)
+function enforceGalleryHidden() {
+  const gallery = document.getElementById('gallery');
+  if (gallery && window.getComputedStyle(gallery).display !== 'none') {
+    gallery.style.display = 'none !important';
+    gallery.setAttribute('aria-hidden', 'true');
+  }
+}
+
+// MutationObserver 持续监视并强制隐藏
+```
+
+**目的**: 确保展览页面优先显示 Hero 轮播模式，而不是 Gallery 列表。
+
+**HTML inline style**:
+```html
+<section class="gallery" id="gallery" style="display: none !important;">
+```
+
+**重要**：
+- ✅ 这是**有意的设计**，不是 bug
+- ✅ 确保 Hero 区域正常渲染后再考虑修改
+- ❌ 不要轻易删除这段代码，除非明确知道后果
+- ❌ 不要删除 HTML 的 inline style
+
+### ⚠️ 缓存问题
+
+GitHub Pages 使用 CDN 缓存，缓存时间可能长达 10-30 分钟。
+
+**解决方法**：
+1. 版本查询参数：`?v=1`, `?v=2` (推荐)
+2. 时间戳参数：`?nocache=timestamp`
+3. 等待 CDN 自动刷新
+
+**示例**：
+```html
+<link rel="stylesheet" href="/styles/main.css?v=5">
+<script src="/js/app.js?v=6"></script>
+```
 
 ---
 
-## 🎨 样式约定
+## 📝 常见开发任务
 
-### CSS 文件组织
+### 添加新作品
 
-```css
-/* main.css 包含所有样式：*/
-1. CSS 变量（颜色、字体、间距）
-2. Reset 和基础样式
-3. Layout（响应式网格）
-4. Components（卡片、按钮、模态框）
-5. Utilities（flex、text、spacing）
-6. Responsive（移动优先）
-```
+**重要**: 系统支持 Placeholder + 状态追踪，可添加确认或待定作品。
 
-### 颜色系统
-
-```css
-:root {
-  /* 品牌色 */
-  --color-primary: #...;
-  --color-secondary: #...;
-
-  /* 文本 */
-  --color-text: #2d2d2d;
-  --color-text-light: #666;
-
-  /* 背景 */
-  --color-bg: #fff;
-  --color-bg-alt: #f9f9f9;
-
-  /* 边框 */
-  --color-border: #e0e0e0;
+1. **编辑 `data.json`**:
+```javascript
+{
+  "id": "artwork-47",
+  "status": "confirmed",  // 或 "pending"
+  "titleZh": "...",
+  "titleEn": "...",
+  "imageUrl": "/assets/artworks/artwork-47/01.jpg",
+  // ...
 }
 ```
 
-### 响应式断点
-
-```css
-/* 移动优先 */
-@media (min-width: 768px) { /* tablet */ }
-@media (min-width: 1024px) { /* desktop */ }
-@media (min-width: 1440px) { /* large desktop */ }
+2. **添加评论** (仅确认作品):
+```javascript
+// 6条评论（6位评论家）
+{
+  "artworkId": "artwork-47",
+  "personaId": "su-shi",
+  "textZh": "...",
+  "textEn": "...",
+  "rpait": { "R": 7, "P": 8, "A": 9, "I": 7, "T": 8 }
+}
 ```
 
----
+3. **创建对话文件** (`js/data/dialogues/artwork-47.js`):
+```javascript
+export const artwork47Dialogue = {
+  id: 'dialogue-artwork-47',
+  artworkId: 'artwork-47',
+  // ...
+  messages: [...]
+};
+```
 
-## 🔧 常见任务
+4. **更新对话索引** (`js/data/dialogues/index.js`):
+```javascript
+import { artwork47Dialogue } from './artwork-47.js';
+export const DIALOGUES = [..., artwork47Dialogue];
+```
 
-### 任务1: 添加新作品
+5. **运行验证**:
+```bash
+node scripts/validate-sync.js
+node scripts/test-dialogues-loading.js
+```
 
-**重要提示**: 系统支持 Placeholder + 状态追踪，可添加确认或待定作品！
-
-**步骤**:
-
-1. **编辑数据文件** (`exhibitions/negative-space-of-the-tide/data.json`)
-
-   **添加作品对象**:
-   ```javascript
-   {
-     "id": "artwork-47",  // 使用唯一ID（递增）
-     "titleZh": "作品中文标题",
-     "titleEn": "Artwork English Title",
-     "year": 2024,
-     "imageUrl": "/exhibitions/negative-space-of-the-tide/assets/artwork-47.jpg",
-     "artist": "艺术家姓名 (Artist Name)",
-     "status": "confirmed",  // "confirmed" 或 "pending"
-     "metadata": {
-       "school": "美术学院名称",
-       "confirmationDate": "2025-11-14"  // 或 "expectedDate" for pending
-     }
-   }
-   ```
-
-2. **添加评论数据** (仅确认作品需要)
-
-   如果 `status: "confirmed"`，添加6条评论:
-   ```javascript
-   {
-     "artworkId": "artwork-47",
-     "personaId": "su-shi",
-     "textZh": "评论中文...",
-     "textEn": "Critique English...",
-     "rpait": { "R": 7, "P": 8, "A": 9, "I": 7, "T": 8 }
-   }
-   // ... 重复6次（6位评论家）
-   ```
-
-   如果 `status: "pending"`，跳过评论（待定作品无评论）
-
-3. **创建对话文件** (`js/data/dialogues/artwork-47.js`)
-
-   **确认作品**:
-   ```javascript
-   export const artwork47Dialogue = {
-     id: 'dialogue-artwork-47',
-     artworkId: 'artwork-47',
-     topic: '作品中文标题',
-     topicEn: 'Artwork English Title',
-     participants: ['su-shi', 'guo-xi', 'john-ruskin', 'mama-zola', 'professor-petrova', 'ai-ethics-reviewer'],
-     messages: [
-       // 6条消息（模板化，待LLM优化）
-     ]
-   };
-   ```
-
-   **待定作品**:
-   ```javascript
-   export const artwork47Dialogue = {
-     id: 'dialogue-artwork-47',
-     artworkId: 'artwork-47',
-     topic: '作品待定',
-     topicEn: 'Artwork TBD',
-     participants: [],
-     messages: [
-       {
-         id: 'msg-47-pending',
-         personaId: 'system',
-         textZh: '此作品尚未确定最终形式。敬请期待...',
-         textEn: 'This artwork is yet to be finalized. Please stay tuned...',
-         timestamp: 0,
-         replyTo: null,
-         interactionType: 'initial'
-       }
-     ]
-   };
-   ```
-
-4. **更新对话索引** (`js/data/dialogues/index.js`)
-   ```javascript
-   import { artwork47Dialogue } from './artwork-47.js';
-
-   export const DIALOGUES = [
-     // ... existing dialogues ...
-     artwork47Dialogue,
-   ];
-   ```
-
-5. **创建占位符图片** (仅待定作品需要)
-
-   如果 `status: "pending"`，创建 `assets/placeholders/pending-artwork-47.svg`:
-   ```svg
-   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-     <defs>
-       <linearGradient id="grad47" x1="0%" y1="0%" x2="100%" y2="100%">
-         <stop offset="0%" style="stop-color:#颜色1" />
-         <stop offset="100%" style="stop-color:#颜色2" />
-       </linearGradient>
-     </defs>
-     <rect width="1200" height="800" fill="url(#grad47)" />
-     <!-- 添加文本元素... -->
-   </svg>
-   ```
-
-6. **更新元数据** (`data.json`)
-   ```javascript
-   "metadata": {
-     "artworkCount": 44,  // 43 + 1
-     "confirmedArtworks": 41,  // 如果新作品是confirmed
-     "pendingArtworks": 3,     // 或增加到4如果是pending
-     "lastSyncDate": "2025-11-14"
-   }
-   ```
-
-7. **运行验证**
-   ```bash
-   node scripts/validate-sync.js
-   node scripts/test-dialogues-loading.js
-   ```
-
-8. **本地测试**
-   ```bash
-   python -m http.server 9999
-   # 访问 http://localhost:9999
-   ```
-
-9. **验证清单**:
-   - ✅ 数据验证全部通过（无错误）
-   - ✅ 对话加载测试通过
-   - ✅ 新作品在展览页面显示
-   - ✅ 如果有图片: 图片正常显示
-   - ✅ 如果无图片: 显示占位符
-   - ✅ 对话系统正常工作
-
-10. **提交到Git**
-    ```bash
-    git add .
-    git commit -m "feat: Add new artwork artwork-47 (艺术家姓名)"
-    git push origin master
-    ```
-
-### 任务2: 修改评论家信息
-
-1. 找到 `js/data.js` 中的对应评论家对象
-2. 修改 `bio`, `rpait` 得分, 或其他字段
-3. 更新 `index.html` 中的评论家卡片
-4. 本地测试
-
-### 任务3: 调整样式
-
-1. 打开 `styles/main.css`
-2. 修改相关的 CSS 规则
-3. 在浏览器中实时查看（F12 刷新）
-4. 提交更改
-
-### 任务4: 添加交互功能
-
-1. 在 `js/app.js` 中添加事件监听
-2. 或创建新的 JavaScript 文件
-3. 在 `index.html` 中加载脚本
-4. 测试功能
-
----
-
-## 🔄 OpenSpec 工作流 (功能变更管理)
-
-本项目使用 **OpenSpec** 规范管理所有功能变更。这是一个严格的提案-设计-实施-归档流程。
-
-### OpenSpec 命令
+### Git 提交规范
 
 ```bash
-# 1. 创建新功能提案
+# 格式: <type>: <description>
+# type: feat, fix, docs, style, refactor, perf, test, chore
+
+git commit -m "feat: Add new artwork artwork-47 (艺术家姓名)"
+git commit -m "fix: Correct artwork-23 metadata"
+git commit -m "docs: Update CLAUDE.md with deployment notes"
+```
+
+---
+
+## 🔧 OpenSpec 工作流
+
+本项目使用 OpenSpec 管理所有功能变更。
+
+### 核心命令
+
+```bash
+# 创建新提案
 /openspec:proposal
-# 描述问题和解决方案，系统会生成 proposal.md, design.md, specs/, tasks.md
 
-# 2. 验证提案
-openspec validate <change-name> --strict
-# 检查 SHALL/MUST 关键词、场景完整性、依赖关系
-
-# 3. 实施变更
+# 应用已批准的提案
 /openspec:apply
-# 根据 tasks.md 逐步实施，更新进度
 
-# 4. 归档已完成的变更
+# 归档已部署的变更
 /openspec:archive <change-name>
-# 标记为已部署，移动到归档目录
 ```
 
-### OpenSpec 文件结构
+### 已知问题: OpenSpec CLI Bug
 
-```
-openspec/changes/<change-name>/
-├── proposal.md              # 提案概述 (问题、解决方案、影响范围)
-├── design.md                # 设计决策 (架构选择、技术选型、权衡分析)
-├── specs/                   # 需求规范
-│   └── <feature>/
-│       └── spec.md         # ADDED/MODIFIED/REMOVED 需求 + BDD 场景
-└── tasks.md                # 可执行任务清单 (带时间估计和验证标准)
-```
+**问题**: `openspec validate` 存在验证 bug，即使 spec 正确也会报错。
 
-### OpenSpec 最佳实践
-
-1. **提案阶段**: 完整描述问题和解决方案，包括 3 个关键部分:
-   - **What Changes**: 具体变更内容
-   - **Why**: 问题分析和动机
-   - **How**: 实施步骤和验证方法
-
-2. **设计阶段**: 记录所有架构决策和技术选型:
-   - 列出所有考虑的方案 (A/B/C)
-   - 说明每个方案的优缺点
-   - 明确选择理由
-
-3. **规范阶段**: 使用严格的 BDD 格式:
-   - 每个需求必须包含 SHALL 或 MUST
-   - 每个场景包含 Given/When/Then
-   - 提供验证代码示例
-
-4. **任务阶段**: 分解为可执行的小任务:
-   - 每个任务 15-45 分钟
-   - 包含成功标准 ([ ] checklist)
-   - 明确依赖关系
-
-### 示例: fix-artwork-image-display-system
-
-这是本项目第一个完整的 OpenSpec 变更，包含:
-- **Proposal**: 3阶段解决方案 (Placeholder → Asset Acquisition → Enhancements)
-- **Design**: 5个架构决策 (CSS vs SVG, 错误处理策略, 图片获取策略等)
-- **Specs**: 5个需求，11个验证场景
-- **Tasks**: 77个任务，分为 Phase 1/2/3 + 验证
-
-参考此示例创建新的功能变更提案。
-
----
-
-### 🐛 OpenSpec Known Issues
-
-**重要**: OpenSpec CLI v0.14.0 存在已知的验证 bug，需要使用临时解决方案。
-
-#### 问题描述
-
-运行 `openspec validate <change-id> --strict` 会报错：
-```
-✗ [ERROR] Delta sections found, but no requirement entries parsed
-✗ [ERROR] Change must have at least one delta. No deltas found
-```
-
-但实际上：
-- Spec 文件格式是正确的
-- `openspec show <change-id> --json --deltas-only` 可以成功解析
-- 这是 **CLI 工具的 bug**，不是我们的规范问题
-
-#### 临时解决方案
-
-**归档已完成的变更时使用**：
+**临时解决方案**:
 ```bash
+# 归档时跳过验证
 openspec archive <change-id> --yes --no-validate --skip-specs
 ```
 
-**标志说明**：
-- `--yes`: 自动确认
-- `--no-validate`: 跳过验证（绕过 bug）
-- `--skip-specs`: 跳过 spec 更新（仅用于工具性变更）
-
-**何时使用 `--skip-specs`**：
+**何时使用 `--skip-specs`**:
 - ✅ 工具/文档类变更（无功能需求）
 - ✅ UI 双语支持（不改变功能逻辑）
 - ❌ 新功能开发（需要更新 specs）
 
-#### 验证步骤
+详见：`OPENSPEC_KNOWN_ISSUES.md`
 
-归档前验证 spec 正确性：
+---
+
+## 🧪 测试与验证
+
+### 数据验证脚本
+
 ```bash
-# 1. 检查文件结构
-ls openspec/changes/<change-id>/specs/
+# 验证展览数据同步（12项检查）
+node scripts/validate-sync.js
 
-# 2. 测试解析功能（应该成功）
-openspec show <change-id> --json --deltas-only
-
-# 3. 忽略验证错误（已知 bug）
-openspec validate <change-id> --strict  # 会失败，忽略
-
-# 4. 使用临时解决方案归档
-openspec archive <change-id> --yes --no-validate --skip-specs
+# 预期输出:
+# ✅ Artwork count: 43
+# ✅ Confirmed artworks: 40
+# ✅ Pending artworks: 3
+# ✅ Critiques count: 258
 ```
 
-#### 追踪状态
+### 对话加载测试
 
-- **GitHub Issue**: [#164](https://github.com/Fission-AI/OpenSpec/issues/164)（OPEN，未修复）
-- **详细文档**: 参见 `OPENSPEC_KNOWN_ISSUES.md`
-- **版本**: v0.14.0（当前最新版本）
-- **预计修复**: 待官方发布
+```bash
+# 测试对话系统 ES6 模块加载
+node scripts/test-dialogues-loading.js
 
-**当 CLI 修复后**：
-1. 升级版本：`npm install -g openspec@latest`
-2. 移除临时解决方案文档
-3. 恢复标准验证流程
+# 预期输出:
+# ✅ Dialogue count correct (43)
+# ✅ Total messages: 268
+# ✅ All dialogues loaded successfully
+```
+
+### 手动测试清单
+
+**核心功能**:
+- [ ] Hero 轮播区域正常显示
+- [ ] 可以点击左右箭头切换作品
+- [ ] 数据可视化（雷达图 + 矩阵）正常
+- [ ] 语言切换正常（中文 ↔ 英文）
+
+**响应式设计**:
+- [ ] 375px (移动端)
+- [ ] 768px (平板)
+- [ ] 1024px (桌面)
+
+**浏览器兼容性**:
+- [ ] Chrome/Edge 90+
+- [ ] Firefox 88+
+- [ ] Safari 14+
 
 ---
 
 ## 📤 部署流程
 
-### 本地开发
-```bash
-# 1. 修改文件
-# 2. 本地测试
-python -m http.server 8080
-# http://localhost:8080 检查
+### GitHub Pages 自动部署
 
-# 3. 提交到 Git
+```bash
+# 1. 本地修改和测试
+python -m http.server 8000
+
+# 2. 提交到 Git
 git add .
-git commit -m "描述你的更改"
+git commit -m "描述"
 git push origin master
 
-# 4. GitHub Pages 自动部署
-# https://vulcaart.art 在几秒内更新
+# 3. GitHub Pages 自动部署
+# 访问 https://vulcaart.art 检查结果（等待 1-2 分钟）
 ```
 
-### 缓存绕过
-
-如果线上网站未显示最新内容，可能是 CDN 缓存。
-
-使用查询参数绕过：
-```
-https://vulcaart.art?nocache=1
-```
-
----
-
-## 🧪 验证与测试工作流
-
-### 验证脚本 (Validation Scripts)
-
-本项目包含自动化验证脚本，用于确保数据完整性和系统稳定性。
-
-#### 1. 数据同步验证 (`scripts/validate-sync.js`)
-
-**用途**: 验证展览数据同步的完整性（作品数量、评论、对话、占位符）
-
-**运行方式**:
-```bash
-node scripts/validate-sync.js
-```
-
-**验证内容**:
-- ✅ 作品数量正确（预期: 43）
-- ✅ 确认/待定作品比例正确（40确认 + 3待定）
-- ✅ 新作品全部存在（artwork-39 ~ artwork-46）
-- ✅ 退出作品已移除（artwork-10, 17, 30）
-- ✅ 评论数量正确（预期: 258，6评论家 × 43作品）
-- ✅ 确认作品有6条评论
-- ✅ 待定作品无评论
-- ✅ 对话文件全部存在
-- ✅ 占位符图片全部存在
-- ✅ 元数据正确更新
-
-**输出示例**:
-```
-======================================================================
-Phase 6.1: Data Validation - sync-exhibition-with-ppt-final-version
-======================================================================
-
-[1] Loading data.json...
-✅ data.json loaded successfully
-
-[2] Validating artwork count...
-✅ Artwork count: 43 (expected: 43)
-
-[3] Validating artwork status distribution...
-✅ Confirmed artworks: 40
-✅ Pending artworks: 3
-
-[4] Validating new artworks present...
-✅ artwork-39 present
-✅ artwork-40 present
-...
-
-======================================================================
-VALIDATION SUMMARY
-======================================================================
-✅ Passed checks: ALL
-❌ Errors: 0
-⚠️  Warnings: 3
-
-⚠️  WARNINGS:
-  1. artwork-10.js still exists (dialogue file not removed, but excluded from index)
-  2. artwork-17.js still exists (dialogue file not removed, but excluded from index)
-  3. artwork-30.js still exists (dialogue file not removed, but excluded from index)
-
-======================================================================
-⚠️  VALIDATION PASSED WITH WARNINGS - Review warnings before deployment
-```
-
-#### 2. 对话加载测试 (`scripts/test-dialogues-loading.js`)
-
-**用途**: 测试对话系统ES6模块正确加载，验证对话数量和统计数据
-
-**运行方式**:
-```bash
-node scripts/test-dialogues-loading.js
-```
-
-**验证内容**:
-- ✅ ES6 模块导入成功
-- ✅ 对话数量正确（预期: 43）
-- ✅ 新作品对话存在（artwork-39 ~ artwork-46）
-- ✅ 退出作品对话已排除（artwork-10, 17, 30）
-- ✅ 统计数据正确（总对话数、总消息数、作品数、评论家数、平均消息数）
-
-**输出示例**:
-```
-======================================================================
-Phase 6.2: Testing Dialogue Loading
-======================================================================
-
-[1] Importing dialogue index...
-✅ Import successful
-
-[2] Checking dialogue count...
-   Total dialogues: 43
-✅ Dialogue count correct (43)
-
-[3] Checking new artwork dialogues...
-✅ artwork-39: 6 messages
-✅ artwork-40: 1 messages
-✅ artwork-41: 6 messages
-...
-
-[4] Checking withdrawn artworks removed...
-✅ artwork-10: correctly excluded
-✅ artwork-17: correctly excluded
-✅ artwork-30: correctly excluded
-
-[5] Getting dialogue statistics...
-   Statistics:
-   - Total dialogues: 43
-   - Total messages: 268
-   - Artwork count: 43
-   - Persona count: 6
-   - Avg messages/dialogue: 6
-
-======================================================================
-✅ ALL DIALOGUE TESTS PASSED
-======================================================================
-```
-
-#### 3. 何时运行验证
-
-**必须运行验证的情况**:
-1. 添加新作品后
-2. 修改 `data.json` 后
-3. 更新对话文件后
-4. 部署到生产环境前
-5. 修复数据bug后
-
-**推荐工作流**:
-```bash
-# 1. 修改数据
-vim exhibitions/negative-space-of-the-tide/data.json
-
-# 2. 运行验证
-node scripts/validate-sync.js
-node scripts/test-dialogues-loading.js
-
-# 3. 修复任何错误
-# 4. 重新验证直到通过
-# 5. 提交到Git
-git add .
-git commit -m "..."
-```
-
----
-
-## 🧪 测试检查清单
-
-在部署前，确保：
-
-### 数据验证 (必须先通过)
-- [ ] ✅ 运行 `node scripts/validate-sync.js` - 全部检查通过
-- [ ] ✅ 运行 `node scripts/test-dialogues-loading.js` - 对话加载成功
-- [ ] ✅ 检查控制台无错误（仅允许非关键警告）
-
-### 核心功能
-- [ ] ✅ 本地测试成功 (`http://localhost:9999`)
-- [ ] ✅ HTML 验证通过（无语法错误）
-- [ ] ✅ 主页面滚动被禁用（不能用鼠标滚轮/键盘）
-- [ ] ✅ 详细页面可滚动（critics.html, about.html, process.html）
-
-### 导航系统
-- [ ] ✅ 汉堡菜单按钮 (☰) 可点击
-- [ ] ✅ 菜单显示 4 个导航链接 + 2 个按钮
-- [ ] ✅ "评论家" 链接打开 `/pages/critics.html`
-- [ ] ✅ "关于" 链接打开 `/pages/about.html`
-- [ ] ✅ "过程" 链接打开 `/pages/process.html`
-- [ ] ✅ 返回按钮 (←) 返回主页面
-- [ ] ✅ 汉堡菜单自动关闭（点击链接或外部）
-
-### RPAIT评论家页面
-- [ ] ✅ 6位评论家卡片正确渲染
-- [ ] ✅ 每位评论家显示传记文本
-- [ ] ✅ 每位评论家显示 5 个 RPAIT 维度 (R/P/A/I/T)
-- [ ] ✅ 维度条形图宽度正确 (1-10 分)
-- [ ] ✅ 条形图颜色匹配评论家的主题色
-
-### 响应式设计
-- [ ] ✅ 响应式设计测试 (375px, 768px, 1024px, 1440px)
-- [ ] ✅ 图片加载正常
-- [ ] ✅ 中英文显示正确
-
-### 跨浏览器测试
-- [ ] ✅ Chrome/Edge 90+
-- [ ] ✅ Firefox 88+
-- [ ] ✅ Safari 14+
-
----
-
-## 🐛 常见问题
-
-### Q1: 菜单按钮不工作？
-**A**: 检查:
-1. `index.html` 中是否有 `<button id="menu-toggle">`
-2. `js/navigation.js` 是否被正确加载
-3. 浏览器控制台是否有 `[Navigation] Handler initialized` 消息
-4. 菜单元素是否有 `hidden` 属性 (查看 DOM 树)
-
-### Q2: 评论家页面不显示卡片？
-**A**: 最常见原因是 RPAIT 分数计算失败:
-1. 验证 `js/data.js` 中 critiques 数组有 24 条评论
-2. 确认每条 critique 都有 `rpait: { R, P, A, I, T }` 字段
-3. 浏览器控制台检查是否有 `Missing or invalid rpait` 错误
-4. 确保 `data.js` 在 `critics-page.js` **之前** 加载
-
-**修复**: data.js 在加载时会自动为每个 persona 计算平均 RPAIT 分数 (lines 297-351)
-
-### Q3: 详细页面无法滚动？
-**A**: 检查:
-1. `pages/*.html` 顶部是否设置了 `window.IMMERSIVE_MODE = false;` 脚本
-2. 主页面应该设置 `window.IMMERSIVE_MODE = true;`
-3. `scroll-prevention.js` 会根据这个标志启用/禁用滚动禁止
-
-### Q4: 样式未加载？
-**A**: 检查 CSS 文件路径是否使用绝对路径 `/styles/main.css` 而不是相对路径。
-
-### Q5: JavaScript 不工作？
-**A**: 检查脚本加载顺序（在 index.html 中）:
-```html
-<!-- 必须按此顺序加载 -->
-<script>window.IMMERSIVE_MODE = true;</script>
-<script src="/js/data.js?v=3"></script>        <!-- 必须第一个 -->
-<script src="/js/scroll-prevention.js?v=1"></script>
-<script src="/js/navigation.js?v=1"></script>
-<script src="/js/critics-page.js?v=1"></script> <!-- critics 页面才需要 -->
-```
-
-### Q6: 部署后显示旧版本？
-**A**: 这是 CDN 缓存。等待 10-30 分钟，或在 URL 加 `?nocache=1`。
-
-### Q7: 图片显示为彩色渐变块 (Placeholder)？
-**A**: 这是**正常行为**！系统实施了 Placeholder 系统 (Phase 1: fix-artwork-image-display-system)。
-
-**原因**: 图片文件暂未获取或路径错误
-
-**Placeholder 功能**:
-- 显示作品完整元数据（中英文标题、艺术家、年份）
-- 每个作品有独特的渐变背景色用于区分
-- 保持 3:2 宽高比，响应式设计
-- 支持屏幕阅读器 (ARIA 属性)
-- 控制台记录警告消息
-
-**如何添加真实图片**:
-1. 将图片文件放入 `/assets/` 目录
-2. 确保文件名与 `js/data.js` 中的 `imageUrl` 匹配
-3. 图片规格: 1200×800px (3:2), <500KB, JPG 85% 质量
-4. 刷新浏览器，图片会自动替换 placeholder
-
-**如何自定义 Placeholder 颜色**:
-编辑 `styles/main.css` 中的渐变定义:
-```css
-.artwork-placeholder.artwork-5 {
-  background: linear-gradient(135deg, #颜色1 0%, #颜色2 100%);
-}
-```
-
-### Q8: 汉字显示乱码？
-**A**: 确保 HTML 头部有 `<meta charset="UTF-8">`，文件编码为 UTF-8。
-
-### Q9: 如何验证 Placeholder 系统是否正常工作？
-**A**: 按以下步骤检查:
-
-1. **打开浏览器开发者工具** (F12)
-2. **访问** `http://localhost:9999`
-3. **检查控制台**，应该看到:
-   ```
-   ⚠ Image not found: /assets/artwork-1.jpg (artwork-1)
-   ✓ Displaying placeholder for: 记忆（绘画操作单元：第二代）
-   ⚠ Image not found: /assets/artwork-2.jpg (artwork-2)
-   ✓ Displaying placeholder for: 绘画操作单元（第一代）
-   ...
-   ```
-4. **检查 DOM 结构**，应该看到:
-   ```html
-   <div class="artwork-placeholder artwork-1" role="img" aria-label="...">
-     <div class="placeholder-content">
-       <h3 class="placeholder-title" lang="zh">记忆（绘画操作单元：第二代）</h3>
-       <p class="placeholder-title-en" lang="en">Memory (Painting Operation Unit: Second Generation)</p>
-       <p class="placeholder-meta">Sougwen Chung • 2022</p>
-       <p class="placeholder-status">🖼️ Image Pending Acquisition</p>
-     </div>
-   </div>
-   ```
-5. **视觉验证**: 每个作品应显示不同颜色的渐变背景
-6. **响应式测试**: 在不同设备宽度下 (375/768/1024px)，placeholder 应保持 3:2 宽高比
-
----
-
-## 📖 相关文档
-
-- **SPEC.md** - 项目规范和结构（必读）
-- **README.md** - 项目概览与快速开始
-- **PHASE_5_FINAL_SUMMARY.md** - Phase 5 功能总结
-- **PHASE_5_PROGRESS.md** - 详细开发进度
-- **openspec/changes/fix-artwork-image-display-system/** - 图片占位符系统完整规范
-  - `proposal.md` - 问题分析与3阶段解决方案
-  - `design.md` - 架构决策与技术选型
-  - `specs/placeholder-system/spec.md` - 5个需求规范 + 11个验证场景
-  - `tasks.md` - 77个可执行任务清单
-
----
-
-## 🔗 关键链接
-
-| 资源 | URL |
-|------|-----|
-| 线上网站 | https://vulcaart.art |
-| GitHub 仓库 | https://github.com/yha9806/VULCA-EMNLP2025 |
-| 联系邮箱 | yuhaorui48@gmail.com |
-
----
-
-## 📝 提交信息格式
-
-遵循约定格式：
-
-```
-<类型>: <简短描述>
-
-<详细说明（可选）>
-
-Closes #<issue>（如果适用）
-```
-
-**类型**:
-- `feat`: 新功能
-- `fix`: 修复 bug
-- `docs`: 文档更新
-- `style`: 样式调整
-- `refactor`: 代码重构
-- `perf`: 性能优化
-- `test`: 测试
-
-**示例**:
-```
-feat: 添加新评论家简介
-
-在评论家卡片中添加李清照相关信息和RPAIT得分。
-确保样式与现有卡片一致。
-
-Closes #42
-```
-
----
-
-## ✅ 本文档维护
-
-- **本文档与 SPEC.md 必须保持同步**
-- 每当项目结构或规则变更时，同时更新两个文档
-- 定期审查过时内容
-
-**最后更新**: 2025-11-14 (展览数据同步完成)
-**上次结构性更新**: 2025-11-02
-
-**本次更新内容**:
-- ✅ 添加展览数据同步完成记录（43件作品）
-- ✅ 添加验证与测试工作流文档
-- ✅ 更新数据结构示例（status字段、metadata字段）
-- ✅ 更新"添加新作品"任务流程（包含验证步骤）
-- ✅ 更新项目统计数据（43作品、258评论、43对话）
-
----
-
-## 🎉 最新更新
-
-### ✅ 展览数据同步完成 - 43件作品上线 (2025-11-14)
-
-**解决的问题**:
-- ❌ 之前: 展览显示38件旧版PPT作品，缺少最新艺术家
-- ✅ 现在: 与PPT最终版本同步，显示43件作品（40件确认 + 3件待定）
-
-**实施内容**:
-
-**1. 数据同步** (`exhibitions/negative-space-of-the-tide/data.json`)
-   - **新增8件作品**: artwork-39 到 artwork-46
-     - ✅ 5件确认: 凌筱薇、郭缤禧、林杨彬、邢辰力德、周妤蓉
-     - ⏳ 3件待定: 金钛锆、一名奇怪的鸟类观察员、罗薇
-   - **移除3位退出艺术家**: 李鹏飞 (artwork-17)、陈筱薇 (artwork-10)、龍暐翔 (artwork-30)
-   - **数据统计**:
-     - 作品总数: 38 → 43 (+5净增)
-     - 评论总数: 228 → 258 (+30条，5件作品 × 6位评论家)
-     - 对话总数: 38 → 43 (+5)
-
-**2. 对话系统更新** (`js/data/dialogues/`)
-   - **新建8个对话文件**: `artwork-39.js` ~ `artwork-46.js`
-     - 确认作品: 6条消息/件（模板化评论，待LLM优化）
-     - 待定作品: 1条占位消息/件（"作品制作中..."）
-   - **更新对话索引**: `index.js` 移除3个withdrawn imports，添加8个新imports
-   - **验证通过**: 43个对话全部正确加载，268条总消息
-
-**3. 占位符系统** (`assets/placeholders/`)
-   - **创建3个SVG占位图**: `pending-artwork-40.svg`, `pending-artwork-42.svg`, `pending-artwork-44.svg`
-   - **设计特点**:
-     - 独特渐变背景（蓝紫、绿青、橙红）
-     - 显示艺术家中英文姓名
-     - 显示"作品待定 • Artwork TBD"
-     - 显示预计完成日期（2025年11月-12月）
-
-**4. 验证与测试**
-   - **数据验证** (`scripts/validate-sync.js`):
-     - ✅ 12项检查全部通过（3个非关键警告）
-     - ✅ 作品数量: 43
-     - ✅ 确认作品: 40，待定作品: 3
-     - ✅ 评论数量: 258
-     - ✅ 所有新作品对话文件存在
-     - ✅ 所有占位符图片存在
-   - **对话加载测试** (`scripts/test-dialogues-loading.js`):
-     - ✅ ES6 模块导入成功
-     - ✅ 43个对话正确加载
-     - ✅ 统计数据正确: 43对话, 268消息, 43作品, 6评论家
-
-**5. 部署**
-   - **Git提交**: `0bc02c8` - "feat: Sync exhibition with PPT final version"
-   - **文件变更**: 29个文件, +10,663行
-   - **GitHub Pages**: 已推送到master分支，自动部署中
-   - **线上地址**: https://vulcaart.art/exhibitions/negative-space-of-the-tide/
-
-**已知问题**:
-- ⚠️ 模板化评论内容需要用LLM + 知识库优化（Priority 1）
-- ⚠️ 8件新作品使用占位符图片，需联系艺术家获取真实图片（Priority 2）
-- ⚠️ 3个withdrawn对话文件仍存在磁盘（已从index排除，无功能影响）
-
-**未来增强**:
-1. **内容质量提升** (1-2小时)
-   - 使用LLM + 6位评论家知识库生成authentic critiques
-   - 替换模板文本为真实艺术评论
-   - 验证RPAIT分数与内容一致性
-
-2. **获取真实图片** (持续进行)
-   - 联系8位新艺术家获取作品图片
-   - 图片规格: 1200×800px, <500KB, JPG 85%质量
-   - 替换占位符SVG
-
-3. **导航增强** (Phase 3-5, 已延后)
-   - 创建艺术家名录页面 (`/pages/artists.html`)
-   - 实现过滤控制（学校、状态、搜索）
-   - 添加"返回列表"导航按钮
-
-**相关文档**:
-- `SYNC_COMPLETION_SUMMARY.md` - 完整实施报告（370行）
-- `openspec/changes/sync-exhibition-with-ppt-final-version/` - OpenSpec提案
-- `PPT_COMPARISON_FINAL_REPORT.md` - PPT差异分析
-
----
-
-### ✅ 设计系统优化 + 导航恢复 (2025-11-11)
-
-**解决的问题**:
-1. ❌ 之前: 视觉风格不统一（圆角8px vs 12px、阴影深度不一致）
-2. ❌ 之前: 导航缺少"评论家"和"过程"页面链接
-3. ✅ 现在: 统一设计系统，完整的5个导航项
-
-**实施内容**:
-
-**1. 设计 Tokens 系统** (`styles/design-tokens.css` 新建, 350+行)
-   - **颜色系统**: 80+ CSS 变量（primary, accent, neutral, semantic）
-   - **阴影系统**: 三层 `--shadow-sm/md/lg` (柔和阴影，提升层次感)
-   - **圆角标准**: `--radius-md: 12px` (之前8px，现在统一12px)
-   - **排版尺度**: 10级字号 (xs到6xl，基于1.25比例)
-   - **间距系统**: 8px网格 (`--spacing-xs` 到 `--spacing-2xl`)
-   - **过渡动画**: `--transition-base/slow` (cubic-bezier缓动)
-
-**2. 组件更新** (所有页面应用设计tokens)
-   - `index.html` - Portfolio 主页
-   - `pages/exhibitions-archive.html` - 展览归档页面
-   - `pages/about.html` - 关于页面
-   - `styles/portfolio-homepage.css` - 展览卡片、按钮、加载动画
-   - `shared/styles/global-navigation.css` - 导航栏、语言切换按钮
-
-**3. 导航系统恢复** (`shared/js/global-navigation.js`)
-   - **5个导航项**: 🏠 主页、📚 展览归档、👥 评论家（新）、ℹ️ 关于、🎨 过程（新）
-   - **响应式支持**:
-     - 桌面端 (>768px): 横向导航栏
-     - 移动端 (≤768px): 汉堡菜单 (☰) + 侧边栏
-   - **页面高亮**: 自动检测当前页面并高亮对应链接
-   - **版本控制**: 所有引用更新为 `?v=2` 强制刷新缓存
-
-**4. 测试验证**
-   - ✅ 响应式测试: 375px/768px/1024px/1440px 全部通过
-   - ✅ 链接测试: 主页、归档、评论家、关于、过程、展览页面全部正常
-   - ✅ 导航测试: 汉堡菜单、页面跳转、高亮功能全部正常
-
-**视觉改进**:
-- 🎨 **更柔和的阴影**: 从 `rgba(0,0,0,0.1)` 改为 `rgba(0,0,0,0.08)`
-- 🔲 **统一圆角**: 所有卡片从 8px 改为 12px
-- ⚡ **流畅动画**: 所有过渡使用 cubic-bezier(0.4, 0, 0.2, 1)
-- 📐 **一致间距**: 所有页面使用 8px 基准网格
-
-**开发者体验提升**:
-- 🔧 **单一来源**: 所有设计值集中在 `design-tokens.css`
-- 🎯 **易于维护**: 修改一个变量，全站同步更新
-- 📦 **模块化**: 设计tokens独立文件，优先加载
-
-**相关文档**: 参见 `openspec/changes/enhance-visual-design-system/`
-
----
-
-### ✅ Hero 标题双语支持 (2025-11-04)
-
-**解决的问题**:
-- ❌ 之前: 主页 Hero 标题和副标题只显示中文，语言切换时不更新
-- ✅ 现在: 显示双语结构，语言切换时实时更新
-
-**实施内容**:
-1. **Hero 标题双语化** (`js/gallery-hero.js` +17行, -4行)
-   - 标题: "潮汐的负形" / "Negative Space of the Tide"
-   - 副标题: "一场关于艺术评论的视角之旅" / "A Perspective Journey Through Art Critiques"
-   - 使用 `<span lang="zh">` / `<span lang="en">` 结构
-   - 利用现有 CSS `[data-lang]` 选择器控制显示/隐藏
-
-2. **事件驱动更新**
-   - 监听 `langchange` 事件自动重新渲染
-   - 支持语言持久化（localStorage）
-   - 支持 URL 参数 (`?lang=en`)
-
-**开发者体验提升**:
-- 🚀 **即时切换**: CSS 控制显示，无 JavaScript 延迟
-- 🎨 **一致模式**: 与评论文本、评论家姓名使用相同的双语结构
-- ♿ **完全可访问**: `lang` 属性支持屏幕阅读器
-
-**相关文档**: 参见 `openspec/changes/fix-hero-title-bilingual-support/`
-
----
-
-### ✅ 图表标签双语支持 (2025-11-04)
-
-**解决的问题**:
-- ❌ 之前: RPAIT雷达图和评论家对比矩阵的标签只显示中文，语言切换时不更新
-- ✅ 现在: 所有图表标签（维度名称、评论家姓名、Legend）实时响应语言切换
-
-**实施内容**:
-1. **RPAIT 雷达图双语化** (`js/visualizations/rpait-radar.js` +45行)
-   - 维度标签: ["代表性", "哲学性", "美学性", "身份性", "传统性"] / ["Representation", "Philosophicality", "Aesthetics", "Identity", "Tradition"]
-   - 评论家姓名: 根据当前语言显示 `nameZh` 或 `nameEn`
-   - ARIA 标签: 支持双语无障碍访问
-   - 添加 `langchange` 事件监听器，实时更新图表数据
-
-2. **评论家对比矩阵双语化** (`js/visualizations/persona-matrix.js` +43行)
-   - 单维度标签: { R: "代表性"/"Representation", P: "哲学性"/"Philosophicality", ... }
-   - 全维度标签: "所有RPAIT维度" / "All RPAIT Dimensions"
-   - Y轴标签（评论家姓名）: 根据当前语言动态更新
-   - 维度选择器保持正常工作
-
-3. **技术实现模式**:
-   - 集中式翻译常量对象 (`CHART_LABELS`)
-   - `getCurrentLang()` 辅助函数读取当前语言
-   - `getPersonaName(persona, lang)` 辅助函数选择正确姓名
-   - Chart.js 热数据更新（无需重建图表实例）
-   - 事件驱动: 所有图表监听 `langchange` 事件
-
-**开发者体验提升**:
-- ⚡ **即时响应**: 语言切换后图表在 100ms 内更新
-- 🎯 **一致模式**: 与 Hero 标题使用相同的翻译管理模式
-- ♿ **完全可访问**: ARIA 标签也支持双语
-- 🔧 **易于维护**: 翻译常量集中管理，易于扩展
-
-**相关文档**: 参见 `openspec/changes/fix-chart-labels-bilingual-support/`
-
----
-
-### ✅ Phase 2: 对话数据结构转换完成 (2025-11-06)
-
-**解决的问题**:
-- ❌ 之前: 每个作品有 6 个分散的对话线程，叙事不连贯
-- ✅ 现在: 每个作品 1 个连续对话，自然时间流动（4-7秒间隔）
-
-**实施内容**:
-1. **数据结构转换** (`js/data/dialogues/*.js`)
-   - 从 `artwork1Dialogues = [thread1, ..., thread6]` (数组)
-   - 转换为 `artwork1Dialogue = { id, messages: [...] }` (单一对话对象)
-   - 4 个作品 × 1 个对话 = 4 个对话对象（之前是 16 个线程）
-   - 总消息数: 85 条 (30+19+18+18)
-
-2. **时间戳重新生成** (`scripts/merge-threads-helper.js`)
-   - 随机间隔 4000-7000ms（平均 5.6 秒）
-   - 模拟自然对话节奏
-   - 总时长: artwork-1 (2.6分钟), artwork-2 (1.7分钟), artwork-3 (1.6分钟), artwork-4 (1.5分钟)
-
-3. **验证系统** (`scripts/validate-dialogue-data.js`)
-   - 6 项验证检查（必填字段、唯一ID、回复链、时间戳、参与者、知识库引用）
-   - 所有 4 个对话通过验证
-   - 34 条回复消息验证有效（40% 的消息包含回复关系）
-
-4. **知识库引用准备就绪**
-   - `references` 字段已定义（可选）
-   - Phase 1A 知识库已完成（6位评论家，~2000行，300+引用）
-   - Phase 3 将填充 references 数组
-
-**数据完整性**:
-- ✅ 所有消息内容保留（无数据丢失）
-- ✅ 所有 replyTo 引用有效
-- ✅ 所有参与者一致性检查通过
-- ✅ 唯一消息 ID（无重复）
-
-**向后兼容性**:
-- DialoguePlayer 组件自动检测新旧格式（无需修改）
-- index.js 导出 `DIALOGUES`（新）和 `DIALOGUE_THREADS`（别名，向后兼容）
-
-**相关文档**:
-- `PHASE_2_TRANSFORMATION_SUMMARY.md` - 完整转换报告
-- `openspec/changes/merge-threads-to-continuous-dialogue/` - OpenSpec 提案
-
----
-
-### ✅ Phase 1: 艺术作品图片 Placeholder 系统已实施 (2025-11-02)
-
-**解决的问题**:
-- ❌ 之前: 画廊显示破损图片图标 (broken image icons)，控制台显示 404 错误
-- ✅ 现在: 显示美观的彩色渐变占位符，包含完整的作品元数据
-
-**实施内容**:
-1. **CSS 渐变背景** (`styles/main.css` +123行)
-   - 4个独特的渐变色，每个作品一个
-   - 响应式设计，支持 3 个断点 (768/480px)
-   - 保持 3:2 宽高比
-
-2. **JavaScript 错误处理** (`js/gallery-hero.js` +33行)
-   - `createPlaceholder()` 函数生成占位符 DOM
-   - `img.onerror` 处理器捕获图片加载失败
-   - 控制台警告日志
-
-3. **可访问性支持**
-   - ARIA 属性 (`role="img"`, `aria-label`)
-   - 多语言支持 (`lang="zh"`, `lang="en"`)
-   - 屏幕阅读器兼容
-
-**开发者体验提升**:
-- 🚀 **无需真实图片即可开发**: 添加新作品到 `js/data.js`，立即看到效果
-- 🎨 **视觉区分度高**: 每个作品有独特的渐变背景色
-- 📱 **响应式验证**: 可以在没有图片的情况下验证布局
-- ♿ **完全可访问**: 符合 WCAG 2.1 AA 标准
-
-**相关文档**: 参见 `openspec/changes/fix-artwork-image-display-system/`
-
----
-
-## 🎭 动态对话系统 (Dialogue Player System)
-
-### 概述
-
-本项目包含一个完整的**评论家对话动画系统**，用于展示6位评论家对艺术作品的深度对话。
-
-**核心功能**:
-- ✅ 自动播放动画对话（无需手动控制）
-- ✅ 自然时间间隔（4-7秒随机延迟，模拟思考过程）
-- ✅ 思维链可视化（显示评论家"思考中..."的过程）
-- ✅ 引文系统（消息间引用与回复关系）
-- ✅ 双语支持（中/英文切换）
-- ✅ 响应式设计（桌面/移动端）
-
-### 架构组成
-
-```
-动态对话系统
-├── DialoguePlayer 类 (js/components/dialogue-player.js)
-│   ├── 自动播放引擎（Natural Timing）
-│   ├── 思维链轮播（Thought Chain Carousel）
-│   ├── 引文交互（Quote Interaction）
-│   └── 响应式布局
-├── 对话数据 (js/data/dialogues/)
-│   ├── artwork-1.js ~ artwork-4.js（Phase 2: 4个连续对话，85条消息）
-│   ├── types.js（类型定义，包含知识库引用）
-│   └── index.js（数据导出: DIALOGUES, DIALOGUE_THREADS）
-├── 样式系统 (styles/components/dialogue-player.css)
-│   ├── 赤陶色/金色暖色调（Terracotta → Gold）
-│   ├── 评论家颜色区分
-│   └── 响应式断点（768px/1024px）
-└── 测试页面
-    ├── test-quote-interaction.html ⭐ **推荐**（完整功能）
-    ├── test-thought-chain.html（思维链测试）
-    ├── test-dialogue-colors.html（颜色系统）
-    └── test-typography.html（排版测试）
-```
-
-### ⭐ 推荐实现: test-quote-interaction.html
-
-**重要**: 这是**用户最满意的实现版本**，未来集成到主网站时应使用此页面的设计和功能。
-
-**访问地址**: `http://localhost:9999/test-quote-interaction.html`
-
-**包含功能**:
-1. **自动播放对话动画**
-   - 页面加载后自动开始
-   - 随机时间间隔（4-7秒）
-   - 无需手动点击"播放"按钮
-
-2. **引文系统** ⭐ 核心功能
-   - 显示 `↩ 回复 [评论家名字]` 标签
-   - 显示被引用的原文内容
-   - **桌面端**: 鼠标悬停显示白色工具提示
-   - **移动端**: 点击打开全屏模态框
-   - 点击引用自动滚动到原始消息
-
-3. **思维链可视化**
-   - 未来消息显示"思考中..."状态
-   - 每2秒轮播切换思考内容
-   - "生成中..." 标签显示在右上角
-
-4. **视觉设计**
-   - 赤陶色/金色渐变（#B85C3C → #D4A574）
-   - 评论家颜色区分（Su Shi: #B85C3C, Guo Xi: #2D5F4F）
-   - 圆角卡片、微阴影
-
-### DialoguePlayer 类使用方法
-
-```javascript
-// 1. 确保 VULCA_DATA 已加载（包含 personas 数据）
-// 2. 创建对话线程对象
-const dialogueThread = {
-  id: 'thread-1',
-  artworkId: 'artwork-1',
-  topic: '对话主题',
-  topicEn: 'Dialogue Topic',
-  participants: ['su-shi', 'guo-xi', 'john-ruskin'],
-  messages: [
-    {
-      id: 'msg-1',
-      personaId: 'su-shi',
-      textZh: '中文评论内容...',
-      textEn: 'English critique...',
-      timestamp: 0,
-      replyTo: null,
-      interactionType: 'initial'
-    },
-    {
-      id: 'msg-2',
-      personaId: 'guo-xi',
-      textZh: '回复内容...',
-      textEn: 'Reply content...',
-      timestamp: 3000,
-      replyTo: 'su-shi',
-      interactionType: 'agree-extend',
-      quotedText: '被引用的原文片段'  // ⭐ 引文系统关键字段
-    }
-  ]
-};
-
-// 3. 实例化 DialoguePlayer
-const container = document.getElementById('dialogue-container');
-const player = new DialoguePlayer(dialogueThread, container, {
-  speed: 1.0,          // 播放速度（1.0 = 正常）
-  autoPlay: true,      // 自动播放（推荐 true）
-  lang: 'zh'           // 默认语言（'zh' 或 'en'）
-});
-
-// 4. DialoguePlayer 自动处理一切！
-// - 自动开始播放
-// - 自动显示思维链
-// - 自动处理引文交互
-// - 自动响应式布局
-```
-
-### 对话数据结构
-
-**Message 对象** (当前实现):
-```javascript
-{
-  id: string,              // 消息唯一ID
-  personaId: string,       // 评论家ID（对应 VULCA_DATA.personas）
-  textZh: string,          // 中文内容
-  textEn: string,          // 英文内容
-  timestamp: number,       // 显示时间戳（毫秒，从0开始）
-  replyTo: string|null,    // 回复的评论家ID
-  interactionType: string, // 交互类型（initial, agree-extend, question-challenge, etc.）
-  quotedText?: string      // ⭐ 被引用的原文（可选，用于引文系统）
-}
-```
-
-**Message 对象** (Phase 2 扩展 - 待实施):
-```javascript
-{
-  // ... 现有字段 ...
-  chapterNumber?: number,        // 章节编号 (1-5)
-  highlightImage?: string,       // 高亮图像 ID
-  imageAnnotation?: {            // 图像注释
-    zh: string,
-    en: string
-  },
-  references?: Array<{           // 知识库引用
-    critic: string,              // 评论家 ID
-    source: string,              // 来源文档
-    quote: string,               // 引用文本
-    page?: string                // 页码/章节
-  }>
-}
-```
-
-### 交互类型 (Interaction Types)
-
-```javascript
-const INTERACTION_TYPES = {
-  'initial': { labelZh: '首发', labelEn: 'INITIAL' },
-  'agree-extend': { labelZh: '赞同并延伸', labelEn: 'AGREE & EXTEND' },
-  'question-challenge': { labelZh: '质疑', labelEn: 'QUESTION' },
-  'counter': { labelZh: '反驳', labelEn: 'COUNTER' },
-  'synthesize': { labelZh: '综合', labelEn: 'SYNTHESIZE' },
-  'reflect': { labelZh: '反思', labelEn: 'REFLECT' }
-};
-```
-
-### 本地测试
+### 检查部署状态
 
 ```bash
-# 1. 启动本地服务器
-python -m http.server 9999
+# 使用 GitHub CLI
+gh api repos/yha9806/VULCA-EMNLP2025/pages/builds --jq '.[0] | "\(.status) | \(.commit[0:7]) | \(.updated_at)"'
 
-# 2. 访问测试页面
-http://localhost:9999/test-quote-interaction.html  # ⭐ 推荐
-http://localhost:9999/test-thought-chain.html
-http://localhost:9999/test-dialogue-colors.html
-http://localhost:9999/test-typography.html
+# 预期输出:
+# built | a42f468 | 2025-11-15T00:15:13Z
 ```
 
-### 相关 OpenSpec 项目
+### 强制刷新缓存
 
-- **`natural-dialogue-flow-redesign`** (已归档 2025-11-05)
-  - 从"媒体播放器模式"改为"自然对话流动模式"
-  - 移除播放控制按钮，自动播放
-  - 随机时间间隔，模拟自然思考
+如果线上未显示最新内容：
 
-- **`fix-dialogue-system-ux-and-layout`** (已归档 2025-11-05)
-  - CSS 布局修复
-  - 内容可见性修复
-  - 响应式设计优化
+```bash
+# 方法1: 更新版本号
+# 编辑 index.html，修改 ?v=5 → ?v=6
 
-### 未来集成计划
+# 方法2: URL 参数
+https://vulcaart.art/?nocache=123456
 
-**目标**: 将 `test-quote-interaction.html` 集成到主网站
-
-**步骤**:
-1. 创建 `pages/dialogues.html`（基于 test-quote-interaction.html）
-2. 更新导航菜单（添加"对话"链接）
-3. 加载真实对话数据（从 `js/data/dialogues/`）
-4. 集成到主网站导航流程
-
-**注意**: 保持 test-quote-interaction.html 的所有功能和设计风格！
+# 方法3: 用户清除浏览器缓存
+# Ctrl+Shift+Delete → 缓存图片和文件 → 清除
+```
 
 ---
 
-## 📚 知识库系统 (Knowledge Base System)
+## 🚫 禁止的操作
 
-### 概述
+### 绝对不要做的事
 
-本项目为 **6 位评论家** 构建了完整的知识库，用于生成深度对话内容。
+1. **❌ 删除关键文件**
+   - `index.html`, `exhibitions/*/index.html`
+   - `data.json`
+   - `js/data-loader.js`, `js/gallery-hero.js`
 
-**状态**: ✅ Phase 1A 完成（2025-11-06，Session 1-2）
+2. **❌ 改变目录结构**
+   - 不要重组 `js/`, `styles/`, `exhibitions/` 目录
+   - 不要移动文件到不同路径
 
-### 评论家列表
+3. **❌ 破坏部署**
+   - 不要使用相对路径 `../` 或 `./`（使用绝对路径 `/`）
+   - 不要更改 `CNAME` 文件
 
-| 评论家 | 文化背景 | 时代 | 核心方法论 | 文件路径 |
-|--------|---------|------|-----------|---------|
-| **Su Shi (苏轼)** | 北宋文人画 | 1037-1101 | 哲学-诗意 | `knowledge-base/critics/su-shi/` |
-| **Guo Xi (郭熙)** | 北宋画院 | 1020-1090 | 技术-系统 | `knowledge-base/critics/guo-xi/` |
-| **John Ruskin** | 维多利亚英国 | 1819-1900 | 道德-政治 | `knowledge-base/critics/john-ruskin/` |
-| **Mama Zola** | 西非 Griot | 2000+ 年传统 | 社区-去殖民 | `knowledge-base/critics/mama-zola/` |
-| **Professor Petrova** | 俄国形式主义 | 1910s-1930s | 形式-结构 | `knowledge-base/critics/professor-petrova/` |
-| **AI Ethics Reviewer** | 当代科技伦理 | 2018-present | 权力-系统 | `knowledge-base/critics/ai-ethics-reviewer/` |
+4. **❌ 删除 enforceGalleryHidden**
+   - 不要删除展览页面的 `enforceGalleryHidden()` 函数
+   - 不要删除 `<section class="gallery">` 的 inline style
+   - 这些是**有意的设计**，确保 Hero 模式优先显示
 
-### 知识库结构
-
-每位评论家的知识库包含:
-
-```
-knowledge-base/critics/[critic-id]/
-├── README.md                     # 完整使用指南
-│   ├── Biography（传记）
-│   ├── Core Philosophy（5个核心原则）
-│   ├── Voice Characteristics（声音特征）
-│   ├── Application to AI Art（AI艺术批评框架）
-│   └── Example Critique（示例评论）
-├── [topic].md                    # 主题引用文件（50+ 引用）
-│   ├── Su Shi: poetry-and-theory.md
-│   ├── Guo Xi: landscape-theory.md
-│   ├── John Ruskin: art-and-morality.md
-│   ├── Mama Zola: griot-aesthetics-oral-tradition.md
-│   ├── Petrova: formalism-and-device.md
-│   └── AI Ethics: algorithmic-justice-and-power.md
-├── key-concepts.md               # 5个核心概念详解
-└── references.md                 # 参考文献列表
-```
-
-### 核心原则示例
-
-**Mama Zola (西非 Griot)**:
-1. **Ubuntu** — "我在故我们在" (umuntu ngumuntu ngabantu)
-2. **Griot Ethics** — 社区记忆守护者
-3. **Call-and-Response** — 参与式美学
-4. **Sankofa** — 从祖先学习
-5. **Spiral Time** — 非线性时间性
-
-**Professor Petrova (俄国形式主义)**:
-1. **Defamiliarization (Остранение)** — 陌生化
-2. **Device (Прием)** — 设备/技巧
-3. **Literariness** — 文学性
-4. **Automatization vs. Enstrangement** — 自动化 vs 陌生化
-5. **Structural Analysis** — 结构分析
-
-### 使用知识库生成对话
-
-**Phase 3 计划** (待实施):
-1. 读取评论家知识库（README.md, key-concepts.md）
-2. 使用 LLM 生成对话内容
-3. 为每条消息添加 `references` 字段（引用具体来源）
-4. 验证对话符合评论家声音特征
-
-**示例**:
-```javascript
-// Phase 3: 带知识库引用的消息
-{
-  id: 'msg-1',
-  personaId: 'su-shi',
-  textZh: '观此作，机械与自然交织...',
-  references: [
-    {
-      critic: 'su-shi',
-      source: '东坡诗集',
-      quote: '笔墨当随时代',
-      page: '卷三'
-    }
-  ]
-}
-```
-
-### 相关文档
-
-- **SESSION_2_SUMMARY.md** — Session 2 完整工作记录
-- **WORK_SESSION_LOG.md** — Session 1 工作记录
-- **openspec/changes/expand-dialogue-with-knowledge-base/** — OpenSpec 提案
+5. **❌ 强制推送到 main/master**
+   - 除非回滚错误，否则不使用 `git push --force`
+   - 使用 `git push --force-with-lease` 更安全
 
 ---
 
-## 🚧 Phase 2: 数据结构扩展 (准备就绪)
+## 📚 关键文档
 
-### 状态
-
-- ✅ Phase 1A: Knowledge Base Construction (100% 完成)
-- ⏸️ Phase 2: Data Structure Extensions (已启动，数据结构分析完成)
-
-### Phase 2 目标
-
-扩展对话数据结构，支持：
-1. **章节化叙事** (5 chapters per artwork)
-2. **图像同步** (highlightImage 字段)
-3. **知识库引用** (references 数组)
-4. **图像注释** (imageAnnotation 对象)
-
-### 待实施任务
-
-| 任务 | 预计时长 | 状态 |
-|------|---------|------|
-| Task 2.2: 扩展 Message 数据结构 | 2小时 | ⏳ 待开始 |
-| Task 2.3: 创建 Chapter 数据结构 | 2小时 | ⏳ 待开始 |
-| Task 2.5: 更新现有对话数据 | 4小时 | ⏳ 待开始 |
-| Task 2.7: 创建数据验证脚本 | 4小时 | ⏳ 待开始 |
-| Task 2.10: 更新文档 | 2小时 | ⏳ 待开始 |
-| **总计** | **14.5小时** | — |
-
-### Chapter 结构 (5 章节模板)
-
-```javascript
-const DIALOGUE_CHAPTERS = [
-  {
-    id: 1,
-    title: '初见印象',
-    titleEn: 'First Impressions',
-    description: '评论家的初步观察与即时反应',
-    descriptionEn: 'Initial observations and immediate reactions',
-    messageIds: ['msg-1', 'msg-2', ...]  // 3-4条消息
-  },
-  {
-    id: 2,
-    title: '技法解析',
-    titleEn: 'Technical Analysis',
-    // ... 3-4条消息
-  },
-  {
-    id: 3,
-    title: '哲学思辨',
-    titleEn: 'Philosophical Reflection',
-    // ... 3-4条消息
-  },
-  {
-    id: 4,
-    title: '美学评判',
-    titleEn: 'Aesthetic Judgment',
-    // ... 3-4条消息
-  },
-  {
-    id: 5,
-    title: '文化对话',
-    titleEn: 'Cultural Dialogue',
-    // ... 3-4条消息
-  }
-];
-```
-
-### 下次会话开始
-
-**快速启动**: 阅读 `NEXT_SESSION_START_HERE.md` 和 `SESSION_2_SUMMARY.md`
-
-**实施指南**: 参见 `openspec/changes/expand-dialogue-with-knowledge-base/tasks.md` (lines 559-658)
+- **SPEC.md** - 项目规范（必读）
+- **README.md** - 项目概览
+- **openspec/AGENTS.md** - OpenSpec 工作流
+- **OPENSPEC_KNOWN_ISSUES.md** - OpenSpec CLI 已知问题
 
 ---
 
-**开始编辑前，请完整阅读本文档和 SPEC.md！**
-- to memorize 记住这个问题
+## 🎯 项目统计（当前版本 a42f468）
+
+| 维度 | 数量 |
+|------|------|
+| **作品总数** | 43件 (40确认 + 3待定) |
+| **评论家** | 6位 |
+| **评论总数** | 258条 (43作品 × 6评论家) |
+| **对话总数** | 43个 |
+| **总消息数** | 268条 |
+| **图片资源** | ~130张（含多图系统）|
+
+---
+
+## ⚠️ 重要提醒
+
+### 开始编辑前必读
+
+1. **阅读 SPEC.md** - 了解项目规范和约束
+2. **运行本地服务器** - 验证修改效果
+3. **运行验证脚本** - 确保数据完整性
+4. **检查 OpenSpec** - 大功能需要提案
+
+### 遇到问题时
+
+1. **检查控制台** - F12 查看 JavaScript 错误
+2. **检查网络请求** - F12 Network 面板查看资源加载
+3. **清除缓存** - Ctrl+Shift+R 硬刷新
+4. **查看文档** - 本文档 + SPEC.md + OpenSpec
+
+### 联系方式
+
+- **Email**: yuhaorui48@gmail.com
+- **GitHub Issues**: https://github.com/yha9806/VULCA-EMNLP2025/issues
+
+---
+
+**最后更新**: 2025-11-15
+**稳定版本**: a42f468 (tooltip 升级前的最后稳定版本)
+**下次更新**: 当有重大架构变更或新功能时
