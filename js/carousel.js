@@ -55,6 +55,21 @@ window.ArtworkCarousel = (function() {
     }
 
     /**
+     * Jump to specific artwork by ID (for QR code deep linking)
+     * @param {string} artworkId - Artwork ID (e.g., "artwork-1")
+     * @returns {object|null} - Artwork object or null if not found
+     */
+    jumpToArtwork(artworkId) {
+      const index = this.artworks.findIndex(a => a.id === artworkId);
+      if (index === -1) {
+        console.warn(`⚠ Artwork not found: ${artworkId}`);
+        return null;
+      }
+      console.log(`✓ Jumping to artwork: ${artworkId} (index ${index})`);
+      return this.goTo(index);
+    }
+
+    /**
      * Get current artwork object
      */
     getCurrentArtwork() {
@@ -157,6 +172,18 @@ window.ArtworkCarousel = (function() {
     window.carousel = carousel; // Make globally accessible
 
     console.log(`✓ Carousel initialized with ${data.artworks.length} artworks`);
+
+    // Check for artwork ID in URL parameters (for QR code deep linking)
+    const urlParams = new URLSearchParams(window.location.search);
+    const artworkId = urlParams.get('artwork');
+    if (artworkId) {
+      console.log(`✓ URL parameter detected: artwork=${artworkId}`);
+      // Small delay to ensure gallery-hero.js is ready
+      setTimeout(() => {
+        carousel.jumpToArtwork(artworkId);
+      }, 100);
+    }
+
     return carousel;
   }
 

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VULCA 展签二维码生成器</title>
+
+  <style>
+    /* ===== 全局样式 ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      padding: 2rem;
+    }
+
+    /* ===== 头部控制面板 ===== */
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .status {
+      text-align: center;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .status.loading {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    /* ===== A4 打印布局 ===== */
+    .print-preview {
+      display: none; /* 屏幕上隐藏，打印时显示 */
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .container {
+        box-shadow: none;
+        padding: 0;
+      }
+
+      .header,
+      .controls,
+      .status,
+      .screen-preview {
+        display: none !important;
+      }
+
+      .print-preview {
+        display: block !important;
+      }
+    }
+
+    /* A4 页面：210mm × 297mm */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 10mm;
+      margin: 0 auto 20px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      page-break-after: always;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 8mm;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    /* 展签标签：每个 95mm × 93mm */
+    .label {
+      width: 95mm;
+      height: 93mm;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 8mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .label::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    }
+
+    /* VULCA Logo */
+    .label-logo {
+      width: 80px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: #667eea;
+      margin-bottom: 4mm;
+    }
+
+    /* 作品信息 */
+    .label-info {
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .label-title-zh {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .label-title-en {
+      font-size: 11px;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .label-meta {
+      font-size: 10px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    .label-artist {
+      font-weight: 500;
+      color: #555;
+    }
+
+    /* 二维码 */
+    .label-qr {
+      width: 100px;
+      height: 100px;
+      border: 2px solid #f0f0f0;
+      border-radius: 8px;
+      padding: 4px;
+      background: white;
+    }
+
+    .label-qr canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* 状态标签（待定作品） */
+    .label-status {
+      position: absolute;
+      top: 8mm;
+      right: 8mm;
+      background: #ff9800;
+      color: white;
+      font-size: 8px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* ===== 屏幕预览 ===== */
+    .screen-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .preview-label {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1.5rem;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .preview-label:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .preview-logo {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: #667eea;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .preview-info {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .preview-title-zh {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .preview-title-en {
+      font-size: 13px;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    .preview-meta {
+      font-size: 12px;
+      color: #999;
+    }
+
+    .preview-qr {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .preview-qr canvas {
+      border: 2px solid #f0f0f0;
+      border-radius: 8px;
+      padding: 8px;
+      background: white;
+    }
+
+    .preview-url {
+      font-size: 11px;
+      color: #999;
+      text-align: center;
+      margin-top: 0.5rem;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 头部控制面板 -->
+    <div class="header">
+      <h1>🖼️ VULCA 展签二维码生成器</h1>
+      <p>为 43 件艺术作品生成带二维码的展签标签（A4 打印格式）</p>
+
+      <div class="controls">
+        <button class="btn btn-primary" onclick="generateAllLabels()">
+          ✨ 生成所有标签
+        </button>
+        <button class="btn btn-secondary" onclick="window.print()">
+          🖨️ 打印/保存为PDF
+        </button>
+        <button class="btn btn-secondary" onclick="location.reload()">
+          🔄 重新加载
+        </button>
+      </div>
+
+      <div id="status" class="status" style="display: none;"></div>
+    </div>
+
+    <!-- 屏幕预览区 -->
+    <div class="screen-preview" id="screen-preview">
+      <p style="text-align: center; color: #999; width: 100%;">
+        点击"生成所有标签"按钮开始...
+      </p>
+    </div>
+
+    <!-- 打印布局区（打印时显示） -->
+    <div class="print-preview" id="print-preview"></div>
+  </div>
+
+  <!-- QRCode.js 库 (davidshimjs/qrcodejs) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    // ===== 全局配置 =====
+    const BASE_URL = 'https://vulcaart.art/exhibitions/negative-space-of-the-tide/';
+    const DATA_URL = '/exhibitions/negative-space-of-the-tide/data.json';
+
+    let artworksData = [];
+    let labelsGenerated = false;
+
+    // ===== 状态显示 =====
+    function showStatus(message, type) {
+      const statusEl = document.getElementById('status');
+      statusEl.textContent = message;
+      statusEl.className = `status ${type}`;
+      statusEl.style.display = 'block';
+    }
+
+    // ===== 加载展览数据 =====
+    async function loadExhibitionData() {
+      try {
+        showStatus('正在加载展览数据...', 'loading');
+
+        const response = await fetch(DATA_URL);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        artworksData = data.artworks || [];
+
+        console.log(`✓ 加载了 ${artworksData.length} 件作品`);
+        showStatus(`✓ 成功加载 ${artworksData.length} 件作品`, 'success');
+
+        return artworksData;
+      } catch (error) {
+        console.error('❌ 加载数据失败:', error);
+        showStatus(`❌ 加载失败: ${error.message}`, 'error');
+        throw error;
+      }
+    }
+
+    // ===== 生成二维码 =====
+    function generateQRCode(container, url) {
+      return new Promise((resolve, reject) => {
+        try {
+          // 清空容器
+          container.innerHTML = '';
+
+          // 使用 QRCode.js 生成二维码
+          const qr = new QRCode(container, {
+            text: url,
+            width: 200,
+            height: 200,
+            colorDark: '#333333',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+
+          resolve(qr);
+        } catch (error) {
+          console.error('QR Code generation failed:', error);
+          reject(error);
+        }
+      });
+    }
+
+    // ===== 生成单个标签（屏幕预览） =====
+    async function createPreviewLabel(artwork) {
+      const labelDiv = document.createElement('div');
+      labelDiv.className = 'preview-label';
+
+      const url = `${BASE_URL}?artwork=${artwork.id}`;
+
+      labelDiv.innerHTML = `
+        <div class="preview-logo">VULCA</div>
+        <div class="preview-info">
+          <div class="preview-title-zh">${artwork.titleZh}</div>
+          <div class="preview-title-en">${artwork.titleEn}</div>
+          <div class="preview-meta">
+            <div class="label-artist">${artwork.artist}</div>
+            <div>${artwork.year}${artwork.status === 'pending' ? ' · 待定' : ''}</div>
+          </div>
+        </div>
+        <div class="preview-qr" id="qr-preview-${artwork.id}"></div>
+        <div class="preview-url">${url}</div>
+      `;
+
+      // 异步生成二维码
+      setTimeout(async () => {
+        const qrContainer = document.getElementById(`qr-preview-${artwork.id}`);
+        if (qrContainer) {
+          await generateQRCode(qrContainer, url);
+        }
+      }, 100);
+
+      return labelDiv;
+    }
+
+    // ===== 生成单个标签（打印布局） =====
+    async function createPrintLabel(artwork) {
+      const labelDiv = document.createElement('div');
+      labelDiv.className = 'label';
+
+      const url = `${BASE_URL}?artwork=${artwork.id}`;
+
+      labelDiv.innerHTML = `
+        <div class="label-logo">VULCA</div>
+        ${artwork.status === 'pending' ? '<div class="label-status">待定</div>' : ''}
+        <div class="label-info">
+          <div class="label-title-zh">${artwork.titleZh}</div>
+          <div class="label-title-en">${artwork.titleEn}</div>
+          <div class="label-meta">
+            <div class="label-artist">${artwork.artist}</div>
+            <div>${artwork.year}</div>
+          </div>
+        </div>
+        <div class="label-qr" id="qr-print-${artwork.id}"></div>
+      `;
+
+      // 异步生成二维码
+      setTimeout(async () => {
+        const qrContainer = document.getElementById(`qr-print-${artwork.id}`);
+        if (qrContainer) {
+          await generateQRCode(qrContainer, url);
+        }
+      }, 100);
+
+      return labelDiv;
+    }
+
+    // ===== 生成所有标签 =====
+    async function generateAllLabels() {
+      if (labelsGenerated) {
+        console.log('⚠ 标签已生成，跳过重复生成');
+        return;
+      }
+
+      try {
+        showStatus('正在生成标签...', 'loading');
+
+        // 如果数据未加载，先加载
+        if (artworksData.length === 0) {
+          await loadExhibitionData();
+        }
+
+        const screenPreview = document.getElementById('screen-preview');
+        const printPreview = document.getElementById('print-preview');
+
+        // 清空容器
+        screenPreview.innerHTML = '';
+        printPreview.innerHTML = '';
+
+        // 生成屏幕预览标签
+        console.log('生成屏幕预览标签...');
+        for (const artwork of artworksData) {
+          const previewLabel = await createPreviewLabel(artwork);
+          screenPreview.appendChild(previewLabel);
+        }
+
+        // 生成打印布局（每页 6 个标签）
+        console.log('生成打印布局...');
+        let currentPage = null;
+        let labelCount = 0;
+
+        for (const artwork of artworksData) {
+          // 每 6 个标签创建新页面
+          if (labelCount % 6 === 0) {
+            currentPage = document.createElement('div');
+            currentPage.className = 'page';
+            printPreview.appendChild(currentPage);
+          }
+
+          const printLabel = await createPrintLabel(artwork);
+          currentPage.appendChild(printLabel);
+          labelCount++;
+        }
+
+        labelsGenerated = true;
+        showStatus(`✓ 成功生成 ${artworksData.length} 个标签（共 ${Math.ceil(artworksData.length / 6)} 页A4）`, 'success');
+
+        console.log(`✓ 生成完成: ${artworksData.length} 个标签, ${Math.ceil(artworksData.length / 6)} 页A4`);
+
+      } catch (error) {
+        console.error('❌ 生成失败:', error);
+        showStatus(`❌ 生成失败: ${error.message}`, 'error');
+      }
+    }
+
+    // ===== 页面加载时初始化 =====
+    window.addEventListener('DOMContentLoaded', async () => {
+      console.log('✓ QR Code Generator 已加载');
+
+      // 预加载数据
+      try {
+        await loadExhibitionData();
+      } catch (error) {
+        console.error('初始化失败:', error);
+      }
+    });
+  </script>
+</body>
+</html>
