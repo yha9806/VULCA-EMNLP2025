@@ -16,7 +16,7 @@ const QRCode = require('qrcode');
 // ===== 配置 =====
 const CONFIG = {
   dataPath: path.join(__dirname, '../exhibitions/negative-space-of-the-tide/data.json'),
-  outputPath: path.join(__dirname, '../qr-codes-labels-ae-a3.pdf'),  // A+E组合版本（ae-fixed配置 + A3页面）
+  outputPath: path.join(__dirname, '../qr-codes-labels-ae.pdf'),  // A+E组合版本
   baseUrl: 'https://vulcaart.art/exhibitions/negative-space-of-the-tide/',
 
   // 中文字体路径（Windows/macOS/Linux通用）
@@ -32,20 +32,20 @@ const CONFIG = {
     linuxPathAlt: '/usr/share/fonts/truetype/arphic/uming.ttc'
   },
 
-  // A3 页面尺寸（单位：点，1mm ≈ 2.83点）
+  // A4 页面尺寸（单位：点，1mm ≈ 2.83点）
   page: {
-    width: 841.89,   // 297mm (A3宽度)
-    height: 1190.55, // 420mm (A3高度)
+    width: 595.28,   // 210mm
+    height: 841.89,  // 297mm
     margin: 28.35    // 10mm
   },
 
-  // 标签布局（3列×4行=12个/页，A3尺寸）
+  // 标签布局（2列×3行=6个/页）
   label: {
-    cols: 3,
-    rows: 4,
-    width: 255.12,   // 90mm
-    height: 275.91,  // 97.5mm
-    gap: 14.17       // 5mm
+    cols: 2,
+    rows: 3,
+    width: 269.29,   // 95mm
+    height: 263.62,  // 93mm
+    gap: 22.68       // 8mm
   },
 
   // A+E 方案配色（赤陶暖色调 + 极简美术馆）
@@ -62,13 +62,13 @@ const CONFIG = {
     purple: '#667eea'
   },
 
-  // 字号配置（A+E方案：ae-fixed版本 + A3页面）
+  // 字号配置（A方案：增大层级）
   typography: {
-    logo: 20,           // VULCA logo（ae-fixed版本）
-    titleZh: 14,        // 中文标题（ae-fixed版本）
-    titleEn: 10,        // 英文标题（ae-fixed版本）
-    artist: 9,          // 艺术家名字（ae-fixed版本）
-    year: 9,            // 年份（ae-fixed版本）
+    logo: 22,           // VULCA logo（原20pt）
+    titleZh: 18,        // 中文标题（原14pt）
+    titleEn: 12,        // 英文标题（原11pt）
+    artist: 10,         // 艺术家名字
+    year: 10,           // 年份
     badge: 8            // 待定标签
   }
 };
@@ -157,7 +157,7 @@ async function drawLabel(doc, artwork, x, y, chineseFont) {
      .fillColor(colors.terracotta)
      .fill();
 
-  // 4. 绘制VULCA Logo（赤陶色，ae-fixed版本）
+  // 4. 绘制VULCA Logo（赤陶色，居中，距顶部20点）
   doc.fontSize(typography.logo)
      .fillColor(colors.terracotta)
      .font('Helvetica-Bold')
@@ -166,44 +166,44 @@ async function drawLabel(doc, artwork, x, y, chineseFont) {
        align: 'center'
      });
 
-  // 5. 绘制作品信息（ae-fixed版本）
-  const infoY = y + 50;
+  // 5. 绘制作品信息（居中，距logo下方15点）
+  const infoY = y + 55;
 
-  // 中文标题（14pt，深褐色，粗体）
+  // 中文标题（18pt，深褐色，粗体）
   doc.fontSize(typography.titleZh)
      .fillColor(colors.deepBrown)
      .font(chineseFont)
-     .text(artwork.titleZh || 'Untitled', x + 12, infoY, {
-       width: width - 24,
+     .text(artwork.titleZh || 'Untitled', x + 15, infoY, {
+       width: width - 30,
        align: 'center',
-       lineGap: 3
+       lineGap: 5
      });
 
-  // 英文标题（10pt，浅褐色，斜体）
-  const titleHeight = doc.heightOfString(artwork.titleZh || 'Untitled', { width: width - 24 });
+  // 英文标题（12pt，浅褐色，斜体）
+  const titleHeight = doc.heightOfString(artwork.titleZh || 'Untitled', { width: width - 30 });
   doc.fontSize(typography.titleEn)
      .fillColor(colors.lightBrown)
      .font('Helvetica-Oblique')
-     .text(artwork.titleEn || 'Untitled', x + 12, infoY + titleHeight + 6, {
-       width: width - 24,
+     .text(artwork.titleEn || 'Untitled', x + 15, infoY + titleHeight + 8, {
+       width: width - 30,
        align: 'center',
-       lineGap: 2
+       lineGap: 4
      });
 
   // 艺术家名字（深褐色）
-  const enTitleHeight = doc.heightOfString(artwork.titleEn || 'Untitled', { width: width - 24 });
-  const metaY = infoY + titleHeight + enTitleHeight + 15;
+  const enTitleHeight = doc.heightOfString(artwork.titleEn || 'Untitled', { width: width - 30 });
+  const metaY = infoY + titleHeight + enTitleHeight + 20;
 
   doc.fontSize(typography.artist)
      .fillColor(colors.deepBrown)
      .font(chineseFont)
-     .text(artwork.artist, x + 12, metaY, {
-       width: width - 24,
+     .text(artwork.artist, x + 15, metaY, {
+       width: width - 30,
        align: 'center'
      });
 
   // 年份（浅褐色）
-  const artistHeight = doc.heightOfString(artwork.artist, { width: width - 24 });
+  const artistHeight = doc.heightOfString(artwork.artist, { width: width - 30 });
   const yearText = artwork.status === 'pending'
     ? `${artwork.year} · 待定`
     : `${artwork.year}`;
@@ -211,25 +211,25 @@ async function drawLabel(doc, artwork, x, y, chineseFont) {
   doc.fontSize(typography.year)
      .fillColor(colors.lightBrown)
      .font(chineseFont)
-     .text(yearText, x + 12, metaY + artistHeight + 3, {
-       width: width - 24,
+     .text(yearText, x + 15, metaY + artistHeight + 4, {
+       width: width - 30,
        align: 'center'
      });
 
-  // 6. 绘制金色分割线（方案A：向上移动25pt）
-  const dividerY = y + height - 155;  // 向上移动25pt
+  // 6. 绘制金色分割线（信息区和QR码区之间）
+  const dividerY = y + height - 130;
   doc.moveTo(x + 30, dividerY)
      .lineTo(x + width - 30, dividerY)
      .lineWidth(0.5)
      .strokeColor(colors.gold)
      .stroke();
 
-  // 7. 生成并绘制二维码（方案A：向上移动25pt）
+  // 7. 生成并绘制二维码（90×90点，增加留白）
   const qrSize = 90;
   const qrX = x + (width - qrSize) / 2;
-  const qrY = y + height - qrSize - 50;  // 底部空白50pt
+  const qrY = y + height - qrSize - 25;
 
-  // 绘制QR码圆角边框（赤陶色，ae-fixed版本）
+  // 绘制QR码圆角边框（赤陶色）
   const qrBorderPadding = 5;
   doc.roundedRect(
        qrX - qrBorderPadding,
@@ -249,7 +249,7 @@ async function drawLabel(doc, artwork, x, y, chineseFont) {
     height: qrSize
   });
 
-  // 8. 如果是待定作品，绘制状态标签（金色，右上角，ae-fixed版本）
+  // 8. 如果是待定作品，绘制状态标签（金色，右上角）
   if (artwork.status === 'pending') {
     const badgeX = x + width - 50;
     const badgeY = y + 15;

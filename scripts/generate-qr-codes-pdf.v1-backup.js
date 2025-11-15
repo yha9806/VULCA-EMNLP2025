@@ -16,7 +16,7 @@ const QRCode = require('qrcode');
 // ===== 配置 =====
 const CONFIG = {
   dataPath: path.join(__dirname, '../exhibitions/negative-space-of-the-tide/data.json'),
-  outputPath: path.join(__dirname, '../qr-codes-labels-ae-a3.pdf'),  // A+E组合版本（ae-fixed配置 + A3页面）
+  outputPath: path.join(__dirname, '../qr-codes-labels-new.pdf'),  // 使用新文件名避免文件被锁定
   baseUrl: 'https://vulcaart.art/exhibitions/negative-space-of-the-tide/',
 
   // 中文字体路径（Windows/macOS/Linux通用）
@@ -32,44 +32,20 @@ const CONFIG = {
     linuxPathAlt: '/usr/share/fonts/truetype/arphic/uming.ttc'
   },
 
-  // A3 页面尺寸（单位：点，1mm ≈ 2.83点）
+  // A4 页面尺寸（单位：点，1mm ≈ 2.83点）
   page: {
-    width: 841.89,   // 297mm (A3宽度)
-    height: 1190.55, // 420mm (A3高度)
+    width: 595.28,   // 210mm
+    height: 841.89,  // 297mm
     margin: 28.35    // 10mm
   },
 
-  // 标签布局（3列×4行=12个/页，A3尺寸）
+  // 标签布局（2列×3行=6个/页）
   label: {
-    cols: 3,
-    rows: 4,
-    width: 255.12,   // 90mm
-    height: 275.91,  // 97.5mm
-    gap: 14.17       // 5mm
-  },
-
-  // A+E 方案配色（赤陶暖色调 + 极简美术馆）
-  colors: {
-    // 赤陶色系（来自网站 dialogue 系统）
-    terracotta: '#B85C3C',      // 主品牌色
-    gold: '#D4A574',            // 金色（用于分割线、待定标签）
-    warmWhite: '#FFF8F0',       // 米黄色背景（纸张感）
-    deepBrown: '#3D2817',       // 深褐色文字
-    lightBrown: '#8B7355',      // 浅褐色（次要文字）
-    veryLightBrown: '#D4C4B0',  // 极浅褐色（边框、分割线）
-
-    // 原版紫色（保留以备用）
-    purple: '#667eea'
-  },
-
-  // 字号配置（A+E方案：ae-fixed版本 + A3页面）
-  typography: {
-    logo: 20,           // VULCA logo（ae-fixed版本）
-    titleZh: 14,        // 中文标题（ae-fixed版本）
-    titleEn: 10,        // 英文标题（ae-fixed版本）
-    artist: 9,          // 艺术家名字（ae-fixed版本）
-    year: 9,            // 年份（ae-fixed版本）
-    badge: 8            // 待定标签
+    cols: 2,
+    rows: 3,
+    width: 269.29,   // 95mm
+    height: 263.62,  // 93mm
+    gap: 22.68       // 8mm
   }
 };
 
@@ -124,142 +100,103 @@ async function generateQRCodeDataURL(url) {
   }
 }
 
-// ===== 绘制单个标签（A+E 方案：极简美术馆 + 赤陶暖色调）=====
+// ===== 绘制单个标签 =====
 async function drawLabel(doc, artwork, x, y, chineseFont) {
   const { width, height } = CONFIG.label;
-  const { colors, typography } = CONFIG;
   const url = `${CONFIG.baseUrl}?artwork=${artwork.id}`;
 
-  doc.save();
+  // 1. 绘制边框
+  doc.save()
+     .rect(x, y, width, height)
+     .lineWidth(0.5)
+     .strokeColor('#dddddd')
+     .stroke();
 
-  // 1. 绘制米黄色背景（纸张感）
-  doc.rect(x, y, width, height)
-     .fillColor(colors.warmWhite)
-     .fill();
-
-  // 2. 绘制微妙阴影效果（用多层半透明矩形模拟）
-  // 右侧阴影
-  doc.rect(x + width, y + 2, 2, height - 2)
-     .fillColor('#000000')
-     .fillOpacity(0.05)
-     .fill();
-  // 底部阴影
-  doc.rect(x + 2, y + height, width - 2, 2)
-     .fillColor('#000000')
-     .fillOpacity(0.05)
-     .fill();
-
-  // 重置透明度
-  doc.fillOpacity(1);
-
-  // 3. 绘制顶部品牌色条（赤陶色）
+  // 2. 绘制顶部品牌色条（紫色渐变，简化为纯色）
   doc.rect(x, y, width, 8)
-     .fillColor(colors.terracotta)
+     .fillColor('#667eea')
      .fill();
 
-  // 4. 绘制VULCA Logo（赤陶色，ae-fixed版本）
-  doc.fontSize(typography.logo)
-     .fillColor(colors.terracotta)
+  // 3. 绘制VULCA Logo（居中，距顶部20点）
+  doc.fontSize(20)
+     .fillColor('#667eea')
      .font('Helvetica-Bold')
      .text('VULCA', x, y + 20, {
        width: width,
        align: 'center'
      });
 
-  // 5. 绘制作品信息（ae-fixed版本）
-  const infoY = y + 50;
+  // 4. 绘制作品信息（居中，距logo下方15点）
+  const infoY = y + 55;
 
-  // 中文标题（14pt，深褐色，粗体）
-  doc.fontSize(typography.titleZh)
-     .fillColor(colors.deepBrown)
+  // 中文标题（使用中文字体）
+  doc.fontSize(14)
+     .fillColor('#333333')
      .font(chineseFont)
-     .text(artwork.titleZh || 'Untitled', x + 12, infoY, {
-       width: width - 24,
+     .text(artwork.titleZh || 'Untitled', x + 10, infoY, {
+       width: width - 20,
+       align: 'center',
+       lineGap: 4
+     });
+
+  // 英文标题
+  const titleHeight = doc.heightOfString(artwork.titleZh || 'Untitled', { width: width - 20 });
+  doc.fontSize(11)
+     .fillColor('#666666')
+     .font('Helvetica-Oblique')
+     .text(artwork.titleEn || 'Untitled', x + 10, infoY + titleHeight + 6, {
+       width: width - 20,
        align: 'center',
        lineGap: 3
      });
 
-  // 英文标题（10pt，浅褐色，斜体）
-  const titleHeight = doc.heightOfString(artwork.titleZh || 'Untitled', { width: width - 24 });
-  doc.fontSize(typography.titleEn)
-     .fillColor(colors.lightBrown)
-     .font('Helvetica-Oblique')
-     .text(artwork.titleEn || 'Untitled', x + 12, infoY + titleHeight + 6, {
-       width: width - 24,
-       align: 'center',
-       lineGap: 2
-     });
+  // 艺术家和年份（使用中文字体）
+  const enTitleHeight = doc.heightOfString(artwork.titleEn || 'Untitled', { width: width - 20 });
+  const metaY = infoY + titleHeight + enTitleHeight + 18;
 
-  // 艺术家名字（深褐色）
-  const enTitleHeight = doc.heightOfString(artwork.titleEn || 'Untitled', { width: width - 24 });
-  const metaY = infoY + titleHeight + enTitleHeight + 15;
-
-  doc.fontSize(typography.artist)
-     .fillColor(colors.deepBrown)
+  doc.fontSize(10)
+     .fillColor('#555555')
      .font(chineseFont)
-     .text(artwork.artist, x + 12, metaY, {
-       width: width - 24,
+     .text(artwork.artist, x + 10, metaY, {
+       width: width - 20,
        align: 'center'
      });
 
-  // 年份（浅褐色）
-  const artistHeight = doc.heightOfString(artwork.artist, { width: width - 24 });
+  const artistHeight = doc.heightOfString(artwork.artist, { width: width - 20 });
   const yearText = artwork.status === 'pending'
     ? `${artwork.year} · 待定`
     : `${artwork.year}`;
 
-  doc.fontSize(typography.year)
-     .fillColor(colors.lightBrown)
+  doc.fontSize(10)
+     .fillColor('#999999')
      .font(chineseFont)
-     .text(yearText, x + 12, metaY + artistHeight + 3, {
-       width: width - 24,
+     .text(yearText, x + 10, metaY + artistHeight + 4, {
+       width: width - 20,
        align: 'center'
      });
 
-  // 6. 绘制金色分割线（方案A：向上移动25pt）
-  const dividerY = y + height - 155;  // 向上移动25pt
-  doc.moveTo(x + 30, dividerY)
-     .lineTo(x + width - 30, dividerY)
-     .lineWidth(0.5)
-     .strokeColor(colors.gold)
-     .stroke();
-
-  // 7. 生成并绘制二维码（方案A：向上移动25pt）
-  const qrSize = 90;
+  // 5. 生成并绘制二维码（底部居中，100×100点）
+  const qrSize = 100;
   const qrX = x + (width - qrSize) / 2;
-  const qrY = y + height - qrSize - 50;  // 底部空白50pt
+  const qrY = y + height - qrSize - 20;
 
-  // 绘制QR码圆角边框（赤陶色，ae-fixed版本）
-  const qrBorderPadding = 5;
-  doc.roundedRect(
-       qrX - qrBorderPadding,
-       qrY - qrBorderPadding,
-       qrSize + qrBorderPadding * 2,
-       qrSize + qrBorderPadding * 2,
-       4
-     )
-     .lineWidth(1)
-     .strokeColor(colors.terracotta)
-     .stroke();
-
-  // 绘制QR码
   const qrDataURL = await generateQRCodeDataURL(url);
   doc.image(qrDataURL, qrX, qrY, {
     width: qrSize,
     height: qrSize
   });
 
-  // 8. 如果是待定作品，绘制状态标签（金色，右上角，ae-fixed版本）
+  // 6. 如果是待定作品，绘制状态标签（右上角）
   if (artwork.status === 'pending') {
     const badgeX = x + width - 50;
     const badgeY = y + 15;
 
     doc.save()
        .roundedRect(badgeX, badgeY, 40, 16, 4)
-       .fillColor(colors.gold)
+       .fillColor('#ff9800')
        .fill();
 
-    doc.fontSize(typography.badge)
+    doc.fontSize(8)
        .fillColor('#ffffff')
        .font(chineseFont)
        .text('待定', badgeX, badgeY + 4, {

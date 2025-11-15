@@ -25,8 +25,7 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 
 ---
 
-**最后更新**: 2025-11-15
-**当前稳定版本**: a42f468 (2025-11-14)
+**最后更新**: 2025-01-15
 **项目**: VULCA - 潮汐的负形 艺术评论展览平台
 **网址**: https://vulcaart.art
 **GitHub**: https://github.com/yha9806/VULCA-EMNLP2025
@@ -54,6 +53,9 @@ node scripts/validate-sync.js
 
 # 测试对话加载
 node scripts/test-dialogues-loading.js
+
+# 生成QR码展签PDF（A3尺寸，4页，43个标签）
+node scripts/generate-qr-codes-pdf.js
 
 # Git 提交
 git add .
@@ -146,6 +148,36 @@ gallery-hero.js / carousel.js / 其他模块初始化
 **处理逻辑**：
 - `js/utils/image-compat.js`: 向后兼容处理
 - `js/components/artwork-carousel.js`: 多图轮播组件
+
+**4. QR码展签生成系统**
+
+使用 Node.js 生成可打印的PDF展签，包含作品信息和QR码：
+
+```
+scripts/generate-qr-codes-pdf.js
+    ↓
+读取 data.json (展览数据)
+    ↓
+使用 pdfkit + qrcode 库
+    ↓
+生成 qr-codes-labels-ae-a3.pdf
+    ↓
+A3尺寸，3列×4行=12个标签/页，共4页
+```
+
+**配置文件**: `scripts/generate-qr-codes-pdf.js`
+- **页面尺寸**: A3 (297mm × 420mm)
+- **标签布局**: 3列×4行 = 12个/页
+- **标签尺寸**: 90mm × 97.5mm
+- **配色方案**: A+E组合（赤陶暖色调 + 极简美术馆）
+- **字体**: 支持中文（SimHei黑体），自动检测系统字体
+
+**关键特性**：
+- 米黄色背景 (#FFF8F0) + 赤陶色品牌 (#B85C3C)
+- QR码链接到线上作品页面
+- 支持"待定"作品标记（金色标签）
+- 微妙阴影效果 + 金色分割线
+- 多平台字体支持（Windows/macOS/Linux）
 
 ---
 
@@ -274,6 +306,25 @@ GitHub Pages 使用 CDN 缓存，缓存时间可能长达 10-30 分钟。
 <script src="/js/app.js?v=6"></script>
 ```
 
+### ⚠️ QR码PDF生成注意事项
+
+**字体问题**：
+- PDFKit 不支持 `.ttc` 格式字体，只支持 `.ttf` 格式
+- 中文显示需要显式指定中文字体路径
+- 脚本会自动检测系统字体（Windows/macOS/Linux）
+
+**布局调整原则**：
+- 信息区和QR码区域的垂直空间需要平衡
+- QR码位置通过 `y + height - X` 控制（X越大，位置越靠上）
+- 当前最佳配置：分割线 `y + height - 155`，QR码底部边距 `50pt`
+- 修改布局时需要考虑长标题作品（如artwork-35）的换行情况
+
+**版本历史**：
+- A+E原版：紫色品牌色，A4尺寸
+- A+E-fixed：赤陶色，A4尺寸，字号优化
+- A+E-compact：超紧凑布局，A4尺寸
+- **A+E-A3（当前）**: A3尺寸，QR码位置优化（向上25pt）
+
 ---
 
 ## 📝 常见开发任务
@@ -328,6 +379,52 @@ node scripts/validate-sync.js
 node scripts/test-dialogues-loading.js
 ```
 
+6. **重新生成QR码PDF**（如果需要打印展签）:
+```bash
+node scripts/generate-qr-codes-pdf.js
+```
+
+### 修改QR码PDF布局
+
+如需调整标签布局，编辑 `scripts/generate-qr-codes-pdf.js` 中的 `CONFIG` 对象：
+
+```javascript
+// 调整页面尺寸（A3/A4）
+page: {
+  width: 841.89,   // A3宽度 (A4: 595.28)
+  height: 1190.55, // A3高度 (A4: 841.89)
+  margin: 28.35
+},
+
+// 调整标签布局
+label: {
+  cols: 3,         // 列数
+  rows: 4,         // 行数
+  width: 255.12,   // 标签宽度
+  height: 275.91,  // 标签高度
+  gap: 14.17       // 间距
+},
+
+// 调整字号
+typography: {
+  logo: 20,        // VULCA logo
+  titleZh: 14,     // 中文标题
+  titleEn: 10,     // 英文标题
+  artist: 9,       // 艺术家
+  year: 9,         // 年份
+  badge: 8         // 待定标签
+}
+```
+
+**QR码位置调整**（在 `drawLabel` 函数中）：
+```javascript
+// 分割线位置（数值越大，分割线越靠上）
+const dividerY = y + height - 155;
+
+// QR码底部边距（数值越大，QR码越靠上）
+const qrY = y + height - qrSize - 50;
+```
+
 ### Git 提交规范
 
 ```bash
@@ -337,6 +434,7 @@ node scripts/test-dialogues-loading.js
 git commit -m "feat: Add new artwork artwork-47 (艺术家姓名)"
 git commit -m "fix: Correct artwork-23 metadata"
 git commit -m "docs: Update CLAUDE.md with deployment notes"
+git commit -m "chore: Update QR code PDF layout"
 ```
 
 ---
@@ -403,6 +501,27 @@ node scripts/test-dialogues-loading.js
 # ✅ Total messages: 268
 # ✅ All dialogues loaded successfully
 ```
+
+### QR码PDF生成测试
+
+```bash
+# 生成PDF
+node scripts/generate-qr-codes-pdf.js
+
+# 预期输出:
+# ✅ 找到中文字体: C:\Windows\Fonts\simhei.ttf
+# ✅ 加载了 43 件作品
+# ✅ PDF生成成功！
+# 📍 文件位置: I:\VULCA-EMNLP2025\qr-codes-labels-ae-a3.pdf
+# 📊 总页数: 4 页A3, 总标签数: 43 个
+```
+
+**手动验证清单**:
+- [ ] 所有中文文字正常显示（无乱码）
+- [ ] QR码可正常扫描，链接正确
+- [ ] 长标题作品（如artwork-35）无截断
+- [ ] "待定"标签正确显示在待定作品上
+- [ ] 标签布局整齐，间距合理
 
 ### 手动测试清单
 
@@ -476,9 +595,10 @@ https://vulcaart.art/?nocache=123456
    - `index.html`, `exhibitions/*/index.html`
    - `data.json`
    - `js/data-loader.js`, `js/gallery-hero.js`
+   - `scripts/generate-qr-codes-pdf.js`
 
 2. **❌ 改变目录结构**
-   - 不要重组 `js/`, `styles/`, `exhibitions/` 目录
+   - 不要重组 `js/`, `styles/`, `exhibitions/`, `scripts/` 目录
    - 不要移动文件到不同路径
 
 3. **❌ 破坏部署**
@@ -494,6 +614,11 @@ https://vulcaart.art/?nocache=123456
    - 除非回滚错误，否则不使用 `git push --force`
    - 使用 `git push --force-with-lease` 更安全
 
+6. **❌ 修改QR码PDF生成的核心参数而不测试**
+   - 修改字号、布局、QR码位置后必须生成并检查PDF
+   - 确保长标题作品不会截断
+   - 确保中文字体路径正确
+
 ---
 
 ## 📚 关键文档
@@ -505,7 +630,7 @@ https://vulcaart.art/?nocache=123456
 
 ---
 
-## 🎯 项目统计（当前版本 a42f468）
+## 🎯 项目统计（当前版本）
 
 | 维度 | 数量 |
 |------|------|
@@ -515,6 +640,7 @@ https://vulcaart.art/?nocache=123456
 | **对话总数** | 43个 |
 | **总消息数** | 268条 |
 | **图片资源** | ~130张（含多图系统）|
+| **QR码展签** | A3尺寸，4页，12标签/页 |
 
 ---
 
@@ -534,6 +660,13 @@ https://vulcaart.art/?nocache=123456
 3. **清除缓存** - Ctrl+Shift+R 硬刷新
 4. **查看文档** - 本文档 + SPEC.md + OpenSpec
 
+### QR码PDF问题排查
+
+1. **中文乱码**: 检查字体路径是否正确，确认使用 `.ttf` 格式
+2. **内容截断**: 检查分割线位置和QR码位置参数，确保留有足够垂直空间
+3. **布局错乱**: 确认页面尺寸、标签尺寸、列行数配置正确
+4. **文件锁定**: 关闭已打开的PDF文件，或修改输出文件名
+
 ### 联系方式
 
 - **Email**: yuhaorui48@gmail.com
@@ -541,6 +674,6 @@ https://vulcaart.art/?nocache=123456
 
 ---
 
-**最后更新**: 2025-11-15
-**稳定版本**: a42f468 (tooltip 升级前的最后稳定版本)
+**最后更新**: 2025-01-15
+**稳定版本**: QR码PDF生成系统已集成（A3尺寸，A+E配色方案）
 **下次更新**: 当有重大架构变更或新功能时
