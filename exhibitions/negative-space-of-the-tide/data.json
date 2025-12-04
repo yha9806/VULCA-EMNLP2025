@@ -6,20 +6,20 @@
       "titleEn": "VULCA: AI Art Critique Exhibition Platform",
       "year": 2025,
       "artist": "于浩睿 (Yu Haorui)",
-      "imageUrl": "/assets/artworks/artwork-1/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-1/01/medium.webp",
       "primaryImageId": "img-1-1",
       "context": "An immersive digital platform exploring AI-generated art criticism through simulated dialogues between six historical art critics and AI artworks. VULCA uses knowledge bases and dialogue systems to create deep, multi-perspective conversations about contemporary AI art",
       "images": [
         {
           "id": "img-1-1",
-          "url": "/assets/artworks/artwork-1/01.png",
+          "url": "/assets/artworks-optimized/artwork-1/01/medium.webp",
           "sequence": 1,
           "titleZh": "VULCA平台界面",
           "titleEn": "VULCA Platform Interface"
         },
         {
           "id": "img-1-2",
-          "url": "/assets/artworks/artwork-1/02.png",
+          "url": "/assets/artworks-optimized/artwork-1/02/medium.webp",
           "sequence": 2,
           "titleZh": "评论家对话系统",
           "titleEn": "Critic Dialogue System"
@@ -39,41 +39,41 @@
       "titleEn": "The Apple Is Broken",
       "year": 2024,
       "artist": "王歆童、黄恩琦 (Wang Xintong, Huang Enqi)",
-      "imageUrl": "/assets/artworks/artwork-2/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-2/01/medium.webp",
       "primaryImageId": "img-2-1",
       "context": "An installation using AI and computer vision to simulate the temporal decay of an apple. The work explores surveillance, entropy, and the relationship between observation and change.",
       "images": [
         {
           "id": "img-2-1",
-          "url": "/assets/artworks/artwork-2/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-2/01/medium.webp",
           "sequence": 1,
           "titleZh": "装置全景",
           "titleEn": "Installation Overview"
         },
         {
           "id": "img-2-2",
-          "url": "/assets/artworks/artwork-2/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-2/02/medium.webp",
           "sequence": 2,
           "titleZh": "机械装置细节",
           "titleEn": "Mechanical Detail"
         },
         {
           "id": "img-2-3",
-          "url": "/assets/artworks/artwork-2/03.jpg",
+          "url": "/assets/artworks-optimized/artwork-2/03/medium.webp",
           "sequence": 3,
           "titleZh": "AI视觉系统",
           "titleEn": "AI Vision System"
         },
         {
           "id": "img-2-4",
-          "url": "/assets/artworks/artwork-2/04.jpg",
+          "url": "/assets/artworks-optimized/artwork-2/04/medium.webp",
           "sequence": 4,
           "titleZh": "腐烂过程记录",
           "titleEn": "Decay Process Documentation"
         },
         {
           "id": "img-2-5",
-          "url": "/assets/artworks/artwork-2/05.jpg",
+          "url": "/assets/artworks-optimized/artwork-2/05/medium.webp",
           "sequence": 5,
           "titleZh": "观众互动场景",
           "titleEn": "Audience Interaction"
@@ -94,27 +94,27 @@
       "titleEn": "Gàn (The Game)",
       "year": 2024,
       "artist": "电子果酱 (Electronic Jam)",
-      "imageUrl": "/assets/artworks/artwork-3/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-3/01/medium.webp",
       "primaryImageId": "img-3-1",
       "context": "Using adversarial AI (GAN) to create an interactive rock-paper-scissors game where the machine arm plays against humans. The work explores the absurdity of games dominated by AI and the transformation of playfulness into mechanical repetition.",
       "images": [
         {
           "id": "img-3-1",
-          "url": "/assets/artworks/artwork-3/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-3/01/medium.webp",
           "sequence": 1,
           "titleZh": "游戏装置全景",
           "titleEn": "Game Installation Overview"
         },
         {
           "id": "img-3-2",
-          "url": "/assets/artworks/artwork-3/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-3/02/medium.webp",
           "sequence": 2,
           "titleZh": "机械臂对战系统",
           "titleEn": "Robotic Arm Combat System"
         },
         {
           "id": "img-3-3",
-          "url": "/assets/artworks/artwork-3/03.jpg",
+          "url": "/assets/artworks-optimized/artwork-3/03/medium.webp",
           "sequence": 3,
           "titleZh": "手势识别界面",
           "titleEn": "Gesture Recognition Interface"
@@ -135,27 +135,27 @@
       "titleEn": "Jensen Huang, Is This the World You Want?",
       "year": 2024,
       "artist": "李國嘉 (Lee Kuo-Chia)",
-      "imageUrl": "/assets/artworks/artwork-4/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-4/01/medium.webp",
       "primaryImageId": "img-4-1",
       "context": "A critical video work questioning NVIDIA CEO Jensen Huang and the AI-driven future. The work examines power structures, technological determinism, and the societal impact of AI development.",
       "images": [
         {
           "id": "img-4-1",
-          "url": "/assets/artworks/artwork-4/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-4/01/medium.webp",
           "sequence": 1,
           "titleZh": "影像装置场景一",
           "titleEn": "Video Installation Scene 1"
         },
         {
           "id": "img-4-2",
-          "url": "/assets/artworks/artwork-4/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-4/02/medium.webp",
           "sequence": 2,
           "titleZh": "影像装置场景二",
           "titleEn": "Video Installation Scene 2"
         },
         {
           "id": "img-4-3",
-          "url": "/assets/artworks/artwork-4/03.jpg",
+          "url": "/assets/artworks-optimized/artwork-4/03/medium.webp",
           "sequence": 3,
           "titleZh": "影像装置场景三",
           "titleEn": "Video Installation Scene 3"
@@ -174,34 +174,34 @@
       "titleEn": "Digital Breath Growth",
       "year": 2024,
       "artist": "程佳瑜 (Cheng Jiayu)",
-      "imageUrl": "/assets/artworks/artwork-5/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-5/01/medium.webp",
       "primaryImageId": "img-5-1",
       "context": "Generative artwork exploring algorithmic growth patterns and the relationship between digital systems and organic life. The work uses computational processes to create evolving visual forms that mimic natural growth.",
       "images": [
         {
           "id": "img-5-1",
-          "url": "/assets/artworks/artwork-5/01.png",
+          "url": "/assets/artworks-optimized/artwork-5/01/medium.webp",
           "sequence": 1,
           "titleZh": "算法生成图像一",
           "titleEn": "Algorithmic Generation 1"
         },
         {
           "id": "img-5-2",
-          "url": "/assets/artworks/artwork-5/02.png",
+          "url": "/assets/artworks-optimized/artwork-5/02/medium.webp",
           "sequence": 2,
           "titleZh": "算法生成图像二",
           "titleEn": "Algorithmic Generation 2"
         },
         {
           "id": "img-5-3",
-          "url": "/assets/artworks/artwork-5/03.png",
+          "url": "/assets/artworks-optimized/artwork-5/03/medium.webp",
           "sequence": 3,
           "titleZh": "算法生成图像三",
           "titleEn": "Algorithmic Generation 3"
         },
         {
           "id": "img-5-4",
-          "url": "/assets/artworks/artwork-5/04.jpg",
+          "url": "/assets/artworks-optimized/artwork-5/04/medium.webp",
           "sequence": 4,
           "titleZh": "算法生成图像四",
           "titleEn": "Algorithmic Generation 4"
@@ -220,13 +220,13 @@
       "titleEn": "Memory Tides - Horizon Series",
       "year": 2024,
       "artist": "张凯飞",
-      "imageUrl": "/assets/artworks/artwork-6/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-6/01/medium.webp",
       "primaryImageId": "img-6-1",
       "context": "A visual exploration of memory and landscape. Through abstract compositions reminiscent of horizons, this work investigates the fluid nature of recollection and the traces left by time.",
       "images": [
         {
           "id": "img-6-1",
-          "url": "/assets/artworks/artwork-6/01.png",
+          "url": "/assets/artworks-optimized/artwork-6/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
@@ -245,34 +245,34 @@
       "titleEn": "I Am Always Behind You",
       "year": 2024,
       "artist": "宋佳益",
-      "imageUrl": "/assets/artworks/artwork-7/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-7/01/medium.webp",
       "primaryImageId": "img-7-1",
       "context": "An installation examining surveillance, presence, and the psychology of being watched. The work creates an unsettling atmosphere that questions contemporary visibility and privacy.",
       "images": [
         {
           "id": "img-7-1",
-          "url": "/assets/artworks/artwork-7/01.png",
+          "url": "/assets/artworks-optimized/artwork-7/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-7-2",
-          "url": "/assets/artworks/artwork-7/02.png",
+          "url": "/assets/artworks-optimized/artwork-7/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-7-3",
-          "url": "/assets/artworks/artwork-7/03.png",
+          "url": "/assets/artworks-optimized/artwork-7/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
         },
         {
           "id": "img-7-4",
-          "url": "/assets/artworks/artwork-7/04.png",
+          "url": "/assets/artworks-optimized/artwork-7/04/medium.webp",
           "sequence": 4,
           "titleZh": "作品图片 4",
           "titleEn": "Artwork Image 4"
@@ -292,27 +292,27 @@
       "titleEn": "The Rotten Man",
       "year": 2024,
       "artist": "李凯文、赵冠杰、陈号",
-      "imageUrl": "/assets/artworks/artwork-8/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-8/01/medium.webp",
       "primaryImageId": "img-8-1",
       "context": "A collaborative multimedia work exploring decay, transformation, and the passage of time. Drawing from classical Chinese literature, the piece reinterprets ancient themes through contemporary artistic practice.",
       "images": [
         {
           "id": "img-8-1",
-          "url": "/assets/artworks/artwork-8/01.png",
+          "url": "/assets/artworks-optimized/artwork-8/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-8-2",
-          "url": "/assets/artworks/artwork-8/02.png",
+          "url": "/assets/artworks-optimized/artwork-8/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-8-3",
-          "url": "/assets/artworks/artwork-8/03.png",
+          "url": "/assets/artworks-optimized/artwork-8/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
@@ -331,13 +331,13 @@
       "titleEn": "Origin Wandering",
       "year": 2024,
       "artist": "叶君豪",
-      "imageUrl": "/assets/artworks/artwork-9/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-9/01/medium.webp",
       "primaryImageId": "img-9-1",
       "context": "An immersive investigation of origins, migration, and cultural roots. Through layered visual narratives, this work traces pathways between past and present, tradition and contemporary life.",
       "images": [
         {
           "id": "img-9-1",
-          "url": "/assets/artworks/artwork-9/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-9/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
@@ -356,13 +356,13 @@
       "titleEn": "The House of Time: Calculated Genealogical Memory",
       "year": 2024,
       "artist": "陈玉萍",
-      "imageUrl": "/assets/artworks/artwork-11/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-11/01/medium.webp",
       "primaryImageId": "img-11-1",
       "context": "A data-driven artwork that transforms family genealogy into visual form. By algorithmic processing of ancestral records, the work questions how digital systems reshape our understanding of heritage and lineage.",
       "images": [
         {
           "id": "img-11-1",
-          "url": "/assets/artworks/artwork-11/01.png",
+          "url": "/assets/artworks-optimized/artwork-11/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
@@ -381,20 +381,20 @@
       "titleEn": "Investigating Bamboo",
       "year": 2024,
       "artist": "张引",
-      "imageUrl": "/assets/artworks/artwork-12/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-12/01/medium.webp",
       "primaryImageId": "img-12-1",
       "context": "A meditation on the philosophical tradition of 'investigating things to extend knowledge' (格物致知). Through close observation of bamboo, this work connects classical Chinese epistemology with contemporary artistic inquiry.",
       "images": [
         {
           "id": "img-12-1",
-          "url": "/assets/artworks/artwork-12/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-12/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-12-2",
-          "url": "/assets/artworks/artwork-12/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-12/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
@@ -413,34 +413,34 @@
       "titleEn": "Project Chasing the Sun",
       "year": 2024,
       "artist": "王博",
-      "imageUrl": "/assets/artworks/artwork-13/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-13/01/medium.webp",
       "primaryImageId": "img-13-1",
       "context": "A time-based project documenting the pursuit of light and solar phenomena. Through systematic observation and recording, this work explores human relationships with natural cycles and celestial movement.",
       "images": [
         {
           "id": "img-13-1",
-          "url": "/assets/artworks/artwork-13/01.png",
+          "url": "/assets/artworks-optimized/artwork-13/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-13-2",
-          "url": "/assets/artworks/artwork-13/02.png",
+          "url": "/assets/artworks-optimized/artwork-13/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-13-3",
-          "url": "/assets/artworks/artwork-13/03.png",
+          "url": "/assets/artworks-optimized/artwork-13/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
         },
         {
           "id": "img-13-4",
-          "url": "/assets/artworks/artwork-13/04.png",
+          "url": "/assets/artworks-optimized/artwork-13/04/medium.webp",
           "sequence": 4,
           "titleZh": "作品图片 4",
           "titleEn": "Artwork Image 4"
@@ -459,41 +459,41 @@
       "titleEn": "Museum X",
       "year": 2024,
       "artist": "魏云佳",
-      "imageUrl": "/assets/artworks/artwork-14/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-14/01/medium.webp",
       "primaryImageId": "img-14-1",
       "context": "A speculative installation reimagining the museum as an institution. Through interactive elements and institutional critique, this work questions how art is preserved, displayed, and made accessible in the digital age.",
       "images": [
         {
           "id": "img-14-1",
-          "url": "/assets/artworks/artwork-14/01.png",
+          "url": "/assets/artworks-optimized/artwork-14/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-14-2",
-          "url": "/assets/artworks/artwork-14/02.png",
+          "url": "/assets/artworks-optimized/artwork-14/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-14-3",
-          "url": "/assets/artworks/artwork-14/03.png",
+          "url": "/assets/artworks-optimized/artwork-14/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
         },
         {
           "id": "img-14-4",
-          "url": "/assets/artworks/artwork-14/04.png",
+          "url": "/assets/artworks-optimized/artwork-14/04/medium.webp",
           "sequence": 4,
           "titleZh": "作品图片 4",
           "titleEn": "Artwork Image 4"
         },
         {
           "id": "img-14-5",
-          "url": "/assets/artworks/artwork-14/05.png",
+          "url": "/assets/artworks-optimized/artwork-14/05/medium.webp",
           "sequence": 5,
           "titleZh": "作品图片 5",
           "titleEn": "Artwork Image 5"
@@ -512,20 +512,20 @@
       "titleEn": "404 Word Cave",
       "year": 2024,
       "artist": "修楚贺，张萌萌",
-      "imageUrl": "/assets/artworks/artwork-15/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-15/01/medium.webp",
       "primaryImageId": "img-15-1",
       "context": "A digital installation exploring information loss and digital archaeology. Referencing the '404 error' of missing web pages, this work excavates fragments of disappeared online content and linguistic traces.",
       "images": [
         {
           "id": "img-15-1",
-          "url": "/assets/artworks/artwork-15/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-15/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-15-2",
-          "url": "/assets/artworks/artwork-15/02.png",
+          "url": "/assets/artworks-optimized/artwork-15/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
@@ -544,20 +544,20 @@
       "titleEn": "Where Does the Wind Come From II",
       "year": 2024,
       "artist": "李芷暄、许佩霖",
-      "imageUrl": "/assets/artworks/artwork-16/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-16/01/medium.webp",
       "primaryImageId": "img-16-1",
       "context": "A poetic investigation of invisible forces and atmospheric phenomena. Through ethereal visuals and spatial interventions, this work makes tangible the intangible movements of air and energy.",
       "images": [
         {
           "id": "img-16-1",
-          "url": "/assets/artworks/artwork-16/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-16/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-16-2",
-          "url": "/assets/artworks/artwork-16/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-16/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
@@ -576,34 +576,34 @@
       "titleEn": "Disordered Consensus",
       "year": 2024,
       "artist": "张瑞航",
-      "imageUrl": "/assets/artworks/artwork-18/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-18/01/medium.webp",
       "primaryImageId": "img-18-1",
       "context": "A multi-channel installation examining collective decision-making and social coordination. Through generative systems and participatory elements, the work visualizes how order emerges from apparent chaos.",
       "images": [
         {
           "id": "img-18-1",
-          "url": "/assets/artworks/artwork-18/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-18/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-18-2",
-          "url": "/assets/artworks/artwork-18/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-18/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-18-3",
-          "url": "/assets/artworks/artwork-18/03.jpg",
+          "url": "/assets/artworks-optimized/artwork-18/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
         },
         {
           "id": "img-18-4",
-          "url": "/assets/artworks/artwork-18/04.png",
+          "url": "/assets/artworks-optimized/artwork-18/04/medium.webp",
           "sequence": 4,
           "titleZh": "作品图片 4",
           "titleEn": "Artwork Image 4"
@@ -622,13 +622,13 @@
       "titleEn": "Not in the Pool",
       "year": 2024,
       "artist": "王梓潘",
-      "imageUrl": "/assets/artworks/artwork-19/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-19/01/medium.webp",
       "primaryImageId": "img-19-1",
       "context": "A conceptual piece questioning categories of inclusion and exclusion. The work plays with boundaries of artistic spaces and challenges assumptions about what belongs within institutional frameworks.",
       "images": [
         {
           "id": "img-19-1",
-          "url": "/assets/artworks/artwork-19/01.png",
+          "url": "/assets/artworks-optimized/artwork-19/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
@@ -647,34 +647,34 @@
       "titleEn": "Circular Void",
       "year": 2024,
       "artist": "杨锋",
-      "imageUrl": "/assets/artworks/artwork-20/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-20/01/medium.webp",
       "primaryImageId": "img-20-1",
       "context": "An immersive installation creating environments of absence and presence. Through circular forms and void spaces, the work explores existential questions of emptiness, repetition, and the cyclical nature of experience.",
       "images": [
         {
           "id": "img-20-1",
-          "url": "/assets/artworks/artwork-20/01.png",
+          "url": "/assets/artworks-optimized/artwork-20/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-20-2",
-          "url": "/assets/artworks/artwork-20/02.png",
+          "url": "/assets/artworks-optimized/artwork-20/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-20-3",
-          "url": "/assets/artworks/artwork-20/03.png",
+          "url": "/assets/artworks-optimized/artwork-20/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
         },
         {
           "id": "img-20-4",
-          "url": "/assets/artworks/artwork-20/04.png",
+          "url": "/assets/artworks-optimized/artwork-20/04/medium.webp",
           "sequence": 4,
           "titleZh": "作品图片 4",
           "titleEn": "Artwork Image 4"
@@ -693,20 +693,20 @@
       "titleEn": "Upload",
       "year": 2024,
       "artist": "李索、张恺麟",
-      "imageUrl": "/assets/artworks/artwork-21/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-21/01/medium.webp",
       "primaryImageId": "img-21-1",
       "context": "A new media work examining digital transcendence and the uploading of consciousness. Through technological metaphors and interactive elements, this piece questions what it means to exist in digital space.",
       "images": [
         {
           "id": "img-21-1",
-          "url": "/assets/artworks/artwork-21/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-21/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-21-2",
-          "url": "/assets/artworks/artwork-21/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-21/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
@@ -725,13 +725,13 @@
       "titleEn": "Lingnan Road",
       "year": 2024,
       "artist": "洪泽榕",
-      "imageUrl": "/assets/artworks/artwork-22/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-22/01/medium.webp",
       "primaryImageId": "img-22-1",
       "context": "A landscape painting capturing the essence of southern Chinese geography and culture. Through traditional techniques applied to contemporary subjects, this work bridges regional identity and artistic heritage.",
       "images": [
         {
           "id": "img-22-1",
-          "url": "/assets/artworks/artwork-22/01.png",
+          "url": "/assets/artworks-optimized/artwork-22/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
@@ -769,34 +769,34 @@
       "titleEn": "Return to Origin · Symbiosis",
       "year": 2024,
       "artist": "刘铁源",
-      "imageUrl": "/assets/artworks/artwork-24/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-24/01/medium.webp",
       "primaryImageId": "img-24-1",
       "context": "An installation exploring ecological interconnection and return to fundamental principles. Through organic forms and natural materials, the work visualizes symbiotic relationships between living systems.",
       "images": [
         {
           "id": "img-24-1",
-          "url": "/assets/artworks/artwork-24/01.png",
+          "url": "/assets/artworks-optimized/artwork-24/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-24-2",
-          "url": "/assets/artworks/artwork-24/02.png",
+          "url": "/assets/artworks-optimized/artwork-24/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-24-3",
-          "url": "/assets/artworks/artwork-24/03.png",
+          "url": "/assets/artworks-optimized/artwork-24/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
         },
         {
           "id": "img-24-4",
-          "url": "/assets/artworks/artwork-24/04.png",
+          "url": "/assets/artworks-optimized/artwork-24/04/medium.webp",
           "sequence": 4,
           "titleZh": "作品图片 4",
           "titleEn": "Artwork Image 4"
@@ -815,34 +815,34 @@
       "titleEn": "Tracing Origins No. 1",
       "year": 2024,
       "artist": "郭雨欣",
-      "imageUrl": "/assets/artworks/artwork-25/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-25/01/medium.webp",
       "primaryImageId": "img-25-1",
       "context": "The first in a series investigating cultural and material origins. Through archaeological metaphors and layered compositions, this work excavates foundational elements of identity and tradition.",
       "images": [
         {
           "id": "img-25-1",
-          "url": "/assets/artworks/artwork-25/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-25/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-25-2",
-          "url": "/assets/artworks/artwork-25/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-25/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-25-3",
-          "url": "/assets/artworks/artwork-25/03.jpg",
+          "url": "/assets/artworks-optimized/artwork-25/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
         },
         {
           "id": "img-25-4",
-          "url": "/assets/artworks/artwork-25/04.jpg",
+          "url": "/assets/artworks-optimized/artwork-25/04/medium.webp",
           "sequence": 4,
           "titleZh": "作品图片 4",
           "titleEn": "Artwork Image 4"
@@ -861,27 +861,27 @@
       "titleEn": "Letter of Explanation",
       "year": 2024,
       "artist": "吴振华",
-      "imageUrl": "/assets/artworks/artwork-26/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-26/01/medium.webp",
       "primaryImageId": "img-26-1",
       "context": "A text-based artwork engaging with language, justification, and the need to explain oneself. The work examines power dynamics embedded in speech and the politics of self-defense.",
       "images": [
         {
           "id": "img-26-1",
-          "url": "/assets/artworks/artwork-26/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-26/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-26-2",
-          "url": "/assets/artworks/artwork-26/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-26/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-26-3",
-          "url": "/assets/artworks/artwork-26/03.jpg",
+          "url": "/assets/artworks-optimized/artwork-26/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
@@ -900,34 +900,34 @@
       "titleEn": "Letter of Explanation",
       "year": 2024,
       "artist": "张苑婷",
-      "imageUrl": "/assets/artworks/artwork-27/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-27/01/medium.webp",
       "primaryImageId": "img-27-1",
       "context": "An artistic statement questioning the obligation to justify one's existence and choices. Through visual and textual elements, this work explores themes of accountability, agency, and resistance.",
       "images": [
         {
           "id": "img-27-1",
-          "url": "/assets/artworks/artwork-27/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-27/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-27-2",
-          "url": "/assets/artworks/artwork-27/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-27/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-27-3",
-          "url": "/assets/artworks/artwork-27/03.jpg",
+          "url": "/assets/artworks-optimized/artwork-27/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
         },
         {
           "id": "img-27-4",
-          "url": "/assets/artworks/artwork-27/04.jpg",
+          "url": "/assets/artworks-optimized/artwork-27/04/medium.webp",
           "sequence": 4,
           "titleZh": "作品图片 4",
           "titleEn": "Artwork Image 4"
@@ -953,20 +953,20 @@
       "titleEn": "Walking with Difficulty",
       "year": 2024,
       "artist": "刘坤",
-      "imageUrl": "/assets/artworks/artwork-28/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-28/01/medium.webp",
       "primaryImageId": "img-28-1",
       "context": "A performance and installation documenting struggle, persistence, and constrained movement. The work makes visible the hidden obstacles that shape daily experience and embodied knowledge.",
       "images": [
         {
           "id": "img-28-1",
-          "url": "/assets/artworks/artwork-28/01.png",
+          "url": "/assets/artworks-optimized/artwork-28/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-28-2",
-          "url": "/assets/artworks/artwork-28/02.png",
+          "url": "/assets/artworks-optimized/artwork-28/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
@@ -985,34 +985,34 @@
       "titleEn": "Twin Realms",
       "year": 2024,
       "artist": "向诗雨 陈晨 王思莹",
-      "imageUrl": "/assets/artworks/artwork-29/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-29/01/medium.webp",
       "primaryImageId": "img-29-1",
       "context": "A collaborative installation creating parallel worlds and doubled realities. Through mirrors, projections, and spatial interventions, this work explores duality, reflection, and the boundaries between real and imagined spaces.",
       "images": [
         {
           "id": "img-29-1",
-          "url": "/assets/artworks/artwork-29/01.png",
+          "url": "/assets/artworks-optimized/artwork-29/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-29-2",
-          "url": "/assets/artworks/artwork-29/02.png",
+          "url": "/assets/artworks-optimized/artwork-29/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-29-3",
-          "url": "/assets/artworks/artwork-29/03.png",
+          "url": "/assets/artworks-optimized/artwork-29/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
         },
         {
           "id": "img-29-4",
-          "url": "/assets/artworks/artwork-29/04.png",
+          "url": "/assets/artworks-optimized/artwork-29/04/medium.webp",
           "sequence": 4,
           "titleZh": "作品图片 4",
           "titleEn": "Artwork Image 4"
@@ -1031,20 +1031,20 @@
       "titleEn": "Black No. 1",
       "year": 2024,
       "artist": "林書旭",
-      "imageUrl": "/assets/artworks/artwork-31/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-31/01/medium.webp",
       "primaryImageId": "img-31-1",
       "context": "An investigation of monochrome aesthetics and the philosophical dimensions of black. Through concentrated use of dark tones, this work explores depth, void, and the visual power of restraint.",
       "images": [
         {
           "id": "img-31-1",
-          "url": "/assets/artworks/artwork-31/01.png",
+          "url": "/assets/artworks-optimized/artwork-31/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-31-2",
-          "url": "/assets/artworks/artwork-31/02.png",
+          "url": "/assets/artworks-optimized/artwork-31/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
@@ -1063,27 +1063,27 @@
       "titleEn": "Code",
       "year": 2024,
       "artist": "鄭曉瓊",
-      "imageUrl": "/assets/artworks/artwork-32/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-32/01/medium.webp",
       "primaryImageId": "img-32-1",
       "context": "A work examining systems of encoding, secrecy, and encrypted meaning. Through visual ciphers and pattern systems, the piece questions what is revealed and concealed in communication.",
       "images": [
         {
           "id": "img-32-1",
-          "url": "/assets/artworks/artwork-32/01.png",
+          "url": "/assets/artworks-optimized/artwork-32/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-32-2",
-          "url": "/assets/artworks/artwork-32/02.png",
+          "url": "/assets/artworks-optimized/artwork-32/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-32-3",
-          "url": "/assets/artworks/artwork-32/03.png",
+          "url": "/assets/artworks-optimized/artwork-32/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
@@ -1103,13 +1103,13 @@
       "titleEn": "Body Reconstruction Series - Nose",
       "year": 2024,
       "artist": "謝綺文",
-      "imageUrl": "/assets/artworks/artwork-33/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-33/01/medium.webp",
       "primaryImageId": "img-33-1",
       "context": "Part of a series reimagining human anatomy through artistic intervention. Focusing on the nose, this work deconstructs and reconstructs bodily forms to question norms of representation and embodiment.",
       "images": [
         {
           "id": "img-33-1",
-          "url": "/assets/artworks/artwork-33/01.png",
+          "url": "/assets/artworks-optimized/artwork-33/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
@@ -1128,13 +1128,13 @@
       "titleEn": "Square City",
       "year": 2024,
       "artist": "郭姸瑩",
-      "imageUrl": "/assets/artworks/artwork-34/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-34/01/medium.webp",
       "primaryImageId": "img-34-1",
       "context": "An architectural vision of urban space organized through geometric rigor. The work explores how grid systems and orthogonal planning shape movement, perception, and social organization in contemporary cities.",
       "images": [
         {
           "id": "img-34-1",
-          "url": "/assets/artworks/artwork-34/01.png",
+          "url": "/assets/artworks-optimized/artwork-34/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
@@ -1153,27 +1153,27 @@
       "titleEn": "Traditional Restored Paper Running-Cursive Album Frame - Excerpts from Rongzhai Suibi",
       "year": 2024,
       "artist": "陈之涵",
-      "imageUrl": "/assets/artworks/artwork-35/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-35/01/medium.webp",
       "primaryImageId": "img-35-1",
       "context": "A calligraphic work connecting to classical Chinese literary traditions. Through careful copying of historical texts, this piece demonstrates technical mastery while preserving and transmitting cultural knowledge.",
       "images": [
         {
           "id": "img-35-1",
-          "url": "/assets/artworks/artwork-35/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-35/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-35-2",
-          "url": "/assets/artworks/artwork-35/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-35/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
         },
         {
           "id": "img-35-3",
-          "url": "/assets/artworks/artwork-35/03.jpg",
+          "url": "/assets/artworks-optimized/artwork-35/03/medium.webp",
           "sequence": 3,
           "titleZh": "作品图片 3",
           "titleEn": "Artwork Image 3"
@@ -1186,20 +1186,20 @@
       "titleEn": "Lauren Lee McCarthy and David Leonard (Artist Documentation)",
       "year": 2024,
       "artist": "L.A.Suzie",
-      "imageUrl": "/assets/artworks/artwork-36/01.jpg",
+      "imageUrl": "/assets/artworks-optimized/artwork-36/01/medium.webp",
       "primaryImageId": "img-36-1",
       "context": "Documentation and analysis of contemporary new media artists Lauren Lee McCarthy and David Leonard. This research-based work examines their contributions to interactive art, AI, and social practice.",
       "images": [
         {
           "id": "img-36-1",
-          "url": "/assets/artworks/artwork-36/01.jpg",
+          "url": "/assets/artworks-optimized/artwork-36/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-36-2",
-          "url": "/assets/artworks/artwork-36/02.jpg",
+          "url": "/assets/artworks-optimized/artwork-36/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"
@@ -1212,20 +1212,20 @@
       "titleEn": "3 × 70 × 365 = 76650",
       "year": 2024,
       "artist": "刘海天",
-      "imageUrl": "/assets/artworks/artwork-37/01.png",
+      "imageUrl": "/assets/artworks-optimized/artwork-37/01/medium.webp",
       "primaryImageId": "img-37-1",
       "context": "A durational conceptual work calculating the days in an average human lifespan. Through mathematical operations and temporal visualization, the piece contemplates mortality, time's passage, and the measure of a life.",
       "images": [
         {
           "id": "img-37-1",
-          "url": "/assets/artworks/artwork-37/01.png",
+          "url": "/assets/artworks-optimized/artwork-37/01/medium.webp",
           "sequence": 1,
           "titleZh": "作品图片 1",
           "titleEn": "Artwork Image 1"
         },
         {
           "id": "img-37-2",
-          "url": "/assets/artworks/artwork-37/02.png",
+          "url": "/assets/artworks-optimized/artwork-37/02/medium.webp",
           "sequence": 2,
           "titleZh": "作品图片 2",
           "titleEn": "Artwork Image 2"

@@ -766,6 +766,40 @@
       });
 
       console.log(`[UnifiedNavigation] ✓ Artwork change handled: ${data.artwork?.id || 'unknown'}`);
+
+      // Preload adjacent artworks' images for smoother navigation
+      this._preloadAdjacentArtworks(newIndex);
+    }
+
+    /**
+     * Preload images for adjacent artworks
+     * @private
+     * @param {number} currentIndex - Current artwork index
+     */
+    _preloadAdjacentArtworks(currentIndex) {
+      const artworks = this.artworkCarousel?.artworks;
+      if (!artworks || !artworks.length) return;
+
+      const indicesToPreload = [currentIndex - 1, currentIndex + 1];
+
+      indicesToPreload.forEach(index => {
+        if (index >= 0 && index < artworks.length) {
+          const artwork = artworks[index];
+          const imageUrl = artwork.imageUrl ||
+            (artwork.images && artwork.images[0] && artwork.images[0].url);
+
+          if (imageUrl) {
+            // Use VULCALazyLoader if available, otherwise basic preload
+            if (window.VULCALazyLoader && window.VULCALazyLoader.preload) {
+              window.VULCALazyLoader.preload(imageUrl);
+            } else {
+              const img = new Image();
+              img.src = imageUrl;
+            }
+            console.log(`[UnifiedNavigation] Preloading: ${artwork.id}`);
+          }
+        }
+      });
     }
 
     /**

@@ -280,6 +280,12 @@
     init();
   }
 
+  // Re-initialize when critiques are loaded (for optimized data loading)
+  document.addEventListener('vulca-critiques-ready', () => {
+    console.log('[PersonaMatrix] Critiques ready, re-initializing...');
+    init();
+  });
+
   window.PersonaMatrix = {
     update: updateMatrixChart
   };

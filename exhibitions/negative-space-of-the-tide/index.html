@@ -322,6 +322,7 @@
   <!-- Multi-Image System Utilities (Phase 2-3: implement-multi-image-artwork-series) -->
   <!-- CRITICAL: Load BEFORE data.js so auto-extraction works -->
   <script src="/js/utils/image-compat.js?v=1.0"></script>
+  <script src="/js/utils/lazy-loader.js?v=1.0"></script>
   <script src="/js/utils/critique-parser.js?v=1.0"></script>
   <script src="/js/components/artwork-carousel.js?v=1.1"></script>
 
@@ -378,36 +379,36 @@
   <!-- Auto-Play Immersive Experience (DISABLED - Replaced by click-based carousel) -->
   <!-- <script src="/js/autoplay.js?v=1"></script> -->
 
-  <!-- Utilities -->
-  <script src="/js/performanceMonitor.js?v=1"></script>
-  <script src="/js/testFramework.js?v=1"></script>
-  <script src="/js/templates.js?v=1"></script>
+  <!-- Utilities (deferred - non-critical) -->
+  <script src="/js/performanceMonitor.js?v=1" defer></script>
+  <script src="/js/testFramework.js?v=1" defer></script>
+  <script src="/js/templates.js?v=1" defer></script>
 
   <!-- Core Systems -->
-  <script src="/js/eventDelegation.js?v=1"></script>
-  <script src="/js/particles-config.js?v=1"></script>
+  <script src="/js/eventDelegation.js?v=1" defer></script>
+  <script src="/js/particles-config.js?v=1" defer></script>
 
   <!-- New Gallery System Modules (to be created in Phase 2) -->
   <!-- <script src="/js/gallery.js?v=1"></script> -->
   <!-- <script src="/js/critique.js?v=1"></script> -->
   <!-- <script src="/js/language.js?v=1"></script> -->
 
-  <!-- Data Analysis Module -->
-  <script src="/js/analysis.js?v=1"></script>
+  <!-- Data Analysis Module (deferred - loads after DOM ready) -->
+  <script src="/js/analysis.js?v=1" defer></script>
 
-  <!-- D3.js for Network Graph (minimal modules) -->
-  <script src="https://cdn.jsdelivr.net/npm/d3-force@3"></script>
-  <script src="https://cdn.jsdelivr.net/npm/d3-selection@3"></script>
+  <!-- D3.js for Network Graph (deferred - visualization only) -->
+  <script src="https://cdn.jsdelivr.net/npm/d3-force@3" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-selection@3" defer></script>
 
-  <!-- Global Persona Selection State Manager (must load before visualizations) -->
-  <script src="/js/persona-selector.js?v=1"></script>
+  <!-- Global Persona Selection State Manager (deferred) -->
+  <script src="/js/persona-selector.js?v=1" defer></script>
 
-  <!-- Visualization Components -->
-  <script src="/js/visualizations/rpait-radar.js?v=2"></script>
-  <script src="/js/visualizations/persona-matrix.js?v=2"></script>
+  <!-- Visualization Components (deferred - non-critical for first paint) -->
+  <script src="/js/visualizations/rpait-radar.js?v=2" defer></script>
+  <script src="/js/visualizations/persona-matrix.js?v=2" defer></script>
 
-  <!-- Navigation Auto-Hide Module -->
-  <script src="/js/navigation-autohide.js?v=1"></script>
+  <!-- Navigation Auto-Hide Module (deferred) -->
+  <script src="/js/navigation-autohide.js?v=1" defer></script>
 
   <!-- Main App (deferred for async loading) -->
   <script src="/js/app.js?v=6" defer></script>

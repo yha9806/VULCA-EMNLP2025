@@ -297,6 +297,12 @@
     init();
   }
 
+  // Re-initialize when critiques are loaded (for optimized data loading)
+  document.addEventListener('vulca-critiques-ready', () => {
+    console.log('[RPAITRadar] Critiques ready, re-initializing...');
+    init();
+  });
+
   // Export for external access
   window.RPAITRadar = {
     selectPersona,
