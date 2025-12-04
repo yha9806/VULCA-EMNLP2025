@@ -1,104 +1,41 @@
 /**
  * Data Loader for Multi-Exhibition Platform
  * Loads exhibition data from data.json and transforms it into VULCA_DATA format
- * Version: 2.0.0 - Optimized loading with split data files
+ * Version: 2.1.0 - Simplified loading (reverted split loading due to visualization issues)
  *
- * Loading Strategy:
- * - Initial load: artworks.json + personas.json (~65KB) for fast first paint
- * - On-demand: critiques loaded per-artwork when needed
- * - Fallback: If split files not available, uses original data.json
+ * Note: Split loading was causing issues with visualization components that need
+ * critiques data immediately. Now loads all data from data.json in one request.
  */
 
 (async function() {
   console.log('[Data Loader] Starting to load exhibition data...');
 
-  // Critiques cache
-  const critiquesCache = {};
-
-  /**
-   * Load critiques for a specific artwork (on-demand)
-   * @param {string} artworkId - Artwork ID
-   * @returns {Promise<Array>} - Critiques array
-   */
-  async function loadCritiquesForArtwork(artworkId) {
-    // Check cache first
-    if (critiquesCache[artworkId]) {
-      return critiquesCache[artworkId];
-    }
-
-    try {
-      const response = await fetch(`./data/critiques/${artworkId}.json`);
-      if (response.ok) {
-        const data = await response.json();
-        critiquesCache[artworkId] = data.critiques || [];
-        console.log(`[Data Loader] Loaded critiques for ${artworkId}`);
-        return critiquesCache[artworkId];
-      }
-    } catch (e) {
-      console.warn(`[Data Loader] Could not load critiques for ${artworkId}:`, e.message);
-    }
-
-    // Fallback to cached critiques from initial load
-    return (window.VULCA_DATA?.critiques || []).filter(c => c.artworkId === artworkId);
-  }
-
-  /**
-   * Get all cached critiques
-   * @returns {Array} - All loaded critiques
-   */
-  function getAllCritiques() {
-    return Object.values(critiquesCache).flat();
-  }
-
   try {
-    // Try optimized loading (split files)
-    let artworksData, personasData, critiquesData = [];
-    let useOptimizedLoading = true;
-
-    try {
-      // Load artworks and personas in parallel (first paint data)
-      const [artworksResponse, personasResponse] = await Promise.all([
-        fetch('./data/artworks.json'),
-        fetch('./data/personas.json')
-      ]);
-
-      if (artworksResponse.ok && personasResponse.ok) {
-        artworksData = await artworksResponse.json();
-        personasData = await personasResponse.json();
-        console.log('[Data Loader] ✓ Optimized loading: split files loaded');
-      } else {
-        useOptimizedLoading = false;
-      }
-    } catch (e) {
-      console.log('[Data Loader] Split files not available, falling back to data.json');
-      useOptimizedLoading = false;
+    // Load complete data.json (artworks + personas + critiques)
+    const response = await fetch('./data.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // Fallback to original data.json
-    if (!useOptimizedLoading) {
-      const response = await fetch('./data.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const exhibitionData = await response.json();
-      artworksData = { artworks: exhibitionData.artworks, metadata: exhibitionData.metadata };
-      personasData = { personas: exhibitionData.personas };
-      critiquesData = exhibitionData.critiques || [];
-      console.log('[Data Loader] ✓ Fallback: data.json loaded');
-    }
-
-    console.log(`[Data Loader] Loaded ${artworksData.artworks.length} artworks`);
+    const exhibitionData = await response.json();
+    console.log('[Data Loader] ✓ Exhibition data loaded from data.json');
 
     // Transform exhibition data into VULCA_DATA format
     window.VULCA_DATA = {
-      artworks: artworksData.artworks || [],
-      personas: personasData.personas || [],
-      critiques: critiquesData, // Initially empty or full (fallback)
+      artworks: exhibitionData.artworks || [],
+      personas: exhibitionData.personas || [],
+      critiques: exhibitionData.critiques || [],
 
-      // New API for on-demand critique loading
-      getCritiques: loadCritiquesForArtwork,
-      getAllLoadedCritiques: getAllCritiques,
-      isOptimizedLoading: useOptimizedLoading
+      // Keep API methods for compatibility
+      getCritiques: function(artworkId) {
+        return Promise.resolve(
+          (window.VULCA_DATA.critiques || []).filter(c => c.artworkId === artworkId)
+        );
+      },
+      getAllLoadedCritiques: function() {
+        return window.VULCA_DATA.critiques || [];
+      },
+      isOptimizedLoading: false
     };
 
     // Set image categories (for backward compatibility)
@@ -114,7 +51,7 @@
     console.log('[Data Loader] ✓ Data loaded successfully:');
     console.log(`  - Artworks: ${window.VULCA_DATA.artworks.length}`);
     console.log(`  - Personas: ${window.VULCA_DATA.personas.length}`);
-    console.log(`  - Critiques: ${window.VULCA_DATA.critiques.length} (initial)`);
+    console.log(`  - Critiques: ${window.VULCA_DATA.critiques.length}`);
 
     // Mark data as ready
     window.VULCA_DATA_READY = true;
@@ -130,61 +67,12 @@
     document.dispatchEvent(dataReadyEvent);
     console.log('[Data Loader] ✓ Data ready event dispatched');
 
-    // If using optimized loading, load all critiques in background for visualizations
-    if (useOptimizedLoading) {
-      console.log('[Data Loader] Loading all critiques in background for visualizations...');
-
-      // Load all critiques asynchronously
-      (async function loadAllCritiques() {
-        try {
-          const artworkIds = artworksData.artworks.map(a => a.id);
-          const allCritiques = [];
-
-          // Load in batches to avoid too many parallel requests
-          const batchSize = 10;
-          for (let i = 0; i < artworkIds.length; i += batchSize) {
-            const batch = artworkIds.slice(i, i + batchSize);
-            const promises = batch.map(async (artworkId) => {
-              try {
-                const response = await fetch(`./data/critiques/${artworkId}.json`);
-                if (response.ok) {
-                  const data = await response.json();
-                  critiquesCache[artworkId] = data.critiques || [];
-                  return data.critiques || [];
-                }
-              } catch (e) {
-                console.warn(`[Data Loader] Could not load critiques for ${artworkId}`);
-              }
-              return [];
-            });
-
-            const results = await Promise.all(promises);
-            results.forEach(critiques => allCritiques.push(...critiques));
-          }
-
-          // Update VULCA_DATA.critiques with all loaded critiques
-          window.VULCA_DATA.critiques = allCritiques;
-          console.log(`[Data Loader] ✓ All critiques loaded: ${allCritiques.length} total`);
-
-          // Re-initialize analysis module if it exists
-          if (window.VULCA_ANALYSIS && typeof window.VULCA_ANALYSIS.init === 'function') {
-            console.log('[Data Loader] Re-initializing analysis module with critiques...');
-            window.VULCA_ANALYSIS.init();
-          }
-
-          // Dispatch event for visualizations to update
-          document.dispatchEvent(new CustomEvent('vulca-critiques-ready', {
-            detail: { count: allCritiques.length }
-          }));
-
-        } catch (e) {
-          console.error('[Data Loader] Failed to load all critiques:', e);
-        }
-      })();
-    }
+    // Also dispatch critiques-ready event immediately since all data is loaded
+    document.dispatchEvent(new CustomEvent('vulca-critiques-ready', {
+      detail: { count: window.VULCA_DATA.critiques.length }
+    }));
 
     // Wait for other scripts to load, then initialize
-    // This ensures all modules (GalleryInit, carousel, etc.) are defined
     setTimeout(() => {
       console.log('[Data Loader] Triggering initialization...');
 
@@ -204,7 +92,7 @@
       }
 
       console.log('[Data Loader] ✓ Initialization complete');
-    }, 100); // Small delay to ensure all scripts are loaded
+    }, 100);
 
   } catch (error) {
     console.error('[Data Loader] ❌ Failed to load exhibition data:', error);
