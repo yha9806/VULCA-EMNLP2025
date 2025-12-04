@@ -12,7 +12,9 @@
 
   try {
     // Load complete data.json (artworks + personas + critiques)
-    const response = await fetch('./data.json');
+    // Add cache-busting parameter to ensure fresh data
+    const cacheBuster = `v=${Date.now()}`;
+    const response = await fetch(`./data.json?${cacheBuster}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

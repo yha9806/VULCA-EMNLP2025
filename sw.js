@@ -4,7 +4,7 @@
  * Version: 1.1.0 - Simplified, no pre-cache to avoid 404 errors
  */
 
-const CACHE_VERSION = 'vulca-v2';
+const CACHE_VERSION = 'vulca-v3';
 const CACHE_NAME = CACHE_VERSION + '-cache';
 
 // Patterns for cache-first strategy (static assets)
