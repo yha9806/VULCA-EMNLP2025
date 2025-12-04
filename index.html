@@ -23,18 +23,24 @@
   <meta name="twitter:description" content="探索人工智能与艺术评论的沉浸式展览平台">
   <meta name="twitter:image" content="https://vulcaart.art/assets/og-image.jpg">
 
+  <!-- Preconnect for faster resource loading -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 
   <!-- Design Tokens (First!) -->
-  <link rel="stylesheet" href="/styles/design-tokens.css">
+  <link rel="stylesheet" href="/styles/design-tokens.min.css?v=1">
 
   <!-- Main Styles (includes header-minimal and floating-menu) -->
-  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/main.min.css?v=6">
 
   <!-- Homepage Styles -->
-  <link rel="stylesheet" href="/styles/portfolio-homepage.css">
+  <link rel="stylesheet" href="/styles/portfolio-homepage.min.css?v=1">
 </head>
 <body>
   <!-- Minimal Header with Hamburger Menu -->
@@ -330,6 +336,21 @@
         });
       }
     });
+  </script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('[App] Service Worker registered:', registration.scope);
+          })
+          .catch(error => {
+            console.warn('[App] Service Worker registration failed:', error);
+          });
+      });
+    }
   </script>
 
 </body>
