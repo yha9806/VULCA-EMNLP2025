@@ -266,12 +266,21 @@ window.VULCA_ANALYSIS = {
   }
 };
 
-// Auto-initialize on DOM ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
+// Auto-initialize when data is ready
+function initWhenReady() {
+  // If data already loaded, initialize immediately
+  if (window.VULCA_DATA && window.VULCA_DATA.artworks) {
     window.VULCA_ANALYSIS.init();
-  });
+  } else {
+    // Wait for data-ready event
+    document.addEventListener('vulca-data-ready', () => {
+      window.VULCA_ANALYSIS.init();
+    }, { once: true });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initWhenReady);
 } else {
-  // DOM already loaded
-  window.VULCA_ANALYSIS.init();
+  initWhenReady();
 }

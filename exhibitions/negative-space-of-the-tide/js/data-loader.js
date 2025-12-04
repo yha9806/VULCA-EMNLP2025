@@ -91,6 +91,8 @@
         window.renderGalleryHero();
       }
 
+      // Mark body as loaded to trigger CSS transitions
+      document.body.classList.add('loaded');
       console.log('[Data Loader] ✓ Initialization complete');
     }, 100);
 
