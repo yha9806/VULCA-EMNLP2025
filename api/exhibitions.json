@@ -10,13 +10,27 @@
       "coverImage": "/exhibitions/negative-space-of-the-tide/assets/cover.jpg",
       "url": "/exhibitions/negative-space-of-the-tide/",
       "stats": {
-        "artworks": 4,
+        "artworks": 43,
         "personas": 6,
-        "messages": 85,
-        "dialogues": 4
+        "messages": 268,
+        "dialogues": 43
       },
       "descriptionZh": "一场关于人工智能与艺术创作的深度对话，通过6位来自不同文化背景的评论家视角，探索机器创造力的本质。",
       "descriptionEn": "An in-depth dialogue on AI and artistic creation, exploring the nature of machine creativity through the perspectives of 6 critics from diverse cultural backgrounds."
+    },
+    {
+      "id": "forgetting-absence-loss",
+      "slug": "forgetting-absence-loss",
+      "titleZh": "遗忘、缺失与失落",
+      "titleEn": "Forgetting, Absence & Loss",
+      "year": 2025,
+      "status": "live",
+      "external": true,
+      "coverImage": "/assets/exhibitions/forgetting-absence-loss-cover.svg",
+      "url": "https://virtualgallery.didots.com/index.html",
+      "stats": {},
+      "descriptionZh": "探索记忆消逝与存在缺席的艺术表达，一场关于失去、遗忘与空白的沉浸式虚拟展览。",
+      "descriptionEn": "Exploring artistic expressions of fading memories and absent presence — an immersive virtual exhibition on loss, forgetting, and the spaces left behind."
     },
     {
       "id": "test-exhibit",
@@ -37,6 +51,6 @@
       "descriptionEn": "Exhibition description (please update this content)"
     }
   ],
-  "total": 2,
-  "updated": "2025-11-10T21:59:35.618Z"
+  "total": 3,
+  "updated": "2025-12-26T08:00:00.000Z"
 }

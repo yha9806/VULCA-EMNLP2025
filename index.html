@@ -186,6 +186,14 @@
       card.href = exhibition.url;
       card.setAttribute('data-status', exhibition.status);
 
+      // Handle external links
+      const isExternal = exhibition.external || exhibition.url.startsWith('http');
+      if (isExternal) {
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        card.classList.add('external-link');
+      }
+
       // Status badge
       const statusBadges = {
         live: { labelZh: '展出中', labelEn: 'LIVE NOW', class: 'status-live' },
@@ -223,6 +231,7 @@
             <span lang="en">${exhibition.descriptionEn || ''}</span>
           </p>
 
+          ${!isExternal ? `
           <div class="card-stats">
             <span class="stat">
               <span class="stat-value">${exhibition.stats.artworks}</span>
@@ -240,12 +249,25 @@
               <span class="stat-label" lang="en">Messages</span>
             </span>
           </div>
+          ` : `
+          <div class="card-stats external-badge">
+            <span class="stat">
+              <span class="stat-label" lang="zh">🔗 外部虚拟展厅</span>
+              <span class="stat-label" lang="en">🔗 External Virtual Gallery</span>
+            </span>
+          </div>
+          `}
 
           <div class="card-footer">
             <span class="card-year">${exhibition.year}</span>
             <span class="card-cta">
+              ${isExternal ? `
+              <span lang="zh">访问展览 ↗</span>
+              <span lang="en">Visit ↗</span>
+              ` : `
               <span lang="zh">进入展览 →</span>
               <span lang="en">Enter →</span>
+              `}
             </span>
           </div>
         </div>

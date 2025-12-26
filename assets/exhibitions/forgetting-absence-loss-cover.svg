@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f0f1a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Abstract shapes representing absence/loss -->
+  <circle cx="200" cy="200" r="80" fill="none" stroke="#4a4a6a" stroke-width="1" opacity="0.5"/>
+  <circle cx="200" cy="200" r="60" fill="none" stroke="#5a5a7a" stroke-width="1" opacity="0.4"/>
+  <circle cx="200" cy="200" r="40" fill="none" stroke="#6a6a8a" stroke-width="1" opacity="0.3"/>
+
+  <circle cx="600" cy="400" r="100" fill="none" stroke="#4a4a6a" stroke-width="1" opacity="0.4"/>
+  <circle cx="600" cy="400" r="70" fill="none" stroke="#5a5a7a" stroke-width="1" opacity="0.3"/>
+
+  <!-- Floating particles -->
+  <circle cx="150" cy="350" r="3" fill="#8a8aaa" opacity="0.6"/>
+  <circle cx="300" cy="150" r="2" fill="#9a9aba" opacity="0.5"/>
+  <circle cx="500" cy="250" r="4" fill="#7a7a9a" opacity="0.4"/>
+  <circle cx="650" cy="180" r="2" fill="#8a8aaa" opacity="0.5"/>
+  <circle cx="450" cy="450" r="3" fill="#9a9aba" opacity="0.4"/>
+  <circle cx="250" cy="500" r="2" fill="#7a7a9a" opacity="0.6"/>
+
+  <!-- Central text area -->
+  <text x="400" y="270" font-family="Georgia, serif" font-size="42" fill="#e0e0e0" text-anchor="middle" filter="url(#glow)">
+    Forgetting
+  </text>
+  <text x="400" y="320" font-family="Georgia, serif" font-size="42" fill="#c0c0d0" text-anchor="middle">
+    Absence &amp; Loss
+  </text>
+
+  <!-- Subtitle -->
+  <text x="400" y="380" font-family="Arial, sans-serif" font-size="16" fill="#8a8a9a" text-anchor="middle">
+    遗忘、缺失与失落
+  </text>
+
+  <!-- Decorative line -->
+  <line x1="280" y1="400" x2="520" y2="400" stroke="#5a5a7a" stroke-width="1" opacity="0.5"/>
+
+  <!-- Virtual Gallery badge -->
+  <text x="400" y="450" font-family="Arial, sans-serif" font-size="12" fill="#6a6a8a" text-anchor="middle">
+    Virtual Gallery Exhibition
+  </text>
+
+  <!-- External link indicator -->
+  <g transform="translate(720, 40)">
+    <rect x="0" y="0" width="60" height="24" rx="4" fill="#3a3a5a" opacity="0.8"/>
+    <text x="30" y="16" font-family="Arial, sans-serif" font-size="10" fill="#b0b0c0" text-anchor="middle">外部链接</text>
+  </g>
+</svg>
