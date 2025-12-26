@@ -144,7 +144,7 @@
       const grid = document.getElementById('exhibitions-grid');
 
       try {
-        const response = await fetch('/api/exhibitions.json');
+        const response = await fetch('/api/exhibitions.json?v=2');
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
